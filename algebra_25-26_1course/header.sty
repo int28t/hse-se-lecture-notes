@@ -1,0 +1,177 @@
+\ProvidesPackage{header}
+
+\RequirePackage{cmap}                    
+\RequirePackage[T1,T2A]{fontenc}      
+\RequirePackage[utf8]{inputenc}        
+\RequirePackage[english,russian]{babel}
+
+\RequirePackage{microtype} 
+\RequirePackage[top=0.8in,bottom=0.8in,left=0.8in,right=0.8in,headheight=110pt]{geometry}
+
+\RequirePackage{fancyhdr}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+
+\RequirePackage{subfiles}
+\RequirePackage{textcomp}
+\RequirePackage{array}
+\RequirePackage{amsmath}
+\RequirePackage{gensymb}
+\RequirePackage{mathtools} 
+\RequirePackage{amssymb}    
+\RequirePackage{amsthm}   
+\RequirePackage{bm}        
+\RequirePackage{icomma}
+\RequirePackage{enumitem}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\RequirePackage{indentfirst}
+\RequirePackage{authblk}
+
+\RequirePackage{bookmark} % лучше управляет закладками PDF
+\hypersetup{
+    bookmarksnumbered=true,       % нумерация закладок в PDF
+    colorlinks=true,              % кликабельные ссылки
+    linkcolor=blue,               % ссылки на секции
+    urlcolor=blue,                % ссылки на URL
+    citecolor=blue,               % ссылки на цитаты
+    pdfauthor={Гришин Алексей},  % автор документа
+    pdftitle={Домашнее задание по Линалу}, % заголовок документа
+}
+
+
+\RequirePackage{tcolorbox} 
+\tcbuselibrary{most}
+
+
+\tcbset{
+  myboxstyle/.style={
+    breakable,
+    enhanced,      % ОБЯЗАТЕЛЬНО для скругления и advanced функций
+    arc=2mm,       % радиус скругления углов
+    boxrule=0.5pt,
+    fonttitle=\bfseries,
+    coltitle=black
+  }
+}
+
+
+
+\providecommand{\F}{\mathbb{F}}
+\renewcommand{\C}{\mathbb{C}}
+\providecommand{\N}{\mathbb{N}}
+\providecommand{\Z}{\mathbb{Z}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\Q}{\mathbb{Q}}
+
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\Ima}{\mathop{\rm Im}}
+\newcommand{\Rea}{\mathop{\rm Re}}  
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\St}{St}
+\DeclareMathOperator{\lker}{lker}
+\DeclareMathOperator{\rker}{rker}
+
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\providecommand{\Sum}[2]{\overset{#2}{\underset{#1}{\sum}}}
+\providecommand{\Lim}[2]{\lim\limits_{#1 \to #2}}
+\providecommand{\pd}[2]{\frac{\partial #1}{\partial #2}}  % лучше \pd, чем \p
+
+\renewcommand{\Pr}{\mathsf{P}}
+\providecommand{\QQ}{\mathsf{Q}}
+\providecommand{\EE}{\operatorname{\mathsf{E}}}
+\providecommand{\DD}{\operatorname{\mathsf{D}}}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\providecommand{\diff}{\mathop{}\!\mathrm{d}}
+\renewcommand{\vec}[1]{\bm{#1}}
+\providecommand{\matr}[1]{\mathbf{#1}}
+\providecommand{\Ell}{\mathcal{L}}
+\providecommand{\eps}{\varepsilon}
+\providecommand{\Uniform}{\mathrm{U}}
+\everymath{\displaystyle}
+
+
+\definecolor{theorem_frame}{HTML}{FFC9B8}
+\definecolor{theorem_back}{HTML}{FFF8F5}
+
+\definecolor{example_frame}{HTML}{94C9F9}  
+\definecolor{example_back}{HTML}{E0F5FE}  
+
+\definecolor{exercise_frame}{HTML}{D0C4E8}
+\definecolor{exercise_back}{HTML}{F7F5FC}
+
+\definecolor{definition_frame}{HTML}{A8E0C3}  
+\definecolor{definition_back}{HTML}{E6FAF4}  
+
+\definecolor{statement_color}{RGB}{248,248,248}
+\definecolor{solution_color}{RGB}{222,239,255}
+
+\definecolor{lemma_frame}{HTML}{B8D1FF}  
+\definecolor{lemma_back}{HTML}{EDF5FF}  
+
+\definecolor{consequence_frame}{HTML}{FFD580}  
+\definecolor{consequence_back}{HTML}{FFF4E0}  
+
+\definecolor{remark_frame}{HTML}{A8D0E6}       
+\definecolor{remark_back}{HTML}{E8F4FD}       
+
+\definecolor{hint_frame}{HTML}{C1E1C1}        
+\definecolor{hint_back}{HTML}{F0FAF0} 
+
+\newenvironment{theorem}[1][Теорема]{%
+  \begin{tcolorbox}[title=#1,colback=theorem_back,colframe=theorem_frame,myboxstyle]}%
+{\end{tcolorbox}}
+
+\newenvironment{Proof}[1][Доказательство]{%
+  \begin{tcolorbox}[title=#1,colback=theorem_back,colframe=theorem_frame,myboxstyle]}%
+{\qed\end{tcolorbox}}
+
+\newenvironment{example}[1][Пример]{%
+  \begin{tcolorbox}[title=#1,colback=example_back,colframe=example_frame,myboxstyle]}%
+{\end{tcolorbox}}
+
+\newenvironment{exercise}[1][Упражнение]{%
+  \begin{tcolorbox}[title=#1,colback=exercise_back,colframe=exercise_frame,myboxstyle]}%
+{\end{tcolorbox}}
+
+\newenvironment{definition}[1][Определение]{%
+  \begin{tcolorbox}[title=#1,colback=definition_back,colframe=definition_frame,myboxstyle]}%
+{\end{tcolorbox}}
+
+\newenvironment{task}[1][Задача]{%
+  \begin{tcolorbox}[title=#1,colback=statement_color,colframe=gray!80,myboxstyle]}%
+{\end{tcolorbox}}
+
+\newenvironment{solution}[1][Решение]{%
+  \begin{tcolorbox}[title=#1,colback=solution_color,colframe=black,myboxstyle]}%
+{\end{tcolorbox}}
+
+\newenvironment{lemma}[1][Лемма]{%
+  \begin{tcolorbox}[title=#1,colback=lemma_back,colframe=lemma_frame,myboxstyle]}%
+{\end{tcolorbox}}
+
+\newenvironment{consequence}[1][Следствие]{%
+  \begin{tcolorbox}[title=#1,colback=consequence_back,colframe=consequence_frame,myboxstyle]}%
+{\end{tcolorbox}}
+
+\newenvironment{remark}[1][Примечание]{%
+  \begin{tcolorbox}[title=#1,colback=remark_back,colframe=remark_frame,myboxstyle]}%
+{\end{tcolorbox}}
+
+\newenvironment{hint}[1][Подсказка]{%
+  \begin{tcolorbox}[title=#1,colback=hint_back,colframe=hint_frame,myboxstyle]}%
+{\end{tcolorbox}}
+
+\providecommand{\backtotoc}{\noindent\hyperlink{main-toc}{\textbf{Вернуться к содержанию}}}
+
+\providecommand{\addtocurrent}[1]{ \addcontentsline{toc}{section}{#1} }
+
+\endinput

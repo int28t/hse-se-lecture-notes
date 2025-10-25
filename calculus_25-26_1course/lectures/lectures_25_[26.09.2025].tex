@@ -1,0 +1,111 @@
+\begin{example}
+    б.б. + б.б.
+
+    Мы точно не можем сказать, чем будет являться эта сумма. Например $n + (-n) = 0$ и $n + n = 2n$
+\end{example}
+
+\begin{example}
+    б.б. + огр. = б.б.
+
+    Покажем, что это так
+
+    Хотим: $b_n + c_n = u_n$ соответственно. Тогда:
+    $$ \forall M > 0\ \exists N(M) \in \N\ \forall n > N(M)\ |b_n| > M $$
+    $$ \exists C > 0\ \forall n \in \N\ |c_n| \leq C $$
+
+    Хотим:
+    $$ \forall K > 0\ \exists N_2(K) \in \N\ \forall n > N_2(K)\ |b_n + c_n| > K $$
+    Так, как $ |x + y| \geq |x| - |y| $:
+    $$ |b_n| - |c_n| > K $$
+    $$ |b_n| - C > K $$
+    $$ |b_n| > K + C $$
+    Возьмем $N_2(K) = N(K + C)$
+\end{example}
+
+\begin{theorem}
+    $$ \Lim{n}{\infty} a_n = A \Leftrightarrow (a_n - A) = \alpha_n \text{ - бесконечно малая} $$
+\end{theorem}
+
+\begin{Proof}
+    $$ \forall \eps > 0\ \exists N_1(\eps) \in \N\ \forall n > N_1(\eps)\ |a_n - A| < \eps $$
+    Хотим
+    $$ \forall \eps > 0\ \exists N_2(\eps) \in \N\ \forall n > N_2(\eps)\ |(a_n - A) - 0| < \eps $$
+    $$ N_2(\eps) = N_1(\eps) $$
+\end{Proof}
+
+\begin{remark}
+    Теперь можно спокойно доказать свойство 2) из арифметики пределов
+\end{remark}
+
+\begin{remark}
+    Произведение бесконечно малых - бесконечно малая последовательность. Так как можно представить одну из них как ограниченную и использовать теорему выше
+\end{remark}
+
+\begin{definition}
+    Назовем последовательность $d_n$ \textbf{отделимой от нуля}, если:
+    $$ \exists \delta > 0\ \forall n \in \N\ |d_n| \geq \delta $$
+\end{definition}
+
+\begin{example}
+    $(-1)^n$
+\end{example}
+
+\begin{theorem}
+    $$ \frac{1}{\text{огр}} = \text{отделима от нуля},\ \frac{1}{\text{отделима от нуля}} = \text{огр} $$
+\end{theorem}
+
+\begin{Proof}
+    $$ \exists \delta > 0\ \forall n \in \N\ |d_n| \geq \delta $$
+    $$ u_n = \frac{1}{d_n},\ \exists c > 0\ \forall n \in \N\ |u_n| \leq c $$
+    $$ \Updownarrow $$
+    $$ \l|\frac{1}{d_n}\r| \leq c $$
+    $$ \Updownarrow $$
+    $$ |d_n| \geq \frac{1}{c} $$
+    Возьмем $ c = \frac{1}{\delta} $. Тогда $ |d_n| \geq \delta $ верно $ \forall n \in \N $
+\end{Proof}
+
+\begin{theorem}
+    Если $ \Lim{n}{\infty} u_n = U;\ u_n, U \neq 0$,\ то $u_n$ отделима от нуля
+\end{theorem}
+
+\begin{Proof}
+    $$ \forall \eps > 0\ \exists N(\eps) \in \N\ \forall n > N(\eps)\ |u_n - U| < \eps $$
+    Хотим
+    $$ \exists \delta > 0\ \forall n \in \N\ |u_n| \geq \delta $$
+    Возьмем $ \eps_0 = \frac{|U|}{2} $
+    $$ \exists N_0 = N\l(\frac{|U|}{2}\r) = N(\eps_0) $$
+    $$ \forall n > N_0\ u_n \in U_{\frac{|U|}{2}}(U) $$
+    Очевидно, что существует конечное число $u_k,\ k \leq N(\eps_0)$, причем $u_k \neq 0$
+
+    Возьмем $\delta = min\{|u_1|, |u_2|, \ldots, \frac{|U|}{2}\}$
+\end{Proof}
+
+\subsection{Предельный переход в неравенствах}
+
+\begin{theorem}
+    Если $\exists N_0\ \forall n > N_0\ a_n > b_n$ и $a_n \underset{n \to \infty}{\to} A$ и $b_n \underset{n \to \infty}{\to} B$, то 
+    $ A \geq B $
+\end{theorem}
+
+\begin{Proof}
+    Пп $A < B$. Возьмем $\eps_0 = \frac{B - A}{2} $
+    $$ \exists N_1(\eps_0)\ \forall n > N_1(\eps_0)\ a_n \in U_{\eps_0}(A) $$
+    $$ \exists N_2(\eps_0)\ \forall n > N_2(\eps_0)\ b_n \in U_{\eps_0}(B) $$
+    Возьмем $n_0 = N_1(\eps_0) + N_2(\eps_0) + N_0$
+    Тогда по условию $a_{n_0} > b_{n_0}$, но также $a_{n_0} < b_{n_0}$ (так как окрестность $a$ по предположению левее окрестности $b$). Получили противоречие
+\end{Proof}
+
+\subsection{Теорема о зажатой последовательности}
+\begin{theorem}[Теорема о зажатой последовательности]
+    Если $\exists N_0\ \forall n > N_0\ a_n \leq c_n \leq d_n$, а также $a_n \underset{n \to \infty}{\to} A$ и $d_n \underset{n \to \infty}{\to} A$, то $c_n \underset{n \to \infty}{\to} A$
+\end{theorem}
+
+\begin{Proof}
+    $$a_n \underset{n \to \infty}{\to} A;\ \forall \eps > 0\ \exists N_1(\eps)\ \forall n > N_1(\eps)\ A-\eps < a_n < A+\eps$$
+    $$d_n \underset{n \to \infty}{\to} A;\ \forall \eps > 0\ \exists N_2(\eps)\ \forall n > N_2(\eps)\ A-\eps < d_n < A+\eps$$
+    Хотим
+    $$c_n \underset{n \to \infty}{\to} A;\ \forall \eps > 0\ \exists N_3(\eps)\ \forall n > N_3(\eps)\ A-\eps < c_n < A+\eps$$
+    Получаем
+    $$ \underbrace{A-\eps <}_{\forall n > N_1(\eps)} a_n \underbrace{\leq c_n \leq}_{\forall n > N_0} d_n \underbrace{< A+\eps}_{\forall n > N_2(\eps)} $$
+    Возьмем $N_3(\eps) = max\{N_1(\eps),\ N_2(\eps),\ N_0\}$
+\end{Proof}

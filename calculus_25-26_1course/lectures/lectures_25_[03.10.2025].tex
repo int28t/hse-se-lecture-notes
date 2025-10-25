@@ -1,0 +1,137 @@
+\section{Действительные числа}
+
+\begin{definition}
+    Множество \textbf{действительных чисел} - это четверка $(\R; +; \times; \leq)$ (множество, 2 операции, 1~отношение)
+\end{definition}
+
+\begin{remark}
+    Отличие операции от отношения. Для того чтобы задать операцию, нужно поставить в соответствие для каждой пары чисел число $(\R \times \R \to \R)$. В отношении для каждой пары чисел нужно поставить в соответствие 0 или 1 $(\R \times \R \to \{0, 1\})$.
+\end{remark}
+
+\subsection{Аксиома непрерывности}
+$ A, B \subset \R $
+\begin{itemize}
+    \item[1)] $ A, B \neq \varnothing $
+    \item[2)] $ \forall x \in A\ \forall y \in B\ x \leq y$
+\end{itemize}
+Тогда $ \exists \xi \in \R : \forall x \in A\ \forall y \in B\ x \leq \xi \leq y $
+
+\begin{definition}
+    \textbf{Верхней гранью} множества $A \subset \R$ называется число $C \in \R$, такое что $\forall x \in A\ x \leq C$
+\end{definition}
+
+\begin{definition}
+    \textbf{Точной верхней гранью} $(sup\ A)$ ограниченного сверху множества $A$ называют наименьшую верхнюю грань множества $A$
+\end{definition}
+
+\begin{definition}
+    \textbf{Нижней гранью} множества $A \subset \R$ называется число $D \in \R$, такое что $\forall x \in A\ x \geq D$
+\end{definition}
+
+\begin{definition}
+    \textbf{Точной нижней гранью} $(inf\ A)$ ограниченного снизу множества $A$ называют наибольшую нижнюю грань множества $A$
+\end{definition}
+
+\begin{example}
+    $A = (-1; 0)$. Множество верхних граней: $[0; +\infty),\ sup\ A = 0$
+\end{example}
+
+\begin{theorem}
+    У ограниченного сверху множества есть точная верхняя грань
+\end{theorem}
+
+\begin{Proof}
+    \[\begin{array}{l}
+        \l.
+        \begin{array}{l}
+            A - \text{огр. сверху},\ A \neq \varnothing\\
+            B = \{\text{верхние грани A}\},\ B \neq \varnothing\\
+            \forall x \in A\ \forall y \in B\ x \leq y\\
+        \end{array}
+        \r]
+        \l.
+        \exists \xi \in \R: \forall x \in A\ \forall y \in B\ x \leq \xi \leq y
+        \r.
+    \end{array}\]
+    \begin{itemize}
+        \item[1)] Из $x \leq \xi$ получаем, что $\xi$ - верхняя грань $A \Rightarrow \xi \in B$
+        \item[2)] Так, как $\xi \leq y$, то $\xi$ - минимальный элемент из $B$. \fbox{$\xi = sup\ A$}
+    \end{itemize}
+\end{Proof}
+
+\begin{definition}
+    \textbf{Точной верхней гранью неограниченного сверху множества} назовем $+\infty$
+\end{definition}
+
+\subsection{Теорема Вейерштрасса}
+\begin{definition}
+    $\{a_n\}$ - \textbf{неубывает}, если $a_{n+1} \geq a_n$
+\end{definition}
+
+\begin{definition}
+    $\{a_n\}$ - \textbf{возрастает}, если $a_{n+1} > a_n$
+\end{definition}
+
+\begin{example}[Пример (3-й способ доказательства монотонности)]
+    Доказать, что последовательность $a_n = \l(1 + \frac{1}{n}\r)^n$ строго возрастает
+
+    Необходимо доказать: $\forall n\ a_{n+1} > a_n$
+    $$1 < \frac{a_{n+1}}{a_n} = \frac{\l(1 + \frac{1}{n+1}\r)^{n+1}}{\l(1 + \frac{1}{n}\r)^n} = \l(\frac{n+2}{n+1}\r)^{n+1} \cdot \l(\frac{n}{n+1}\r)^n =$$
+    $$ = \l(\frac{n(n+2)}{(n+1)^2}\r)^n \cdot \l(\frac{n+2}{n+1}\r) $$
+    По неравенству Бернулли \fbox{$ \forall n \in \N\ \forall x \geq -1\ (1 + x)^n \geq 1 + xn $}
+    $$ \l(\frac{n(n+2)}{(n+1)^2}\r)^n \cdot \l(\frac{n+2}{n+1}\r) = \l(\frac{n^2 + 2n}{n^2 + 2n + 1}\r)^n \cdot \l(\frac{n+2}{n+1}\r) = $$
+    $$ = \l(1 + \underbrace{\l(- \frac{1}{(n + 1)^2}\r)}_{\geq -1}\r)^n \cdot \l(\frac{n+2}{n+1}\r) \geq \l(1 - \frac{n}{(n + 1)^2}\r) \cdot \l(\frac{n+2}{n+1}\r) = $$
+    $$ = \frac{(n^2 + n + 1)(n + 2)}{(n+1)^3} = \frac{n^3 + 3n^2 + 3n + 2}{n^3 + 3n^2 + 3n + 1} > 1 $$
+\end{example}
+
+\begin{theorem}[Теорема Вейерштрасса]
+    Если $\{a_n\}$ неубывает и ограничена сверху, то она сходится
+\end{theorem}
+
+\begin{Proof}
+    $ \{a_n\} = A \neq \varnothing \text{, огр. сверху} $
+
+    $ \exists sup\ A = a \in \R $
+
+    Хотим доказать: $a_n \underset{n \to \infty}{\to} A $
+
+    $$ \forall \eps > 0\ \exists N(\eps)\ \forall n > N(\eps)\ \underbrace{|a_n - A|}_{\leq 0} < \eps $$
+    $$ A - a_n < \eps $$
+    $$ a_n > A - \eps \Leftrightarrow a_{N(\eps) + 1} > A - \eps$$
+
+    Тогда докажем:
+    $$ \forall \eps > 0\ \exists N(\eps) \in \N\ a_{N(\eps) + 1} > A - \eps $$
+
+    Пп 
+    $$ \exists \eps_0 > 0\ \forall N \in \N\ a_{N+1} \leq A - \eps_0 $$
+    $$ \Updownarrow $$
+    $$ \exists \eps_0 > 0\ \forall n \in \N\ a_{n} \leq A - \eps_0 $$
+    Получаем, что самая маленькая верхняя граница $ = A - \eps_0 $, но $ sup\ a_n = A$. $\bot$
+\end{Proof}
+
+\textbf{Контрпример} (Если $\{a_n\}$ сходится, то необязательно она неубывает)
+
+$$ \fbox{
+    $ a_n = \frac{\sin n}{2^n} \underset{n \rightarrow \infty}{\rightarrow} 0 $
+} $$
+\begin{theorem}
+    $$ \exists \Lim{n}{\infty} \l(1 + \frac{1}{n}\r)^n = e $$
+\end{theorem}
+
+\begin{Proof}
+    Ранее мы доказали, что данная последовательность неубывает.
+    $$ \l(1 + \frac{1}{n}\r)^n = \l(\frac{1}{n} + 1\r)^n = \Sum{k = 0}{n} \ C^k_n \l(\frac{1}{n}\r)^k 1^{n-k} =$$
+    $$ = 1 + \frac{n!}{(n-1)!\ 1!} \cdot \frac{1}{n} + \ldots + \frac{n!}{(n-k)!\ k!} \cdot \frac{1}{n^k} + \ldots = $$
+    $$ = 1 + 1 + \ldots + \underbrace{\frac{n}{n}}_{\leq 1} \cdot \underbrace{\frac{n-1}{n}}_{\leq 1} \cdot \ldots \cdot \underbrace{\frac{n - k + 1}{n}}_{\leq 1} \cdot \frac{1}{k!} + \ldots < 1 + 1 + \frac{1}{2!} + \ldots + \frac{1}{n!} $$
+
+    Напоминение о телескопических суммах:
+    $$
+    \boxed{
+    \begin{aligned}
+        \Sum{k=1}{n} \frac{1}{k(k+1)} = \Sum{k=1}{n} \l(\frac{1}{k} - \frac{1}{k+1} \r) = 1 - \frac{1}{n+1}
+    \end{aligned}
+    }$$
+
+    Хотим получить нечто похожее, тогда выкинем из каждого знаменателя все множители, кроме последних двух:
+    $$ 1 + 1 + \frac{1}{2!} + \ldots + \frac{1}{n!} \underbrace{<}_{n \geq 4} 2 + \frac{1}{1 \cdot 2} + \frac{1}{2 \cdot 3} + \ldots + \frac{1}{(n - 1) \cdot n} = 2 + \l(1 - \frac{1}{n} \r) < 3 $$
+\end{Proof}
