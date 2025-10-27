@@ -114,7 +114,9 @@ $ A, B \subset \R $
 $$ \fbox{
     $ a_n = \frac{\sin n}{2^n} \underset{n \rightarrow \infty}{\rightarrow} 0 $
 } $$
-\begin{theorem}
+
+\subsection{Второй замечательный предел}
+\begin{theorem}[Теорема о втором замечательном пределе]
     $$ \exists \Lim{n}{\infty} \l(1 + \frac{1}{n}\r)^n = e $$
 \end{theorem}
 
@@ -134,4 +136,17 @@ $$ \fbox{
 
     Хотим получить нечто похожее, тогда выкинем из каждого знаменателя все множители, кроме последних двух:
     $$ 1 + 1 + \frac{1}{2!} + \ldots + \frac{1}{n!} \underbrace{<}_{n \geq 4} 2 + \frac{1}{1 \cdot 2} + \frac{1}{2 \cdot 3} + \ldots + \frac{1}{(n - 1) \cdot n} = 2 + \l(1 - \frac{1}{n} \r) < 3 $$
+\end{Proof}
+
+\begin{consequence}
+    $$ \Lim{n}{\infty} \l(1 + \frac{1}{kn}\r)^n = e^{\frac{1}{k}} $$
+\end{consequence}
+
+\begin{Proof}
+    $$ \Lim{n}{\infty} \l(1 + \frac{1}{kn}\r)^n 
+    = \Lim{n}{\infty} \l(\l(1 + \frac{1}{kn}\r)^{nk}\r)^{\frac{1}{k}} $$
+    $ \l(1 + \frac{1}{kn}\r)^{nk} $ --- подпоследовательность $ \l(1 + \frac{1}{n}\r)^{n} $. Значит, она тоже сходится к $e$
+
+    Получаем:
+    $$ \l(\l(1 + \frac{1}{kn}\r)^{nk}\r)^{\frac{1}{k}} = e^{\frac{1}{k}} $$
 \end{Proof}
