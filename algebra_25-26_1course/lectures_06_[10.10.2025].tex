@@ -1,0 +1,64 @@
+\subsection{Предел рекуррентно заданных последовательностей}
+\subsection{Постоянная Эйлера}
+
+\section{Подпоследовательности}
+
+\begin{definition}
+    \textbf{Подпоследовательностью} последовательности $\{a_n\}$ называется последовательность $\{b_k\}$, такая что $b_k = a_{n_k}$, где $n_k$ - строго возрастающая последовательность номеров ($\N$)
+\end{definition}
+
+\begin{remark}[Замечание]
+    $$ n_k \geq k $$
+\end{remark}
+
+\begin{example}
+    $ a_n = \sin \frac{\pi n}{2} $
+
+    $ b_k = a_{4k} = \sin 2\pi k \equiv 0$
+
+    $ c_k = a_{4k - 1} = \sin \frac{\pi (4k - 1)}{2} \equiv -1$
+
+    $ d_k = a_{2k + 1} = \sin \frac{\pi (2k + 1)}{2} = (-1)^k  $
+\end{example}
+
+\subsection{Частичные пределы}
+\subsection{Предельные точки} 
+\subsection{Свойства частичных пределов}
+\newpage
+\subsection{Теорема Больцано-Вейерштрасса}
+
+\begin{theorem}
+Если $a_n \underset{n \to \infty}{\to} A, \text{ то}\ \forall n_k\ b_k = a_{n_k} \underset{n \to \infty}{\to} A $ 
+\end{theorem}
+
+\begin{Proof}
+    $$ \forall \eps > 0\ \exists N(\eps)\ \forall n > N(\eps)\ |a_n - A| < \eps $$
+    Хотим
+    $$ \forall \eps > 0\ \exists K(\eps)\ \forall k > k(\eps)\ |a_{n_k} - A| < \eps $$
+    Возьмем $K(\eps) = N(\eps)$
+    \[\begin{array}{l}
+        \l.
+        \begin{array}{l}
+            \forall k > N(\eps)\\
+            \text{т.к } n_k \geq k
+        \end{array}
+        \r]
+        \l. \Rightarrow \r.
+        \l.
+        n_k > N(\eps). \text{ Тогда } |a_{n_k} - A| < \eps \text{ истина}
+        \r.
+    \end{array}\]
+\end{Proof}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{lectures/files/lec_6_10.10.2025-19-24-42.png}
+  \caption{К теореме}
+  \label{fig:lec_6_10.10.2025-19-24-42.png}
+\end{figure}
+
+\begin{theorem}[Теорема Больцано-Вейерштрасса]
+    Если последовательность ограничена, то у нее есть сходящаяся подпоследовательность
+\end{theorem}
+
+\subsection{Критерий Коши}
