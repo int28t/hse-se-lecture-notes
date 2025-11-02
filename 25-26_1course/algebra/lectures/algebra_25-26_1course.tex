@@ -448,4 +448,158 @@
 
 	{\bf Замечание: } $sgn(\delta_1 * \delta_2)=sgn(\delta_1) * sgn(\delta_2)$
 
+	\section{Определитель}
+	
+	{\bf Определение} Определителем или детерминантом квадратной матрицы $A$ порядка $n$ называется сумма $n!$ слагаемых следующего вида:
+
+	$\det A = \sum_{\delta \in S_n}~sgn(\delta) * a_{1\delta(1)} * a_{2\delta(2)} * a_{3\delta(3)} * \ldots * a_{n\delta(n)}$, где 
+
+	\[
+		A = 
+		\begin{pmatrix}
+			a_{11} & a_{12} & a_{13} & \ldots & a_{1n} \\
+			a_{21} & a_{22} & a_{23} & \ldots & a_{2n} \\
+			\hdotsfor{5} \\
+			a_{n1} & \hdotsfor{3} & a_{nn}
+		\end{pmatrix}
+	\]
+	и
+	\[
+		\delta = 
+		\begin{pmatrix}
+			1 & 2 & 3 & \ldots & n \\
+			\delta(1) & \delta(2) & \delta(3) & \ldots & \delta(n)
+		\end{pmatrix}
+	\]
+
+	{\bf Обозначение: } $\det A$ или $|A|$
+
+	{\bf Замечание: } По сути $\det A$ является суммой произведений элементов матрицы по одному из каждой строки и столбца (стоящие в разных строках и столбцах по всем способам так сделать (с учётом знака))
+
+	{\bf Пример: } $n = 2 \Rightarrow n! = 2! = 2$
+
+	\[
+		\delta_1 = 
+		\begin{pmatrix}
+			1 & 2 \\
+			1 & 2
+		\end{pmatrix}
+		= Id
+	\]
+
+	\[
+		\delta_2 =
+		\begin{pmatrix}
+			1 & 2 \\
+			2 & 1
+		\end{pmatrix}
+	\]
+
+	$\Rightarrow$
+
+	\[
+		\begin{vmatrix}
+			a_{11} & a_{12} \\
+			a_{21} & a_{22}
+		\end{vmatrix}
+		= a_{11} * a_{22} - a_{21} * a_{12}
+	\]
+
+	% todo: пример для n = 3...
+
+	{\bf Пример: } $n = 3 \Rightarrow n! = 3! = 6$
+
+	\[
+		A =
+		\left[
+			\begin{matrix}
+				a_{11} & a_{12} & a_{13}, \\
+				a_{21} & a_{22} & a_{23}, \\
+				a_{31} & a_{32} & a_{33}
+			\end{matrix}
+			\left|
+				\,
+				\begin{matrix}
+					a_{11} & a_{12} \\
+					a_{21} & a_{22} \\
+					a_{31} & a_{32}
+				\end{matrix}
+			\right.
+		\right]
+	\]
+
+
+	$\det A = a_{11} a_{22} a_{33} + a_{12} a_{23} a_{31} + a_{13} a_{21} a_{32} - a_{31} a_{22} a_{13} - a_{22} a_{23} a_{11} - a_{32} a_{23} a_{11} - a_{33} a_{21} a_{12}$ - Правило Саррюса
+
+	(Диагонали $\searrow$ идут с плюсом, диагонали с $\nearrow$ с минусом)
+
+	\subsection{Свойства определителей}
+
+	\textnumero1
+	$\det A = \det A^T$
+	($\Rightarrow$ Все свойства $\det$ верные для строк матрицы справедливы и для столбцов)
+
+	$\square~B = A^T, b_{ij}=a_{ji}$
+	Переставим $b_{i\delta_i}$ по возрастанию номеров столбцов
+
+	$\det B = \sum_{\delta \in S_n} sgn(\delta) * b_{1\delta(1)} * b_{2\delta(2)} * \ldots * b_{n\delta(n)} = $
+
+	Используем: 
+	\[
+		\delta = 
+		\begin{pmatrix}
+			1 & 2 & \ldots & n \\
+			\delta(1) & \delta(2) & \ldots & \delta(n)
+		\end{pmatrix}
+		= 
+		\begin{pmatrix}
+			\delta(1)^{-1} & \delta(2)^{-1} & \ldots & \delta(n)^{-1} \\
+			1 & 2 & \ldots & n
+		\end{pmatrix}
+	\]
+
+	$sgn(\delta^{-1})=sgn(\delta)$ так как $sgn(\delta * \delta^{-1}) = sgn(\delta) * sgn(\delta^{-1}) = 1$
+
+	$= \sum_{\delta \in S_n} sgn(\delta^{-1}) b_{\delta^{-1}_{}(1)1} b_{\delta^{-1}_{}(2)2} * \ldots * b_{\delta^{-1}_{}(n)n} = \sum_{\delta \in S_n} sgn(\delta^{-1}) * a_{1\delta^{-1}(1)} * a_{2\delta^{-1}(2)} * \ldots * a_{n\delta^{-1}(n)}$
+
+	Переименуем $\tau = \delta^{-1}$
+
+	$=\sum_{\tau \in S_n} sgn(\tau) * a_{1\tau_1} * \ldots * a_{n\tau_n} = \det A \,\blacksquare$
+
+
+	\textnumero2
+	Определитель линеен по строкам и столбцам т.е. пусть $A = (A_1, \ldots, A_n)$ -- матрица как набор строк
+
+	Тогда:
+
+	a) $\det(A_1, \ldots, A_i^\prime + A_i^{\prime\prime}, \ldots, A_n)$
+	$=\det(A_1, \ldots, A_i^\prime, \ldots, A_n) + \det(A_1, \ldots, A_i^{\prime\prime}, \ldots, A_n)$
+
+	б) $\det(A_1, \ldots, \alpha * A_i, \ldots, A_n) = \alpha * \det(A_1, \ldots, A_i, \ldots, A_n)$
+
+	{\bf Пример: }
+	\[
+		\begin{vmatrix}
+			1 & 3 + x \\
+			2 & 7 + x
+		\end{vmatrix}
+		=
+		\begin{vmatrix}
+			1 & 3 \\
+			2 & 7
+		\end{vmatrix}
+		+
+		\begin{vmatrix}
+			1 & x \\
+			2 & x
+		\end{vmatrix}
+		=
+		(1 * 7 - 3 * 2) + x * 
+		\begin{vmatrix}
+			1 & 1 \\
+			2 & 1
+		\end{vmatrix}
+		= 1-x
+	\]
+
 \end{document}
