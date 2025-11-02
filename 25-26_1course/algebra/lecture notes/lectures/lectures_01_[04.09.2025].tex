@@ -1,0 +1,214 @@
+\section {Матрицы}
+	Матрицей размера/типа/порядка $n$x$m$ называется упорядоченная таблица с $m$ строками и $n$ столбцами.
+
+	{\bf Обозначение: }
+	\[
+		A = 
+		\begin{pmatrix}
+			a_{11} & \ldots & a_{1n} \\
+			\vdots & \ddots & \vdots \\
+			a_{m1} & \ldots & a_{mn} 
+		\end{pmatrix}
+		_{mxn}
+	\]
+	$i$ - строка, $j$ - столбец
+
+	$M_{mn}(\mathbb{R})$ - множество всех матриц размера $m$x$n$ с вещественными элементами
+
+	1) При $m = n$ матрица называется квадратной порядка $n$
+
+	2) При $m = 1$ матрица $1$x$n$ - $n$-мерная строка
+
+	При $n = 1$ матрица $m$x$1$ - $m$-мерный столбец
+
+	Матрица $1$x$1$ - число
+
+	3) Матрица состоящая из нулей (т.е. $a_{ij}=0~\forall i = \overline{1, m},~j = \overline{1, n}$) называется нулевой матрицей.
+	{\bf Обозначение: $\mathbb{O}$ }
+
+	4) Будем называть единичной квадратную матрицу порядка n, если:
+
+	\[
+		a_{ij}=\underbrace{\delta^i_j}_{\text{Символ Кронекера}}=
+		\begin{cases}
+			1, & \text{при  $i = j$ } \\
+			0, & \text{при  $i \neq j$}
+		\end{cases}
+	\]
+
+	{\bf Обозначение: }
+	\[
+		E = \begin{pmatrix}
+			1 & 0 & 0 & \ldots & 0 \\
+			0 & 1 & 0 & \ldots & 0 \\
+			0 & 0 & 1 & \ldots & 0 \\
+			\hdotsfor{5} \\
+			0 & 0 & \ldots & 0 & 1
+			\end{pmatrix}
+	\]
+
+	{\bf Определение: } Две матрицы $a$ и $b$ называются равными если они одного размера и соответствующие элементы равны (т.е. $a_{ij}=b_{ij} \forall i=\overline{1, m}, j=\overline{1, n}$)
+
+	{\bf Определение: } Матрица $C$ называется суммой матриц A и B если все матрицы A, B и C одинакового размера и $c_{ij}=b_{ij}+a_{ij}, \forall i=\overline{1,m}, j=\overline{1,n}$
+
+	{\bf Обозначение: } $C = A + B$
+
+	{\bf Пример: }
+
+	\[
+		\begin{pmatrix} 
+			1 & 0 & -1 \\
+			0 & 0 & 2
+		\end{pmatrix}
+		+
+		\begin{pmatrix} 
+			0 & 0 & 1 \\
+			0 & 0 & -2
+		\end{pmatrix}
+		=
+		\begin{pmatrix} 
+			1 & 0 & 0 \\
+			0 & 0 & 0
+		\end{pmatrix}
+	\]
+
+	\subsection{Свойства сложения матриц}
+
+	1. Коммутативность ($A + B = B + A$)
+
+	$\square$ Поэлементно: $[A+B]_{ij} \underbrace{=}_{\text{по определению сложения}} [A]_{ij}+[B]_{ij} \underbrace{=}_{\text{Вещественные числа коммутативны}} [B]_{ij}+[A]_{ij} = \underbrace{=}_{\text{по определению сложения}} [B+A]_{ij}$ $\blacksquare$
+
+	2. Ассоциативность $(A + B) + C = A + (B + C)$
+
+	3. $\exists$ нейтральный элемент по сложению т.е. $\exists$ матрица $\mathbb{O} \in M_{mn}(\mathbb R)~\forall A \in M_{mn}(\mathbb R)$ выполняется $\mathbb O + A = A + \mathbb O = A$
+
+	$\square~[\mathbb O]_{ij} = 0$ -- нулевая матрица $\blacksquare$
+
+	4. $\forall$ матрицы $A \in M_{mn}(\mathbb R)~\exists~B \in M_{mn}(\mathbb R): A + B = B + A = \mathbb O$ -- нулевая матрица
+	
+	$\square~B_{ij} = -A_{ij}~\blacksquare$
+
+	{\bf Обозначение: } $B = -A$ -- Обратная по сложению к $A$ или противоположная
+
+	{\bf Определение: } Матрица $C$ называется произведением числа $\lambda \in \mathbb R$ и матрицы $A$, если матрицы $C$ и $A$ одинакового размера и $[C]_{ij} = \lambda * [A]_{ij}~\forall i = \overline{1,m}, j = \overline{1,n}$
+
+	{\bf Обозначение: } $C = \lambda * A$
+
+	{\bf Пример: }
+	\[
+		2 * 
+		\begin{pmatrix}
+			1 & 3 \\
+			0 & -1
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			2 & 6 \\
+			0 & -2
+		\end{pmatrix}
+	\]
+
+	{\bf Определение: } Разностью матриц A и B называется сумма $A$ и $-B$
+
+	\subsection {Свойства умножения на число}
+
+	$\forall \lambda, \mu \in \mathbb R: (\lambda * \mu) * A = \lambda * (\mu * A)$ -- ассоциативность относительно умножения на число
+
+	$(\lambda + \mu) * A = \lambda * A + \mu * A$ -- дистрибутивность относительно умножения чисел
+
+	$\lambda * (A + B) = \lambda * A + \lambda * B$ -- дистрибутивность относительно сложения матриц
+
+	{\bf Это место стоит перепроверить (!!!) } 
+
+	$1 * A = A$ -- унарность
+
+	\subsection{Умножение матриц}
+
+	Рассмотрим $A_{mxn} \in M_{mn}(\mathbb R), B_{nxk} \in M_{nk}(\mathbb R)$:
+
+	{\bf Определение: }
+	Произведением матрицы $A_{mxn}$ и $B_{nxk}$ (число столбцов в $A$ равно числу строк в $B$) называется $C_{mk}$ где:
+	\[
+		C_{ij}=\sum_{q=1}^{n} a_{iq} * b_{qj}
+	\]
+	
+	($C_{ij}=a_{i1} b_{1j}+a_{i2} b_{2j}+\ldots+a_{in} b_{nj}~\forall i=\overline{1,m},~j=\overline{1,k}$)
+
+	{\bf Пример:}
+
+	\[
+		\begin{pmatrix}
+			1 & 2 \\
+			3 & 4 \\
+			0 & -1
+		\end{pmatrix}_{\text{3x2}}
+		*
+		\begin{pmatrix}
+			1 \\
+			-2
+		\end{pmatrix}_{\text{2x1}}
+		=
+		\begin{pmatrix}
+			-3 \\
+			-5 \\
+			2
+		\end{pmatrix}_{\text{3x1}}
+	\]
+
+	\subsection{Свойства умножения матриц}
+
+	1. Ассоциативность
+	Пусть $A_{mxn}$, $B_{nxk}$, $C_{kxl}$. Тогда $(A * B) * C = A * (B * C)$
+
+	$\square~[(A * B) * C]_{ij} = \sum_{r=1}^k~[A * B]_{ir} * [C]_{rj} = \sum_{r=1}^{k}~(\sum_{s=1}^{n}~[A]_{is} * [B]_{sr}) * [C]_{rj} = \sum_{r=1}^{k}~\sum_{s=1}^{n}~[A]_{is} * [B]_{sr} * [C]_{rj} \underbrace{=}_\text{перегруппируем слагаемые} \sum_{s=1}^{n}~\sum_{r=1}^{k}~[A]_{is} * [B]_{sr} * [C]_{rj}=\sum_{s=1}^{n}~[A]_{is} * (\sum_{r=1}^{k}~[B]_{sr} * [C]_{rj})=\sum_{s=1}^{n}~[A]_{is} * [B * C]_{sj} \underbrace{=}_\text{по определению умножения}=A * (B * C)~\blacksquare$
+
+	2. $\exists$ Нейтрального элемента по умножению (для квадратных матриц)
+	$\exists$ матрица $E \in M_{n}(\mathbb R): \forall A \in M_{n}(\mathbb R)~E * A = A * E = A$
+
+	$\square$ Предъявим единичную матрицу
+
+	$[E]_{ij} = \delta_j^i$
+
+	$[A * E]_{ij} = \sum_{r=1}^{n}~[A]_{ir} * [E]_{rj} = \sum_{r=1}^{n}~[A]_{ir} * \delta_j^i = 0 + \ldots + [A]_{ij} + \ldots + 0 = [A]_{ij}~\forall i, j = \overline{1,n}$
+
+	$E * A$ аналогично $\blacksquare$
+
+	3. $A * \mathbb O = \mathbb O * A = \mathbb O$
+	Для квадратных $A$ и $\mathbb O$ порядка $n$
+
+	Рассмотрим: $(A + B) * C = A * C + B * C$ -- дистрибутивность умножения матриц
+	{\bf Замечание: } Вообще говоря умножение матриц некоммутативно (даже для квадратных)
+	{\bf Пример: }
+	\[
+		\begin{pmatrix}
+			1 & 1 \\
+			0 & 0
+		\end{pmatrix}
+		*
+		\begin{pmatrix}
+			0 & 0 \\
+			1 & 1
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			1 & 1 \\
+			0 & 0
+		\end{pmatrix}
+	\]
+
+	\[
+		\begin{pmatrix}
+			0 & 0 \\
+			1 & 1
+		\end{pmatrix}
+		*
+		\begin{pmatrix}
+			1 & 1 \\
+			0 & 0
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			0 & 0 \\
+			1 & 1
+		\end{pmatrix}
+	\]
