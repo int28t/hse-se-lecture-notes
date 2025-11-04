@@ -104,8 +104,16 @@
 
     На каждом шаге мы вдвое уменьшаем длину отрезка. Выпишем общую формулу:
     
-    // TODO
-    $$ b_k - a_k $$
+    $$b_k - a_k = \frac{B-A}{2^{k-1}} \text{, для строгости необходимо доказать по индукции}$$
+    Также по арифметике пределов сходящихся последовательностей $b_k,\ a_k\ (b_k \to~B',\ a_k \to~A')$, их разность стремится к $B' - A'$ при $k \to \infty$
+
+    $\frac{B-A}{2^{k-1}} \to 0,\ k \to \infty \Rightarrow B' - A' = 0 \Rightarrow B' = A'$
+
+    Получаем, что у $a_k$ и $b_k$ один и тот же предел
+
+    Заметим, что $a_k \leq c_{n_k} \leq b_k\ \forall k \in \N$. По теореме о сходящейся последовательности:
+
+    $a_k \to A', b_k \to B', A' = B'$ при $k \to \infty$. Следовательно: $\lim_{k \to \infty} c_{n_k} = A' = B'$
 \end{Proof}
 
 \begin{example}
@@ -120,3 +128,91 @@
 \end{figure}
 
 \subsection{Критерий Коши}
+
+\begin{definition}
+    Последовательность $a_n$ называется фундаментальной, если:
+    \[
+        \forall \varepsilon > 0\ \exists N(\varepsilon) \in \N\ \forall n, m > N(\varepsilon)\ |a_n - a_m| < \varepsilon 
+    \]
+    \[
+        \Updownarrow
+    \]
+    \[
+        \forall \varepsilon > 0\ \exists N(\varepsilon) \in \N\ \forall n > N(\varepsilon)\ \forall k \in \N\ |a_{n+k} - a_n| < \varepsilon 
+    \]
+\end{definition}
+
+\begin{theorem}[Теорема о критерии Коши]
+    Последовательность $a_n$ сходится $\Leftrightarrow$ последовательность $a_n$ фундаментальна
+\end{theorem}
+
+\begin{Proof}
+{\bf ($\Rightarrow$):}
+
+$\Lim{n}{\infty} a_n = A$
+\[
+    \forall \eps > 0\ \exists N_1(\eps) \in \N\ \forall n > N_1(\eps)\ |a_n - A| < \eps 
+\]
+Хотим:
+\[
+    \forall \varepsilon > 0\ \exists N_2(\varepsilon) \in \N\ \forall n, m > N_2(\varepsilon)\ |a_n - a_m| < \varepsilon
+\]
+\[
+    \forall \varepsilon > 0\ \exists N_2(\varepsilon) \in \N\ \forall n, m > N_2(\varepsilon)\ |(a_n - A) + (A - a_m)| < \varepsilon
+\]
+\[
+    \forall \varepsilon > 0\ \exists N_2(\varepsilon) \in \N\ \forall n, m > N_2(\varepsilon)\ \underbrace{|a_n - A|}_{< \frac{\eps}{2}} + \underbrace{|a_m - A|}_{< \frac{\eps}{2}} < \varepsilon
+\]
+Это выполняется $\forall n > N_1\l(\frac{\eps}{2}\r)$ и $\forall m > N_1\l(\frac{\eps}{2}\r)$
+
+Возьмем $N_2(\eps) = N_1\l(\frac{\eps}{2}\r)$
+
+{\bf ($\Leftarrow$):}
+
+1) Фундаментальные последовательности ограниченны
+
+Возьмем $\eps_0 = 1, N(1)$
+\[
+    \forall n, m > N(1)\ |a_n - a_m| < 1
+\]
+Возьмем $m_0 = N(1) + 1$
+\[
+    \forall n > N(1), a_n \in U_1(a_{m_0})
+\]
+\end{Proof}
+
+//TODO рисунок к 1 части
+
+\begin{Proof}[]
+2) По теореме Больцано-Вейерштрасса:
+\[
+    \exists a_{n_k} \xrightarrow[k \to \infty]{} A
+\]
+Доказать:
+\[
+    a_n \xrightarrow[n \to \infty]{} A
+\]
+Имеем:
+\[
+    \forall \varepsilon > 0\ \exists N_1(\varepsilon) \ \forall n, m > N_1(\varepsilon)\ |a_n - a_m| < \varepsilon 
+\]
+\[
+    \forall \eps > 0\ \exists K(\eps)\ \forall k > K(\eps)\ |a_{n_k} - A| < \eps
+\]
+Хотим:
+\[
+    \forall \eps > 0\ \exists N_2(\eps)\ \forall n > N_2(\eps)\ |a_n - A| < \eps 
+\]
+\[
+    \forall \eps > 0\ \exists N_2(\eps)\ \forall n > N_2(\eps)\ \underbrace{|a_n - a_{n_k}|}_{< \frac{\eps}{2}} + \underbrace{|a_{n_k} - A|}_{< \frac{\eps}{2}} < \eps 
+\]
+Это выполнено $\forall k > K\l(\frac{\eps}{2}\r)$ и $n, n_k > N_1\l(\frac{\eps}{2}\r)$
+
+Так как $n_k \geq k$, потребуем $n, k > N_1\l(\frac{\eps}{2}\r)$
+
+Изначально мы прибавили и вычли $a_{n_k}, k > \max \{N_1\l(\frac{\eps}{2}\r), K\l(\frac{\eps}{2}\r)\}$
+
+$k$ --- вспомогательный аргумент, которого изначально не было (требовалось только показать существование). Поэтому при предъявлении $N_2(\eps)$ мы не будем использовать вспомогательное $K(\eps)$
+
+Возьмем $N_2(\eps) = N_1\l(\frac{\eps}{2}\r)$
+\end{Proof}
