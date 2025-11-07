@@ -1,0 +1,229 @@
+\subsection{Классификация разрывов}
+\begin{enumerate}
+    \item[{\bf 1 рода}] $\exists \Lim{x}{x_{0}\pm} f(x)$
+    \item[{\bf 1.1}] устранимый $\Lim{x}{x_{0}^-} f(x) = \Lim{x}{x_{0}^+} f(x) = f(x_0)$
+    \item[{\bf 1.2}]  скачок $\Lim{x}{x_{0}^-} f(x) \neq \Lim{x}{x_{0}^+} f(x)$
+    \item[{\bf 2 рода}] $\neg \exists \Lim{x}{x_{0}\pm} f(x)$
+    \item[{\bf 2.1}] $\Lim{x}{x_{0}^-} f(x) = \pm \infty$
+  
+    \fbox{$x_0$ - полюс}
+
+    \item[{\bf 2.2}] Никак \frownie{}
+\end{enumerate}
+
+\[
+    \Lim{x}{2^+} f(x) = -\infty
+\]
+\[
+    \forall M > 0\ \exists \delta > 0\ \forall x \in (2;2+\delta)\ f(x) < -M
+\]
+
+\section{Асимптоты}
+
+\subsection{Вертикальная}
+\begin{definition}
+    Прямая $x = a$ называется \fbox{вертикальной асимптотой}, если $\Lim{x}{a^\infty} f(x) = \pm \infty$ или $\Lim{x}{a^+} f(x) = \pm \infty$
+\end{definition}
+
+\begin{example}
+    \[
+        f(x) = \frac{x+3}{x-2}
+    \]
+    \fbox{$x = 2$ --- вертикальная асимптота} $D_f = \R^{\setminus \{2\}} $
+    \[
+        \Lim{x}{2^+} \frac{x + 3}{x - 2} = \frac{5}{0^+} = +\infty
+    \]
+    \[
+        \Lim{x}{2^-} \frac{x + 3}{x - 2} = \frac{5}{0^-} = -\infty
+    \]
+\end{example}
+
+\begin{definition}
+    $f(x)$ ограничена при $x \to x_0$: $\exists \delta_0 \ \exists c_0\ \forall x \in \dot{U}_\delta(x_0)\ |f(x)| \leq c_0$
+\end{definition}
+
+\begin{definition}
+    $f(x)$ отделима от нуля при $x \to x_0$: $\exists \delta_0\ \exists c_0\ \forall x \in \dot{U}_\delta(x_0) |f(x)| \geq c_0$
+\end{definition}
+
+\begin{example}
+    \[
+        f(x) = \frac{1}{1 - \{x\}}
+    \]
+    ДОБАВИТЬ РИСУНОК
+
+    $\{x\} = x - [x]$ --- дробная часть
+
+    $[x] - \max \{k \in \Z : k \leq x\}$ --- целая часть
+\end{example}
+
+\subsection{Горизонтальная}
+
+\begin{definition}
+    $y = b$ --- горизонтальная асимптота при $x \to \pm \infty$, если
+    \[
+        \Lim{x}{\pm \infty} f(x) = b
+    \]
+\end{definition}
+
+\subsection{Наклонная}
+
+\begin{definition}
+    $y = kx + b$ --- наклонная асимптота при $x \to \pm \infty$, если 
+    \[
+        \Lim{x}{\pm \infty} (f(x) - f(kx + b)) = 0
+    \]
+\end{definition}
+
+\begin{remark}
+    Горизонтальная --- частный случай наклонной
+\end{remark}
+
+\begin{theorem}
+    $y = kx + b$ --- наклонная асимптота при $x \to \pm \infty$
+
+    $\exists \Lim{x}{\pm \infty} \frac{f(x)}{x} = k$
+    $\exists \Lim{x}{\pm \infty} (f(x) - kx) = b$
+\end{theorem}
+
+\begin{Proof}
+    {\bf $\Rightarrow$}
+    \[
+        f(x) - (kx + b) = \alpha(x),\ \alpha(x) \to 0
+    \]
+    \[
+        \frac{f(x)}{x} = k + \frac{b}{x} + \frac{\alpha}{x} \to k
+    \]
+    \[
+        f(x) - kx = b + \alpha(x) \to b
+    \]
+    {\bf $\Leftarrow$}
+    \[
+        f(x) - kx = b + \alpha(x)
+    \]
+    \[
+        f(x) - kx - b = \alpha(x)
+    \]
+    \[
+        \Lim{x}{\pm \infty} (f(x) - (kx + b)) = 0
+    \]
+\end{Proof}
+
+\begin{example}
+    \[
+        y = \sqrt{x^2 + 7x + 14} 
+    \]
+    Вертикальных нет, так как $\forall x_0 \Lim{x}{x_0} f(x) = f(x_0)$
+    Наклонная:
+    \[
+        \Lim{x}{\pm \infty} \frac{\sqrt{x^2 + 7x + 4}}{x}
+    \]
+    \begin{itemize}
+        \item[1)] 
+        \[
+            x \to +\infty \sqrt{1 + \frac{7}{x} + \frac{14}{x^2}} \to -1 
+        \]
+        \item[2)]
+        \[
+            x \to +\infty -\sqrt{1 + \frac{7}{x} + \frac{14}{x^2}} \to \frac{7}{2}
+        \]
+        \item[1)]
+        \[
+            \Lim{x}{+\infty} \sqrt{x^2 + 7x + 14} - x = \frac{7}{2} 
+        \]
+        \item[2)]
+        \[
+            \Lim{x}{+\infty} \sqrt{x^2 + 7x + 14} + x = \frac{7}{2} 
+        \]
+    \end{itemize}
+\end{example}
+
+\section{O --- символика}
+
+\subsection{O малое}
+
+\begin{definition}
+    $f(x) = \overline{o}(g(x))$ при $x \to x_0\ (x_0 \in \overline{\R})$, если
+
+    \[
+        \frac{f(x)}{g(x)} = \text{бесконечно малая при } x \to x_0
+    \]
+\end{definition}
+
+\subsection{O большое}
+
+\begin{definition}
+    $f(x) = \underline{O}(g(x))$ при $x \to x_0\ (x_0 \in \overline{\R})$, если
+
+    \[
+        \frac{f(x)}{g(x)} = \text{ограниченная при } x \to x_0
+    \]
+\end{definition}
+
+\begin{example}
+    \[
+        x^2 = \overline{o}(x^3)\ \text{при } x \to 0\ \frownie{}
+    \]
+    \[
+        \frac{x^2}{x^3} = \frac{1}{x} \to \infty
+    \]
+    \[
+        x^2 = \overline()
+    \]
+\end{example}
+
+\begin{remark}
+    1. Впредь бесконечно малые будем обозначать $\overline{o}(1)$
+
+    \[
+        f(x) - kx - b = \overline{o}(1)
+    \]
+
+    \[
+        \overline{o}(1) + \overline{o}(1) = \overline{o}(1)
+    \]
+
+    2. Впредь ограниченные будем обозначать $\underline{O}(1)$
+    \[
+        \overline{o}(1) + \underline{O}(1) = \underline{O}(1)
+    \]
+\end{remark}
+
+\section{Замечательные пределы}
+
+\begin{theorem}
+    $\cos x$ непрерывен на $\R$
+\end{theorem}
+
+\begin{Proof}
+    \[
+        \Lim{x}{x_0} \cos x = \cos x_0
+    \]
+    \[
+        \Updownarrow
+    \]
+    \[
+        \cos x - \cos x_0 = \overline{o}(1) \text{ при }  x \to x_0
+    \]
+    \[
+        \l| -2 \cdot \sin \frac{x + x_0}{2} \cdot \sin \frac{x - x_0}{2} \r| \leq 2 \cdot 1 \cdot \l|\frac{x - x_0}{2}\r| \to 0
+    \]
+\end{Proof}
+
+\fbox{1} $\Lim{x}{0} \frac{\sin x}{x} = 1$
+
+\begin{Proof}
+    \[
+        S_{\triangle OAB} < S_{\sector OAB} < S_{\triangle OAC}
+    \]
+    \[
+        \frac{\sin x}{2} < \pi \cdot \frac{x}{2 \pi} < \frac{tg\ x}{2}
+    \]
+\end{Proof}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{lectures/files/lec_10_14-13-30.png}
+  \caption{К доказательству}
+  \label{fig:lec_10_14-13-30.png}
+\end{figure}
