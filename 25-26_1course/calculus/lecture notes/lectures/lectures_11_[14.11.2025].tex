@@ -1,0 +1,197 @@
+$\Lim{n}{\infty} \l(1 + \frac{1}{n}\r)^n = e$,\ $\Lim{n}{\infty} \l(1 - \frac{1}{n}\r)^{-n} = e$
+
+\begin{remark}
+    Неопределенность $\frac{0}{0}: \Lim{x}{x_0} \frac{f(x)}{g(x)}; \Lim{x}{x_0} f(x) = 0,\ \Lim{x}{x_0} g(x) = 0 $, а также $\frac{\infty}{\infty}, \infty - \infty$
+
+    $x_0 \in \overline{\R} = \R \cup \{\pm \infty\}$
+\end{remark}
+
+\begin{Proof}
+    Хотим:
+    
+    $\Lim{n}{+\infty} \l(1 + \frac{1}{t}\r)^t = e$,\ $\Lim{n}{-\infty} \l(1 + \frac{1}{t}\r)^{t} = e$
+
+    \[
+        \l(1 + \frac{1}{[t] + 1} \r)^{[t]} \leq \l(1 + \frac{1}{t} \r)^{[t]} \leq \l(1 + \frac{1}{[t]} \r)^{[t] + 1},\ \fbox{$t \geq 1, t \in \R$}
+    \]
+
+    \[
+        \forall \eps > 0\ \exists N(\eps) \forall n > N(\eps) \l| \l(1 + \frac{1}{n}\r)^{n+1} - e \r| < \eps 
+    \]
+    $h(t)$ принимают те же значения, что и $a_n$
+
+    {\bf Утверждение:} $\Lim{t}{+\infty} h(t) = e$
+
+    \[
+        \forall \eps > 0\ \exists M(\eps)\ \forall t > M(\eps) \l|\l(1 + \frac{1}{[t]} \r)^{[t] + 1} - e\r| < \eps
+    \]
+
+    $M(\eps) = N(\eps) + 1$
+
+    \[
+        \forall t > M(\eps)\ \text{верно}\ [t] > N(\eps)
+    \]
+
+    Аналогично рассмотрим $\Lim{n}{\infty} \l(1 + \frac{1}{n + 1} \r)^{n} = e$
+
+    Аналогично доказывается $\Lim{n}{-\infty} \l(1 + \frac{1}{t}\r)^{t} = e$
+\end{Proof}
+
+\fbox{2} $\Lim{x}{0} (1 + x)^{\frac{1}{x}} = e \Leftrightarrow \Lim{x}{0^{\pm}} (1 + x)^{\frac{1}{x}} = e$
+
+\begin{Proof}
+Замена $t = \frac{1}{x}$
+\[
+    \Lim{x}{0^+} (1 + x)^{\frac{1}{x}} = \Lim{t}{+\infty} \l(1 + \frac{1}{t}\r)^{t} = e
+\]
+\[
+    \Lim{x}{0^-} (1 + x)^{\frac{1}{x}} = \Lim{t}{-\infty} \l(1 + \frac{1}{t}\r)^{t} = e
+\]
+\end{Proof}
+
+{\bf Следствие 1} 
+\[
+    \Lim{x}{0} \frac{\ln (1 + x)}{x} = 1
+\]
+\[
+    \frac{1}{x} \cdot \ln (1 + x) = \ln (1 + x)^{\frac{1}{x}} \rightarrow \ln e = 1
+\]
+
+Непрерывность $f(x)$ в т $x_0$
+\[
+    \Lim{x}{x_0} f(x) = f(x_0) = f(\Lim{x}{x_0} x)
+\]
+\[
+    \Lim{x}{x_0} \ln (x) = \ln (x_0)
+\]
+
+{\bf Следствие 2}
+\[
+    \Lim{x}{x_0} \frac{e^x - 1}{x} = 1
+\]
+Замена $t = e^x - 1$, при $x \to 0,\ t = e^x - 1 \to 0$,\
+$t + 1 = e^x, x = \ln (t + 1)$
+\[
+    \frac{t}{\ln (t + 1)} = \frac{1}{\frac{\ln(t + 1)}{t} \to 1} \to 1
+\]
+
+$\Lim{x}{0} \frac{e^x - e^0}{x - 0} = (e^x)^{'} |_{x=0}$
+
+\[
+    f'(x_0) = \Lim{x}{x_0} \frac{f(x) - f(x_0)}{x - x_0}
+\]
+
+\section{Непрерывность функции на отрезке}
+
+\begin{definition}
+    Функция непрерывна на $[a; b]$, если
+
+    \begin{itemize}
+        \item[1)] $[a;b] \subset D_f$
+        \item[2)] $f(x)$ непрерывна в т. $x_0 \in (a;b)$
+        \item[3)] $\Lim{x}{a^+} f(x) = f(a)\ \Lim{x}{b^-} f(x) = f(b)$
+    \end{itemize}
+\end{definition}
+
+TODO: рисунок
+
+\begin{theorem}
+    Если функция непрерывна на отрезке $[a;b]$, то 
+    \begin{itemize}
+        \item[1)] она ограничена на $[a;b]$
+        \item[2)] достигает $\sup f(x) x \in [a;b] = \sup E_f$ и $\inf f(x) x \in [a;b] = \inf E_f$
+    \end{itemize}
+\end{theorem}
+
+\[
+    M = \sup f(x) x \in [a;b] \in \overline{\R}
+\]
+\[
+    m = \inf f(x) x \in [a;b] \in \overline{\R}
+\]
+
+\begin{itemize}
+    \item[1)] $M \in \R$
+    \item[2)] $\exists x_0 \in [a;b] M = f(x_0)$
+\end{itemize}
+
+Построим $a_n \uparrow M$
+\[
+    \forall n \exists x_n f(x_n) \geq a_n
+\]
+
+TODO: рисунок
+
+\[
+    \text{Пп} \exists n_0 \forall x \in [a;b] f(x) < a_{n_0}\ \text{$a_{n_0}$ --- верхняя грань для $E_+$} \text{противоречие}
+\]
+
+Построили $\{x_n\}$: 
+\[
+    a_n \leq f(x_n) \leq M
+\]
+\[
+    \Lim{n}{\infty} f(x_n) = M
+\]
+$x_n \in [a;b] \Rightarrow \text{ограничена}$
+\[
+    \exists x_{n_k} : x_{n_k} \underset{k \to \infty}{\rightarrow} x_0
+\]
+\[
+    \text{Предельный переход в нер-вах}\ a \leq x_{n_k} \leq b \Rightarrow x_0 \in [a;b]
+\]
+\[
+    \text{Определение непрерывности по Гейне}\ f(x_{n_k}) \underset{k \to \infty}{\rightarrow} f(x_0)
+\]
+\[
+    f(x_{n_k}) \underset{k \to \infty}{\rightarrow} M
+\]
+
+\begin{theorem}
+    Непрерывная на отрезке функция принимает все промежуточные значения, т.е $f(x), [a;b]$
+
+    $A = f(x_1), B = f(x_2), A < B\ x_1, x_2 \in [a;b]$
+
+    тогда $\forall C \in (A;B) \exists x_0 \in [a;b] : f(x_0) = C$
+\end{theorem}
+
+{\bf Следствие} $f(x)\ \text{непрерывна на}\ [a;b] = D_f, \text{то}\ E_f = [m; M]$
+
+\begin{Proof}
+Построим последовательность влож отрезков $\l\{[a_k; b_k] \r\}_{k \in \N}$, будем считать $x_1 < x_2$
+
+$[a_1; b_1] = [x_1; x_2]$
+
+Возьмем середину $x_3 = \frac{x1 + x2}{2}$
+
+\begin{itemize}
+    \item[1.] $f(x_3) = C$ чтд
+    \item[2.] $f(x_3) < C$ $[a_2; b_2] = [x_3; b_1]$
+    \item[3.] $f(x_3) > C$ $[a_2; b_2] = [a_1; x_3]$
+\end{itemize}
+\end{Proof}
+
+TODO: рисунок
+
+\begin{Proof}[]
+$\{a_k\}_k$ --- неубывающая и огр сверху b
+
+$\{b_k\}_k$ --- невозрастает и огр снизу a
+
+При $k \to \infty$: $a_k \to \alpha$, $b_k \to \beta$
+
+$b_k - a_k = \frac{1}{2^{k - 1}} (x_2 - x_1) \underset{k \to \infty}{\to} 0$
+
+Следовательно по теореме Вейерштрасса: $\alpha = \beta$
+
+\[
+    f(a_k) < C \to f(\alpha) \leq C
+\]
+Непрерывность $f$ по Гейне в т. $x_0 = \alpha$
+\[
+    f(b_k) > C \to f(\beta) \geq C
+\]
+\[
+    f(\alpha) = f(\beta) = C
+\]
+\end{Proof}
