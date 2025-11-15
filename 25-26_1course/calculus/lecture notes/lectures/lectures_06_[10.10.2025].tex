@@ -1,12 +1,13 @@
+\subsubsection{Постоянная Эйлера}
+
 \subsection{Предел рекуррентно заданных последовательностей}
 Для того чтобы найти пример рекуррентно заданных последовательностей
 
 \textbf{Шаг 1:} Проверить, что последовательность сходится (можно пытаться делать через теорему Вейерштрасса или критерий Коши)
 
 \textbf{Шаг 2:} Найти предел используя арифметику пределов
-\subsection{Постоянная Эйлера}
 
-\section{Подпоследовательности}
+\subsection{Подпоследовательности}
 
 \begin{definition}
     \textbf{Подпоследовательностью} последовательности $\{a_n\}$ называется последовательность $\{b_k\}$, такая что $b_k = a_{n_k}$, где $n_k$ - строго возрастающая последовательность номеров ($\N$)
@@ -26,18 +27,66 @@
     $ d_k = a_{2k + 1} = \sin \frac{\pi (2k + 1)}{2} = (-1)^k  $
 \end{example}
 
-\subsection{Частичные пределы}
+\subsubsection{Частичные пределы}
 \begin{definition}
-    \textbf{Частичный предел последовательности -} предел подпоследовательности
+    \textbf{Частичный предел -} конечный или бесконечный предел подпоследовательности
 \end{definition}
 
 \begin{remark}
 У какой (ограниченной) последовательности бесконечное число частичных пределов?
 \end{remark}
-\subsection{Предельные точки} 
-\subsection{Свойства частичных пределов}
+\subsubsection{Предельные точки} 
+
+\begin{definition}
+    Предельная точка последовательности $\{a_n\}_{n \in \N}$ --- число $A \in \R$, такое что:
+    \[
+        \forall \eps > 0 \text{ в } U_{\eps}(A) \text{ находится } \infty  \text{ число членов } \{a_n\}
+    \]
+\end{definition}
+
+\begin{theorem}
+    Конечный частичный предел $\Leftrightarrow$ предельная точка
+\end{theorem}
+
+\begin{Proof}
+    {\bf ($\Rightarrow$):}
+
+    $\Lim{k}{\infty} a_{n_k} = A$
+    \[
+        \forall \eps > 0\ \exists K(\eps)\ \forall k > K(\eps)\ a_{n_k} \in U_{\eps}(A) 
+    \]
+
+    {\bf ($\Leftarrow$):}
+
+    $a$ --- предельная точка
+
+    Возьмем $\eps = 1$
+
+    $U_1(A)$ Возьмем 1 член, его номер объявим $n_1$
+
+    Возьмем $\eps = \frac{1}{2}$
+
+    $U_{\frac{1}{2}}(A)$ Возьмем член с номером $> n_1$. Его номер объявим $n_2$
+
+    $\ldots$
+
+    Возьмем $\eps = \frac{1}{k}$
+
+    $U_{\frac{1}{k}}(A)$ Возьмем член с номером $> n_{k-1}$. Его номер объявим $n_k$
+
+    $\{a_{n_k}\}_{k \in \N} $
+
+    Рассмотрим $\{a_{n_k}\}$:
+    \[
+        \underbrace{A - \frac{1}{k}}_{\xrightarrow{k \to \infty} A} 
+        < \{a_{n_k}\} < 
+        \underbrace{A + \frac{1}{k}}_{\xrightarrow{k \to \infty} A}
+    \]
+\end{Proof}
+
+\subsubsection{Свойства частичных пределов}
 \newpage
-\subsection{Теорема Больцано-Вейерштрасса}
+\subsubsection{Теорема Больцано-Вейерштрасса}
 
 \begin{theorem}
 Если $a_n \underset{n \to \infty}{\to} A, \text{ то}\ \forall n_k\ b_k = a_{n_k} \underset{n \to \infty}{\to} A $ 
@@ -65,7 +114,6 @@
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{lectures/files/lec06-11-25-35.png}
-  \caption{К теореме}
   \label{fig:lec06-11-25-35.png}
 \end{figure}
 
@@ -123,11 +171,10 @@
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{lectures/files/lec6-11-28-20.png}
-  \caption{К примеру}
   \label{fig:lec6-11-28-20.png}
 \end{figure}
 
-\subsection{Критерий Коши}
+\subsubsection{Критерий Коши}
 
 \begin{definition}
     Последовательность $a_n$ называется фундаментальной, если:
@@ -181,7 +228,11 @@ $\Lim{n}{\infty} a_n = A$
 \]
 \end{Proof}
 
-//TODO рисунок к 1 части
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.55\textwidth]{lectures/files/638_06_10.10.2025-23-21-38.png}
+  \label{fig:638_06_10.10.2025-23-21-38.png}
+\end{figure}
 
 \begin{Proof}[]
 2) По теореме Больцано-Вейерштрасса:

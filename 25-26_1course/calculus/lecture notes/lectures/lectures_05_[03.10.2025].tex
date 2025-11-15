@@ -1,4 +1,4 @@
-\section{Действительные числа}
+\subsection{Действительные числа}
 
 \begin{definition}
     Множество \textbf{действительных чисел} - это четверка $(\R; +; \times; \leq)$ (множество, 2 операции, 1~отношение)
@@ -8,7 +8,7 @@
     Отличие операции от отношения. Для того чтобы задать операцию, нужно поставить в соответствие для каждой пары чисел число $(\R \times \R \to \R)$. В отношении для каждой пары чисел нужно поставить в соответствие 0 или 1 $(\R \times \R \to \{0, 1\})$.
 \end{remark}
 
-\subsection{Аксиома непрерывности}
+\subsubsection{Аксиома непрерывности}
 $ A, B \subset \R $
 \begin{itemize}
     \item[1)] $ A, B \neq \varnothing $
@@ -63,7 +63,7 @@ $ A, B \subset \R $
     \textbf{Точной верхней гранью неограниченного сверху множества} назовем $+\infty$
 \end{definition}
 
-\subsection{Теорема Вейерштрасса}
+\subsubsection{Теорема Вейерштрасса}
 \begin{definition}
     $\{a_n\}$ - \textbf{неубывает}, если $a_{n+1} \geq a_n$
 \end{definition}
@@ -89,7 +89,7 @@ $ A, B \subset \R $
 \end{theorem}
 
 \begin{Proof}
-    $ \{a_n\} = A \neq \varnothing \text{, огр. сверху} $
+    $ \{a_n\} \neq \varnothing \text{, огр. сверху} $
 
     $ \exists sup\ \{a_n\} = A \in \R $
 
@@ -115,7 +115,8 @@ $$ \fbox{
     $ a_n = \frac{\sin n}{2^n} \underset{n \rightarrow \infty}{\rightarrow} 0 $
 } $$
 
-\subsection{Второй замечательный предел}
+\subsection{Число $e$ и постоянная Эйлера}
+\subsubsection{Второй замечательный предел}
 \begin{theorem}[Теорема о втором замечательном пределе]
     $$ \exists \Lim{n}{\infty} \l(1 + \frac{1}{n}\r)^n = e $$
 \end{theorem}

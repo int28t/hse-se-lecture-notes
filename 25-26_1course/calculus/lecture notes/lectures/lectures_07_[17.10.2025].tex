@@ -1,6 +1,115 @@
 \section{Функции}
-\subsection{Функция. График функции}
-\subsection{Инъекция, сюрьекция, биекция} 
-\subsection{Обратимость функции}
-\subsection{Предел функции по Коши}
-\subsection{Предел функции по Гейне}
+\subsection{Понятия функции и ее предела}
+\subsubsection{Функция. График функции}
+$f(x) : \R \to \R$
+
+\begin{definition}
+    \textbf{Функцией} $f$ отображающей множество $X$ во множество $Y$ $(f : X \to Y)$ множество упорядоченных пар $\{(x, y)\}_{x \in X, y \in Y}$, причем каждый элемент $X$ встречается в какой-то паре на первой позиции и только один раз.
+
+    В частности, $X$ называется областью определения функции и обозначается $D_f$
+
+    Множество вторых элементов пар обозначается $E_f$, множество значений функции. $E_f \subset Y$
+\end{definition}
+
+\begin{definition}
+    \textbf{График функции} --- множество точек на декартовой (координатной) плоскости, координаты которых --- пары функции
+\end{definition}
+\subsubsection{Инъекция, сюрьекция, биекция} 
+\begin{definition}
+    Функция называется \textbf{инъекцией}, если вторые элементы пар не повторяются
+\end{definition}
+\begin{definition}
+    Функция называется \textbf{сюрьекцией}, если $E_f = Y$
+    \[
+        \forall y \in Y\ \exists x \in X\ : f(x) = y
+    \]
+\end{definition}
+\begin{definition}
+    Функция называется \textbf{биекцией}, если она инъекция и сюрьекция
+\end{definition}
+\subsubsection{Обратимость функции}
+\begin{definition}
+    Функция $f^{-1} : Y \to X$ называется \textbf{обратной} к $f : X \to Y$, если пары $f^{-1}$ $\rightharpoonup$ пары $f$, где элементы поменяны местами 
+\end{definition}
+
+\begin{remark}
+    Чтобы $f : X \to Y$ была обратима нужно, чтобы она была биекцией
+\end{remark}
+
+\begin{example}
+    \[
+        f(x) = \sin(x),\ \R \to \R\ \text{--- не обратима}
+    \]
+    \[
+        f(x) = \sin(x),\ \l[-\frac{\pi}{2};\frac{\pi}{2} \r] \to [-1; 1]
+    \]
+    Тогда обратима
+    \[
+        f^{-1}(x) = \arcsin (y) \in \l[-\frac{\pi}{2};\frac{\pi}{2} \r]
+    \]
+\end{example}
+
+Далее работаем с числовыми функциями ($X, Y \subset \R$)
+\subsubsection{Предел функции по Коши}
+\begin{definition}[Определение по Коши]
+    $\Lim{x}{x_0} f(x) = A$, если
+    \[
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x \in \overset{\circ}{U}_{\delta } (x_0)\ |f(x) - A| < \eps
+    \]
+    \[
+        \Updownarrow
+    \]
+    \[
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+    \]
+\end{definition}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{lectures/files/614_07_17.10.2025-23-17-14.png}
+  
+  \label{fig:614_07_17.10.2025-23-17-14.png}
+\end{figure}
+
+\newpage
+
+\begin{example}
+    $\Lim{x}{3} (2x - 7) = -1$
+    \[
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - 3| < \delta\ |(2x - 7) - (-1)| < \eps
+    \]
+    \[
+        |2x - 6| < \eps
+    \]
+    \[
+        2 \cdot |x - 3| < \eps
+    \]
+    \[
+        |x - 3| < \frac{\eps}{2}
+    \]
+    Возьмем $\delta (\eps) = \frac{\eps }{3}$
+\end{example}
+
+\subsubsection{Предел функции по Гейне}
+
+\begin{definition}[Определение по Гейне]
+    $\Lim{x}{x_0} f(x) = A$, если истина импликация
+
+    \[
+    \underset{
+        \substack{
+            x_n \xrightarrow[n \to \infty]{} x_0 \\ 
+            x_n \neq x_0
+        }
+    }{\forall \{x_n\}_{n \in \N}} 
+    \Rightarrow f(x_n) \xrightarrow[n \to \infty]{} A
+    \]
+\end{definition}
+
+\begin{example}
+    $\Lim{x}{3} (2x - 7) = -1$
+
+    Возьмем $\{x_n\}_{n \in \N} : x_n \xrightarrow[n \to \infty]{} 3, x_n \neq 3$
+
+    Посмотрим $f(x_n) = \underbrace{\underbrace{2 \underbrace{x_n}_3}_6 - 7}_{-1} \xrightarrow[n \to \infty]{} -1 $
+\end{example}
