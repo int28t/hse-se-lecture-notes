@@ -1,3 +1,4 @@
+\newpage
 \section{Функции}
 \subsection{Понятия функции и ее предела}
 \subsubsection{Функция. График функции}
@@ -71,8 +72,6 @@ $f(x) : \R \to \R$
   \label{fig:614_07_17.10.2025-23-17-14.png}
 \end{figure}
 
-\newpage
-
 \begin{example}
     $\Lim{x}{3} (2x - 7) = -1$
     \[
@@ -93,7 +92,7 @@ $f(x) : \R \to \R$
 \subsubsection{Предел функции по Гейне}
 
 \begin{definition}[Определение по Гейне]
-    $\Lim{x}{x_0} f(x) = A$, если истина импликация
+    $\Lim{x}{x_0} f(x) = A$, если истинна импликация
 
     \[
     \underset{
@@ -112,4 +111,81 @@ $f(x) : \R \to \R$
     Возьмем $\{x_n\}_{n \in \N} : x_n \xrightarrow[n \to \infty]{} 3, x_n \neq 3$
 
     Посмотрим $f(x_n) = \underbrace{\underbrace{2 \underbrace{x_n}_3}_6 - 7}_{-1} \xrightarrow[n \to \infty]{} -1 $
+\end{example}
+
+\begin{theorem}
+    Определения предела функции по Коши и Гейне равносильны
+\end{theorem}
+
+\begin{Proof}
+    {\bf $(\Rightarrow):$}
+
+    Имеем:
+    \[
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+    \]
+    Предположим, что посылка истинна. Тогда также имеем:
+    \[
+        x_n \xrightarrow[n \to \infty ]{} x_0,\ x_n \neq x_0, \text{ то есть } \forall \omega > 0\ \exists N_1(\omega )\ \forall n > N_1(\omega )\ 0 < |x_n - x_0| < \omega 
+    \]
+    Хотим:
+    \[
+        f(x_n) \xrightarrow[n \to \infty ]{} A,\ \forall \eps > 0\ \exists N_2(\eps )\ \forall n > N_2(\eps )\ |f(x_n) - A| < \eps 
+    \]
+
+    Чтобы $|f(x_n) - A| < \eps$ нужно $0 < |x_n - x_0| < \delta(\eps )$ (Подставили в определение Коши $f(x_n)$ вместо $f(x)$). Поэтому возьмем $\omega = \delta (\eps )$. 
+    
+    Получаем $N_1(\delta (\eps ))$ и $\forall n > N_1(\delta (\eps ))\ 0 < |x_n - x_0| < \delta (\eps )$ и тогда $|f(x_n) - A| < \eps $
+
+    Возьмем $N_2(\eps ) = N_1(\delta (\eps ))$
+
+    {\bf $(\Leftarrow):$}
+
+    Имеем:
+    \[
+    \underset{
+        \substack{
+            x_n \xrightarrow[n \to \infty]{} x_0 \\ 
+            x_n \neq x_0
+        }
+    }{\forall \{x_n\}_{n \in \N}} 
+    \Rightarrow f(x_n) \xrightarrow[n \to \infty]{} A
+    \]
+
+    Пп т.е верно:
+    \[
+        \exists \eps > 0\ \forall \delta = \delta (\eps )\ \exists x(\delta ) \in \overset{\circ}{U}_{\delta } (x_0)\ |f(x) - A| \geq \eps 
+    \]
+    Для каждого $\delta = \frac{1}{n} \text{ найдем } x_n \in \overset{\circ}{U}_{\delta } (x_0)$
+
+    Получим
+    \[
+        \underbrace{x_0 - \frac{1}{n}}_{\xrightarrow{n \to \infty} x_0} 
+        < x_n < 
+        \underbrace{x_0 + \frac{1}{n}}_{\xrightarrow{n \to \infty} x_0}
+    \]
+    \[
+        \{x_n \}_{n \in \N}: x_n \xrightarrow[n \to \infty ]{} x_0, x_n \neq x_0 
+    \]
+    Значит $f(x_n) \xrightarrow[n \to \infty ]{} A$
+
+    Но $|f(x) - A| \geq \eps$. Получили противоречие (расписать определение и в качестве $\eps$ взять $\eps_0$)
+\end{Proof}
+
+\begin{example}
+    Рассмотрим функцию Дирихле:
+    \[
+        D(x) = 
+        \begin{dcases}
+            1, &x \in \Q\\
+            0, &x \notin \Q\\
+        \end{dcases}
+    \]
+    Утверждается, что у данной функции нет предела ни в какой точке. Рассмотрим~$x_0 = 0$
+
+    $\Lim{x}{0} D(x)\ \lnot \exists $
+
+    $x_n = \frac{1}{n} \xrightarrow[n \to \infty ]{} 0,\ x_n \neq 0$; $f(x_n) \equiv 1 \xrightarrow[n \to \infty ]{} 1$
+
+    $x_n' = \frac{\sqrt{2}}{n} \xrightarrow[n \to \infty ]{} 0, x_n' \neq 0$; $f(x_n') \equiv 0 \xrightarrow[n \to \infty ]{} 0$
 \end{example}

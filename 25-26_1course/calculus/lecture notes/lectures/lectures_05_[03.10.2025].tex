@@ -1,3 +1,4 @@
+\newpage
 \subsection{Действительные числа}
 
 \begin{definition}
@@ -115,11 +116,12 @@ $$ \fbox{
     $ a_n = \frac{\sin n}{2^n} \underset{n \rightarrow \infty}{\rightarrow} 0 $
 } $$
 
+\newpage
 \subsection{Число $e$ и постоянная Эйлера}
-\subsubsection{Второй замечательный предел}
-\begin{theorem}[Теорема о втором замечательном пределе]
+\subsubsection{Число $e$}
+\begin{definition}
     $$ \exists \Lim{n}{\infty} \l(1 + \frac{1}{n}\r)^n = e $$
-\end{theorem}
+\end{definition}
 
 \begin{Proof}
     Ранее мы доказали, что данная последовательность неубывает.
@@ -150,4 +152,101 @@ $$ \fbox{
 
     Получаем:
     $$ \l(\l(1 + \frac{1}{kn}\r)^{nk}\r)^{\frac{1}{k}} = e^{\frac{1}{k}} $$
+\end{Proof}
+
+\begin{consequence}
+    \[
+        \Lim{n}{\infty } \left( 1 + \frac{a}{n} \right)^n = e^a
+    \]
+\end{consequence}
+\begin{Proof}
+$c_n = \left( 1 + \frac{a}{n} \right)^n$
+
+Мы не умеем доказывать для $\forall a \in \R$ :(
+
+Докажем для $\forall a \in \Q$
+
+{\bf 1. $a = -1$}
+
+Хотим:
+\[
+    d_n = \left( 1 - \frac{1}{n} \right)^n \xrightarrow[n \to \infty ]{} \frac{1}{e} = e^{-1}
+\]
+\[
+    \frac{1}{d_n} = \l(\frac{n}{n - 1}\r)^n = \l(1 + \frac{1}{n - 1}\r)^n = \l(1 + \frac{1}{n - 1}\r)^{n-1} \l(1 + \frac{1}{n - 1}\r) \xrightarrow[n \to \infty ]{} e \cdot 1 = e
+\]
+Получили исходную последовательность со сдвинутой нумерацией
+
+{\bf 2. $a = \frac{1}{k}, k \in \N$}
+
+Хотим:
+\[
+    d_n = \left( 1 + \frac{1}{kn} \right)^n \xrightarrow[n \to \infty ]{} e^{\frac{1}{k}}
+\]
+Данный случай также разбирался выше (на семинаре)
+\[
+    d_n = \left( 1 + \frac{1}{kn} \right)^n = \sqrt[k]{ \underbrace{\left( 1 + \frac{1}{kn} \right)^{kn}}_{e_n}}  
+\]
+$e_n$ --- подпоследовательность $c_n : e_n = c_{k \cdot n} \Rightarrow e_n \xrightarrow[n \to \infty ]{} e$
+\[
+    \sqrt[k]{ \left( 1 + \frac{1}{kn} \right)^{kn}} \to \sqrt[k]{e} = e^{\frac{1}{k}}
+\]
+{\bf 3. $a = k, k \in \N$}
+
+\[
+    d_n = \left( 1 + \frac{k}{n} \right)^{n} =\l(\underbrace{\left( 1 + \frac{k}{n} \right)^{\frac{n}{k}}}_{f_n}\r)^k 
+\]
+$c_n$ --- подпоследовательность $f_n : c_n = f_{k \cdot n} \Rightarrow $ если $f_n$ сходится, то она сходится к $e$
+
+Докажем, что $f_n$ сходится: 
+
+1. Монотонность $f_n$ (Она должна возрастать, так как $c_n$ ее подпоследовательность и она возрастает)
+
+\[
+    \frac{f_{n+1}}{f_n} = \frac{\left( 1 + \frac{k}{n+1} \right)^{\frac{n+1}{k}} }{\left( 1 + \frac{k}{n} \right)^{\frac{n}{k}}} = \left(\l(\frac{(n + 1 + k)n}{(n + 1)(n + k)}\r)^n \frac{n + 1 + k}{n + 1} \right)^{\frac{1}{k}} =
+\]
+\[
+    = \left(\l(\frac{n^2 + n + nk}{n^2 + nk + n + k}\r)^n \frac{n + 1 + k}{n + 1} \right)^{\frac{1}{k}} = \left(\l(1 - \frac{k}{n^2 + nk + n + k}\r)^n \frac{n + 1 + k}{n + 1} \right)^{\frac{1}{k}}
+\]
+\[
+    \left(\l(1 - \frac{k}{n^2 + nk + n + k}\r)^n \frac{n + 1 + k}{n + 1} \right)^{\frac{1}{k}} \geq \left(\l(1 - \frac{nk}{n^2 + nk + n + k}\r) \frac{n + 1 + k}{n + 1} \right)^{\frac{1}{k}} =
+\]
+\[
+    = \left(\frac{(n^2 + n + k)(n + 1 + k)}{(n^2 + nk + n + k)(n + 1)} \right)^{\frac{1}{k}} = \left(\frac{n^3 + n^2 + n^2 k + n^2 + n + nk + nk + k +k^2}{n^3 + n^2 + n^2 k + nk + n^2 + n + nk + k } \right)^{\frac{1}{k}} =
+\]
+\[
+    = \left(\frac{n^3 + 2n^2 + n^2 k + 2nk + n + k +k^2}{n^3 + 2n^2 + n^2 k + 2nk + n + k } \right)^{\frac{1}{k}}; \frac{n^3 + 2n^2 + n^2 k + 2nk + n + k +k^2}{n^3 + 2n^2 + n^2 k + 2nk + n + k } > 1
+\]
+Получили $f_{n+1} > f_n$. $f_n$ строго возрастает. Тогда $f_n$ либо сходится, либо стремится к $+\infty $. У $f_n$ есть сходящаяся подпоследовательность $\Rightarrow$ она не может стремиться к $+\infty $. Значит, она сходится
+
+\sout{2. Ограниченность}
+
+Так как $f_n$ сходится, то она сходится к $e$. Доказано. Возвращаемся к $d_n$:
+
+\[
+    d_n = \l(\underbrace{\left( 1 + \frac{k}{n} \right)^{\frac{n}{k}}}_{f_n}\r)^k \xrightarrow[n \to \infty ]{} e^k = e^a
+\]
+
+{\bf 4. $a = -k, k \in \N$}
+
+\[
+    d_n = \left( 1 - \frac{k}{n} \right)^{n}
+\]
+\[
+    \frac{1}{d_n} = \left( \frac{n}{n - k} \right)^n = \left( 1 + \frac{k}{n - k} \right)^{n-k} \left(1 + \frac{k}{n - k} \right)^k \xrightarrow[n \to \infty ]{} e^k \cdot 1 = e^k \Rightarrow d_n \xrightarrow[n \to \infty ]{} e^{-k} = e^a
+\]
+
+{\bf 5. $a \in \Q$}
+
+Тогда
+\[
+    \exists m \in \Z,\ k \in \N : a = \frac{m}{k}
+\]
+\[
+    d_n = \left( 1 + \frac{a}{n} \right)^n = \left( 1 + \frac{m}{kn} \right)^n = \sqrt[k]{\left( 1 + \frac{m}{kn} \right)^{kn}} 
+\]
+Под корнем подпоследовательность из пункта 3 или 4, она сходится к $e^m$ при $n \to \infty $. Тогда: 
+\[
+    \sqrt[k]{\left( 1 + \frac{m}{kn} \right)^{kn}} \xrightarrow[n \to \infty ]{} e^{\frac{m}{k}} = e^a
+\]
 \end{Proof}

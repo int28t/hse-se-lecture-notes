@@ -1,12 +1,18 @@
 \ProvidesPackage{header}
 
 \RequirePackage{cmap}                    
-\RequirePackage[T1,T2A]{fontenc}      
+\RequirePackage[T2A, T1]{fontenc}      
 \RequirePackage[utf8]{inputenc}        
 \RequirePackage[english,russian]{babel}
 
+\RequirePackage{amssymb}   
+\RequirePackage{amsmath}
+\RequirePackage{mathtools} 
+
 \RequirePackage{microtype} 
 \RequirePackage[top=0.8in,bottom=0.8in,left=0.8in,right=0.8in,headheight=110pt]{geometry}
+
+\RequirePackage[normalem]{ulem} 
 
 \RequirePackage{fancyhdr}
 \fancyhf{}
@@ -16,10 +22,7 @@
 \RequirePackage{subfiles}
 \RequirePackage{textcomp}
 \RequirePackage{array}
-\RequirePackage{amsmath}
 \RequirePackage{gensymb}
-\RequirePackage{mathtools} 
-\RequirePackage{amssymb}    
 \RequirePackage{amsthm}   
 \RequirePackage{bm}        
 \RequirePackage{icomma}
@@ -76,6 +79,7 @@
 \renewcommand{\l}{\left}
 \renewcommand{\r}{\right}
 \providecommand{\Sum}[2]{\overset{#2}{\underset{#1}{\sum}}}
+\providecommand{\Prod}[2]{\overset{#2}{\underset{#1}{\prod}}}
 \providecommand{\Lim}[2]{\lim\limits_{#1 \to #2}}
 \providecommand{\pd}[2]{\frac{\partial #1}{\partial #2}}  
 
@@ -130,7 +134,7 @@
 
 \newenvironment{Proof}[1][Доказательство]{
   \begin{tcolorbox}[title=#1,colback=theorem_back,colframe=theorem_frame,myboxstyle]}
-{\qed\end{tcolorbox}}
+{\end{tcolorbox}}
 
 \newenvironment{example}[1][Пример]{
   \begin{tcolorbox}[title=#1,colback=example_back,colframe=example_frame,myboxstyle]}
@@ -168,7 +172,13 @@
   \begin{tcolorbox}[title=#1,colback=hint_back,colframe=hint_frame,myboxstyle]}
 {\end{tcolorbox}}
 
-\providecommand{\backtotoc}{\noindent\hyperlink{main-toc}{\textbf{Вернуться к содержанию}}}
-\providecommand{\addtocurrent}[2][section]{\addcontentsline{toc}{#1}{#2}}
+\providecommand{\sector}{%
+  \mathbin{%
+    \begin{tikzpicture}[scale=0.15, baseline=-0.5ex]
+      \draw[line width=0.5pt, cap=round] 
+        (0,0) -- (1.2,0) arc (0:60:1.2) -- cycle;
+    \end{tikzpicture}%
+  }%
+}
 
 \endinput

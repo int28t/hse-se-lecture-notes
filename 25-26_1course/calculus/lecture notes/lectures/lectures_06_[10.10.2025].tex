@@ -1,4 +1,117 @@
 \subsubsection{Постоянная Эйлера}
+(Не путать с $e$, константой Эйлера)
+
+$a_n = \Sum{k = 1}{n} \frac{1}{k} = 1 + \frac{1}{2} + \ldots + \frac{1}{n} \xrightarrow[n \to \infty ]{} +\infty $
+
+$\left(1 + \frac{1}{2} + \ldots + \frac{1}{n} - \ln n  \right) \xrightarrow[n \to \infty ]{} \gamma$ --- постоянная Эйлера
+
+\begin{definition}
+    \[
+        \exists \Lim{n}{\infty } \l(\Sum{k = 1}{n} \frac{1}{k} - \ln n \r) = \gamma 
+    \]
+\end{definition}
+
+\begin{remark}
+    В доказательстве будем пользоваться строгим возрастанием $y = \ln x$ и свойствами $\ln$
+\end{remark}
+
+\begin{Proof}
+    {\bf 1.} $\gamma_n$ убывает:
+
+    Будем рассматривать разность соседних, так как мы не знаем знаки членов последовательности, а также будет удобно сокращать слагаемые
+    \[
+      \gamma_{n+1} - \gamma_{n} = \frac{1}{n+1} + \ln n - \ln (n+1) = \frac{1}{n+1} - (\ln (n+1) - \ln n) = \frac{1}{n+1} - \ln \l(1 + \frac{1}{n} \r) =  
+    \]
+    \[
+        = \frac{1}{n+1} \left( 1 - (n+1)\ln \left( 1 + \frac{1}{n} \right)  \right) = \frac{1}{n+1} \left( 1 - \ln \left( 1 + \frac{1}{n} \right)^{n+1}  \right)
+    \]
+\end{Proof}
+\begin{remark}[Вспомогательное доказательство]
+    $b_n = \left( 1 + \frac{1}{n} \right)^{n+1} = \left( 1 + \frac{1}{n} \right)^n \cdot \left( 1 + \frac{1}{n} \right) \xrightarrow[n \to \infty ]{} e \cdot 1 = e $
+
+    Мы знаем, что $\left( 1 + \frac{1}{n} \right)^n$ возрастает и сходится к $e$. Докажем, что $b_n$ убывает. Мы знаем, что все члены $b_n$ положительные, рассмотрим частное:
+
+    \[
+        \frac{b_n}{b_{n+1}} = \frac{\left( 1 + \frac{1}{n} \right)^{n+1} }{\left( 1 + \frac{1}{n+1} \right)^{n+2} } = \frac{\left( \frac{n + 1}{n} \right)^{n+1} }{\left( \frac{n+2}{n+1} \right)^{n+2} } = \frac{\left( \frac{n + 1}{n} \right)^{n+1} }{\left( \frac{n+2}{n+1} \right)^{n+1} \left( \frac{n+2}{n+1} \right) } = \l(\frac{ \frac{n + 1}{n} }{ \frac{n+2}{n+1} }\r)^{n+1} \left( \frac{n+1}{n+2} \right) =
+    \]
+    \[
+        = \l(\frac{(n + 1)^2}{n (n+2)}\r)^{n+1} \left( \frac{n+1}{n+2} \right) = \l(\frac{n^2 + 2n + 1}{n^2 + 2n}\r)^{n+1} \left( \frac{n+1}{n+2} \right) =
+    \]
+    По неравенству Бернулли:
+    \[
+        = \l(1 + \frac{1}{n (n+2)}\r)^{n+1} \left( \frac{n+1}{n+2} \right) \geq \l(1 + \frac{n+1}{n (n+2)}\r) \left( \frac{n+1}{n+2} \right) = 
+    \]
+    \[
+        = \frac{(n^2 + 3n +1)(n+1)}{n (n+2)^2} = \frac{n^3 + 4n^2 + 4n + 1}{n^3 + 4n^2 + 4n} > 1
+    \]
+    Вывод: $b_n$ убывает к $e \Rightarrow \forall n \in \N\ b_n > e$
+\end{remark}
+
+\begin{Proof}[]
+    Из вспомогательного доказательства получаем (по монотонности $\ln $): 
+    
+    \[
+        \left( 1 + \frac{1}{n} \right)^{n+1} > e \Rightarrow \ln \left( \left( 1 + \frac{1}{n} \right)^{n+1} \right) > \ln e = 1
+    \]
+
+    Тогда:
+    \[
+        \left( 1 - \ln \left( 1 + \frac{1}{n} \right)^{n+1}  \right) < 0
+    \]
+    \[
+        \frac{1}{n+1} \left( 1 - \ln \left( 1 + \frac{1}{n} \right)^{n+1}  \right) < 0
+    \]
+    Получаем: $\gamma _n$ убывает
+
+    {\bf 2.} $\gamma_n$ ограничена снизу:
+\end{Proof}
+
+\begin{remark}[Вспомогательное доказательство]
+    Известный факт: \fbox{$\ln (1 + x) \leq x\ \forall x> -1$} Докажем его
+\end{remark}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{lectures/files/ctur051_06_10.10.2025-13-24-51.png}
+  \label{fig:ctur051_06_10.10.2025-13-24-51.png}
+\end{figure}
+
+\begin{remark}[]
+    \[
+        \ln (1 + x) \leq x\ \forall x> -1
+    \]
+    \[
+        \ln \l(1 + \frac{1}{n}\r) \leq \frac{1}{n}\ \forall n \in \N
+    \]
+    \[
+        n \cdot \ln \l(1 + \frac{1}{n}\r) \leq 1
+    \]
+    \[
+        \ln \l(1 + \frac{1}{n}\r)^n \leq 1
+    \]
+    Возьмем $c_n = \l(1 + \frac{1}{n}\r)^n,\ c_n < e$. Тогда, по монотонности $\ln $:
+    \[
+        \ln \l(1 + \frac{1}{n}\r)^n < 1\ \forall n \in \N
+    \]
+\end{remark}
+\begin{Proof}[]
+    \[
+        \gamma _n = 1 + \frac{1}{2} + \ldots + \frac{1}{n} - \ln n \geq \ln (1 + 1) + \ln \left( 1 + \frac{1}{2} \right) + \ldots + \ln \left( 1 + \frac{1}{n} \right) - \ln n =
+    \]
+    \[
+        = \ln \left( \frac{2}{1} \right) + \ln \left( \frac{3}{2} \right) + \ldots + \ln \left( \frac{n+1}{n} \right) - \ln n =
+    \]
+    \[
+        = \ln 2 - \ln 1 + \ln 3 - \ln 2 + \ldots + \ln n - \ln (n - 1) + \ln (n + 1) - \ln n - \ln n =
+    \]
+    \[
+        = -\ln 1 + \ln (n + 1) - \ln n = \ln \left( \frac{n+1}{n} \right) > \ln 1 = 0
+    \]
+    Получили $\gamma _n$ ограничена снизу 0. По т.Вейерштрасса:
+    \[
+        \exists \Lim{n}{\infty } \l(\Sum{k = 1}{n} \frac{1}{k} - \ln n \r) = \gamma 
+    \]
+\end{Proof}
 
 \subsection{Предел рекуррентно заданных последовательностей}
 Для того чтобы найти пример рекуррентно заданных последовательностей
@@ -7,6 +120,199 @@
 
 \textbf{Шаг 2:} Найти предел используя арифметику пределов
 
+\subsection{Доказательства стандартных сходимостей}
+
+\begin{remark}[]
+    \[
+        a_n = q^n,\ q \in \R
+    \]
+\end{remark}
+\begin{Proof}
+
+{\bf (1) $q>1$}
+
+Используем неравенство $(1+x)^n \geq 1+nx$ при $x>-1$.  
+Положим $x = q-1 > 0$. Тогда
+\[
+q^n = (1 + (q-1))^n \geq 1 + n(q-1).
+\]
+Для любого $M>0$ из $q^n > M$ достаточно
+\[
+1 + n(q-1) > M
+\Rightarrow
+n > \frac{M-1}{q-1}.
+\]
+Предъявим номер
+\[
+N(M)=\left\lceil\frac{M-1}{q-1}\right\rceil + 1.
+\]
+Следовательно, $q^n \to +\infty$.
+
+{\bf (2) $0<q<1$}
+
+Имеем
+\[
+q^n = \left( \frac{1}{\,1/q\,} \right)^n,\qquad \frac{1}{q}>1.
+\]
+Поэтому $q^n\to 0$.
+
+{\bf (3) $-1<q<0$}
+
+Пишем
+\[
+q^n = (-1)^n |q|^n.
+\]
+Последовательность $(-1)^n$ ограничена, а $|q|^n$ — бесконечно малая.  
+Следовательно, $q^n \to 0$.
+
+{\bf (4) $q<-1$}
+
+Пишем
+\[
+q^n = (-1)^n |q|^n.
+\]
+Последовательность $(-1)^n$ отделена от нуля, а $|q|^n$ — бесконечно большая.  
+Следовательно, $q^n \to \infty$.
+
+\end{Proof}
+
+\begin{remark}[]
+    \[
+        a_n = \sqrt[n]{a},\ a>0
+    \]
+\end{remark}
+\begin{Proof}
+
+Случай $a=1$ очевиден.
+
+Пусть $a>1$. Требуем
+\[
+|\sqrt[n]{a} - 1| < \varepsilon,
+\]
+что равносильно
+\[
+a < (1+\varepsilon)^n.
+\]
+По неравенству Бернулли:
+\[
+1 + n\varepsilon \leq (1+\varepsilon)^n.
+\]
+Достаточно потребовать
+\[
+a < 1 + n\varepsilon
+\ \Rightarrow\ 
+n > \frac{a-1}{\varepsilon}.
+\]
+Берём
+\[
+N(\varepsilon)
+= \left\lceil \frac{a-1}{\varepsilon} \right\rceil + 1.
+\]
+
+Если $0 < a < 1$, то
+\[
+\sqrt[n]{a}
+= \frac{1}{\sqrt[n]{1/a}},\qquad \frac{1}{a}>1.
+\]
+Во всех случаях
+\[
+\sqrt[n]{a} \xrightarrow[n\to\infty]{} 1.
+\]
+
+\end{Proof}
+
+\begin{remark}[]
+    \[
+        a_n = \sqrt[n]{n}
+    \]
+\end{remark}
+\begin{Proof}
+
+Требуем
+\[
+n < (1+\varepsilon)^n.
+\]
+По биному Ньютона:
+\[
+(1+\varepsilon)^n
+= \sum_{k=0}^n \binom{n}{k}\varepsilon^k
+> 1 + \binom{n}{2}\varepsilon^2.
+\]
+Достаточно
+\[
+\binom{n}{2}\varepsilon^2 > 1
+\ \Rightarrow \
+\frac{n(n-1)}{2}\varepsilon^2 > n.
+\]
+Отсюда
+\[
+n > 1 + \frac{2}{\varepsilon^2}.
+\]
+Следовательно,
+\[
+\sqrt[n]{n}\to 1,
+\]
+и можно взять
+\[
+N(\varepsilon)
+= \left\lceil 1 + \frac{2}{\varepsilon^2} \right\rceil + 1.
+\]
+
+\end{Proof}
+
+\begin{remark}[]
+    \[
+        a_n = \frac{n^2}{2^n},\ \text{ + обобщить результат}
+    \]
+\end{remark}
+\begin{Proof}
+
+Так как
+\[
+2^n = (1+1)^n = \sum_{k=0}^n \binom{n}{k}
+\geq \binom{n}{3}
+= \frac{n(n-1)(n-2)}{3!},
+\]
+то по теореме о зажатой последовательности:
+\[
+0 \leq \frac{n^2}{2^n}
+\leq
+\frac{n^2}{\binom{n}{3}}
+= \frac{3!n^2}{n(n-1)(n-2)}
+\xrightarrow[n\to\infty]{} 0.
+\]
+
+\end{Proof}
+
+\begin{remark}[]
+    \[
+        a_n = \frac{2^n}{n!},\ \text{ + обобщить результат}
+    \]
+\end{remark}
+\begin{Proof}
+
+Пишем
+\[
+\frac{2^n}{n!}
+= \prod_{k=1}^n \frac{2}{k}
+= \frac{2}{1}\cdot\frac{2}{2}\cdot\frac{2}{3}\cdot \ldots \cdot\frac{2}{n}.
+\]
+
+Составим оценку:
+\[
+0 \leq \frac{2^n}{n!}
+\leq \frac{2}{n}\cdot 2
+= \frac{4}{n}.
+\]
+
+По теореме о зажатой последовательности:
+\[
+\frac{2^n}{n!}\to 0.
+\]
+
+\end{Proof}
+
+\newpage
 \subsection{Подпоследовательности}
 
 \begin{definition}
@@ -35,6 +341,18 @@
 \begin{remark}
 У какой (ограниченной) последовательности бесконечное число частичных пределов?
 \end{remark}
+
+\begin{definition}
+    \textbf{Верхний предел} последовательности — это точная верхняя грань множества частичных пределов последовательности.
+
+    Обозначение: $\varlimsup _{n \to \infty} a_n$
+\end{definition}
+
+\begin{definition}
+    \textbf{Нижний предел} последовательности — это точная нижняя грань множества частичных пределов последовательности.
+
+    Обозначение: $\varliminf_{n \to \infty} a_n$
+\end{definition}
 \subsubsection{Предельные точки} 
 
 \begin{definition}
@@ -43,6 +361,8 @@
         \forall \eps > 0 \text{ в } U_{\eps}(A) \text{ находится } \infty  \text{ число членов } \{a_n\}
     \]
 \end{definition}
+
+\subsubsection{Свойства частичных пределов}
 
 \begin{theorem}
     Конечный частичный предел $\Leftrightarrow$ предельная точка
@@ -84,8 +404,7 @@
     \]
 \end{Proof}
 
-\subsubsection{Свойства частичных пределов}
-\newpage
+
 \subsubsection{Теорема Больцано-Вейерштрасса}
 
 \begin{theorem}
@@ -170,7 +489,7 @@
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.9\textwidth]{lectures/files/lec6-11-28-20.png}
+  \includegraphics[width=0.8\textwidth]{lectures/files/lec6-11-28-20.png}
   \label{fig:lec6-11-28-20.png}
 \end{figure}
 
