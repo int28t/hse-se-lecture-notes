@@ -129,47 +129,52 @@ $\left(1 + \frac{1}{2} + \ldots + \frac{1}{n} - \ln n  \right) \xrightarrow[n \t
 \end{remark}
 \begin{Proof}
 
-{\bf (1) $q>1$}
+Не будем рассматривать тривиальные случаи $q = 0;1;-1$
 
-Используем неравенство $(1+x)^n \geq 1+nx$ при $x>-1$.  
-Положим $x = q-1 > 0$. Тогда
+{\bf (1) $q>1$}, $\Lim{n}{\infty } a_n = +\infty $
+
 \[
-q^n = (1 + (q-1))^n \geq 1 + n(q-1).
+    \forall M > 0\ \exists N(M)\ \forall n > N(M)\ a_n > M
 \]
-Для любого $M>0$ из $q^n > M$ достаточно
 \[
-1 + n(q-1) > M
-\Rightarrow
-n > \frac{M-1}{q-1}.
+    q^n > M
+\]
+
+Используем неравенство Бернулли $(q - 1 > 0)$
+\[
+    (1 + (q - 1))^n > M
+\]
+\[
+    1 + n(q - 1) > M
+\]
+\[
+    n > \frac{M-1}{q - 1}
 \]
 Предъявим номер
 \[
-N(M)=\left\lceil\frac{M-1}{q-1}\right\rceil + 1.
+N(M)=\l|\left[ \frac{M-1}{q - 1} \right]\r| + 1
 \]
-Следовательно, $q^n \to +\infty$.
 
-{\bf (2) $0<q<1$}
+{\bf (2) $0<q<1$}, $\Lim{n}{\infty } a_n = 0 $
 
-Имеем
 \[
-q^n = \left( \frac{1}{\,1/q\,} \right)^n,\qquad \frac{1}{q}>1.
+    q^n = \left( \frac{1}{1/q} \right)^n = \frac{1}{(1/q)^n}, \frac{1}{q} > 1
 \]
-Поэтому $q^n\to 0$.
 
-{\bf (3) $-1<q<0$}
+$(1/q)^n$ --- б.б, тогда $\frac{1}{(1/q)^n}$ --- б.м
 
-Пишем
+{\bf (3) $-1<q<0$}, $\Lim{n}{\infty } a_n = 0 $
+
 \[
-q^n = (-1)^n |q|^n.
+    q^n = (-1)^n (|q|)^n, |q| \in (0;1)
 \]
 Последовательность $(-1)^n$ ограничена, а $|q|^n$ — бесконечно малая.  
-Следовательно, $q^n \to 0$.
+Следовательно, $q^n \to 0$
 
-{\bf (4) $q<-1$}
+{\bf (4) $q<-1$} $\Lim{n}{\infty } a_n = \infty  $
 
-Пишем
 \[
-q^n = (-1)^n |q|^n.
+    q^n = (-1)^n (|q|)^n
 \]
 Последовательность $(-1)^n$ отделена от нуля, а $|q|^n$ — бесконечно большая.  
 Следовательно, $q^n \to \infty$.
@@ -183,40 +188,45 @@ q^n = (-1)^n |q|^n.
 \end{remark}
 \begin{Proof}
 
-Случай $a=1$ очевиден.
+Случай $a=1$ очевиден
 
-Пусть $a>1$. Требуем
+{\bf (1) $a>1$}, $\Lim{n}{\infty } \sqrt[n]{a} = 1 $
+
 \[
-|\sqrt[n]{a} - 1| < \varepsilon,
+    \forall \eps > 0\ \exists N(\eps )\ \forall n > N(\eps )\ |\sqrt[n]{a} - 1| < \eps 
 \]
-что равносильно
 \[
-a < (1+\varepsilon)^n.
+    \sqrt[n]{a} - 1 < \varepsilon
+\]
+\[
+    \sqrt[n]{a} < \varepsilon + 1
+\]
+\[
+    a < (\eps + 1)^n
 \]
 По неравенству Бернулли:
 \[
-1 + n\varepsilon \leq (1+\varepsilon)^n.
+    1 + n\varepsilon \leq (1+\varepsilon)^n
 \]
-Достаточно потребовать
 \[
-a < 1 + n\varepsilon
-\ \Rightarrow\ 
-n > \frac{a-1}{\varepsilon}.
+    a < 1 + n\varepsilon
 \]
-Берём
 \[
-N(\varepsilon)
-= \left\lceil \frac{a-1}{\varepsilon} \right\rceil + 1.
+    n > \frac{a-1}{\varepsilon}
+\]
+\[
+    N(\varepsilon) = \left[ \frac{a-1}{\varepsilon} \right] + 1
 \]
 
-Если $0 < a < 1$, то
+{\bf (2) $0 < a < 1$}, $\Lim{n}{\infty } \sqrt[n]{a} = 1$
 \[
-\sqrt[n]{a}
-= \frac{1}{\sqrt[n]{1/a}},\qquad \frac{1}{a}>1.
+    \sqrt[n]{a} = \frac{1}{\sqrt[n]{1/a}},\qquad \frac{1}{a}>1
 \]
-Во всех случаях
 \[
-\sqrt[n]{a} \xrightarrow[n\to\infty]{} 1.
+    \sqrt[n]{1/a} \xrightarrow[n\to\infty]{} 1
+\]
+\[
+    \frac{1}{1} \xrightarrow[n\to \infty ]{} 1
 \]
 
 \end{Proof}
@@ -228,34 +238,44 @@ N(\varepsilon)
 \end{remark}
 \begin{Proof}
 
-Требуем
+Хотим $\Lim{n}{\infty } \sqrt[n]{n} = 1$
+
 \[
-n < (1+\varepsilon)^n.
+    \forall \eps > 0\ \exists N(\eps )\ \forall n > N(\eps )\ |\sqrt[n]{n} - 1| < \eps 
+\]
+\[
+    |\sqrt[n]{n} - 1| < \eps 
+\]
+\[
+    \sqrt[n]{n} - 1 < \eps 
+\]
+\[
+    \sqrt[n]{n} < \eps + 1
+\]
+\[
+    n < (1+\eps)^n
 \]
 По биному Ньютона:
 \[
-(1+\varepsilon)^n
-= \sum_{k=0}^n \binom{n}{k}\varepsilon^k
-> 1 + \binom{n}{2}\varepsilon^2.
+    (1+\varepsilon)^n = \sum_{k=0}^n \binom{n}{k}\varepsilon^k > \binom{n}{2}\varepsilon^2
 \]
-Достаточно
 \[
-\binom{n}{2}\varepsilon^2 > 1
-\ \Rightarrow \
-\frac{n(n-1)}{2}\varepsilon^2 > n.
+    n < \binom{n}{2}\eps ^2
 \]
-Отсюда
 \[
-n > 1 + \frac{2}{\varepsilon^2}.
+    n < \frac{n(n - 1)}{2} \eps^2
 \]
-Следовательно,
 \[
-\sqrt[n]{n}\to 1,
+    1 < \frac{n - 1}{2} \eps^2
 \]
-и можно взять
 \[
-N(\varepsilon)
-= \left\lceil 1 + \frac{2}{\varepsilon^2} \right\rceil + 1.
+    \frac{2}{\eps ^2} < n - 1
+\]
+\[
+    n > \frac{2}{\eps ^2} + 1
+\]
+\[
+    N(\eps ) = \l[\frac{2}{\eps ^2} + 1\r]
 \]
 
 \end{Proof}
@@ -266,21 +286,21 @@ N(\varepsilon)
     \]
 \end{remark}
 \begin{Proof}
+По теореме о зажатой последовательности:
+\[
+    0 < \frac{n^2}{(1 + 1)^n} < \frac{n^2}{\binom{n}{3}} = \frac{n^2}{\frac{n(n-1)(n-2)}{3!}} \xrightarrow[n \to \infty ]{} 0
+\]
+Получаем
+\[
+    \frac{n^2}{2^n} \xrightarrow[n \to \infty ]{} 0
+\]
+Обобщение: 
+\[
+    \frac{n^k}{a^n}, a > 1 \xrightarrow[n \to \infty ]{} 0
+\]
+Потому что всегда можно сделать оценку с помощью бинома в знаменателе.
 
-Так как
-\[
-2^n = (1+1)^n = \sum_{k=0}^n \binom{n}{k}
-\geq \binom{n}{3}
-= \frac{n(n-1)(n-2)}{3!},
-\]
-то по теореме о зажатой последовательности:
-\[
-0 \leq \frac{n^2}{2^n}
-\leq
-\frac{n^2}{\binom{n}{3}}
-= \frac{3!n^2}{n(n-1)(n-2)}
-\xrightarrow[n\to\infty]{} 0.
-\]
+Вывод: показательная функция растет быстрее степенной
 
 \end{Proof}
 
@@ -290,25 +310,14 @@ N(\varepsilon)
     \]
 \end{remark}
 \begin{Proof}
-
-Пишем
 \[
-\frac{2^n}{n!}
-= \prod_{k=1}^n \frac{2}{k}
-= \frac{2}{1}\cdot\frac{2}{2}\cdot\frac{2}{3}\cdot \ldots \cdot\frac{2}{n}.
+    \frac{2^n}{n!} = \prod_{k=1}^n \frac{2}{k} = \frac{2}{1}\cdot\frac{2}{2}\cdot\frac{2}{3}\cdot \ldots \cdot\frac{2}{n}
 \]
-
-Составим оценку:
+По теореме о зажатой последовательности
 \[
-0 \leq \frac{2^n}{n!}
-\leq \frac{2}{n}\cdot 2
-= \frac{4}{n}.
+    0 < \frac{2^n}{n!} \leq \frac{2}{n} \cdot 2 \xrightarrow[n \to \infty ]{} 0
 \]
-
-По теореме о зажатой последовательности:
-\[
-\frac{2^n}{n!}\to 0.
-\]
+Вывод: факториал растет быстрее любой показательной
 
 \end{Proof}
 
