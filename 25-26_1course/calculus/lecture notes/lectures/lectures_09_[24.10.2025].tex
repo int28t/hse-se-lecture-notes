@@ -1,0 +1,195 @@
+\subsubsection{Арифметика предела функции}
+
+Если $f(x) \xrightarrow[x \to x_0]{} A,\ g(x) \xrightarrow[x \to x_0]{} B$, тогда:
+
+\begin{enumerate}
+    \item $f(x) \pm g(x) \xrightarrow[x \to x_0]{} A \pm B$
+    \item $f(x) \cdot g(x) \xrightarrow[x \to x_0]{} A \cdot B$
+    \item $\frac{f(x)}{g(x)} \xrightarrow[x \to x_0]{} \frac{A}{B}, B \neq 0$
+    \item $\sqrt[k]{f(x)} \xrightarrow[x \to x_0]{} \sqrt[k]{A} $
+\end{enumerate}
+
+\begin{Proof}[Доказательство 1]
+    Возьмем произвольную последовательность \fbox{$\{x_n\}_{n \in \N}: x_n \xrightarrow[n \to \infty ]{} x_0,\ x_n \neq x_0$}. Тогда по Гейне:
+    \[
+        f(x_n) \xrightarrow[n \to \infty ]{} A,\ g(x_n) \xrightarrow[n \to \infty ]{} B
+    \]
+    По арифметике предела последовательности:
+    \[
+        \fbox{$f(x_n) - g(x_n) \xrightarrow[n \to \infty ]{} A - B$}
+    \]
+    Тогда по Гейне:
+    \[
+        \Lim{x}{x_0} (f(x) - g(x)) = A - B
+    \]
+\end{Proof}
+
+\begin{remark}
+    Остальные свойства доказываются аналогично
+\end{remark}
+
+\subsubsection{Теорема о зажатой функции}
+\begin{theorem}
+    \[
+        \exists \delta_0\ \forall x \in \overset{\circ}{U}_{\delta_0}(x_0)\ : f(x) \leq h(x) \leq g(x)
+    \]
+    \[
+        \Lim{x}{x_0} f(x) = \Lim{x}{x_0} g(x) = A, \text{ тогда } \Lim{x}{x_0} h(x) = A
+    \]
+\end{theorem}
+
+\begin{Proof}
+    Возьмем \fbox{произвольную $\{x_n\}_{n \in \N} : x_n \xrightarrow[n \to \infty ]{} x_0,\ x_n \neq x_0$}
+
+    \[
+        \exists N_0\ \forall n > N_0\ x_0 \in \overset{\circ}{U}_{\delta_0}(x_0)
+    \]
+    \[
+        \forall n > N_0\ f(x_n) \leq h(x_n) \leq g(x_n)
+    \]
+    \[
+        \underbrace{f(x_n)}_{\xrightarrow{n \to \infty} A} 
+        \leq h(x_n) \leq
+        \underbrace{g(x_n)}_{\xrightarrow{n \to \infty} A} \Rightarrow \fbox{$h(x_n) \xrightarrow[n \to \infty ]{} A$} \Rightarrow h(x) \xrightarrow[x \to x_0]{} A
+    \]
+\end{Proof}
+
+\subsubsection{Предел сложной функции}
+Вернемся к арифметике предела функции. Хотим:
+
+\begin{enumerate}
+    \item[5.] \sout{Если $\Lim{x}{x_0} f(x) = A, \Lim{y}{A} h(y) = A$, то $\Lim{x}{x_0} h(f(x)) = A$}. Это неправда
+\end{enumerate}
+
+Контрпример:
+\[
+    f(x) \equiv 0, x_n \to 0
+\]
+\[
+    \Lim{x}{0} f(x) \to 0
+\]
+\[
+    h(y) = |sign\ y|,\ sign(y) = \\
+    \begin{dcases}
+        1, &y > 0\\
+        0, &y = 0\\
+        -1, &y < 0
+    \end{dcases}
+\]
+\[
+    \Lim{y}{0} h(y) = 1
+\]
+Хотим: 
+\[
+    h(f(x)) \xrightarrow[x \to 0]{} 1
+\]
+Но: 
+\[
+    h(f(x)) \implies h(0) \implies 0 \text{. Противоречие}
+\]
+Мы всегда смотрели на аргумент из проколотой окрестности, а $f(x)$ попал в центр окрестности
+
+\begin{theorem}[Теорема о пределе сложной функции]
+    Если $f(x) \xrightarrow[x \to x_0]{} A,\ h(y) \xrightarrow[y \to A]{} h(A)$, тогда: 
+    \[
+        h(f(x)) \xrightarrow[x \to x_0]{} h(A)
+    \]
+\end{theorem}
+\begin{Proof}
+\[
+    \forall \omega > 0\ \exists \delta = \delta (\omega )\ \forall x \in \overset{\circ}{U}_{\delta }(x_0)\ |f(x) - A| < \omega
+\]
+\[
+    \forall \eps > 0\ \exists \eta = \eta (\eps )\ \forall y \in \overset{\circ}{U}_{\eta }(A)\ |h(y) - h(A)| < \eps 
+\]
+Добавляем в окрестность $\eta_0$, так как неравенство выполнено $(0 < \eps )$
+\[
+    \forall \eps > 0\ \exists \eta = \eta (\eps )\ \forall y \in {U}_{\eta }(A)\ |h(y) - h(A)| < \eps 
+\]
+Нужно доказать: 
+\[
+    \forall \eps > 0\ \exists \delta_1 = \delta_1(\eps )\ \forall x \in \overset{\circ}{U}_{\delta_1}(x_0)\ |h(f(x)) - h(A)| < \eps 
+\]
+Верно, если $f(x) \in U_{\eta (\eps )}(A)$
+\[
+    \exists \delta = \delta (\eta (\eps ))\ \forall x \in \overset{\circ}{U}_{\delta }(x_0)\ |f(x) - A| < \eta (\eps )
+\]
+Возьмем $\delta_1(\eps ) = \delta (\eta (\eps ))$
+\end{Proof}
+
+\begin{example}
+    \[
+        \Lim{x}{0} \frac{\sin x}{x} = 1
+    \]
+    \[
+        \Lim{x}{0} \frac{\sin 5x}{x} =\ ?
+    \]
+    \[
+        \Lim{x}{0} \frac{\sin 5x}{x} = \Lim{x}{0} \frac{\sin 5x}{5x} \cdot 5 = \Lim{x}{0} \frac{\sin t}{t} \cdot 5 = 1 \cdot 5 = 5
+    \]
+    Рассмотрим обоснование: 
+    \[
+        h(y) = \frac{\sin y}{y},\ f(x) = 5x
+    \]
+    Кажется нужно искать $h(f(x))$ и тогда: 
+    \[
+        \Lim{x}{0} h(f(x)) \sim h(0) \sim 1
+    \]
+    В чем кроется замена переменной: если найдем предел $h(y)$, то $h(f(x))$ будет такой же. Но эта теорема неверна (см контрпример выше). Тогда требуются доп ограничения (спойлер: теорема ниже)
+\end{example}
+
+\begin{theorem}[Вторая теорема о пределе сложной функции]
+    $f(x) \xrightarrow[x \to x_0]{} f(x_0)$, $f(x)$ --- строго монотонна в какой-то окрестности $x_0$, $h(y) \xrightarrow[y \to f(x_0)]{} A$
+
+    Тогда:
+    \[
+        h(f(x)) \xrightarrow[x \to x_0]{} A
+    \]
+\end{theorem}
+
+\begin{Proof}
+    \[
+        \forall \omega > 0\ \exists \delta = \delta (\omega )\ \forall x \in \overset{\circ}{U}_{\delta }(x_0)\ |f(x) - f(x_0)| < \omega
+    \]
+    \[
+        \forall \omega > 0\ \exists \delta = \delta (\omega )\ \forall x \in \overset{\circ}{U}_{\delta }(x_0)\ 0 < |f(x) - f(x_0)| < \omega
+    \]
+    \[
+        \forall \eps > 0\ \exists \eta = \eta (\eps )\ \forall y \in \overset{\circ}{U}_{\eta }(f(x_0))\ |h(y) - A| < \eps 
+    \]
+    Нужно: 
+    \[
+        \forall \eps > 0\ \exists \delta_1 = \delta_1 (\eps )\ \forall y \in \overset{\circ}{U}_{\delta_1 }(x_0)\ |h(f(x)) - A| < \eps 
+    \]
+    Верно при $f(x) \in \overset{\circ}{U}_{\eta(\eps ) }(f(x_0)) \Rightarrow 0 < |f(x) - f(x_0)| < \eta(\eps )$. Это верно при $x \in \overset{\circ}{U}_{\delta(\eta (\eps )) }(x_0) $
+
+    Возьмем $\delta_1(\eps ) = \delta (\eta (\eps ))$
+\end{Proof}
+
+\begin{definition}
+    Функция $f(x)$ называется \textbf{непрерывной в точке} $x_0$, если: 
+    \[
+        \Lim{x}{x_0} f(x) = f(x_0)
+    \]
+\end{definition}
+
+\begin{definition}
+    {\bf Односторонним пределом} $\Lim{x}{x_{0-}^+} f(x) = A$ называется такое число, что: 
+    \begin{itemize}
+        \item $\Lim{x}{x_{0}^+} f(x) = A$
+        \[
+            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x - x_0 < \delta (\eps )\ |f(x) - A| < \eps \text{ --- \textbf{правосторонний предел}}
+        \]
+        \item $\Lim{x}{x_{0-}} f(x) = A$
+        \[
+            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x_0 - x < \delta (\eps )\ |f(x) - A| < \eps \text{ --- \textbf{левосторонний предел}}
+        \]
+    \end{itemize}
+\end{definition}
+
+\begin{remark}[Замечание]
+    \[
+        \exists \Lim{x}{x_0} f(x) \Leftrightarrow \exists \Lim{x}{x_{0}^+} f(x) = \exists \Lim{x}{x_{0-}} f(x)
+    \]
+    Доказательство тривиальное (в обратную сторону нужно взять минимум из двух $\delta $)
+\end{remark}

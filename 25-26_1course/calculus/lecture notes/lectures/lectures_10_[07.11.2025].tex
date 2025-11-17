@@ -1,15 +1,51 @@
-\subsection{Классификация разрывов}
-\begin{enumerate}
-    \item[{\bf 1 рода}] $\exists \Lim{x}{x_{0}\pm} f(x)$
-    \item[{\bf 1.1}] устранимый $\Lim{x}{x_{0}^-} f(x) = \Lim{x}{x_{0}^+} f(x) = f(x_0)$
-    \item[{\bf 1.2}]  скачок $\Lim{x}{x_{0}^-} f(x) \neq \Lim{x}{x_{0}^+} f(x)$
-    \item[{\bf 2 рода}] $\neg \exists \Lim{x}{x_{0}\pm} f(x)$
-    \item[{\bf 2.1}] $\Lim{x}{x_{0}^-} f(x) = \pm \infty$
-  
-    \fbox{$x_0$ - полюс}
+\subsection{Типы разрывов $(x_0)$}
 
-    \item[{\bf 2.2}] Никак \text{ :( }
-\end{enumerate}
+{\Large \text{\bf 1 рода: } $\exists \Lim{x}{x_{0}\pm} f(x)$}
+
+{\bf 1.1 --- Устранимый} (устранимый, значит вы можете переопределить/доопределить функцию в точке, и она станет непрерывной в этой точке)
+\[
+    \Lim{x}{x_{0}^-} f(x) = \Lim{x}{x_{0}^+} f(x) \neq f(x_0)
+\]
+
+\begin{example}
+    \[
+        f(x) = \frac{\sin x}{x}
+    \]
+    Функция неопределена в 0, можем доопределить единицей и тогда она станет непрерывной в 0
+\end{example}
+\begin{example}
+    \[
+        f(x) = |sign(x)|
+    \]
+    Функция в 0 разрывна, так как предел есть и равен 1. Можем переопределить функцию в 0 и она станет непрерывной
+\end{example}
+
+{\bf 1.2 --- Скачок}
+\[
+    \Lim{x}{x_{0}^-} f(x) \neq \Lim{x}{x_{0}^+} f(x)
+\]
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{lectures/files/1ctur124_10_07.11.2025-22-15-24.png}
+  \caption{Скачок на примере функции распределения}
+  \label{fig:1ctur124_10_07.11.2025-22-15-24.png}
+\end{figure}
+\begin{remark}
+    Доказать, что если функция монотонная, то у нее есть разрывы только типа скачок
+\end{remark}
+
+{\Large \text{\bf 2 рода: } $\neg \exists \Lim{x}{x_{0}\pm} f(x)$}
+
+\begin{remark}
+    У таких функций нет предела или они бесконечно большие
+\end{remark}
+
+{\bf 2.1 --- Полюс} 
+\[
+    \Lim{x}{x_{0}^-} f(x) = \pm \infty,\ \fbox{$x_0$ - полюс}
+\]
+
+{\bf 2.2 --- Никак((}
 
 \[
     \Lim{x}{2^+} f(x) = -\infty
