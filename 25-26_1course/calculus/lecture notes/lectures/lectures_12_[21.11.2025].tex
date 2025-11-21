@@ -1,0 +1,166 @@
+\subsection{Обратные функции}
+
+$f(x) : X \to Y\ D_f = X,\ E_f \subset Y$ 
+
+$f^{-1} (y) : E_f \to X $
+
+$f^{-1} : \{(y;x)\}_{x \in X,\ y \in E_f} $
+
+$f(.) $ инъекция
+
+$X, Y \subset \R$
+
+\begin{theorem}[Теорема о достаточном условии обратимости]
+    Если $f(x) $ --- строго монотонна, то она обратима
+\end{theorem}
+
+\begin{Proof}
+Пусть $f(x)$ возрастает
+
+о/п (от противного):
+\[
+    \exists x_1 \text{ и } x_2 : x_1 \neq x_2 \Rightarrow (x_1 > x_2) \lor (x_1 < x_2) \Rightarrow (y_1 > y_2) \lor (y_1 < y_2)
+\]
+Но: $y_1 = y_2, \bot$
+\end{Proof}
+
+\begin{theorem}[Теорема о критерии обратимости непрерывной функции]
+    Если $f(x) $ непрерывна на $[a;b]$, то:
+    \[
+        f(x) \text{ обратима } \Leftrightarrow f(x) \text{ строго монотонна }
+    \]
+\end{theorem}
+
+\begin{Proof}
+{\bf $\Leftarrow$} Доказано ранее
+
+{\bf $\Rightarrow$}
+
+о/п (от противного)
+\[
+    1)\ \exists x_1 < x_2 < x_3 : y_1 > y_2 < y_3
+\]
+\[
+    \text{ИЛИ}
+\]
+\[
+    2)\ \exists x_1 < x_2 < x_3 : y_1 < y_2 > y_3
+\]
+\[
+    3)\ \text{ ИЛИ когда-то равны } \ \Rightarrow \text{ тогда функция не инъективна } \Rightarrow \text{ она не обратима } \bot 
+\]
+//TODO: рисунок
+\[
+    1)\ \exists c: c \in (y_2; y_1),\ c \in (y_2; y_3)
+\]
+По теореме о промежуточных значениях:
+\[
+    \exists z_1 \in (x_1,x_2) : f(z_1) = c
+\]
+\[
+    \exists z_2 \in (x_2,x_3) : f(z_2) = c
+\]
+\[
+    z_1 \neq z_2
+\]
+\[
+    \bot
+\]
+\end{Proof}
+
+\begin{theorem}
+    $$f(x)$$
+    \begin{enumerate}
+        \item[1)] $D_f = [a;b]$ 
+        \item[2)] $f(x)$ непрерывна на $[a;b]$
+        \item[3)] $f(x)$ строго монотонна на $[a;b]$, то
+    \end{enumerate}
+    $$f^{-1}(y)$$
+    \begin{enumerate}
+        \item[1)] область определения --- отрезок с концами $f(a)$ и $f(b)$
+        \item[2)] непрерывна на этом отрезке 
+        \item[3)] также строго монотонна на этом отрезке
+    \end{enumerate}
+\end{theorem}
+\begin{Proof}
+    \begin{enumerate}
+        \item[\bf 1)] $\Rightarrow$ из теоремы о промежуточных значениях
+        \item[\bf 3)] Пусть $f(.)$ возрастает. о/п:
+        \[
+            \exists y_1 < y_2 \in [f(a); f(b)] : f^{-1} (y_1) \geq f^{-1} (y_2)  
+        \]
+        \[
+            x_1 \geq x_2 \Rightarrow y_1 \geq y_2 \text{ но } y_1 < y_2\ \bot
+        \]
+    \end{enumerate}
+\end{Proof}
+\begin{remark}[Словарик]
+    Без ограничений общности --- кажется что мы накладываем ограничение превращая в частный случай, но на самом деле не влияя на справедливость доказательства в целом, так как остальные случаи рассматриваются похожим образом
+\end{remark}
+\begin{example}[Упражнение]
+    \[
+        \forall y_1, y_2 \in E_f = D_{f^{-1} }\ (y_1 < y_2 \Rightarrow f^{-1}(y_1) < f^{-1} (y_2)  )
+    \]
+    \[
+        \ldots \overline{y_1 < y_2} \lor f^{-1}(y_1) < f^{-1}(y_2)  
+    \]
+    \[
+        \exists y_1,y_2 \in E_f\ (y_1 < y_2 \land f^{-1}(y_1) \geq f^{-1}(y_2)  )
+    \]
+\end{example}
+\begin{Proof}[]
+    \begin{enumerate}
+        \item[\bf 2)] $f^{-1}(y) $
+        
+        //TODO: рисунок 
+
+        Предположим, что она не непрерывна на отрезке, тогда у нее разрыв типа скачок. Но тогда в множестве значений появилась дыра (или две), чего не может быть (теория из доп листка)
+
+        Докажем другим способом:
+
+        \[
+            y_0 \in (f(a); f(b))
+        \]
+        \[
+            \Lim{y}{y_0} f^{-1}(y) = f^{-1}(y_0)  
+        \]
+        \[
+            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall y \in U_{\delta }(y_0)\ |f^{-1}(y) - \underbrace{f^{-1}(y_0)}_{x_0 \in (a;b)}| < \eps   
+        \]
+        Без ограничений обзности считаем, что:
+        \[
+            U_{\eps }(x_0) \subset (a;b) 
+        \]
+        //TODO
+        \[
+            x_0 + \eps,\ x_0 - \eps \in (a;b)
+        \]
+        \[
+            \Downarrow
+        \]
+        \[
+            y_1 = f(x_0 - \eps ),\ y_2 = f(x_0 + \eps )
+        \]
+        \[
+            y_1 < y_0 < y_2 \text{ тк $f$ возрастает}
+        \]
+        Возьмем $\delta = \min \{y_0 - y_1; y_2 - y_0 \}$
+        \[
+            \forall y \in U_{\delta }(y_0) \Rightarrow y_1 < y < y_2 \text{ тк $f^{-1} $ возрастает}
+        \]
+        \[
+            \underset{= x_0 - \eps }{f^{-1}(y_1)} < f^{-1}(y) < \underset{= x_0 + \eps }{f^{-1}(y_2)}\ |f^{-1}(y) - \underset{\text{todo}}{x_0}| < \eps
+        \]
+    \end{enumerate}
+\end{Proof}
+
+\begin{example}[Следствие]
+    Если $f(x)$ определена, непрерывна и строго монотонна на промежутке 
+    \[
+        (a; b) a,b \in \overline{\R} (a;b] a \in \overline{\R}
+    \]
+    TODO
+\end{example}
+Без доказательства
+
+TODO!!!
