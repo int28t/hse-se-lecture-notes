@@ -1,0 +1,251 @@
+\section{Bonus: Консультации по доп листкам}
+Консультации старшего ассистента Вадима Колбасина
+
+\subsection{Консультация по 2 листку}
+\begin{definition}
+    Множество $\mathcal{U}  \subseteq \R$ называется \textbf{открытым}, если 
+    \[
+        \forall x\ (x \in \mathcal{U} \Rightarrow \exists \delta\ (\delta > 0 \land \mathcal{U}_{\delta }(x) \subseteq \mathcal{U}))
+    \]
+\end{definition}
+
+\begin{definition}
+    Множество $\mathcal{F} \subseteq \R$ называется \textbf{замкнутым}, если $\R \backslash \mathcal{F}$ открыто
+\end{definition}
+
+\begin{remark}
+    Если множество не открыто, то не значит что оно замкнуто
+    \[
+        (0;1]
+    \]
+    \[
+        (-\infty; 0] \cup (1; +\infty)
+    \]
+    Существуют одновременно открытые и замкнутые множества
+\end{remark}
+
+\begin{remark}
+    \[
+        A \backslash B \coloneqq \{x \in A | x \not\in B \}
+    \]
+\end{remark}
+
+\begin{theorem}[Теорема о критерии замкнутости]
+    \[
+        \mathcal{F} \subseteq \R \text{ замкнуто } \Leftrightarrow \forall \{x_n\} (\{x_n\} \subset \mathcal{F} \land x_n \xrightarrow[n \to \infty ]{} A \in \R \Rightarrow a \in \mathcal{F})
+    \]
+    "любая сходящаяся сходится в само множество"
+\end{theorem}
+
+\begin{Proof}
+{\bf $\Rightarrow$} 
+\[
+    x_n \to A\ |x_n - A| \xrightarrow[n \to \infty ]{} 0
+\]
+о/п:
+\[
+    A \not \in F \Rightarrow A \in \backslash F \text{ --- открыто }
+\]
+\[
+    \exists \delta > 0 : U_{\delta }(A) \subseteq \backslash F \Rightarrow \forall x \in F (|x - A| > \delta )\ \bot
+\]
+{\bf $\Leftarrow$} 
+
+о/п: $F$ не замекнуто $\Rightarrow \backslash F $ не открыто
+\[
+    \exists x_0 \in \backslash F\ \forall \delta > 0\ U_{\delta }(x_0) \cap F \neq 0 
+\]
+\[
+    \delta_0 = 1, \delta_{n+1} = \frac{|x_n - x_0|}{2},\ x_n \not \in \backslash F \Leftrightarrow x_n \in F
+\]
+\[
+    x_n \to x_0,\ x_n \in F,\ x_0 \not\in F, \bot
+\]
+\end{Proof}
+\begin{remark}
+    Почему только $\R \text{ и } \varnothing$ одновременно открытые и пустые множества?
+\end{remark}
+\begin{example}
+    \[
+        (A(\text{open}) \land A(\text{closed})) \Rightarrow (A = \R \lor A = \varnothing)
+    \]
+\end{example}
+\begin{Proof}
+о/п: 
+\[
+    \exists A (\varnothing \subsetneq A \subsetneq \R \land A(\text{closed}) \land A(\text{closed}))
+\]
+\[
+    \Rightarrow \exists b \not\in A \land \exists a \in A 
+\]
+Без ограничений общности $b > a$:
+\[
+    S = \{x \in [a;b]\ |\ [a;x] \subseteq A\} \ni A
+\]
+\[
+    c = \sup S,\ \delta = \frac{1}{n},\ x_n \xrightarrow[n \to \infty ]{} c,\ x_n \in A,\ c \in A,\ U_{\delta > 0}(c) \subseteq A,\ \bot
+\]
+\end{Proof}
+
+\begin{definition}
+    Множество $\mathcal{K} \subseteq \R$ называется компактом, если 
+    \[
+        \forall \{x_n\} (\{x_n\} \subset \mathcal{K} \Rightarrow \exists \{n_m\} (x_{n_m} \to A \land A \in \mathcal{K}) )
+    \]
+    "из любой последовательности можно выделить подпоследовательность"
+\end{definition}
+\begin{theorem}[Теорема о критерии компактности]
+    $\mathcal{K} $ --- компактно $\Leftrightarrow \mathcal{K} $ замкнуто $\land \mathcal{K} $ ограничено
+\end{theorem}
+\begin{Proof}
+{\bf $\Rightarrow$}
+\begin{enumerate}
+    \item[1)] $x_n \to \overset{\sim}{A} $
+    \[
+        x_{n_m} \to A \in K
+    \]
+    \[
+        x_n \to A \in K
+    \]
+    \item[2)] ограниченность
+    
+    о/п: $x_n \to \infty $
+    \[
+        \forall \{n_m\} (x_{n_m} \to \infty), \bot
+    \]
+\end{enumerate}
+{\bf $\Rightarrow$} $\{x_n\} \subset \mathcal{K} \xrightarrow[]{\text{по теореме Б-В}} x_{n_m} \to A, \mathcal{K} $ --- замкнуто $\to A \in \mathcal{K} $
+\end{Proof}
+
+\begin{exercise}
+    \[
+        \l\{\l[-\frac{1}{2^{2n} }; -\frac{1}{2^{2n+1}} \r]\r\} \bigcup^{\infty }_{n = 1} \{0\}
+    \]
+\end{exercise}
+
+\begin{theorem}
+    \begin{enumerate}
+        \item[1)] $\bigcup_{\alpha } \mathcal{U}_{\alpha } = \mathcal{U}  $
+        \item[2)] $\bigcup_{k = 1 }^n \mathcal{U}_{k } = \mathcal{U}  $
+        \item[3)] $\bigcap _{\alpha } \mathcal{F}_{\alpha } = \mathcal{F}  $
+        \item[4)] $\bigcap_{k = 1 }^n \mathcal{F}_{k } = \mathcal{F}  $
+    \end{enumerate}
+    \[
+        \R \backslash \bigcup_{\alpha } \mathcal{A}_{\alpha } = \bigcap_{\alpha }(\R \backslash \mathcal{A}_{\alpha } )  
+    \]
+    \[
+        \R \backslash \bigcap_{\alpha } \mathcal{A}_{\alpha } = \bigcup_{\alpha }(\R \backslash \mathcal{A}_{\alpha } )  
+    \]
+\end{theorem}
+\begin{Proof}
+Доказательство устно
+\end{Proof}
+
+\begin{definition}
+    $f : X \to Y, X, Y \subseteq \R$ называется равномерно непрерывной, если: 
+    \[
+        \exists \eps > 0\ \exists \delta = \delta (\eps ) > 0\ \forall x_1, x_2 \in X\ (|x_1 - x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps ) 
+    \]
+\end{definition}
+\begin{example}
+    \[
+        \frac{1}{x}, x \in (0;1)
+    \]
+\end{example}
+\begin{theorem}[Теорема о равномерной непрерывности (Кантора — Гейне)]
+    Если $f$ непрерывна на компакте, то она равномерно непрерывна на нем
+\end{theorem}
+\begin{Proof}
+о/п: 
+\[
+    \exists \eps > 0\ \forall \delta > 0\ \exists x, y \in \mathcal{X} \ (|x - y| < \delta \land |f(x) - f(y)| \geq \eps)
+\]
+\[
+    \delta = \frac{1}{n}, \{x_n\}, \{y_n\}, |x_n - y_n| \xrightarrow[n \to \infty ]{} 0,\ \mathcal{K} \text{ --- компакт} \Rightarrow x_{n_m} \to A \in \mathcal{K} \text{ И } y_{n_m} \to A \in \mathcal{K} 
+\]
+\[
+    \xrightarrow[]{\text{ по Гейне }} f(x_{n_m}) \to f(A),\ f(y_{n_m}) \to f(A), \bot
+\]
+\end{Proof}
+
+\begin{definition}
+    Функция называется {\bf непрерывной на множестве} если она непрерывна в каждой его предельной точкой
+\end{definition}
+
+\[
+    \forall x \in \overset{\circ}{U_{\delta} }(x_0) \cap \mathcal{X} 
+\]
+
+\begin{remark}
+    $f$ равномерно непрерывна $\Leftrightarrow$ она непрерывна
+\end{remark}
+Функция Римана:
+\[
+    R(x) =
+    \begin{cases}
+        0, x \not\in \Q\\
+        \frac{1}{q}, x = \frac{p}{q}, (pq) = 1
+    \end{cases}    
+\]
+\[
+    R : \R \to \R
+\]
+\[
+    \{x_n\} \subset \Q,\ x_n \to r \in \Q,\ x_n = \frac{p_n}{q_r} (p_n, q_n) = 1 \Rightarrow q_r \to \infty  
+\]
+\begin{definition}
+    Отображением $f : X \to X, X$ --- полное множество, называется {\bf Липшицевым}, если: 
+    \[
+        \forall x, y \in X\ |f(x) - f(y)| \geq \mathcal{L} |x - y|
+    \]
+\end{definition}
+
+\begin{definition}
+    Отображение $f : \R \to \R$ называется {\bf сжимающимся}, если оно Липшицевое и $\mathcal{L} \in [0;1)$
+\end{definition}
+
+\[
+    f(x) = x (\text{неподвижная точка})
+\]
+Интересные факты: 
+\[
+    |\sin x| < |x|
+\]
+\[
+    |\sin x - \sin y| \leq |x - y|
+\]
+\begin{theorem}[Теорема Банаха]
+    $f : X \to X, X$ \text{ --- компакт, --- сжимающее. Тогда:}
+    \begin{enumerate}
+        \item[1)] уравнение $f(x) = x$ имеет единственное решение $x^{*}$
+        \item[2)] последовательность $x_{n+1} = f(x_n) \forall x_0$ своим пределом имеет $x^*$
+    \end{enumerate}
+\end{theorem}
+\begin{Proof}
+План доказательства
+\begin{enumerate}
+    \item[1)] $f({\text const})$
+    \item[2)] $x_{n+1} = f(x_n) $ фундаментальная
+    \item[3)] $f(x^*) = x*$
+    \item[4)] $x^*$ единственный
+\end{enumerate}
+
+\[
+    s_n = |x_{n+1} - x_n| = |f(x_n) - f(x_{n-1} ) | \leq \mathcal{L} |x_n - x_{n-1}| = \mathcal{L} s_{n-1}   
+\]
+\[
+    s_1 \leq \mathcal{L} s_0 = |x_1 - x_0|
+\]
+\[
+    \ldots
+\]
+\[
+    s_n \leq \mathcal{L} ^n s_0 = \mathcal{L} ^n |x_1 - x_0|
+\]
+\[
+    |x_n - x_m| \leq |x_n - x_n - 1| + |x_{n+1} - x_{n+2} | + \ldots + |x_{m-1} - x_m| \leq \Sum{k=m}{m+1}\mathcal{L} ^k s_0  \leq \mathcal{L} ^{n+1} s_0 \leq 
+\]
+\[
+    \leq \Sum{k = n}{\infty }
+\]
+\end{Proof}
