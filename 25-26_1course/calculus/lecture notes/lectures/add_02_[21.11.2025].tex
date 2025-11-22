@@ -30,9 +30,9 @@
     \]
 \end{remark}
 
-\begin{theorem}[Теорема о критерии замкнутости]
+\begin{theorem}[Критерий замкнутости]
     \[
-        \mathcal{F} \subseteq \R \text{ замкнуто } \Leftrightarrow \forall \{x_n\} (\{x_n\} \subset \mathcal{F} \land x_n \xrightarrow[n \to \infty ]{} A \in \R \Rightarrow a \in \mathcal{F})
+        \mathcal{F} \subseteq \R \text{ замкнуто } \Leftrightarrow \forall \{x_n\} (\{x_n\} \subset \mathcal{F} \land x_n \xrightarrow[n \to \infty ]{} A \in \R \Rightarrow A \in \mathcal{F})
     \]
     "любая сходящаяся сходится в само множество"
 \end{theorem}
@@ -40,7 +40,7 @@
 \begin{Proof}
 {\bf $\Rightarrow$} 
 \[
-    x_n \to A\ |x_n - A| \xrightarrow[n \to \infty ]{} 0
+    x_n \to A\ \Rightarrow |x_n - A| \xrightarrow[n \to \infty ]{} 0
 \]
 о/п:
 \[
@@ -65,7 +65,7 @@
 \begin{remark}
     Почему только $\R \text{ и } \varnothing$ одновременно открытые и пустые множества?
 \end{remark}
-\begin{example}
+\begin{example}[Замечание]
     \[
         (A(\text{open}) \land A(\text{closed})) \Rightarrow (A = \R \lor A = \varnothing)
     \]
@@ -94,8 +94,8 @@
     \]
     "из любой последовательности можно выделить подпоследовательность"
 \end{definition}
-\begin{theorem}[Теорема о критерии компактности]
-    $\mathcal{K} $ --- компактно $\Leftrightarrow \mathcal{K} $ замкнуто $\land \mathcal{K} $ ограничено
+\begin{theorem}[Критерий компактности]
+    $\mathcal{K} $ --- компактно $\Leftrightarrow \mathcal{K} $ замкнуто $\land\ \mathcal{K} $ ограничено
 \end{theorem}
 \begin{Proof}
 {\bf $\Rightarrow$}
@@ -119,7 +119,7 @@
 
 \begin{exercise}
     \[
-        \l\{\l[-\frac{1}{2^{2n} }; -\frac{1}{2^{2n+1}} \r]\r\} \bigcup^{\infty }_{n = 1} \{0\}
+        \l\{\l[-\frac{1}{2^{2n} }; -\frac{1}{2^{2n+1}} \r]\r\}^{\infty }_{n = 1} \bigcup \{0\}
     \]
 \end{exercise}
 
@@ -147,12 +147,7 @@
         \exists \eps > 0\ \exists \delta = \delta (\eps ) > 0\ \forall x_1, x_2 \in X\ (|x_1 - x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps ) 
     \]
 \end{definition}
-\begin{example}
-    \[
-        \frac{1}{x}, x \in (0;1)
-    \]
-\end{example}
-\begin{theorem}[Теорема о равномерной непрерывности (Кантора — Гейне)]
+\begin{theorem}[Теорема о равномерной непрерывности (Кантора)]
     Если $f$ непрерывна на компакте, то она равномерно непрерывна на нем
 \end{theorem}
 \begin{Proof}
@@ -175,10 +170,6 @@
 \[
     \forall x \in \overset{\circ}{U_{\delta} }(x_0) \cap \mathcal{X} 
 \]
-
-\begin{remark}
-    $f$ равномерно непрерывна $\Leftrightarrow$ она непрерывна
-\end{remark}
 Функция Римана:
 \[
     R(x) =
@@ -196,7 +187,7 @@
 \begin{definition}
     Отображением $f : X \to X, X$ --- полное множество, называется {\bf Липшицевым}, если: 
     \[
-        \forall x, y \in X\ |f(x) - f(y)| \geq \mathcal{L} |x - y|
+        \forall x, y \in X\ |f(x) - f(y)| \leq \mathcal{L} |x - y|
     \]
 \end{definition}
 
@@ -224,7 +215,7 @@
 \begin{Proof}
 План доказательства
 \begin{enumerate}
-    \item[1)] $f({\text const})$
+    \item[1)] $f({\text cont})$
     \item[2)] $x_{n+1} = f(x_n) $ фундаментальная
     \item[3)] $f(x^*) = x*$
     \item[4)] $x^*$ единственный
