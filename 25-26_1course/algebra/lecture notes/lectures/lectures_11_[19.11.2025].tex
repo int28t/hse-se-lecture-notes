@@ -1,0 +1,167 @@
+{\bf Свойства сложения и умножения комплексных чисел}
+	\[
+		\forall z_1,z_2,z_3,z \in \C
+	\]
+	$$ \text{№1 } z_1 + z_2 = z_2 + z_1 \text{ - коммутативность} $$ 
+	$$ \text{№2 } (z_1 + z_2) + z_3 = z_1 + (z_2 + z_3) \text{ - ассоциативность} $$ 
+	$$ \text{№3 Существует нейтральный элемент по сложению - } O = (0, 0) \in \C:$$ 
+
+	$$ z + 0 = 0 + z = z \forall z \in \C \text{ (Ноль)} $$
+
+	$$ \text{№4 } \forall z \in \C \exists -z \in \C: z + (-z) = -z + z = 0 $$
+
+	Т.е. $$ \forall z \exists $$ противопололжный или обратный элемент по сложению.
+
+	$$ \text{№5 } z_1 * z_2 = z_2 * z_1 \text{- коммутативность} $$
+	$$ \text{№6 } z_1 * z_2 * z_3 = z_1 * z_2 * z_3 \text{- ассоциативность} $$
+	$$ \text{№7 } \exists e \in \C: z * e = e * z = z \forall z \text{ Существует единица - нейтральный элемент по умножению } (e = (1,0) = 1 \in \C )$$
+	$$ \text{№8 } \forall z \neq 0 \exists z^{-1} \in \C: z * z^{-1} = z^{-1} * z = e \text{ Существует обратный элемент по умножению })$$
+	$$ \text{№9 } z_1 * (z_2 + z_3) = z_1 * z_2 + z_1 * z_3 \text{ Дистрибутивность умножения относительно сложения} $$
+
+	{\bf Замечание: } Эти 9 свойств-аксиом числового поля котороые и позволяют называть комплексные числа числами
+
+	\subsection{Тригонометрическая форма}
+	Здесь будет картинка
+
+	Перейдём к полярным координатам (r, $ \phi$)
+
+	\[
+		\begin{cases}
+			x = r * cos \phi \\
+			y = r * sin \phi
+		\end{cases}
+	\]
+
+	Тогда: $$ z = x + iy = r * cos \phi + ir * sin \phi = r(cos \phi + i sin \phi) = \text{тригонометрическая форма комплексного числа} $$ 
+
+	{\bf Определение: } $$ \text{№1 } r = \sqrt{x^2+y^2} - \text{ модуль комплексного числа (угол между положительным направлением вещественной оси и числом} z = x + iy $$
+
+	{\bf Обозначение: } $$ \phi = Arg z = \text{\{}arg z + 2 \pi k | k \in \Z\text{\}} \text{, где arg z - главное значение аргумента, его выбирают произвольно на полуинтервале длины} 2 \pi $$ 
+
+	\subsection{Умножение и деление в тригонометрической форме}
+
+	$$ \text{№1 Умножение. } z_1 * z_2 = r_1 * r_2(cos(\phi_1 + \phi_2) + i sin (\phi_1 + \phi_2) $$
+
+	$$ \text{№2 Деление. } (z_2 \neq 0):  \frac{z_1}{z_2} = \frac{r_1}{r_2} (cos(\phi_1 - \phi_2) - i sin(\phi_1 - \phi_2)) $$
+
+	$$ \square \text{Умножение: } z_1 * z_2 = r_1 * r_2 * (cos \phi_1 + i sin \phi_1) * (cos \phi_2 + i sin \phi_2) = r_1 * r_2 = (\underbrace{cos \phi_1 cos \phi_2 - sin \phi_1 * sin \phi_2}{cos(\phi_1 + \phi_2)} + i (\underbrace{cos \phi_1 * sin \phi_2 + sin \phi_1 * cos \phi_2}{sin(\phi_1 + \phi_2} = r_1 * r_2 * (cos(\phi_1 + \phi_2) + i sin(\phi_1 + \phi_2) \blacksquare$$ 
+
+	{\bf Теорема (Муавра) } $$ \forall z \in \C \forall n \in \N z^n = r^n * cos(n \phi) + i sin(n * \phi) $$
+
+	$$ \square \text{По индукции: } n = 1 \Rightarrow z = r(cos \phi + i sin \phi) = \text{ база индукции, верно} $$ 
+
+	$$ \text{Пусть верно для} n = k \text{, покажем для} n = k + 1 \text{ (шаг индукции) } $$ 
+
+	$$ z^{k+1} = z^k * z = r^k(cos k \phi + i sin k \phi) * r * (cos \phi + i sin \phi) = r^{k+1} (cos(k+1) \phi + i sin (k+1) \phi) \blacksquare $$ 
+
+	\subsection{Извлечение комплексного корня: } 
+
+	$$ \text{\bf Теорема: }  \forall \text{комплексноe числo } w \neq 0 (w \in \C) \text{ имеет ровно } n \text{ различных корней n-ой степени, т.е. таких чисел } z \in \C \text{, что } z^n = w $$
+
+	$$ \square \text{Как их найти? } $$
+
+	$$ \text{№1 Представим } w \text{ в тригонометрической форме: } w = \rho(cos \psi + i sin \psi) (\rho, \psi \text{ даны по условию}) $$
+
+	$$ \text{№2 Ищем корни тоже в тригонометрической форме: } z = r(cos \phi + i sin \phi) $$
+
+	$$ \text{№3 По условию } w = z^n \Rightarrow \text{ по формуле Муавра } z^n = r^n(cos n \phi + i sin n \phi) = \rho (cos \psi + i sin \psi) $$
+
+	$$ \text{№4 Приравняем модули и аргументы: } $$
+
+	\[
+		z^n = w \Leftrightarrow
+		\begin{cases}
+			r^n = \rho (\rho, r \in \R_1 > 0) \\
+			n \phi = \psi + 2 \pi k, k \in \Z
+		\end{cases}
+		\Leftrightarrow
+		\begin{cases}
+			r = \sqrt[n]{p} \\
+			\psi = \frac{\psi + 2 \pi k}{n}, k \in \Z
+		\end{cases}
+	\]
+
+
+	$$ \text{5. Заметим, что достаточно брать } k = \overline{0,n-1} \text{ т.к. начиная с } k = n \text{ корни станут повторяться } \Rightarrow \text{ Существует ровно n различных комплексных корней n-ой степени} $$
+
+	\[
+		\Rightarrow
+		\sqrt[n]{w} = 
+		\text{\{}
+			\sqrt[n]{p}(cos(\frac{\psi + 2 \pi k}{n}) + i sin(\frac{\psi + 2 \pi k}{n}) 
+			\text{|}
+			k = \overline{0,n-1}
+		\text{\}}
+		\blacksquare
+	\]
+
+	\subsection{Геометрическая интерпретация}
+
+	При $$ k = 0, \phi_0 = \frac{\psi}{n} $$ соответствует первому корню, $ \frac{2 pi}{n} $ - угол между соседними корнями - "шаг" 
+
+	Здесь будет картиночка чуть позже
+
+	Корни лежат в вершинах правильного n-угольника, вписанного в окружность радиуса $ \sqrt[n]{\rho} $ При этом 1-ый корень $ z_0 $ имеет аргумент $ \phi_0 = \frac{\psi}{n} $, а каждый следующий корень получен поворотом на угол $ \frac{2 \pi}{n} $ 
+
+	{\bf Пример: }
+
+	$ \sqrt[6]{1} $ - Найти все комлексные корни
+
+	$$ 1 = 1 * (cos 0 + i sin 0) \Rightarrow \rho = 1, \psi = 0 (+ 2 \pi k) $$ 
+
+	$$ \sqrt[6]{1} = \text{\{} \sqrt[6]{1} (cos \frac{0 + 2 \pi k}{6} + i sin \frac{0 + 2 \pi k}{6}, k = \overline{0,5} \text{\}} = \text{\{} cos \frac{\pi k}{3} + sin \frac{\pi k}{3}, k = \overline{0,5} \text{\}} $$
+
+	$$ k = 0 \Rightarrow \phi_0 = 0 \text{, шаг } = \frac{2 \pi}{6} = \frac{\pi}{3} $$
+
+
+	Здесь будет ещё один рисуночек 
+
+	\subsection{Формула эйлера}
+
+	\fbox{$ e^{i \phi} = cos \phi + i sin \phi $} $ \forall \phi \in \R $
+
+	\[
+		\begin{cases}
+			cos \phi = Fe * e^{i \phi} \\
+			sin \phi = Im * e^{i \phi}
+		\end{cases}
+	\]
+
+	{\bf Замечание: } Тождество Эйлера: \fbox{$e^{i \pi} + 1 = 0$}
+
+	{\bf Следствие: }
+	\[
+		\begin{cases}
+			e^{i \phi} = cos \phi + i sin \phi \\
+			e^{-i \phi} = cos \phi - i sin \phi 
+		\end{cases}
+		\Rightarrow
+		\begin{cases}
+			2 cos \phi = e^{i \phi} + e^{-i \phi} \\
+			2 sin \phi = e^{i \phi} - e^{-i \phi}
+		\end{cases}
+		\Rightarrow
+	\]
+
+	\fbox{$ cos \phi = \frac{e^{i \phi} + e^{-i \phi}}{2} \text{ и } sin \phi = \frac{e^{i \phi} - e^{-i \phi}}{2} $}
+
+
+	\subsection{Комплексные многочлены}
+
+	{\bf Теорема: } "Основная" теорема алгебры
+
+	Для любого многочлена с комплексными коэффициентами:
+
+	$$ f(z) = a_n z^n + a_{n-1} z^{n-1} + \ldots + a_1 z + z_0, a_i \in \C, n \in \N, a_n \neq 0 $$
+
+	Существует корень уравнения $ f(z) = 0 $, и этот корень всегда принадлежит $ \C $ 
+
+	{\bf Замечание: } Это утверждение означает, что поле комплексных чисел алгебраически замкнуто. (у $\forall$ многочлена с коэффициентами из $\C$ есть корень из $\C$)
+
+	Это не так для $\Q$ (например $x^2 - 2$ имеет корень $\sqrt{2} \notin Q) $ 
+
+	и не так для $\R: x^2 + 1 $ имеет комплексные корни $\pm i \notin \R$ 
+
+	{\bf Теорема (Безу) } Остаток от деления много члена $f(x)$ на х-с (что?) есть $f(c)$
+
+	$\square$ Разделим $f(x)$ с остатком на х-с: $f(x) = (x-c) * Q(x) + R(x)$, где  deg $R(x) < deg(x-c) = 1 \Rightarrow $ остаток $R(x) = const \Rightarrow f(c) = (c-c) Q(c) + const \Rightarrow R(x) = f(c) \blacksquare$ 
