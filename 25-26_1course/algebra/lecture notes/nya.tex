@@ -1,0 +1,393 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{header}
+
+\title{Лекции по алгебре (1 курс, 25-26)}
+\author{github.com/int28t/hse-se-lecture-notes}
+\date{}
+
+\begin{document}
+    \pagestyle{empty}
+	\maketitle
+	\begin{flushright}
+		Михайлец Екатерина Викторовна
+
+		emihaylets@hse.ru
+
+		ТГК: \url{t.me/alg_pi_25_26}
+	\end{flushright}
+	\tableofcontents{}
+    \newpage
+    \pagestyle{plain}
+	\section{Комплы 2 Wed Nov 19 11:10:48 MSK 2025}
+	{\bf Свойства сложения и умножения комплексных чисел}
+	\[
+		\forall z_1,z_2,z_3,z \in \C
+	\]
+	$$ \text{№1 } z_1 + z_2 = z_2 + z_1 \text{ - коммутативность} $$ 
+	$$ \text{№2 } (z_1 + z_2) + z_3 = z_1 + (z_2 + z_3) \text{ - ассоциативность} $$ 
+	$$ \text{№3 Существует нейтральный элемент по сложению - } O = (0, 0) \in \C:$$ 
+
+	$$ z + 0 = 0 + z = z \forall z \in \C \text{ (Ноль)} $$
+
+	$$ \text{№4 } \forall z \in \C \exists -z \in \C: z + (-z) = -z + z = 0 $$
+
+	Т.е. $$ \forall z \exists $$ противопололжный или обратный элемент по сложению.
+
+	$$ \text{№5 } z_1 * z_2 = z_2 * z_1 \text{- коммутативность} $$
+	$$ \text{№6 } z_1 * z_2 * z_3 = z_1 * z_2 * z_3 \text{- ассоциативность} $$
+	$$ \text{№7 } \exists e \in \C: z * e = e * z = z \forall z \text{ Существует единица - нейтральный элемент по умножению } (e = (1,0) = 1 \in \C )$$
+	$$ \text{№8 } \forall z \neq 0 \exists z^{-1} \in \C: z * z^{-1} = z^{-1} * z = e \text{ Существует обратный элемент по умножению })$$
+	$$ \text{№9 } z_1 * (z_2 + z_3) = z_1 * z_2 + z_1 * z_3 \text{ Дистрибутивность умножения относительно сложения} $$
+
+	{\bf Замечание: } Эти 9 свойств-аксиом числового поля котороые и позволяют называть комплексные числа числами
+
+	\subsection{Тригонометрическая форма}
+	Здесь будет картинка
+
+	Перейдём к полярным координатам (r, $ \phi$)
+
+	\[
+		\begin{cases}
+			x = r * cos \phi \\
+			y = r * sin \phi
+		\end{cases}
+	\]
+
+	Тогда: $$ z = x + iy = r * cos \phi + ir * sin \phi = r(cos \phi + i sin \phi) = \text{тригонометрическая форма комплексного числа} $$ 
+
+	{\bf Определение: } $$ \text{№1 } r = \sqrt{x^2+y^2} - \text{ модуль комплексного числа (угол между положительным направлением вещественной оси и числом} z = x + iy $$
+
+	{\bf Обозначение: } $$ \phi = Arg z = \text{\{}arg z + 2 \pi k | k \in \Z\text{\}} \text{, где arg z - главное значение аргумента, его выбирают произвольно на полуинтервале длины} 2 \pi $$ 
+
+	\subsection{Умножение и деление в тригонометрической форме}
+
+	$$ \text{№1 Умножение. } z_1 * z_2 = r_1 * r_2(cos(\phi_1 + \phi_2) + i sin (\phi_1 + \phi_2) $$
+
+	$$ \text{№2 Деление. } (z_2 \neq 0):  \frac{z_1}{z_2} = \frac{r_1}{r_2} (cos(\phi_1 - \phi_2) - i sin(\phi_1 - \phi_2)) $$
+
+	$$ \square \text{Умножение: } z_1 * z_2 = r_1 * r_2 * (cos \phi_1 + i sin \phi_1) * (cos \phi_2 + i sin \phi_2) = r_1 * r_2 = (\underbrace{cos \phi_1 cos \phi_2 - sin \phi_1 * sin \phi_2}{cos(\phi_1 + \phi_2)} + i (\underbrace{cos \phi_1 * sin \phi_2 + sin \phi_1 * cos \phi_2}{sin(\phi_1 + \phi_2} = r_1 * r_2 * (cos(\phi_1 + \phi_2) + i sin(\phi_1 + \phi_2) \blacksquare$$ 
+
+	{\bf Теорема (Муавра) } $$ \forall z \in \C \forall n \in \N z^n = r^n * cos(n \phi) + i sin(n * \phi) $$
+
+	$$ \square \text{По индукции: } n = 1 \Rightarrow z = r(cos \phi + i sin \phi) = \text{ база индукции, верно} $$ 
+
+	$$ \text{Пусть верно для} n = k \text{, покажем для} n = k + 1 \text{ (шаг индукции) } $$ 
+
+	$$ z^{k+1} = z^k * z = r^k(cos k \phi + i sin k \phi) * r * (cos \phi + i sin \phi) = r^{k+1} (cos(k+1) \phi + i sin (k+1) \phi) \blacksquare $$ 
+
+	\subsection{Извлечение комплексного корня: } 
+
+	$$ \text{\bf Теорема: }  \forall \text{комплексноe числo } w \neq 0 (w \in \C) \text{ имеет ровно } n \text{ различных корней n-ой степени, т.е. таких чисел } z \in \C \text{, что } z^n = w $$
+
+	$$ \square \text{Как их найти? } $$
+
+	$$ \text{№1 Представим } w \text{ в тригонометрической форме: } w = \rho(cos \psi + i sin \psi) (\rho, \psi \text{ даны по условию}) $$
+
+	$$ \text{№2 Ищем корни тоже в тригонометрической форме: } z = r(cos \phi + i sin \phi) $$
+
+	$$ \text{№3 По условию } w = z^n \Rightarrow \text{ по формуле Муавра } z^n = r^n(cos n \phi + i sin n \phi) = \rho (cos \psi + i sin \psi) $$
+
+	$$ \text{№4 Приравняем модули и аргументы: } $$
+
+	\[
+		z^n = w \Leftrightarrow
+		\begin{cases}
+			r^n = \rho (\rho, r \in \R_1 > 0) \\
+			n \phi = \psi + 2 \pi k, k \in \Z
+		\end{cases}
+		\Leftrightarrow
+		\begin{cases}
+			r = \sqrt[n]{p} \\
+			\psi = \frac{\psi + 2 \pi k}{n}, k \in \Z
+		\end{cases}
+	\]
+
+
+	$$ \text{5. Заметим, что достаточно брать } k = \overline{0,n-1} \text{ т.к. начиная с } k = n \text{ корни станут повторяться } \Rightarrow \text{ Существует ровно n различных комплексных корней n-ой степени} $$
+
+	\[
+		\Rightarrow
+		\sqrt[n]{w} = 
+		\text{\{}
+			\sqrt[n]{p}(cos(\frac{\psi + 2 \pi k}{n}) + i sin(\frac{\psi + 2 \pi k}{n}) 
+			\text{|}
+			k = \overline{0,n-1}
+		\text{\}}
+		\blacksquare
+	\]
+
+	\subsection{Геометрическая интерпретация}
+
+	При $$ k = 0, \phi_0 = \frac{\psi}{n} $$ соответствует первому корню, $ \frac{2 pi}{n} $ - угол между соседними корнями - "шаг" 
+
+	Здесь будет картиночка чуть позже
+
+	Корни лежат в вершинах правильного n-угольника, вписанного в окружность радиуса $ \sqrt[n]{\rho} $ При этом 1-ый корень $ z_0 $ имеет аргумент $ \phi_0 = \frac{\psi}{n} $, а каждый следующий корень получен поворотом на угол $ \frac{2 \pi}{n} $ 
+
+	{\bf Пример: }
+
+	$ \sqrt[6]{1} $ - Найти все комлексные корни
+
+	$$ 1 = 1 * (cos 0 + i sin 0) \Rightarrow \rho = 1, \psi = 0 (+ 2 \pi k) $$ 
+
+	$$ \sqrt[6]{1} = \text{\{} \sqrt[6]{1} (cos \frac{0 + 2 \pi k}{6} + i sin \frac{0 + 2 \pi k}{6}, k = \overline{0,5} \text{\}} = \text{\{} cos \frac{\pi k}{3} + sin \frac{\pi k}{3}, k = \overline{0,5} \text{\}} $$
+
+	$$ k = 0 \Rightarrow \phi_0 = 0 \text{, шаг } = \frac{2 \pi}{6} = \frac{\pi}{3} $$
+
+
+	Здесь будет ещё один рисуночек 
+
+	\subsection{Формула эйлера}
+
+	\fbox{$ e^{i \phi} = cos \phi + i sin \phi $} $ \forall \phi \in \R $
+
+	\[
+		\begin{cases}
+			cos \phi = Fe * e^{i \phi} \\
+			sin \phi = Im * e^{i \phi}
+		\end{cases}
+	\]
+
+	{\bf Замечание: } Тождество Эйлера: \fbox{$e^{i \pi} + 1 = 0$}
+
+	{\bf Следствие: }
+	\[
+		\begin{cases}
+			e^{i \phi} = cos \phi + i sin \phi \\
+			e^{-i \phi} = cos \phi - i sin \phi 
+		\end{cases}
+		\Rightarrow
+		\begin{cases}
+			2 cos \phi = e^{i \phi} + e^{-i \phi} \\
+			2 sin \phi = e^{i \phi} - e^{-i \phi}
+		\end{cases}
+		\Rightarrow
+	\]
+
+	\fbox{$ cos \phi = \frac{e^{i \phi} + e^{-i \phi}}{2} \text{ и } sin \phi = \frac{e^{i \phi} - e^{-i \phi}}{2} $}
+
+
+	\subsection{Комплексные многочлены}
+
+	{\bf Теорема: } "Основная" теорема алгебры
+
+	Для любого многочлена с комплексными коэффициентами:
+
+	$$ f(z) = a_n z^n + a_{n-1} z^{n-1} + \ldots + a_1 z + z_0, a_i \in \C, n \in \N, a_n \neq 0 $$
+
+	Существует корень уравнения $ f(z) = 0 $, и этот корень всегда принадлежит $ \C $ 
+
+	{\bf Замечание: } Это утверждение означает, что поле комплексных чисел алгебраически замкнуто. (у $\forall$ многочлена с коэффициентами из $\C$ есть корень из $\C$)
+
+	Это не так для $\Q$ (например $x^2 - 2$ имеет корень $\sqrt{2} \notin Q) $ 
+
+	и не так для $\R: x^2 + 1 $ имеет комплексные корни $\pm i \notin \R$ 
+
+	{\bf Теорема (Безу) } Остаток от деления много члена $f(x)$ на х-с (что?) есть $f(c)$
+
+	$\square$ Разделим $f(x)$ с остатком на х-с: $f(x) = (x-c) * Q(x) + R(x)$, где  deg $R(x) < deg(x-c) = 1 \Rightarrow $ остаток $R(x) = const \Rightarrow f(c) = (c-c) Q(c) + const \Rightarrow R(x) = f(c) \blacksquare$ 
+
+	\section{Лекция Wed Nov 26 11:09:40 MSK 2025}
+
+	{\bf Определение: } Разложение многочлена $f(x) = g(x) * h(x)$ будем называть нетривиальным если 
+
+	\[
+		\begin{cases}
+			\deg g < \deg f \\
+			\deg h < \deg f
+		\end{cases}
+	\]
+	,где $def f$ - степень многочлена
+
+	
+	{\bf Пример: } $(x^2+1)(x-1)$ - нетривиальный т.к. 
+	\[
+		\begin{cases}
+			2 < 3 \\
+			1 < 3
+		\end{cases}
+	\]
+
+	{\bf Определение: } Многочлен называется приводимым если существует нетривиальное разложение $f(x) = g(x) \cdot h(x)$ и неприводимым в противном случае
+
+	{\bf Утверждение: } Любой многочлен степени $n \in \N$ раскладывается в произведение неприводимых многочленов
+
+	{\bf Частные случаи }
+
+	\textnumero 1
+	Многочлен над $\C$ (с коэффициентами из $\C$) степени $n$ всегда разлагается в произведение степеней линейных множителей
+
+	$f(z) = a_n(z-z_1)^{\alpha_1}\ldots(z-z_k)^{\alpha_k}$, где $\alpha_1+\ldots+\alpha_k=n,\alpha_i \in \N$ - кратности корней, $z_i \in \C$ - корни многочлена, $a_n \in \C$ 
+
+	\textnumero 2
+	Разложение над $\R$
+
+	{\bf Утверждение: } Если $z_0 \in \C$ является корнем нмогочлена с вещественными корнями, то и $z_0$ тоже является корнем этого многочлена
+
+	$\square$ Пусть $z_0 \in \C$ - корень $f(x) \Rightarrow f(z_0) = 0$, т.е. $f(z_0) = a_n \cdot z_0^n + a_{n-1} z_0^{n-1}+ \ldots + a_1 z_0 + a_0 = 0$ 
+
+	(*)
+
+	Рассмотрим комплексное сопряжение равенства (*)
+	$\overline{f(z_0)} = \overline{a_n} \cdot \overline{z_0^n} + \overline{a_{n-1}} \overline{z_0^{n-1}} + \ldots + \overline{a_1} \overline{z_0} + \overline{a_0} = \overline{0} = 0$
+
+	Но $a_i \in \R$ по условию $\Rightarrow \overline{a_i} = a_i \Rightarrow a_n \cdot \overline{z_0^n} + a_{n-1} \overline{z_0^{n-1}} + \ldots + a_1 \overline{z_0} + a_0 \Leftrightarrow f(\overline{z_0}) = 0$, т.е. $\overline{z_0}$ - тоже корень $f(x) \blacksquare$
+
+	{\bf Замечание: } $(z-z_0)(z-\overline{z_0}) = z^2 - z_0 \cdot z - \overline{z_0} \cdot z + z_0 \cdot \overline{z_0} = z^2 - (z_0 + \overline{z_0}) \cdot z + |z_0|^2 =$ (если $z_0 = x+iy, \overline{z_0} = x-iy \Rightarrow z_0 + \overline{z_0} = 2x = 2 Re~z_0 \in \R$)
+	
+	$ = z^2 - \underbrace{2 Re z_0}_{\in \R} \cdot z + \underbrace{|z_0|^2}_{\in \R} $ многочлен от $z$ с вещественными коэффициентами
+
+	Соответственно, разложение на неприводимые множители над $R$ имеет вид:
+
+	$f(x) = a_n(x-c_1)^{k_1} \ldots (x-c_s)^{k_s} \cdot (x^2 + p_1x+q_1)^{l_1} \ldots (x^2 + p_tx+q_t)^{l_t}$, где 
+
+	$a_n, c_i, p_j, q_j \in \R, k_i, l_j, \in \N$
+
+	Здесь квадратичные сомножители не имеют вещественных корней, а обладают парой комплексных сопряжеённых коренй с ненулевой мнимой частью (дискриминант $D < 0$) 
+
+	{\bf Теорема Виета}
+
+	Пусть $c_1, \ldots, c_n$ - корни многочлена степени $n$
+
+	$f(x) = x^n + a_1 x^{n-1} + a_2 x^{n-2} + \ldots + a_n$ 
+
+	\[
+		\begin{cases}
+			a_1 = -(c_1+\ldots+c_n) \\
+			a_2 = c_1 c_2 + c_1 c_3 + \ldots + c_{n-1} c_n \\
+			\vdots \\
+			a_n = (-1)^n \cdot c_1 \ldots c_n 
+		\end{cases}
+	\]
+
+	Т.е. $(-1)^j a_j$ равно сумме всех возможных произведений $j$ корней
+
+	{\bf Пример $(n = 3)$: } 
+
+	$f(x) = x^3 + a x^2 + bx + c$ 
+
+	\[
+		\begin{cases}
+			c_1 + c_2 + c_3 = -a \\
+			c_1 \cdot c_2 + c_1 \cdot  c_3 + c_2 \cdot c_3 = b \\
+			c_1 \cdot c_2 \cdot c_3 = -c
+		\end{cases}
+	\]
+
+	На этом комплексное заканчивается
+
+	\section{Аналитическая геометрия} 
+
+	{\bf Определение: } Угол между векторами $a$ и $b$.
+
+	Отложим $a$ и $b$ из одной точки, назовём углом $\phi$ между векторами $a$ и $b$ наименьший из двух плоских углов которые они образуют, т.е. $\phi \in [0, \pi]$
+
+	{\bf Определение: } Если $\phi = \frac{\pi}{2}$, то векторы называются ортогональными. Нулевой вектор ортогонален любому вектору 
+
+	{\bf Определение:} Ортогональная проекция вектора $\overline{a}$ на нправлении вектора $\overline{b} (\overline{b} \neq 0)$
+
+	\textnumero 1 скалярная - число ${\text{Пр}_{\overline{b}}}^{\overline{a}}$ = $|a| \cdot cos \phi$, где $\phi$ - угол между $\overline{a}$ и $\overline{b}$
+
+	\textnumero 2 векторная - вектор $\overline{{\text{Пр}_{\overline{b}}}^{\overline{a}}}$ = $|\overline{a}| \cdot cos(\phi) \cdot \frac{\overline{b}}{|\overline{b}|}$
+
+	{\bf Определение: } Векторы $\overline{a}$ и $\overline{b}$ называют коллинеарными, если они лежат на одной либо параллельных прямых
+
+	{\bf Замечание: } Нулевой вектор коллинеарен любому вектору
+
+	{\bf Замечание: } Коллинеарные векторы $a$ и $b$ могут быть сонаправленными ($a \uparrow \uparrow b$) или противоположно направленными ($\overline{a} \uparrow \downarrow \overline{b}$)
+
+	{\bf Определение: } Векторы $\overline{a}, \overline{b}, \overline{c}$ называются компланарными, если они лежат на прямых, параллельных фиксированной плоскости (т.е. если их отложить из одной точки, они лежат в одной плоскости)
+
+	{\bf Определение: } Скалярное произведение векторов - это функция, ставящая в соответствие паре векторов число, удовлетворяющее следующим свойствам: Для любых векторов $a,b,c$ и для любых $\alpha, \beta \in \R$ 
+
+	1. $(a,b) = (b,a)$ - симметричность
+
+	2. $(\alpha a + \beta b, c) = \alpha(ac) + \beta(b,c)$ - линейность
+
+	3. $(a,a) \geq 0$ и $(a, a) = 0 \Leftrightarrow a = 0$ - положительная определённость
+
+	{\bf Замечание: } В $V_3$ скалярное произведение задаётся, как $(a,b) = |a| \cdot |b| \cdot cos \widehat{a,b}$
+
+	% {\bf Замечание: } Скалярное произведение $(a,b) = 0 \Leftrigharrow a$ и $b$ ортогональны
+
+	{\bf Определение: } Базис - это упорядоченный набор векторов $a_1,\ldots,a_k$ такой что
+
+	1. $a_1,\ldots, a_k$ - линейно независимы
+	2. Любой вектор линейно зависим через $a_1, \ldots, a_k$
+
+
+
+	{\bf Определеие: } Матрицей Грама базиса $\overline{e_1}, \overline{e_2}, \overline{e_3}$ в $V_3$ называется матрица, состоящая из попарных скалярных произведений этих векторов
+
+	\[
+		\text{Г}
+		=
+		\begin{pmatrix}
+			(e_1, e_1) & (e_1, e_2) & (e_1, e_3) \\
+			(e_2, e_1) & (e_2, e_2) & (e_2, e_3) \\
+			(e_3, e_1) & (e_3, e_2) & (e_3, e_3) \\
+		\end{pmatrix}
+	\]
+
+	{\bf Утверждение: } Пусть $\overline{a} = a_1 \overline{e_1} + a_2 \overline{e_2} + a_3 \overline{e_3} $
+
+	$\overline{b} = b_1 \overline{e_1} + b_2 \overline{e_2} + b_3 \overline{e_3}$
+
+	- разложение векторов $a$ и $b$ по базису $e$
+
+
+	\[
+		\text{Тогда \fbox{($\overline{a}, \overline{b}$)}}
+		=
+		\begin{pmatrix}
+			a_1 & a_2 & a_3
+		\end{pmatrix}
+		\begin{pmatrix}
+			(e_1, e_1) & (e_1, e_2) & (e_1, e_3) \\
+			(e_2, e_1) & (e_2, e_2) & (e_2, e_3) \\
+			(e_3, e_1) & (e_3, e_2) & (e_3, e_3) \\
+		\end{pmatrix}
+		\begin{pmatrix}
+			b_1 \\
+			b_2 \\
+			b_3
+		\end{pmatrix}
+		= a_e^T \text{Г} b_e 
+	\]
+	, где
+	\[
+		a_e
+		=
+		\begin{pmatrix}
+			a_1 \\
+			a_2 \\
+			a_3 
+		\end{pmatrix}
+		\text{,}
+		b_e
+		=
+		\begin{pmatrix}
+			b_1 \\
+			b_2 \\
+			b_3 
+		\end{pmatrix}
+	\]
+	- координаты векторов $a$ и $b$ в базисе $e_1, e_2, e_3$
+
+	$\square$
+	$\blacksquare$
+
+	{\bf Определение: } Упорядоченную тройку векторов $\overline{a}, \overline{b}, \overline{c}$ называют правой тройкой, если со стороны вектора $\overline{c}$ (с конца) кратчайший поворот от вектора $\overline{a}$ до вектора $\overline{b}$ происходит против часовой стрелки
+
+	В противном случае тройка векторов называется {\bf левой} (если поворот по часовой стрелке) 
+
+	{\bf Определение: } Вектор $\overline{c}$ называется векторным произведением векторов $a$ и $b$ если выполняются 3 свойства
+
+	1. $|c| = |a| \cdot |b| \cdot sin(\phi)$, где $\phi$ - угол между $\overline{a}$ и $\overline{b}$ 
+
+	2. $\overline{c} \bot \overline{a}, c \bot b$ (ортогонален $a$ и $b$)
+
+	3. $a,b,c$ - правая тройка
+	
+\end{document}
+
