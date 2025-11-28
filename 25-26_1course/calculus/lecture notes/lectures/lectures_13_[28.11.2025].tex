@@ -1,0 +1,140 @@
+\section{Производная}
+
+\begin{definition}
+    Производной функции $y = f(x) : \R \to \R$ в т. $x_0$ называется: 
+    \[
+        \Lim{x}{x_0} = \frac{f(x) - f(x_0)}{x - x_0} = \Lim{\Delta x}{0} \frac{\Delta f}{\Delta x}, \Delta f = f(x_0 + \Delta x) - f(x_0)
+    \]
+\end{definition}
+
+\[
+    V_{\text{ср}} = \frac{\Delta S}{\Delta t},\ \Lim{\Delta t}{0} \frac{\Delta S}{\Delta t}
+\]
+
+\begin{example}
+    \[
+        y = x^n,\ n \in \N
+    \]
+    \[
+       \fbox{$a^n - b^n = (a - b)(a^{n-1} + a^{n-2}b + \ldots + a b^{n-2} + b^{n-1})$}
+    \]
+    \[
+        \Lim{x}{x_0} \frac{x^n - x_0^n}{x - x_0} = \Lim{x}{x_0} = \frac{(x - x_0)(x^{n-1} + x^{n-2}x_0 + \ldots + x_0^{n-1}   )}{(x - x_0)} =
+    \]
+    \[
+        \fbox{$(x^n)' = n \cdot x^{n-1}, x \in \R$}
+    \]
+    \[
+        = n \cdot x^{n-1} 
+    \]
+\end{example}
+
+\begin{remark}[Замечание]
+    Если $\exists f'(x_0), x_0 \in X$, то говорят о производной как о функции $y = f'(x_0)$
+\end{remark}
+
+\subsection{Дифференцируемость функции}
+
+\[
+    \Lim{n}{\infty } a_n = a \Leftrightarrow a_n = a + \underset{\text{б.м.}}{\alpha_n}
+\]
+
+\[
+    \Lim{x}{x_0, x_0 \in \overline{\R}} f(x) = A \Leftrightarrow f(x) = A + o(1)
+\]
+
+\[
+    \Lim{x}{x_0} \frac{f(x) - f(x_0)}{x - x_0} = B \Leftrightarrow \frac{f(x) - f(x_0)}{x - x_0} = B + o(1) \Leftrightarrow f(x) = f(x_0) + B(x - x_0) + \underset{= o(1)\cdot(x - x_0)}{o(x - x_0)}
+\]
+\[
+    \phantom{\Lim{x}{x_0} \frac{f(x) - f(x_0)}{x - x_0} = B \Leftrightarrow \frac{f(x) - f(x_0)}{x - x_0} = B + o(1) \Leftrightarrow} \vdots
+\]
+\[
+    \phantom{\Lim{x}{x_0} \frac{f(x) - f(x_0)}{x - x_0} = B \Leftrightarrow \frac{f(x) - f(x_0)}{x - x_0} = B + o(1) \Leftrightarrow} f(x) = P_n(x) + o((x - x_0)^n)
+\]
+
+\begin{definition}
+    Функция $f(x)$ называется дифференцируемой в т $x_0$, если: 
+    \[
+        f(x) = f(x_0) + B(x - x_0) + o((x - x_0))
+    \]
+\end{definition}
+\begin{theorem}
+    $f(x)$ дифференцируема в т. $x_0 \Leftrightarrow \exists f'(x_0)$, причем $B = f'(x_0)$
+\end{theorem}
+
+\begin{definition}
+    Дифференциалом функции $y = f(x)$ в т. $x_0$ называется линейная функция $B \cdot \Delta x$, такая что $\Delta f = B \cdot \Delta x + o(\Delta x)$
+\end{definition}
+
+\[
+    df(x_0)(\Delta x) = B \cdot \Delta x
+\]
+\[
+    dx(\Delta x) = 1 \cdot \Delta x
+\]
+\[
+    df(x_0)(\Delta x) = B \cdot dx(\Delta x)
+\]
+\[
+    df(x_0) = B\cdot dx
+\]
+\[
+    B = f'(x_0)
+\]
+
+\begin{theorem}
+    Если $f(x)$ дифференцируема в т. $x_0$, то $f(x)$ непрерывна в т. $x_0$
+\end{theorem}
+\begin{Proof}
+\[
+    f(x) = f(x_0) + \underbrace{f'(x_0)(x - x_0)}_{\to 0} + \underbrace{o(x - x_0)}_{\to 0} \xrightarrow[x \to x_0]{} f(x_0)
+\]
+\end{Proof}
+\subsection{Правила подсчета производной}
+Если $\exists f'(x_0), g'(x_0)$, то: 
+\begin{itemize}
+    \item[1)] $\exists (f(x) + g(x))' \Big|_{x = x_0}$
+    \item[2)] $\exists (f(x) + g(x))' \Big|_{x = x_0}$ TODO
+    \item[3)] $\exists (f(x) + g(x))' \Big|_{x = x_0}$ TODO
+\end{itemize}
+
+\begin{Proof}[Доказательство 3)]
+    \[
+        \left( \frac{f(x)}{g(x)} \right) \Big|_{x\to x_0} \coloneqq \Lim{x}{x_0} \frac{\frac{f(x)}{g(x)} - \frac{f(x_0)}{g(x_0)}}{x - x_0} = \Lim{x}{x_0} \frac{f(x)g(x_0) \overset{\pm f(x_0)(g(x_0))}{- g(x)f(x_0)}}{(x - x_0)g(x)g(x_0)} =
+    \]
+    \[
+        \Lim{x}{x_0} \frac{g(x_0) \frac{(f(x) - f(x_0))}{x - x_0} - f(x_0)}{g(x)g(x_0)}
+    \]
+    TODO
+\end{Proof}
+
+\begin{itemize}
+    \item[4)] TODO
+\end{itemize}
+
+\begin{itemize}
+    \item[5)] Если $\exists f'(x_0) \neq 0$ и $f(x)$ строго монотонна в какой-то окрестности $x_0$, то: 
+    \[
+        \exists (f^{-1}(y))' \Big| _{y_0 = f(x_0)} = \frac{1}{f'(f^{-1} (y_0))} = \frac{1}{f'(x_0)}
+    \]
+\end{itemize}
+\begin{Proof}[Доказательство 5)]
+    \[
+        f^{-1} (f(x)) = x  
+    \]
+    \[
+        (f^{-1}(y))' \Big| _{y = y_0 = f(x_0)}. \cdot f'(x_0) = 1
+    \]
+    \[
+        = \Lim{y}{y_0} \frac{f^{-1}(y) - f^{-1}(y_0) }{y - y_0} = \Lim{x}{x_0} \frac{x - x_0}{f(x) - f(x_0)} = \frac{1}{f'(x_0)}
+    \]
+\end{Proof}
+\begin{example}
+    \[
+        x = \arcsin y = f^{-1} = h(y) 
+    \]
+    \[
+        h'(y) = \frac{1}{f'(f^{-1}(y))} = \frac{1}{\cos (\arcsin y)}
+    \]
+\end{example}
