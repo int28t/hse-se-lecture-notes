@@ -1,0 +1,144 @@
+\setlength{\arrayrulewidth}{0.8pt}
+\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{Скалярное произв.} & \textbf{Векторное произв.} & \textbf{Смешанное произв.} \\
+\hline
+(.,.) : $V_3 \times V_3 \rightarrow \mathbb{R}$ (число). \par
+Обозн.: $\langle x,y \rangle$, $x \cdot y$. &
+$[.,.] : V_3 \times V_3 \rightarrow V$ (вектор). \par
+Обозн.: $[x,y]$, $x \times y$. &
+\\
+\hline
+Опр. $(a,b)=|a||b|\cos(\hat{a},\hat{b})$ в $V_3$. &
+Опр. $c=[a,b]$, $a,b \in V_3$. \par
+1) $|c| = |a||b|\sin(\hat{a},\hat{b})$. &
+\\
+\hline
+Геом. св-ва: \par
+$(a,b)=0 \Leftrightarrow a \perp b$ \par
+(a ортогонален b). &
+ &
+\\
+\hline
+Алгебр. св-ва: \par
+1) Линейность \par
+2) Симметричность \par
+3) Полож.опр-ть \par
+$(a,a)\ge 0$ и $(a,a)=0 \Leftrightarrow a=0$. &
+ &
+\\
+\hline
+Вычисл. в координатах: \par
+В ОНБ: $(a,b)=a_1b_1 + a_2b_2 + a_3b_3$ \par
+В произв. б-се: $(a,b)=a^T \Gamma b$. &
+ &
+\\
+\hline
+Геом. приложения: \par
+$|a| = \sqrt{(a,a)} = \sqrt{a^2}$ \par
+$\cos(a^\circ) = \frac{(a,b)}{|a||b|}$ \par
+Про a = $\frac{(a,b)}{(b,b)} b$. &
+ &
+\\
+\hline
+\end{tabular}
+
+	{\bf Утверждение 1} Векторы $a$ и $b$ коллинеарны ($a \parallel b$)
+	$\Leftrightarrow [a,b] = 0$ 
+
+	$\square \Rightarrow$ Пусть $a \parallel b \Rightarrow$ либо $sin \phi = 0 (\phi = 0 или \phi = \pi) либо$
+
+	\[
+		\begin{cases}
+			a = 0 \\
+			b = 0
+		\end{cases}
+		\text{хотя бы один}
+		\Rightarrow
+		|[a,b]|=0 \Rightarrow [a,b]=0
+	\]
+
+	$\Leftarrow$ Пусть $[a,b]=0$. Если один из них $= 0 \Rightarrow$ коллинеарны по определению.
+	Если оба $\neq 0$,
+	то из $|[a,b]|=0 \Rightarrow sin \phi = 0 \Rightarrow a \parallel b \blacksquare$
+
+	{\bf Определение: } Базис $e_1,e_2,e_3$ называется правым если тройка векторов $e_1,e_2,e_3$ правая, и левым если тройка левая.
+
+	Далее будем полагать, что рассматривается правый \underline{ортонормированный базис} $\{i,j,k\}$
+
+	{\bf Утверждение: } 
+
+	\[
+		[a,b]=
+		\begin{vmatrix}
+			\overline{i} & \overline{j} & \overline{k} \\
+			a_x & a_y & a_z \\
+			b_x & b_y & b_z 
+		\end{vmatrix}
+		= \overline{i}(a_y b_z - a_x b_y) + \overline{j} (a_z b_x - a_x b_z) + \overline{k} (a_x b_y - a_y b_z)
+	\]
+	, где $\overline{a} = a_x \overline{i} + a_y \overline{j} + a_z \overline{k} $  и $\overline{b} = b_x \overline{i} + b_y \overline{j} + b_z \overline{k} $
+
+	$\square [a,b] = [a_x \overline{i} + a_y \overline{j} + a_z \overline{k}, b_x \overline{i} + b_y \overline{j} + b_z \overline{k}] $ 
+	$= a_x b_x \underbrace{[i, i]}_{=0} + a_x b_y \underbrace{[i, j]}_{=k} + a_x b_z + a_x b_z \underbrace{[i, k]}_{=-j} + a_y b_x \underbrace{[j, i]}_{=-k} + a_y b_y \underbrace{[j, j]}_{=0} + a_y b_z \underbrace{[j, k]}_{=i} + a_z b_x \underbrace{[k, i]}_{=j} + a_z b_j \underbrace{[k, j]}_{=-i} + a_z b_z \underbrace{[k, k]}_{=0}$
+	$ = i (a_y b_z - a_z b_y) + j (a_z b_x - a_x b_z) + k (a_x b_y - a_y b_x)$
+	\[
+		=
+		\begin{vmatrix}
+			\overline{i} & \overline{j} & \overline{k} \\
+			a_x & a_y & a_z \\
+			b_x & b_y & b_z 
+		\end{vmatrix}
+	\]
+
+	$\blacksquare$
+
+	\section{Смешанное произведение}
+
+	{\bf Смешанным произведением } \underline{Смешанным произведением} векторов $a,b$ и $c$ называется число ($[a,b],c$)
+
+	{\bf Обозначение: } $<a,b,c>$
+
+	{\bf Утвереждение: } Пусть $V$ - объём параллелепипеда построенного на неколлинеарных векторах $a,b,c$ 
+
+	Тогда:
+	\[
+		<a,b,c>=
+		\begin{cases}
+			V \text{если a,b,c - правая тройка} \\
+			-V \text{если a,b,c - левая тройка}
+		\end{cases}
+	\]
+
+	$|[a,b]| = S$ параллелограмма на векторах $a$ и $b$
+
+	Обозначим за $\overline{l}$ единичный
+	ортогональный $\overline{l} \uparrow \uparrow [a,b] \Rightarrow [a,b] = S \cdot \overline{l} \Rightarrow <a,b,c> = ([a,b],c) = (S \cdot \overline{l}, \overline{c}) = S * \cos \phi$, где $\phi$ - угол между $c$ 
+
+	и $\phi \in (\frac{\pi}{2}; \pi]$, если $a,b,c$ - левая $\Rightarrow \cos \phi < 0 \Rightarrow |c| * \cos \phi = -h (\phi \neq \frac{\pi}{2} $так как $a,b,c$ не компланарны $)$
+
+	Таким образом
+
+	\[
+		<a,b,c> = 
+		\begin{cases}
+			S \cdot h = V \text{если a,b,c - правая тройка} \\
+			-S \cdot h = -V \text{если a,b,c - левая тройка} \\
+		\end{cases}
+	\]
+
+	$\blacksquare$
+
+
+	\underline{Следствие 1}
+	$a,b,c$ - компанарны $\Leftrightarrow <a,b,c> = 0$ 
+
+	$\square \Rightarrow$ Пусть $a,b,c$ - компланарны. Если $a \parallel b$, то $[a,b] = 0 \Rightarrow <a,b,c> = 0$
+
+	Если $a \nparallel b$, то $[a,b] \perp c$ (так как $c$ компланарен $a$ и $b$) $\Rightarrow <a,b,c> = 0$ 
+
+	\section{Прямоугольная декартова система координат}
+
+	{\bf Определение: } Прямоугольной декартовой системой координат (ПДСК) будем называть пару состоящуюю из 
+
+
