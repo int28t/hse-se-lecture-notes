@@ -171,7 +171,39 @@
     \[
         \Lim{x}{x_0} f(x) = f(x_0)
     \]
+    \[
+        \forall \eps > 0\ \exists \delta > 0\ \forall x \in U_{\delta }(x_0)\ |f(x) - f(x_0)| < \eps  
+    \]
 \end{definition}
+
+\begin{example}[]
+    \[
+        \fbox{$x \in \text{I} \Rightarrow \sin x < x$}
+    \]
+\end{example}
+\begin{Proof}
+$\ldots$
+\end{Proof}
+
+\begin{example}
+    $\sin x$ непрерывен на $\R$, т.е $\Lim{x}{x_0} \sin x = \sin x_0$
+
+    Хотим: $(\sin x - \sin x_0)$ --- б.м. Будем рассматривать по модулю, так как неважно, само выражение б.м. или модуль от него. Используя \fbox{$x \in \text{I} \Rightarrow \sin x < x$}:
+    \[
+        |\sin x - \sin x_0| = \l|2 \cdot \sin \frac{x - x_0}{2} \cdot \cos \frac{x + x_0}{2} \r| \leq 2 \cdot \sin \frac{|x - x_0|}{2} < 2 \cdot \frac{|x - x_0|}{2} = |x - x_0|
+    \]
+    \[
+        |x - x_0| \xrightarrow[x \to x_0]{} 0
+    \]
+\end{example}
+
+\begin{example}
+    $\cos x$ непрерывен на $\R$, т.е $\Lim{x}{x_0} \cos x = \Lim{x}{x_0} \sin \underbrace{\l(\frac{\pi }{2} - x\r)}_{\frac{\pi}{2} - x_0} = \sin \left( \frac{\pi }{2} -x_0 \right) = \cos x_0$
+\end{example}
+
+\begin{example}
+    $\tg x$ непрерывен на $D_f$, т.е $\underset{x_0 \neq \frac{\pi }{2} + \pi n, n \in \Z}{\Lim{x}{x_0}} \tg x = \frac{\overset{\to \sin x_0}{\sin x}}{\underset{\to \cos x_0 \neq 0}{\cos x}} \xrightarrow[]{} \frac{\sin x_0}{\cos x_0} = \tg x_0$
+\end{example}
 
 \begin{definition}
     {\bf Односторонним пределом} $\Lim{x}{x_{0-}^+} f(x) = A$ называется такое число, что: 
