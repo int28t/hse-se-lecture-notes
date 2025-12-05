@@ -1,0 +1,249 @@
+\subsection{Применение производных}
+
+$f(x) : X \to Y,\ X, Y \subset \R$
+
+\begin{definition}
+    Функция $f(x)$ возрастает (неубывает) на $E \subset X$, если:
+    \[
+        \forall x_1, x_2 \in X : x_1 < x_2 \Rightarrow f(x_1) < f(x_2)
+    \]
+    \[
+        \phantom{\forall x_1, x_2 \in X : x_1 < x_2 \Rightarrow} f(x_1) \leq f(x_2)
+    \]
+\end{definition}
+
+\begin{definition}
+    $x_0$ --- т. $\min f(x)$, если $\exists \delta_0$:
+    \[
+        \forall x \in U_{\delta _0}(x_0) : f(x) \geq f(x_0) 
+    \]
+    \[
+        \forall x \in \overset{\circ}{U}_{\delta _0}(x_0) : f(x) > f(x_0) 
+    \]
+    где $f(x_0)$ - локальный $\min$
+\end{definition}
+
+//TODO: рис
+
+\begin{definition}
+    Точка экстремума --- т. $\min \lor$ т. $\max$
+
+    Экстремум --- $\min \lor \max$
+\end{definition}
+
+\subsubsection{Необходимое условие локального экстремума}
+\begin{theorem}[Теорема Ферма]
+    Если $x_0$ --- т. локального экстремума,
+
+    \[
+        \text{то}
+        \left[
+        \begin{array}{l}
+            \text{либо } \lnot \exists f'(x_0)\\
+            \text{либо } f'(x_0) = 0
+        \end{array}
+        \right.
+    \]
+\end{theorem}
+\begin{Proof}
+$x_0$ --- т. $\min$
+
+Пусть $\exists f'(x_0)$
+\[
+    \exists \Lim{x}{x_0^+} \frac{\overset{\geq 0}{f(x) - f(x_0)}}{\underset{>0}{x - x_0}} \geq 0
+\]
+\[
+    \rotatebox{90}{=}
+\]
+\[
+    \Lim{x}{x_0^+} \frac{\overset{\geq 0}{f(x) - f(x_0)}}{\underset{<0}{x - x_0}} \leq 0
+\]
+\[
+    \Rightarrow = 0
+\]
+\end{Proof}
+
+\subsubsection{Алгоритм нахождения наибольнего и наименьшего значения}
+
+непрерывной на $[a;\ b]$ функции $y > f(x)$
+
+\[
+    \begin{array}{c}
+        \exists x_1 \in [a;\ b]\\
+        M > \sup f(x) = f(x_1),\ x \in [a;\ b]
+    \end{array}
+    \rightarrow
+    \begin{array}{c}
+        x_1 \text{--- т.} \max\\
+        \lor x_1 \text{--- конец отрезка}
+    \end{array}
+\]
+
+Аналогично $m, x_2$
+
+1) Находим $x_1, \ldots, x_n : \lnot f'(x_i)$ или $f'(x_i) > 0$ называются критическими
+
+2) Утверждение: $M$ и $m$ достигаются в одной из точек : $a, b, x_1, \ldots, x_n$
+
+$\rightarrow$ выберем $\max$ и $\min\ \{f(a); f(b); f(x_1); \ldots; f(x_n)\}$
+
+\fbox{$\overset{\rightarrow}{x} \in \R$}
+
+\subsubsection{Теорема Ролля}
+\begin{theorem}[Теорема Ролля]
+    Если $y = f(x)$
+
+    \begin{itemize}
+        \item[\fbox{1}] непрерывна на $[a;\ b]$
+        \item[\fbox{2}] дифференцируема на $(a;\ b)$
+        \item[\fbox{3}] $f(a) = f(b)$
+    \end{itemize}
+
+    тогда $\exists \xi \in (a;\ b) : f'(\xi ) = 0$
+\end{theorem}
+
+\begin{Proof}
+$M = \underset{[a;\ b]}{\sup} f(x),\ m = \underset{[a;\ b]}{\inf } f(x)$
+
+1) $M = m, $ тогда $f(x) = \text{const} \Rightarrow \xi = \frac{a + b}{2}$
+
+2) $M > m$
+
+\[
+    \begin{array}{l}
+        f(x_1) = M\\
+        \neq \\
+        f(x_2) = m
+    \end{array}
+    \Rightarrow
+    \{x_1;\ x_2\} \neq \{a;\ b \}
+\]
+
+Пусть $x_1 \neq a, b \Rightarrow x_1$ --- т. локального $\max,\ x_1 \in (a; b)\ f'(x_1) = 0$
+\end{Proof}
+
+\subsubsection{Теорема Лагранжа}
+\begin{theorem}[Теорема Лагранжа]
+    Если $y = f(x),\ \fbox{1} \text{ и } \fbox{2}$, тогда:
+    \[
+        \exists \xi \in (a; b) : \frac{f(b) - f(a)}{b - a} = f'(\xi )
+    \]
+\end{theorem}
+
+\begin{Proof}
+\[
+    F(x) = f(x) - \lambda x \leftarrow \text{ выполнено \fbox{1} и \fbox{2}}
+\]
+\[
+    F(a) = F(b) \Leftrightarrow f(a) - \lambda a = f(b) - \lambda b \Leftrightarrow \lambda = \frac{f(b) - f(a)}{b - a}
+\]
+По теореме Ролля для $y = F(x) : \exists \xi \in (a;\ b) : F'(\xi) = 0 = f'(\xi) - \lambda = 0$
+\[
+    f'(\xi ) = \lambda 
+\]
+\end{Proof}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{lectures/files/20255ctur531_14_05.12.2025-13-50-31.png}
+  \label{fig:20255ctur531_14_05.12.2025-13-50-31.png}
+\end{figure}
+
+\textbf{Следствия:}
+\begin{itemize}
+    \item[1)] Если $y = f(x)$, \fbox{1} и \fbox{2} и $f'(x) = 0$ на $(a;\ b)$, то $f(x) = const$
+\end{itemize}
+
+\begin{Proof}
+о/п: $\exists x_1,\ x_2 \in [a;\ b]$
+\[
+    f(x_1) \neq f(x_2)
+\]
+$[x_1;\ x_2]$ --- выполнено \fbox{1} и \fbox{2} $\Rightarrow$ верна т. Лагранжа т.е $\exists \xi \in (x_1;\ x_2)$
+\[
+    \underbrace{f(x_2) - f(x_1)}_{\neq 0} = \underbrace{f'(\xi )(x_2 - x_1)}_{= 0},\ \bot
+\]
+\end{Proof}
+
+\begin{itemize}
+    \item[2)] Если $f(x)$ и $g(x)$ выполнено \fbox{1} и \fbox{2} и $f'(x) = g'(x)$ на $(a;\ b)$, то $f(a) - g(a) = const$ на $[a;\ b]$
+\end{itemize}
+
+\subsubsection{Теорема Коши}
+\begin{theorem}[Теорема Коши]
+    Если $f(x)$ и $g(x)$ выполнено \fbox{1} и \fbox{2} и $g(a) \neq g(b),\ g'(x) \neq 0$ на $(a;\ b)$, тогда: 
+    \[
+        \exists \xi \in (a;\ b): \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi )}
+    \]
+\end{theorem}
+\begin{Proof}
+Рассмотрим $F(x) = f(x) - \lambda g(x)$ --- выполнено \fbox{1} и \fbox{2}
+
+Найдем $\lambda : F(a) = F(b)$
+\[
+    \lambda = \frac{f(b) - f(a)}{g(b) - g(a)}
+\]
+По теореме Ролля: 
+\[
+    \exists \xi : F'(\xi ) = 0
+\]
+\[
+    \rotatebox{90}{=}
+\]
+\[
+    \phantom{\exists \xi : } f'(\xi) - \lambda g'(\xi ) = 0
+\]
+\[
+    \frac{f'(\xi )}{g'(\xi )} = \lambda 
+\]
+\end{Proof}
+
+\begin{theorem}
+    $f(x)$ удовлетворяющее \fbox{1} и \fbox{2}
+
+    \[
+        f'(x) \geq 0 \text{ на } (a;\ b) \Leftrightarrow f(x) \text{ неубывает на } [a;\ b]
+    \]
+    \[
+        f'(x) > 0 \text{ на } (a;\ b) \Rightarrow f(x) \text{ возрастает на } [a;\ b]
+    \]
+\end{theorem}
+\begin{Proof}
+{\bf $\Leftarrow$}
+\[
+    f'(x) = \Lim{x}{x_0} \underbrace{\frac{f(x) - f(x_0)}{x - x_0}}_{\geq 0} \geq 0, x_0 \in (a;\ b)
+\]
+{\bf $\Rightarrow$}
+\[
+    \forall x_1, x_2 : x_1 < x_2 \Rightarrow f(x_1) \leq f(x_2) \Leftrightarrow f(x_2) - f(x_1) \geq 0
+\]
+\[
+    [x_1;\ x_2] \subset [a;\ b] \text{ выполняется \fbox{1} и \fbox{2} т.е } \exists \xi \in (x_1;\ x_2)
+\]
+\[
+    f(x_2) - f(x_1) = \underbrace{f'(\xi )}_{\geq 0}\underbrace{(x_2 - x_1)}_{> 0} \geq 0
+\]
+\[
+    \phantom{f(x_2) - f(x_1) =} \underbrace{f'(\xi )}_{> 0}\underbrace{(x_2 - x_1)}_{> 0} > 0
+\]
+\end{Proof}
+
+\subsubsection{Достаточное условие экстремума}
+\begin{theorem}[Достаточное условие экстремума]
+    Если $\exists \overset{\circ }{U}_{\delta _0} (x_0) :$
+
+    на $(x_0 - \delta _0 : x_0)\ f'(x) \geq 0$
+    
+    на $(x_0 : x_0 + \delta _0)\ f'(x) \leq 0$
+
+    непрерывна в т. $x_0$
+
+    тогда $x_0$ --- точка локального $\max $
+\end{theorem}
+\begin{Proof}
+\[
+    \forall x \in (x_0 + \delta _0;\ x_0)
+\]
+\[
+    f(x) \leq f(x_0), [x;\ x_0]
+\]
+\end{Proof}
