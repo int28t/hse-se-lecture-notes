@@ -1,0 +1,212 @@
+\section{Теория Групп. Начало общей алгебры}
+
+\subsection{Алгебраические структуры}
+
+\[
+    \fbox{множество} \xrightarrow[\text{опер.}]{} \underbrace{\fbox{группоид} \xrightarrow[\text{ассоц. оп.}]{} \fbox{полугруппа} \xrightarrow[\text{нейтр. эл.}]{}  \fbox{моноид} \xrightarrow[\text{любой эл-т обратим}]{} \fbox{группа}}_{\text{алгебраические структуры}}
+\]
+
+\begin{definition}[Эквивалентное определение группы]
+    Множество $G$ с бинарной операцией $\times$ называется группой, если:
+\begin{itemize}
+    \item[1)] $\forall a, b, c \in G\ (a \times b) \times c = a \times (b \times c)$ --- ассоциативность
+    \item[2)] $\exists e \in G\ \forall x \in G\ e \times x = x \times e = x$ (существует нейтральный элемент)
+    \item[3)] $\forall x \in G\ \exists x^{-1} \in G : x \times x^{-1} = x^{-1} \times x = e $ (любой элемент обратим)
+\end{itemize}
+\end{definition}
+
+\begin{example}
+    Множество всех невырожденных матриц порядка $n$ с операциями матричного умножения
+
+    Обозначение: $GL_n(\R)$ --- общая линейная группа
+\end{example}
+
+\begin{example}
+    Множество подстановок длины $n$ с операцией композиции образует группу $S_n$
+
+    Она называется симметрической группой
+\end{example}
+
+\begin{definition}
+    Порядком группы $G$ называется число элементов в ней (мощность группы)
+
+    Обозначение: $|G|$
+\end{definition}
+
+\begin{example}
+\[
+    |GL_n(\R)| = \infty,\ |S_n| = n!
+\]
+\end{example}
+
+\begin{definition}
+    Группа с коммутативной бинарной операцией называется абелевой
+\end{definition}
+
+\begin{example}
+\[
+    (\Z, +) \text{ --- абелева группа}
+\]
+\end{example}
+
+\begin{definition}
+    Подмножество $H \subseteq G$ называется подгруппой в группе $G$, если: 
+\begin{itemize}
+    \item[1)] $e \in H$
+    \item[2)] $\forall h_1, h_2 \in H : h_1 \times h_2 \in H$ (замкнутость относительно бинарной операции)
+    \item[3)] $\forall h \in H \Rightarrow h^{-1} \in H$ (замкнутость относительно взятия обратного элемента)
+\end{itemize}
+Другими словами, само $H$ является группой относительно операций в $(G, \times)$, (т.е групповой операции)
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item[1)] $SL_n(\R) = \{A \in GL_n(\R) | \det A = 1\}$ --- специальная линейная подгруппа
+    (т.к $\det(E) = 1, \det (A \cdot B) = \det A \cdot \det B = 1 \cdot 1 = 1, \det A^{-1} = \frac{1}{\det A} = \frac{1}{1} = 1 $)
+
+    \item[2)] $A_n = \{\delta \in S_n | sgn\ \delta = 1\}$ --- подгруппа, четных подстановок длины n. Она называется знакопеременной
+    
+    ${\prod_{i < j}} (x_i - x_j)$ --- знакопеременный многочлен, $\det $ Вандермонда. Подстановки из $A_n$ не меняют его знак 
+\end{itemize}
+\end{example}
+
+\begin{definition}
+    Подгруппа $H$ называется собственной подгруппой в $G$, если $H \neq \{e\}, H \neq G, (SL_n(\R)_nA_n$ --- собств. подгруппы в $GL_n(\R)$ и $S_n$ соотв.)
+\end{definition}
+
+\[
+    |A_n| = \frac{n!}{2}
+\]
+
+\begin{lemma}[Критерий подгруппы]
+Пусть $H$ --- подмножество в группе G.
+
+$H$ является подгруппой $\Leftrightarrow \forall h_1, h_2 \in H \Rightarrow h_1 \times h_2^{-1} \in H $
+\end{lemma}
+
+$\square$ Необходимость ($\Rightarrow$). Дано, что $H$-подгруппа. Тогда $\forall h_1, h_2 \in H \Rightarrow h_2^{-1} \in H $ по определению, $\Rightarrow$ и произведение двух элементов $h_1$ и $h_2^{-1}$ из $H$ тоже лежит в $H$
+
+Достаточность ($\Leftarrow$) 
+
+Дано: $\forall h_1, h_2 \in H \Rightarrow h_1 \times h_2^{-1} \in H $
+
+Доказать: 
+\begin{itemize}
+    \item[1)] $e \in H$
+    \item[2)] $h_1 \times h_2 \in H\ \forall h_1, h_2 \in H$
+    \item[3)] $h^{-1} \in H\ \forall h \in H$
+\end{itemize}
+
+Поскольку $h_1$ и $h_2$ произвольны, возьмем $h_2 = h_1 \Rightarrow h_1 \times h_1^{-1} \in H$, то есть $e \in H \Rightarrow$ выполнено 1)
+
+Возьмем $h_1 = e \Rightarrow \forall h_2 \in H \Rightarrow h_2^{-1} \in H$, т.е выполнено 3)
+
+Пусть $h_1, h_2 \in H \Rightarrow h_2^{-1} \in H$. Следовательно, $h_1 \times (h_2^{-1})^{-1} \in H$, то есть $h_1 \times h_2 \in H \Rightarrow$ выполнено 2) $\blacksquare$
+
+\subsection{Гомоморфизмы}
+
+\begin{definition}
+    Отображение, $f : G_1 \rightarrow G_2$. (Здесь $(G_1, \times)$ и $(G_2, \circ)$ --- группы) называется гомоморфизмом групп, если \fbox{$\forall a, b \in G \Rightarrow f(a \times b) = f(a) \circ f(b)$}. Говорят, что $f$ \emph{уважает} операцию.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item[1)] $\det : GL_n (\R) \rightarrow \R^{\times} = (R\setminus\{0\}, \cdot)$ --- группа 
+    
+    Т.е $A \xrightarrow[]{\det } \det A \in \R^{\times}\ \forall A \in GL_n(\R)$
+
+    $(\det A \cdot B = \det A \cdot \det B \Rightarrow \det$ --- гомоморфизм групп)
+
+    \item[2)] $G_1 = (\R_+, \cdot) \text{ --- группа} \{x \in \R | x > 0\}, G_2 = (\R, +)$
+
+    Рассмотрим $f = \ln x, f : \R_+ \rightarrow \R$
+
+    $\forall a, b \in G_1 (a > 0, b > 0) \Rightarrow \ln (a \cdot b) = \ln a + \ln b \in G_2$ --- уважает операцию $\Rightarrow$ логарифм --- гомоморфизм групп.
+\end{itemize}
+\end{example}
+
+\begin{definition}
+    Инъективный гомоморфизм называется мономорфизмом.
+\end{definition}
+
+\begin{definition}
+    Сюръективный гомоморфизм называется эпиморфизмом.
+\end{definition}
+
+\begin{definition}
+    Биективный гомоморфизм называется изоморфизмом.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item[1)] $\det $ --- эпиморфизм
+    \item[2)] $\ln x$ --- изоморфизм
+\end{itemize}
+\end{example}
+
+\begin{remark}[Замечание]
+    Если две группы изоморфны, то они тождественно неразличимы с точки зрения алгебры.
+
+    Обозначение $G_1 \cong G_2$ ($G_1$ и $G_2$ изоморфны)
+\end{remark}
+
+\begin{example}
+\begin{itemize}
+    \item[1)] $(\R_+, \cdot) \cong (\R, +)$
+    \item[2)] $G_1$ --- группа движений (т.е отображений, переводящих фигуру в себя) правильного треугольника на плоскости:
+    
+    - повороты ($p_0$ -- тождественное отображение, $p_{\frac{2\pi}{3}}, p_{\frac{4\pi}{3}} = p_{-\frac{2\pi}{3}})$
+
+    - отражения относительно осей симметрии $(s_1, s_2, s_3)$
+
+    \emph{Закодируем} движения фигуры подстановками из $S_{3}$)
+
+    $G_2 = S_3 = \{Id, (1 2), (1 3), (2 3), (1 2 3), (1 3 2)\}$
+
+    $p_0 \sim Id$
+
+    $p_{\frac{2\pi}{3}} \sim (1 2 3)$
+
+    $p_{\frac{4\pi}{3}} \sim (1 2 3)^2 = (1 3 2)$
+
+    $s_1 \sim (2 3)$
+
+    $s_2 \sim (1 3)$
+
+    $s_3 \sim (1 2)$
+
+    Построили гомоморфизм, даже изоморфизм.
+\end{itemize}
+\end{example}
+
+\begin{definition}
+    Группа диэдра --- группа движений (симметрий) правильного $n$-угольника на плоскости, включающая вращения и отражения, переводящие фигуру в себя. 
+
+    Обозначение: $D_n$, $|D_n| = 2n$, так как там есть $n$ вращений вокруг центра и $n$ отражений (осевых симметрий)
+\end{definition}
+
+\begin{remark}[Замечание]
+    $D_3 \cong S_3$ (пр.2)
+\end{remark}
+
+\subsection{Таблица Кэли}
+\begin{definition}
+    Таблица Кэли алгебраической структуры (в частности, группы) называется матрица:
+\end{definition}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{lectures/files/jkjkjk12-29-56.png}
+  \caption{таблица умножения}
+  \label{fig:jkjkjk12-29-56.png}
+\end{figure}
+
+\begin{remark}
+    Если таблица Кэли симметрична, то группа абелева
+\end{remark}
+ 
+\begin{remark}
+    Если $G$-группа, то в ее таблице Кэли каждый элемент встречается только 1 раз в каждой строке и каждом столбце
+\end{remark}
+
+$\square$ Так как если $g_1 \times g_2$
