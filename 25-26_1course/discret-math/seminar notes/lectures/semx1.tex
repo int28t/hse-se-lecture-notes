@@ -1,0 +1,38 @@
+\section{Листок X1}
+
+\subsection{Задача 11}
+
+\begin{solution}
+c) $(x, y) \in (A \backslash B) \times C \Leftrightarrow (x \in A \backslash B) \land (y \in C) \Leftrightarrow (x \in A \land x \in \overline{B}) \land (y \in C) \Leftrightarrow$
+
+$(x, y) \in (A \times C) \backslash (B \times C) \Leftrightarrow (x, y) \in A \times C \land (x, y) \in B \times C \Leftrightarrow$
+
+$\Leftrightarrow (x \in A \land y \in C) \land \lnot(x \in B \land y \in C) \Leftrightarrow (x \in A \land y \in C) \land (\lnot (x \in B) \lor \lnot(y \in C))$
+
+$\Leftrightarrow (x \in A \land y \in C) \land (x \not \in B \lor y \not \in C)$
+
+$\Leftrightarrow (x \in A \land y \in C \land x \in \overline{B}) \lor (x \in A \land y \in C \land y \not \in C) \Leftrightarrow (x \in A \land y \in C \land x \in \overline{B})$
+\end{solution}
+
+\subsection{12}
+\begin{task}
+\[
+A \neq \varnothing, B \neq \varnothing, A \subseteq C, B \subseteq D \Leftrightarrow A \times B \subseteq C \times D
+\]
+\end{task}
+\[
+    \fbox{$A \subseteq B \Leftrightarrow \forall x (x \in A \to x \in B)$}
+\]
+\begin{solution}
+Необходимость $\Rightarrow$
+
+Пусть $(x, y) \in A \times B \Rightarrow x \in A \land y \in B$, но $A \subseteq C, B \subseteq D \Rightarrow x \in C \land y \in D \Rightarrow (x, y) \in C \times D$, то есть $A \times B \subseteq C \times D$
+
+Достаточность $\Leftarrow$
+
+Рассмотрим произвольный $x \in A$. Существует $y \in B$, так как $B \neq \varnothing$. Тогда $(x, y) \in A \times B \Rightarrow (x, y) \in C \times D$, так как $A \times B \subseteq C \times D \Rightarrow x \in C$, то есть $A \subseteq C$. Аналогично, $B \subseteq D$. Пусть $B = \varnothing, A = \Z, C = D = \N$
+
+$A \times B = \Z \times \varnothing = \varnothing \ldots$
+\end{solution}
+
+\subsection{13}

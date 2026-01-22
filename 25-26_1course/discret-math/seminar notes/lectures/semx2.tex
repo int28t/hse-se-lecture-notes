@@ -1,0 +1,147 @@
+\section{Бинарные отношения}
+
+\begin{definition}
+$R$ --- бинарное отношение \textbf{между} $A$ и $B$, если $R \subseteq A \times B$
+\end{definition}
+
+\begin{definition}
+\[
+    dom R = \{a \in A\ |\ \exists b : (a, b) \in R\}, rngR = \{b \in B\ |\ \exists a : (a, b) \in A\}
+\]
+\end{definition}
+
+\begin{definition}
+$R$ --- бинарное отношение \textbf{на} $A$, если $R \subseteq A \times A$
+\end{definition}
+
+\begin{remark}
+И первое и второе определение являются частным случаем друг друга. Второе первого тривиально. А первое --- частный случай второго если вместо $A$ подставить $A \cup B$
+\end{remark}
+
+\subsection{Лист 7}
+
+\begin{task}[Задача 1]
+\[
+    A = \{1, 2, 3, 4\}, B = \N,\ domR = \{1, 2, 3, 4\},\ rngR = \{1, 2, 3, 5\}
+\]
+
+{\bf Как рисовать диаграмму $R$?}
+
+$U \coloneqq dom R \cup rng R$
+\begin{itemize}
+    \item[1)] Элементы $U$ изобразить точками
+    \item[2)] Провести стрелку от $a \in U$ к $b \in U$, если $(a, b) \in R$
+\end{itemize}
+\end{task}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{lectures/files/semx2-15-01-42.png}
+  \label{fig:semx2-15-01-42.png}
+\end{figure}
+
+\begin{task}[Задача 2]
+\[
+    (a, b) \in\ |\ \Leftrightarrow a|b \text{ (Вообще, } (a, b) \in R \Leftrightarrow a R b)
+\]
+\end{task}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{lectures/files/semx2-15-05-30.png}
+  \label{fig:semx2-15-05-30.png}
+\end{figure}
+
+\begin{task}[Задача 3]
+\[
+    R^{-1} = \{(a, b)\ |\ (b, a) \in R\}, Q \circ P = \{(a, c)\ |\ \exists b : (a, b) \in P \land (b, c) \in Q\}
+\]
+Важно: композиция некоммутативна 
+
+Обратим внимание, что это некорректная запись. Также требуется указать чему принадлежат $a, c$ в начале задания множества
+
+\[
+    P \circ P = \{(a, c)\ |\ \exists b : (a, b) \in P \land (b, c) \in P\} = \{(a, c)\ |\ \exists b : a \text{ --- сын } b \land b \text{ --- сын } c\} = 
+\]
+\[
+    = \{(a, c)\ |\ a \text{ --- внук } c \}.\ P \circ P \text{ --- быть внуком }
+\]
+\[
+    P^{-1} = \{(a, b)\ |\ (b, a) \in P\} = \{(a, b)\ |\ b \text{ --- сын } a\} = \{(a, b) |\ a \text{ --- отец } b\}.\ aP^{-1}b \text{---} a \text{ отец } b 
+\]
+\[
+    P^{-1} \circ P = \{(a, c)\ |\ \exists b : (a, b) \in P \land (b, c) \in P^{-1}\} = 
+\]
+\[
+    = \{(a, c) | \exists b : a \text{ --- сын } b \land  b \text{ --- отец } c\} = \{(a, c) | a \text{ --- брат } c \lor a = c\}
+\]
+\[
+    P \circ P^{-1} = \{(a, c) | \exists b : (a, b) \in P^{-1} \land (b, c) \in P \} = \{(a, c) | \exists b : a \text{ --- отец } b \land b \text{ --- сын } c\} \Rightarrow 
+\]
+\[
+    \Rightarrow aP \circ P^{-1}b - a = b. \text{ у $a$ есть сын} 
+\]
+\end{task}
+
+\begin{task}[Задача 4]
+\begin{itemize}
+    \item[а)] $\leq \circ <$
+\[
+    = \overbrace{\{(a, c)\ |\ \exists b : a < b \land b \leq c\}}^X = (*) = \overbrace{\{(a, c)\ |\ a < c\}}^Y = <
+\]
+
+Докажем $(*)$: 
+
+Пусть $(a, c) \in X \Rightarrow \exists b : (a < b) \land (b \leq c) \Rightarrow \exists b : a < b \leq c \Rightarrow a < c \Rightarrow (a, c) \in Y (X \subseteq Y)$ 
+
+Пусть $(a, c) \in Y \Rightarrow a < c \Rightarrow a < c \leq c \Rightarrow \exists b (= c) : a < b \land b \leq c \Rightarrow (a, c) \in X (Y \subseteq X)$
+
+{\bf Ответ: } <
+
+    \item[б)] $< \circ <$
+
+\[
+    = \underbrace{\{(a, c)\ |\ \exists b : a < b \land b < c\}}_X = \underbrace{\{(a, c)\ |\ a + 1 < c\}}_Y
+\]
+
+Пусть $(a, c) \in X \Rightarrow \exists b : a < b < c \Rightarrow \exists b : a + 1 \leq b \land b < c \Rightarrow \Rightarrow a + 1 < c \Rightarrow (a, c) \in Y \Rightarrow X \subseteq Y$
+
+Пусть $(a, c) \in Y \Rightarrow a + 1 < c \Rightarrow a < a + 1 \land a + 1 < c \Rightarrow \exists b (= a + 1) : a < b \land b < c \Rightarrow (a, c) \in X \Rightarrow Y \subset X$
+
+{\bf Ответ: } $(a, b) \in < \circ <$, если $a + 1 < b$
+
+    \item[в)] $< \circ <^{-1}$
+
+\[
+    = \{(a, c)\ |\ \exists b : (a, b) \in <^{-1} \land\ b < c\} =
+\]
+\[
+    [(a, b) \in <^{-1} \Leftrightarrow (b, a) \in < \Leftrightarrow b < a \Leftrightarrow a > b]
+\]
+\[
+    = \{(a, c)\ |\ \exists b : a > b \land\ b < c\} = \underbrace{(\N \backslash \{0\}) \times (\N \backslash \{0\})}_{\textbf{Ответ}}
+\]
+
+    \item[г)] $<^{-1} \circ <$ 
+
+\[
+    = \{(a, c)\ |\ \exists b : a < b \land b > c\} = \underbrace{\N \times \N}_{\textbf{Ответ}}
+\]
+\end{itemize}
+\end{task}
+
+$Id_{A} = \{(a, a)\ |\ a \in A\}$
+
+$Q \circ P = \{(a, c)\ |\ \exists b : (a, b) \in P \land (b, c) \in Q\}$
+
+\begin{task}[Задача 5]
+Проговорили устно
+\end{task}
+
+$P \subseteq A \times B, \overline{P} = A \times B \backslash P$. Замечание: $\overline{P} \neq P^{-1} $, например $(<^{-1}) = (>), (\overline{<}) = \geq$
+
+\begin{task}[Задача 6]
+а)
+
+\[
+    (a, b) \in (\overline{P})^{-1} \Leftrightarrow (b, a) \in \overline{P} \Leftrightarrow (b, a) \not \in P \Leftrightarrow (a, b) \in \overline{(P^{-1})} 
+\]
+\end{task}
