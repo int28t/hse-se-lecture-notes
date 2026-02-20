@@ -61,8 +61,14 @@
     \]
 \end{definition}
 
-\subsection{Асимптоты}
+\begin{definition}
+    $f(x)$ отделима от нуля при $x \to x_0$, если:
+    \[
+        \exists c\ \exists \delta_0\ \forall x \in \overset{\circ}{{U}}_{\delta_0(x_0)} |f(x)| \geq c
+    \]
+\end{definition}
 
+\subsection{Асимптоты}
 \subsubsection{Вертикальная}
 \begin{definition}
     Прямая $x = a$ называется \fbox{вертикальной асимптотой}, если $\Lim{x}{a^\infty} f(x) = \pm \infty$ или $\Lim{x}{a^+} f(x) = \pm \infty$
@@ -79,22 +85,23 @@
     \[
         \Lim{x}{2^-} \frac{x + 3}{x - 2} = \frac{5}{0^-} = -\infty
     \]
+    $x_0 \neq 2$ не годится для верт асимптоты
+    \[
+        \Lim{x}{x_0} f(x) = f(x_0) \in \R
+    \]
 \end{example}
 
-\begin{definition}
-    $f(x)$ ограничена при $x \to x_0$: $\exists \delta_0 \ \exists c_0\ \forall x \in \dot{U}_\delta(x_0)\ |f(x)| \leq c_0$
-\end{definition}
-
-\begin{definition}
-    $f(x)$ отделима от нуля при $x \to x_0$: $\exists \delta_0\ \exists c_0\ \forall x \in \dot{U}_\delta(x_0) |f(x)| \geq c_0$
-\end{definition}
-
-\begin{example}
+\begin{example}[Пример (бесконечное число верт асимптот)]
     \[
         f(x) = \frac{1}{1 - \{x\}}
     \]
-    ДОБАВИТЬ РИСУНОК
-
+\end{example}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.35\textwidth]{lectures/files/image201817.png}
+  \label{fig:20265ctur545_10_07.11.2025]-18-16-45.png}
+\end{figure}
+\begin{example}[]
     $\{x\} = x - [x]$ --- дробная часть
 
     $[x] - \max \{k \in \Z : k \leq x\}$ --- целая часть
@@ -114,7 +121,7 @@
 \begin{definition}
     $y = kx + b$ --- наклонная асимптота при $x \to \pm \infty$, если 
     \[
-        \Lim{x}{\pm \infty} (f(x) - f(kx + b)) = 0
+        \Lim{x}{\pm \infty} (f(x) - (kx + b)) = 0
     \]
 \end{definition}
 
@@ -125,8 +132,16 @@
 \begin{theorem}
     $y = kx + b$ --- наклонная асимптота при $x \to \pm \infty$
 
-    $\exists \Lim{x}{\pm \infty} \frac{f(x)}{x} = k$
-    $\exists \Lim{x}{\pm \infty} (f(x) - kx) = b$
+    \[
+        \Updownarrow
+    \]
+
+    \[
+        \begin{dcases}
+            \exists \Lim{x}{\pm \infty} \frac{f(x)}{x} = k\\
+            \exists \Lim{x}{\pm \infty} (f(x) - kx) = b
+        \end{dcases}
+    \]
 \end{theorem}
 
 \begin{Proof}
@@ -135,17 +150,17 @@
         f(x) - (kx + b) = \alpha(x),\ \alpha(x) \to 0
     \]
     \[
-        \frac{f(x)}{x} = k + \frac{b}{x} + \frac{\alpha}{x} \to k
+        \frac{f(x)}{x} = k + \frac{b}{x} + \frac{\alpha(x)}{x} \xrightarrow[x \to \pm \infty ]{} k
     \]
     \[
-        f(x) - kx = b + \alpha(x) \to b
+        f(x) - kx = b + \alpha(x) \xrightarrow[x \to \pm \infty ]{}  b
     \]
     {\bf $\Leftarrow$}
     \[
-        f(x) - kx = b + \alpha(x)
+        f(x) - kx = b + \beta (x), \beta (x) \to 0
     \]
     \[
-        f(x) - kx - b = \alpha(x)
+        f(x) - (kx + b) = \beta (x)
     \]
     \[
         \Lim{x}{\pm \infty} (f(x) - (kx + b)) = 0
@@ -159,25 +174,30 @@
     Вертикальных нет, так как $\forall x_0 \Lim{x}{x_0} f(x) = f(x_0)$
     Наклонная:
     \[
-        \Lim{x}{\pm \infty} \frac{\sqrt{x^2 + 7x + 4}}{x}
+        \Lim{x}{\pm \infty} \frac{\sqrt{x^2 + 7x + 14}}{x}
     \]
     \begin{itemize}
         \item[1)] 
-        \[
-            x \to +\infty \sqrt{1 + \frac{7}{x} + \frac{14}{x^2}} \to -1 
-        \]
+        $
+            \Lim{x}{+\infty } \sqrt{1 + \frac{7}{x} + \frac{14}{x^2}} = 1
+        $
         \item[2)]
-        \[
-            x \to +\infty -\sqrt{1 + \frac{7}{x} + \frac{14}{x^2}} \to \frac{7}{2}
-        \]
+        $
+            \Lim{x}{-\infty } \sqrt{1 + \frac{7}{x} + \frac{14}{x^2}} = -1
+        $
+    \end{itemize}
+    \[
+        \Lim{x}{\pm \infty} (\sqrt{x^2 + 7x + 14} \mp x)
+    \]
+    \begin{itemize} 
         \item[1)]
-        \[
+        $
             \Lim{x}{+\infty} \sqrt{x^2 + 7x + 14} - x = \frac{7}{2} 
-        \]
+        $
         \item[2)]
-        \[
-            \Lim{x}{+\infty} \sqrt{x^2 + 7x + 14} + x = \frac{7}{2} 
-        \]
+        $
+            \Lim{x}{-\infty} \sqrt{x^2 + 7x + 14} + x = - \frac{7}{2} 
+        $
     \end{itemize}
 \end{example}
 
@@ -186,7 +206,7 @@
 \subsubsection{O малое}
 
 \begin{definition}
-    $f(x) = \overline{o}(g(x))$ при $x \to x_0\ (x_0 \in \overline{\R})$, если
+    $f(x) = \overline{o}(g(x))$ при $x \to x_0\ (x_0 \in \overline{\R} = \R \cup \{\pm \infty \})$, если
 
     \[
         \frac{f(x)}{g(x)} = \text{бесконечно малая при } x \to x_0
@@ -210,17 +230,10 @@
     \[
         \frac{x^2}{x^3} = \frac{1}{x} \to \infty
     \]
-    \[
-        x^2 = \overline()
-    \]
 \end{example}
 
 \begin{remark}
     1. Впредь бесконечно малые будем обозначать $\overline{o}(1)$
-
-    \[
-        f(x) - kx - b = \overline{o}(1)
-    \]
 
     \[
         \overline{o}(1) + \overline{o}(1) = \overline{o}(1)
