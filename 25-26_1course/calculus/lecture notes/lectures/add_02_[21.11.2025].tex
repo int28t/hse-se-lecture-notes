@@ -51,7 +51,7 @@
 \]
 {\bf $\Leftarrow$} 
 
-о/п: $F$ не замекнуто $\Rightarrow \backslash F $ не открыто
+о/п: $F$ не замкнуто $\Rightarrow \backslash F $ не открыто
 \[
     \exists x_0 \in \backslash F\ \forall \delta > 0\ U_{\delta }(x_0) \cap F \neq 0 
 \]
@@ -63,7 +63,7 @@
 \]
 \end{Proof}
 \begin{remark}
-    Почему только $\R \text{ и } \varnothing$ одновременно открытые и пустые множества?
+    Почему только $\R \text{ и } \varnothing$ одновременно открытые и замкнутые множества?
 \end{remark}
 \begin{example}[Замечание]
     \[
@@ -144,7 +144,7 @@
 \begin{definition}
     $f : X \to Y, X, Y \subseteq \R$ называется равномерно непрерывной, если: 
     \[
-        \exists \eps > 0\ \exists \delta = \delta (\eps ) > 0\ \forall x_1, x_2 \in X\ (|x_1 - x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps ) 
+        \forall \eps > 0\ \exists \delta = \delta (\eps ) > 0\ \forall x_1, x_2 \in X\ (|x_1 - x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps ) 
     \]
 \end{definition}
 \begin{theorem}[Теорема о равномерной непрерывности (Кантора)]
