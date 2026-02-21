@@ -1,0 +1,242 @@
+\section{Интегрирование}
+
+\begin{definition}
+    \textbf{Первообразной} к $f(x)$ на $(a,\ b),\ a, b \in \overline{\R}$ называется $F(x)$, что $F'(x) = f(x)$
+\end{definition}
+
+\begin{example}
+    \[
+        f(x) = x^{\alpha },\ \alpha > 0,\ (a, b) = \R
+    \]
+    \[
+        F(x) = \frac{x^{\alpha + 1}}{\alpha + 1}
+    \]
+\end{example}
+
+\begin{example}
+    \[
+        f(x) = \frac{1}{1 + x^2}
+    \]
+    \[
+        F(x) = \arctg (x),\ x \in \R
+    \]
+\end{example}
+
+\begin{example}
+    \[
+        f(x) = e^{-x^2}
+    \]
+\end{example}
+
+\begin{theorem}
+    Если $F_1(x), F_2(x)$ --- 2 первообразных на $(a,\ b)$ для $y = f(x)$, тогда:
+    \[
+        F_1(x) - F_2(x) = const \text{ на } (a,\ b)
+    \]
+\end{theorem}
+
+\begin{Proof}
+    Рассмотрим $G(x) = F_1(x) - F_2(x) : G'(x) = 0$ на $(a,\ b) \xrightarrow[]{\text{сл. т. Лагранжа}} G(x) = const$ на $(a,\ b)$
+\end{Proof}
+
+\subsection{Неопределенный интеграл}
+
+\begin{definition}
+    {\bf Неопределенный интеграл} $f(x)$ на $(a,\ b)$ --- множество всех первообразных на $(a,\ b)$
+
+    \[
+        \int f(x)\mathrm{d}x = \left\{ F(x) + C \right\}_{C \in \R}
+    \]
+    Обозначение:
+    \[
+        \int f(x)\mathrm{d}x = F(x) + C, C \in R
+    \]
+\end{definition}
+
+\begin{example}
+    \[
+        \int \frac{1}{x} \mathrm{d}x = \ln |x| + C, C \in \R
+    \]
+    Проверка:
+    
+    $x > 0$:
+    \[
+        (\ln x + C)' = \frac{1}{x} 
+    \]
+    $x < 0$:
+    \[
+        (\ln (-x) + C)' = \frac{1}{-x} \cdot (-1) = \frac{1}{x}
+    \]
+    \[
+        \R^{\backslash\{0\}}
+    \]
+\end{example}
+
+\begin{example}
+    \[
+        F(x) = 
+        \begin{dcases}
+            \ln x,\ x > 0\\
+            \ln (-x) + 2,\ x < 0
+        \end{dcases}
+    \]
+    \[
+        F'(x) = \frac{1}{x},\ \forall x \neq 0
+    \]
+\end{example}
+
+\begin{definition}
+    {\bf Дифференциал} $f(x)$ в $x_0$ --- линейная функция вида $f'(x_0) \cdot \underset{= x - x_0}{\Delta x}$
+\end{definition}
+
+\[
+    f'(x_0) = \Lim{x}{x_0} \frac{f(x) - f(x_0)}{x - x_0} \Leftrightarrow f(x) = f(x_0) + \underbrace{\underset{=f'(x_0)}{A} (x - x_0)}_{\mathrm{d}f(x) |_{x = x_0} } + o(x - x_0)
+\]
+
+\[
+    \text{\fbox{$\mathrm{d} f(x) |_{x=x_0}$}} \left( \Delta x \right) = f'(x_0) \cdot \Delta x
+\]
+
+\[
+    \mathrm{d} f(x) |_{x=x_0} \left( h \right) = f'(x_0) \cdot h
+\]
+
+\[
+    \mathrm{d} x |_{x=x_0} \left( h \right) = h
+\]
+
+\[
+    \mathrm{d} f(x) |_{x=x_0} \left( h \right) = f'(x_0) \cdot \mathrm{d} x |_{x=x_0} (h)
+\]
+
+\[
+    \mathrm{d} f(x) = f'(x)\mathrm{d} x
+\]
+
+\[
+    \frac{\mathrm{d} f(x) }{\mathrm{d} x } = f'(x)
+\]
+
+\begin{example}
+    \[
+        \int x e^{-x^2} \mathrm{d} x = \int \frac{1}{2} e^{-x^2} \mathrm{d} x^2 = \int \frac{(-1)}{2} e^{-x^2} \mathrm{d} (-x^2) = \int -\frac{1}{2} \mathrm{d} (e^{-x^2})
+    \]
+\end{example}
+
+$$\boxed{\mathrm{d} f(g(x)) = f'(g(x)) \cdot \mathrm{d}g(x)}$$
+
+\subsubsection{Свойства неопределенного интеграла}
+
+\begin{itemize}
+    \item[1)] $\int \mathrm{d} F(x) = F(x) + C, C \in \R $
+
+    \begin{Proof}
+        \[
+            \int \mathrm{d} F(x) = \int F'(x) \mathrm{d}x 
+        \]
+    \end{Proof}
+
+    \item[2)] Если у $f(x)$ и $g(x)$ $\exists $ первообразная на $(a,\ b),\ a, b \in \overline{\R}$, тогда у $\alpha f(x) + \beta g(x)\ \exists $ первообразная на $(a,\ b)$ и 
+    
+    Не считаем случай $\alpha = \beta = 0$
+    \[
+        \int (\alpha f(x) + \beta g(x)) \mathrm{d} x = \alpha \underbrace{\int f(x) \mathrm{d} x}_{F(x) + C_1} + \beta \underbrace{\int g(x) \mathrm{d} x}_{G(x) + C_2} = \alpha F(x) + \beta G(x) + C 
+    \]
+
+    \begin{Proof}
+    \[
+        (\alpha F(x) + \beta G(x))' = \alpha F'(x) + \beta G'(x) = \alpha f(x) + \beta g(x)
+    \]
+    \end{Proof}
+
+    \item[3)] Если y $f(x) \exists $ первообразная $y = F(x)$ на $(a,\ b)$ и $\gamma (t)$ --- дифф на $(c,\ d)$, $\gamma ((c, d)) \subset (a, b)$, тогда:
+    
+    \[
+        \int f(\gamma (t)) \gamma'(t) \mathrm{d} t = F(\gamma (t)) + C 
+    \]
+
+    \begin{Proof}
+        \[
+            (F(\gamma (t)))' = F'(\gamma (t)) \gamma'(t) = f(\gamma (t)) \gamma'(t)
+        \]
+    \end{Proof}
+\end{itemize}
+
+\subsubsection{Формула подстановки}
+
+\[
+    \int f(\gamma (t)) \gamma'(t) \mathrm{d} t = \int f(x) \mathrm{d} x |_{x = \gamma (t)} 
+\]
+
+\begin{example}
+    \[
+        -\frac{1}{2}\int (-2x) e^{-x^2} \mathrm{d} x =
+         \begin{vmatrix}
+                \gamma (t) = -x^2  \\
+                \gamma'(t) = -2x  \\
+            \end{vmatrix}
+            = -\frac{1}{2}\int e^t \mathrm{d} t = -\frac{1}{2} e^t + C = -\frac{1}{2} e^{-x^2} + C 
+    \]
+\end{example}
+
+\[
+    \int f(\gamma (t)) \mathrm{d} \gamma (t) \underset{x = \gamma (t)}{=} \int f(x) \mathrm{d} x 
+\]
+
+\begin{example}
+    \[
+        \int \tg x\ \mathrm{d} x = \int \frac{\sin x}{\cos x}\ \mathrm{d} x = - \int \frac{\mathrm{d} \cos x }{\cos x} \underset{\cos x = y}{=} - \int \frac{\mathrm{d} y}{y} = - \ln |y| = -\ln |\cos x| + C
+    \]
+\end{example}
+
+\subsubsection{Формула замены переменной}
+
+\[
+    \int f(x) \mathrm{d} x \underset{x = \gamma (t), обратимая}{=} \int f(\gamma (t)) \gamma'(t) \mathrm{d} t = G(t) + C = G(\gamma^{-1}(x)) + C
+\]
+
+\begin{example}
+    \[
+        \int \sqrt{1 - x^2} \mathrm{d} x \underset{x = \sin t, x \in [-1; 1], t \in [-\frac{\pi}{2}; \frac{\pi }{2}], t = \arcsin x}{=} \int \sqrt{1 - \sin ^2 t} \mathrm{d} \sin t = \int \cos t \cos t \mathrm{d}t =
+    \]
+    \[
+        = \int \cos^2 t \mathrm{d} t = \int \frac{\cos 2t + 1}{2} \mathrm{d} t = \frac{1}{2} \left( \int \cos 2t \mathrm{d} t + \int 1 \mathrm{d} t   \right) = \frac{1}{2} \l(\frac{\sin 2t}{2} + t + C \r) =
+    \]
+    \[
+        = \frac{1}{4} \sin 2t + \frac{t}{2} + C = \frac{1}{4} \sin (2 \arcsin x) + \frac{\arcsin x}{2} + C, C \in \R
+    \]
+\end{example}
+
+\subsubsection{Интегрирование по частям}
+\begin{itemize}
+    \item[4)] $f(x)$ и $g(x)$ дифф на $(a,\ b)$, то 
+    
+    \[
+        \int f(x) \mathrm{d} g(x) = f(x) g(x) - \int g(x) \mathrm{d} f(x) 
+    \]
+
+    \[
+        \int f(x) g'(x) \mathrm{d} x = f(x) g(x) - \int g(x) f'(x) \mathrm{d} x  
+    \]
+
+    \begin{Proof}
+        \[
+            (f(x) g(x))' = f'(x) g(x) + f(x) g'(x)
+        \]
+        \[
+            \int (f'(x) g(x) + f(x) g'(x))\mathrm{d} x = f(x) g(x) + C, C \in \R 
+        \]
+        \[
+            \int f'(x) g(x) \mathrm{d} x + \int f(x) g'(x) \mathrm{d} x = f(x) g(x) + C  
+        \]
+    \end{Proof}
+
+    \begin{example}
+        \[
+            \int \arctg x\ \mathrm{d} x = x \arctg x - \int x \mathrm{d} \arctg x = x \arctg x - \int \frac{x \mathrm{d} x }{1 + x^2} =
+        \]
+        \[
+            = x \arctg x - \frac{1}{2}\int \frac{\mathrm{d} (x^2 + 1) }{1 + x^2} = x \arctg x - \frac{1}{2} \ln (x^2 + 1) + C, C \in \R
+        \]
+    \end{example}
+\end{itemize}
