@@ -1,0 +1,253 @@
+\section{Предел функции в точке и на бесконечности: определения по Коши и по Гейне. Эквивалентность двух определений. Односторонние пределы. Бесконечный предел.}
+
+\subsection{Предел функции в точке}
+
+\begin{definition}[Определение по Коши]
+    $\Lim{x}{x_0} f(x) = A$, если
+    \[
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x \in \overset{\circ}{U}_{\delta } (x_0)\ |f(x) - A| < \eps
+    \]
+    \[
+        \Updownarrow
+    \]
+    \[
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+    \]
+\end{definition}
+
+\begin{definition}[Определение по Гейне]
+    $\Lim{x}{x_0} f(x) = A$, если истинна импликация
+
+    \[
+    \underset{
+        \substack{
+            x_n \xrightarrow[n \to \infty]{} x_0 \\ 
+            x_n \neq x_0
+        }
+    }{\forall \{x_n\}_{n \in \N}} 
+    \Rightarrow f(x_n) \xrightarrow[n \to \infty]{} A
+    \]
+\end{definition}
+
+\subsection{Предел функции на бесконечности}
+
+\begin{definition}
+    $\Lim{x}{+\infty} f(x) = A$, если
+    \[
+        \forall \eps > 0\ 
+        \exists M = M(\eps)\ 
+        \forall x > M:\ 
+        |f(x) - A| < \eps
+    \]
+\end{definition}
+
+\begin{definition}
+    $\Lim{x}{-\infty} f(x) = A$, если
+    \[
+        \forall \eps > 0\ 
+        \exists M = M(\eps)\ 
+        \forall x < -M:\ 
+        |f(x) - A| < \eps
+    \]
+\end{definition}
+
+\begin{remark}
+    \[
+        \overset{\circ}{U}_{\delta } (+\infty ) = (\delta; +\infty ),\ \overset{\circ}{U}_{\delta } (-\infty ) = (-\infty; \delta ),\ \overset{\circ}{U}_{\delta } (\pm\infty ) = (-\infty; \delta ) \cup (\delta; +\infty )
+    \]
+\end{remark}
+
+\subsection{Эквивалентность определений}
+
+\begin{theorem}
+    Определения предела функции по Коши и Гейне равносильны
+\end{theorem}
+
+\begin{Proof}
+    {\bf $(\Rightarrow):$}
+
+    Имеем:
+    \[
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+    \]
+    Предположим, что посылка истинна. Тогда также имеем:
+    \[
+        x_n \xrightarrow[n \to \infty ]{} x_0,\ x_n \neq x_0, \text{ то есть } \forall \omega > 0\ \exists N_1(\omega )\ \forall n > N_1(\omega )\ 0 < |x_n - x_0| < \omega 
+    \]
+    Хотим:
+    \[
+        f(x_n) \xrightarrow[n \to \infty ]{} A,\ \forall \eps > 0\ \exists N_2(\eps )\ \forall n > N_2(\eps )\ |f(x_n) - A| < \eps 
+    \]
+
+    Чтобы $|f(x_n) - A| < \eps$ нужно $0 < |x_n - x_0| < \delta(\eps )$ (Подставили в определение Коши $f(x_n)$ вместо $f(x)$). Поэтому возьмем $\omega = \delta (\eps )$. 
+    
+    Получаем $N_1(\delta (\eps ))$ и $\forall n > N_1(\delta (\eps ))\ 0 < |x_n - x_0| < \delta (\eps )$ и тогда $|f(x_n) - A| < \eps $
+
+    Возьмем $N_2(\eps ) = N_1(\delta (\eps ))$
+
+    {\bf $(\Leftarrow):$}
+
+    Имеем:
+    \[
+    \underset{
+        \substack{
+            x_n \xrightarrow[n \to \infty]{} x_0 \\ 
+            x_n \neq x_0
+        }
+    }{\forall \{x_n\}_{n \in \N}} 
+    \Rightarrow f(x_n) \xrightarrow[n \to \infty]{} A
+    \]
+
+    Пп т.е верно:
+    \[
+        \exists \eps > 0\ \forall \delta > 0\ \exists x(\delta ) \in \overset{\circ}{U}_{\delta } (x_0)\ |f(x) - A| \geq \eps 
+    \]
+    Для каждого $\delta = \frac{1}{n} \text{ найдем } x_n \in \overset{\circ}{U}_{\delta } (x_0)$
+
+    Получим
+    \[
+        \underbrace{x_0 - \frac{1}{n}}_{\xrightarrow{n \to \infty} x_0} 
+        < x_n < 
+        \underbrace{x_0 + \frac{1}{n}}_{\xrightarrow{n \to \infty} x_0}
+    \]
+    \[
+        \{x_n \}_{n \in \N}: x_n \xrightarrow[n \to \infty ]{} x_0, x_n \neq x_0 
+    \]
+    Значит $f(x_n) \xrightarrow[n \to \infty ]{} A$
+
+    Но $|f(x) - A| \geq \eps$. Получили противоречие (расписать определение и в качестве $\eps$ взять $\eps_0$)
+\end{Proof}
+
+\subsection{Односторонние пределы}
+
+\begin{definition}
+    {\bf Односторонним пределом} $\Lim{x}{x_{0-}^+} f(x) = A$ называется такое число, что: 
+    \begin{itemize}
+        \item $\Lim{x}{x_{0}^+} f(x) = A$
+        \[
+            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x - x_0 < \delta (\eps )\ |f(x) - A| < \eps \text{ --- \textbf{правосторонний предел}}
+        \]
+        \item $\Lim{x}{x_{0-}} f(x) = A$
+        \[
+            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x_0 - x < \delta (\eps )\ |f(x) - A| < \eps \text{ --- \textbf{левосторонний предел}}
+        \]
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}[Теорема]
+    \[
+        \exists \Lim{x}{x_0} f(x) \Leftrightarrow \exists \Lim{x}{x_{0}^+} f(x) = \exists \Lim{x}{x_{0-}} f(x)
+    \]
+\end{theorem}
+
+\begin{Proof}
+
+    {\bf $(\Rightarrow):$}
+
+    Пусть 
+    \[
+        \Lim{x}{x_0} f(x) = A
+    \]
+    т.е.
+    \[
+        \forall \eps > 0\ \exists \delta = \delta(\eps )\ 
+        \forall x:\ 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+    \]
+
+    Тогда, если $0 < x - x_0 < \delta$, автоматически выполнено
+    $0 < |x - x_0| < \delta$, следовательно
+    \[
+        |f(x) - A| < \eps
+    \]
+    Значит
+    \[
+        \Lim{x}{x_0^+} f(x) = A
+    \]
+
+    Аналогично, если $0 < x_0 - x < \delta$, то снова
+    $0 < |x - x_0| < \delta$, и
+    \[
+        |f(x) - A| < \eps
+    \]
+    Значит
+    \[
+        \Lim{x}{x_0^-} f(x) = A
+    \]
+
+    \bigskip
+
+    {\bf $(\Leftarrow):$}
+
+    Пусть
+    \[
+        \Lim{x}{x_0^+} f(x) = A,\ 
+        \Lim{x}{x_0^-} f(x) = A
+    \]
+
+    Тогда
+    \[
+        \forall \eps > 0\ 
+        \exists \delta_1 = \delta_1(\eps )\ 
+        \forall x:\ 0 < x - x_0 < \delta_1\ 
+        |f(x) - A| < \eps
+    \]
+    и
+    \[
+        \forall \eps > 0\ 
+        \exists \delta_2 = \delta_2(\eps )\ 
+        \forall x:\ 0 < x_0 - x < \delta_2\ 
+        |f(x) - A| < \eps
+    \]
+
+    Положим
+    \[
+        \delta = \min\{\delta_1(\eps ), \delta_2(\eps )\}
+    \]
+
+    Тогда из условия
+    \[
+        0 < |x - x_0| < \delta
+    \]
+    следует либо
+    \[
+        0 < x - x_0 < \delta
+    \]
+    либо
+    \[
+        0 < x_0 - x < \delta
+    \]
+
+    В обоих случаях
+    \[
+        |f(x) - A| < \eps
+    \]
+
+    Следовательно,
+    \[
+        \Lim{x}{x_0} f(x) = A
+    \]
+
+\end{Proof}
+
+\subsection{Бесконечный предел}
+
+\begin{definition}
+$\Lim{x}{x_0} f(x) = +\infty $, если 
+\[
+    \forall M > 0\ \exists \delta (M) > 0\ \forall x \in \overset{\circ}{U}_{\delta }(x_0) : f(x) > M
+\]
+\end{definition}
+
+\begin{definition}
+$\Lim{x}{x_0} f(x) = -\infty $, если 
+\[
+    \forall M > 0\ \exists \delta (M) > 0\ \forall x \in \overset{\circ}{U}_{\delta }(x_0) : f(x) < -M
+\]
+\end{definition}
+
+\begin{definition}
+$\Lim{x}{x_0} f(x) = \infty $, если 
+\[
+    \forall M > 0\ \exists \delta (M) > 0\ \forall x \in \overset{\circ}{U}_{\delta }(x_0) : |f(x)| > M
+\]
+\end{definition}
