@@ -1,0 +1,125 @@
+\section{Теоремы Ролля, Лагранжа и Коши.}
+
+\subsection{Теорема Ролля}
+\begin{theorem}[Теорема Ролля]
+Пусть $y=f(x)$ и выполнены условия:
+\begin{enumerate}
+  \item $f$ непрерывна на $[a,b]$, обозначим \fbox{1}\;
+  \item $f$ дифференцируема на $(a,b)$, обозначим \fbox{2}
+  \item $f(a)=f(b)$.
+\end{enumerate}
+Тогда $\exists\, \xi \in (a,b)$ такое, что $f'(\xi)=0$.
+\end{theorem}
+
+\begin{Proof}
+Пусть
+\[
+M=\sup_{[a,b]} f(x), \qquad m=\inf_{[a,b]} f(x).
+\]
+
+\begin{enumerate}
+\item $M=m$. Тогда $f(x) =  \mathrm{const}$ на $[a,b]$, значит $f'(x)=0$ на $(a,b)$.
+Возьмём, например,
+\[
+\xi=\frac{a+b}{2}.
+\]
+
+\item $M>m$. Кто-то из них достигается не в концах $a$ и $b$.
+Пусть
+\[
+M=f(x_1), \qquad x_1\in(a,b).
+\]
+Тогда $x_1$ — точка максимума, и $\exists\, f'(x_1)$ (т.к. внутри функция дифф.)
+используя теорему Ферма (необх. условие экстремума):
+\[
+f'(x_1)=0.
+\]
+\end{enumerate}
+\end{Proof}
+
+
+\subsection{Теорема Лагранжа}
+\begin{theorem}[Теорема Лагранжа]
+Если для $f$ выполнены \fbox{1}\ и \fbox{2}, то
+\[
+\exists\, \xi\in(a,b):\qquad \frac{f(b)-f(a)}{b-a}=f'(\xi).
+\]
+Графический смысл этой дроби - это угловой коэфицент. У нас найдётся точка, такая что у неё касательная будет параллельна вот этой так называемой секущей. 
+\end{theorem}
+
+\begin{Proof}
+\[
+F(x)=f(x)-\lambda x \quad \leftarrow \ f \text{ выполнены \fbox{1}\ и \fbox{2} на }[a,b] \text{ и } (a,b) \text{ соотвественно}
+\]
+
+\[
+F(a)=F(b)\iff f(a)-\lambda a=f(b)-\lambda b
+\iff \lambda=\frac{f(b)-f(a)}{b-a}
+\]
+
+По теореме Ролля для $y=F(x)$:
+\[
+\exists\,\xi\in(a,b):\quad F'(\xi)=0
+= f'(\xi)-\lambda=0
+\]
+
+\[
+f'(\xi)=\lambda
+\]
+\end{Proof}
+
+
+\textbf{Следствия из теоремы Лагранжа.}
+
+1) Если $y=f(x)$, $f$ выполнены \fbox{1}\ \ \fbox{2} и
+$f'(x)=0$ на $(a,b)$, то $f(x)=\mathrm{const}$ на $[a,b]$.
+
+\begin{Proof}
+Предположим противное:
+\[
+\exists\,x_1,x_2\in[a,b]:\ f(x_1)\ne f(x_2).
+\]
+На $[x_1,x_2]$ выполнены \fbox{1}\ \ \fbox{2}, значит по теореме Лагранжа:
+\[
+\exists\,\xi\in(x_1,x_2):\qquad f(x_2)-f(x_1)=f'(\xi)(x_2-x_1).
+\]
+Но $f'(\xi)=0$, а левая $\ne 0$ — противоречие.
+\end{Proof}
+
+2) Если $f$ и $g$ \fbox{1}\ на  $[a,b]$, \fbox{2} на $(a,b)$ и
+$f'(x)=g'(x)$ на $(a,b)$, то $f(x)-g(x)=\mathrm{const}$ на $[a,b]$.
+\\
+\\
+Доказывается аналогично, нужно предъявить $h(x) = f(x) - g(x)$ и доказывать по первому следствию.
+
+\subsection{Теорема Коши}
+\begin{theorem}[Теорема Коши]
+Если $f(x)$ и $g(x)$ выполнено \fbox{1} и \fbox{2} и $g(a)\ne g(b)$,
+$g'(x)\ne 0$ на $(a,b)$, тогда:
+\[
+\exists\,\xi\in(a,b):\qquad
+\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi)}{g'(\xi)}.
+\]
+\end{theorem}
+
+\begin{Proof}
+Рассмотрим $F(x)=f(x)-\lambda g(x)$ — выполнено \fbox{1} и \fbox{2}.\\
+Найдём $\lambda:\ F(a)=F(b)$
+\[
+\lambda=\frac{f(b)-f(a)}{g(b)-g(a)}.
+\]
+
+По теореме Ролля:
+\[
+\exists\,\xi\in(a,b):\quad F'(\xi)=0
+\]
+\[
+\Downarrow
+\]
+\[
+f'(\xi)-\lambda g'(\xi)=0
+\]
+\[
+\frac{f'(\xi)}{g'(\xi)}=\lambda.
+\]
+\end{Proof}
