@@ -1,0 +1,94 @@
+\section{Выпуклость функции. Теорема о выпуклости функции.}
+\begin{definition}[Определение выпуклости функции.]
+
+
+\subsection{Выпуклость функции}
+Функция $f(x)$ \textbf{выпукла вверх} на $[a,b]$, если
+\[
+\forall x_1,x_2\in[a,b]\text{ } \forall x\in[x_1,x_2]:
+\quad f(x)\ge \ell(x),
+\]
+где $\ell(x)$ — уравнение хорды, соединяющей точки $(x_1,f(x_1))$ и $(x_2,f(x_2))$:
+\[
+\ell(x)=f(x_1)+\frac{f(x_2)-f(x_1)}{x_2-x_1}\,(x-x_1)
+      =\frac{f(x_1)(x_2-x)+f(x_2)(x-x_1)}{x_2-x_1}.
+\]
+\[
+\forall x\in[x_1;x_2]:\ f(x)\ge \ell(x)\ \text{— нестрогая выпуклость}
+\]
+\[
+\forall x\in(x_1;x_2):\ f(x)>\ell(x)\ \text{— строгая выпуклость}
+\]
+
+В определении функции, выпуклой вниз, знаки неравенств
+$f(x)\ge \ell(x)$ и $f(x)>\ell(x)$ меняются на противоположные.
+\end{definition}
+
+\subsection{Теорема о выпуклости функции}
+\begin{theorem}
+Если $f(x)$ непрерывна на $[a;b]$ и на $(a;b)\ \exists f''(x)$, то
+\[
+\forall x\in(a;b):\ f''(x)\ge 0 \ \Longrightarrow\ f(x)\ \text{выпукла вниз},
+\]
+\[
+\forall x\in(a;b):\ f''(x)\le 0 \ \Longrightarrow\ f(x)\ \text{выпукла вверх}.
+\]
+\end{theorem}
+
+
+\begin{Proof}
+Докажем выпуклость вниз, выпуклость вверх доказывается аналогично.
+
+Пусть $x_1<x_2\in[a;b]$, тогда для доказательства по определению необходимо
+доказать верность неравенства:
+\[
+\forall x\in(x_1;x_2):\ \ell(x)-f(x)\ge 0,
+\]
+где
+\[
+\ell(x)=\frac{f(x_2)-f(x_1)}{x_2-x_1}\,x+\frac{x_2f(x_1)-x_1f(x_2)}{x_2-x_1}
+\quad \text{— уравнение хорды } \ell.
+\]
+
+\[
+\ell(x)-f(x)=\frac{f(x_2)-f(x_1)}{x_2-x_1}\,x+\frac{x_2f(x_1)-x_1f(x_2)}{x_2-x_1}
+-f(x)\frac{x_2-x+x-x_1}{x_2-x_1}=
+\]
+\[
+=\frac{f(x_1)(x_2-x)+f(x_2)(x-x_1)}{x_2-x_1}
+-\frac{f(x)(x_2-x)+f(x)(x-x_1)}{x_2-x_1}=
+\]
+\[
+=\frac{f(x_1)(x_2-x)+f(x_2)(x-x_1)-f(x)(x_2-x)-f(x)(x-x_1)}{x_2-x_1}=
+\]
+\[
+=\frac{(f(x_1)-f(x))(x_2-x)+(f(x_2)-f(x))(x-x_1)}{x_2-x_1}=
+\]
+\[
+=\frac{(f(x_2)-f(x))(x-x_1)-(f(x_1)-f(x))(x_2-x)}{x_2-x_1}.
+\]
+Так как для функции $f$ на $(x_1;x)$ и $(x;x_2)$ выполняется т.\ Лагранжа, то
+\[
+\exists\,\xi\in(x;x_2),\ \exists\,\eta\in(x_1;x):
+\quad
+f(x_2)-f(x)=f'(\xi)(x_2-x),\qquad f(x)-f(x_1)=f'(\eta)(x-x_1).
+\]
+Отсюда
+\[
+\ell(x)-f(x)=
+\frac{f'(\xi)(x_2-x)(x-x_1)-f'(\eta)(x-x_1)(x_2-x)}{x_2-x_1}
+=
+\frac{(x-x_1)(x_2-x)\bigl(f'(\xi)-f'(\eta)\bigr)}{x_2-x_1}.
+\]
+
+Так как для функции $f'$ на $(\eta;\xi)$ выполняется т.\ Лагранжа, то
+\[
+\exists\,\zeta\in(\eta;\xi):\quad f'(\xi)-f'(\eta)=f''(\zeta)(\xi-\eta).
+\]
+Следовательно,
+\[
+\ell(x)-f(x)=
+\frac{(x-x_1)(x_2-x)f''(\zeta)(\xi-\eta)}{x_2-x_1}\ge 0,
+\qquad \zeta\in(\eta;\xi)\subset(a;b).
+\]
+\end{Proof}

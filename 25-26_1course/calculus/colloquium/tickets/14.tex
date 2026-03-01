@@ -1,0 +1,67 @@
+\section{Теоремы о монотонности функции. Первое достаточное условие экстремума.}
+
+\subsection{Теоремы о монотонности функции}
+\begin{theorem}[Теоремы о монотонности функции.]
+\[
+f'(x)\ge 0 \text{ на }(a;b)\Longleftrightarrow f(x)\ \text{неубывает на }[a;b]
+\]
+\[
+f'(x)> 0 \text{ на }(a;b)\Longrightarrow f(x)\ \text{возрастает на }[a;b]
+\]
+\[
+f(x)\ \text{возрастает на }[a;b]\ \not\!\!\Longrightarrow\ f'(x)>0 \text{ на }(a;b),
+\quad \text{к/п: } y=x^3\ (f'(0)=0).
+\]
+
+\end{theorem}
+
+\begin{Proof}
+$\Longleftarrow$
+\[
+f'(x)=\lim_{x\to x_0}\underbrace{\frac{f(x)-f(x_0)}{x-x_0}}_{\ge 0},\ x_0\in(a;b)
+\]
+
+$\Longrightarrow$
+\[
+\forall x_1,x_2:\ x_1<x_2\Rightarrow f(x_1)\le f(x_2)\Longleftrightarrow f(x_2)-f(x_1)\ge 0
+\]
+\[
+[x_1;x_2]\subset[a;b]\ \text{выполняется }\fbox{1}\ \text{и }\fbox{2}\ \text{т.е. }\exists\,\xi\in(x_1,x_2)
+\]
+\[
+f(x_2)-f(x_1)=\underbrace{f'(\xi)}_{\ge 0}\,\underbrace{(x_2-x_1)}_{>0}\ge 0 \text{ в первом случае}
+\]
+\[
+\underbrace{f'(\xi)}_{>0}\,\underbrace{(x_2-x_1)}_{>0}>0 \text{ во втором случае}
+\]
+\end{Proof}
+
+\subsection{Первое достаточное условие extr}
+\begin{theorem}[Теорема о достаточном условии экстремума]
+Если $x_0$ — точка непрерывности $f(x)$ и $\exists\,\delta>0:$ 
+\[
+\begin{aligned}
+(x_0-\delta,\ x_0) &: \ f'(x)\ge 0,\\
+(x_0,\ x_0+\delta) &: \ f'(x)\le 0,
+\end{aligned}
+\]
+то $x_0$ — точка максимума.
+\end{theorem}
+
+\begin{Proof}
+$[x_0-\frac{\delta}{2};\,x_0]$ — вып. \fbox{1} и \fbox{2}
+\[
+\Rightarrow\ f(x)\ \text{неубывает на отрезке }\left[x_0-\frac{\delta}{2};\,x_0\right]
+\]
+\[
+f(x_0)\ge f(x)\quad \forall x\in\left[x_0-\frac{\delta}{2};\,x_0\right]
+\]
+
+Аналогично
+\[
+f(x_0)\ge f(x)\quad \forall x\in\left[x_0;\,x_0+\frac{\delta}{2}\right]
+\]
+(невозрастает на $\left[x_0;\,x_0+\frac{\delta}{2}\right]$).
+\\
+Отсюда выполнено условие локального максимума, что и требовалось доказать.
+\end{Proof}
