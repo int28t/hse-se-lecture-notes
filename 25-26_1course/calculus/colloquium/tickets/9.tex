@@ -1,1 +1,103 @@
-    \section{Определение дифференцируемости функции в точке. Эквивалентность существования производной функции в точке и дифференцируемости функции в точке. Определение дифференциала.}
+\section{Определение дифференцируемости функции в точке. Эквивалентность существования производной функции в точке и дифференцируемости функции в точке. Определение дифференциала.}
+
+\subsection{Определение дифференцируемости функции в точке.}
+\begin{definition}
+Функция $f(x)$ называется дифференцируемой в точке $x_0$, если её можно представить в виде:
+
+\[
+f(x)=f(x_0)+B(x-x_0)+o(x-x_0),
+\]
+\end{definition}
+
+\subsection{Эквивалетность существования производной функции в точке и дифференцируемости функции в точке.}
+\begin{theorem}
+Функция $f$ дифференцируема в точке $x_0$
+\(\Longleftrightarrow\ \exists\, f'(x_0)\).
+\end{theorem}
+
+\begin{Proof}
+``$\Longrightarrow$''
+
+По определению дифференцируемости в точке:
+\[
+\exists\,B\in\mathbb{R}:\quad
+f(x)=f(x_0)+B(x-x_0)+o(x-x_0)\quad (x\to x_0)
+\]
+\[
+\Longrightarrow\ \frac{f(x)-f(x_0)}{x-x_0}=B+o(1)
+\Longrightarrow\ \lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=B\in\mathbb{R}
+\]
+\[
+\Longrightarrow\ \exists\,f'(x_0)=B\in\mathbb{R}.
+\]
+
+``$\Longleftarrow$''
+
+По определению производной:
+\[
+\exists\,\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=f'(x_0)\in\mathbb{R}
+\]
+\[
+\Longrightarrow\ \frac{f(x)-f(x_0)}{x-x_0}=f'(x_0)+o(1)
+\Longrightarrow\ f(x)-f(x_0)=f'(x_0)(x-x_0)+o(x-x_0)
+\]
+\[
+\Longrightarrow\ f(x)=f(x_0)+B(x-x_0)+o(x-x_0),\qquad B=f'(x_0)\in\mathbb{R}.
+\]
+\end{Proof}
+
+\subsection{Определение дифференциала.}
+\begin{definition}
+Дифференциал функции $f(x)$ в точке $x_0$ — это линейная функция
+\[
+B\,(x-x_0)
+\]
+такая, что
+\[
+f(x)=f(x_0)+B\,(x-x_0)+o(x-x_0),\quad x\to x_0.
+\]
+Обозначим \[
+df(x_0)=B(x-x_0).
+\]
+\[
+dx=x-x_0.
+\]
+Тогда
+\[
+df(x_0)=B\,dx.
+\]
+Кроме того, из дифференцируемости следует
+\[
+f'(x_0)=B.
+\]
+Следовательно,
+\[
+df(x_0)=f'(x_0)\,dx.
+\]
+\end{definition}
+
+
+\begin{theorem}[Дифференцируемость в точке влечёт непрерывность в этой точке.]
+$f(x)$ дифференцируема в т. $x_0$ $\Longrightarrow$ $f(x)$ непрерывна в т. $x_0$.
+\end{theorem}
+
+\begin{Proof}
+\[
+f(x)=f(x_0)+\underbrace{f'(x_0)(x-x_0)}_{\to 0}+\underbrace{o(x-x_0)}_{\to 0}
+\ \xrightarrow[x\to x_0]{}\ f(x_0).
+\]
+\end{Proof}
+
+\begin{remark}
+\[
+\text{непрерывность в }x_0\ \not\!\!\Longrightarrow\ \text{дифференцируемость в }x_0.
+\]
+\[
+\text{к/п: } f(x)=|x| \text{ в } x_0=0:\quad
+\]
+\[
+\lim_{x\to 0+}\frac{f(x)-f(0)}{x-0}=1,\qquad
+\lim_{x\to 0-}\frac{f(x)-f(0)}{x-0}=-1
+\ \Longrightarrow\ \nexists\,f'(0).
+\]
+\end{remark}
