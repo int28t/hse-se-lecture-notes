@@ -1,5 +1,140 @@
-\section{Теорема о пределе сложной функции. Первый замечательный предел.}
+\section{Теорема о пределе сложной функции. Первый замечательный предел. (Beta)}
 
 \subsection{Теорема о пределе сложной функции}
 
+\begin{theorem}
+Пусть функция $g(x)$ определена в проколотой окрестности точки $x_0$ и
+\[
+\Lim{x}{x_0} g(x)=a.
+\]
+Пусть функция $f(t)$ определена в проколотой окрестности точки $a$ и
+\[
+\Lim{t}{a} f(t)=A.
+\]
+Тогда, если $g(x)\neq a$ при $x\neq x_0$ (достаточно близких к $x_0$),
+выполняется
+\[
+\Lim{x}{x_0} f(g(x))=A.
+\]
+\end{theorem}
+
+\begin{Proof}
+Пусть $x_n \to x_0$, $x_n \neq x_0$.
+Тогда $g(x_n)\to a$.
+Так как $\Lim{t}{a} f(t)=A$, то
+\[
+f(g(x_n)) \to A.
+\]
+По определению предела функции по Гейне получаем
+\[
+\Lim{x}{x_0} f(g(x))=A.
+\]
+\end{Proof}
+
+\begin{remark}
+Если функция $f$ непрерывна в точке $a$, то условие можно записать проще:
+если
+\[
+\Lim{x}{x_0} g(x)=a,
+\]
+то
+\[
+\Lim{x}{x_0} f(g(x))=f(a).
+\]
+\end{remark}
+
 \subsection{Первый замечательный предел}
+
+\begin{theorem}[Первый замечательный предел]
+\[
+\Lim{x}{0}\frac{\sin x}{x}=1.
+\]
+\end{theorem}
+
+\begin{Proof}
+Для $x>0$ (в радианах) справедливо неравенство:
+\[
+\sin x < x < \tan x.
+\]
+Разделим все части на $\sin x$:
+\[
+1 < \frac{x}{\sin x} < \frac{1}{\cos x}.
+\]
+Переходя к обратным величинам:
+\[
+\cos x < \frac{\sin x}{x} < 1.
+\]
+При $x \to 0$ имеем $\cos x \to 1$.
+По теореме о зажатой функции:
+\[
+\frac{\sin x}{x} \to 1.
+\]
+Аналогично для $x<0$.
+\end{Proof}
+
+\subsection{Следствия первого замечательного предела}
+
+\begin{enumerate}
+\item
+\[
+\Lim{x}{0}\frac{\sin(kx)}{kx}=1,
+\qquad
+\Lim{x}{0}\frac{\sin(kx)}{x}=k.
+\]
+
+\item
+\[
+\Lim{x}{0}\frac{\tan x}{x}=1.
+\]
+
+\item
+\[
+\Lim{x}{0}\frac{1-\cos x}{x}=0.
+\]
+
+\item
+\[
+\Lim{x}{0}\frac{1-\cos x}{x^2}=\frac12.
+\]
+\end{enumerate}
+
+\subsection{Примеры}
+
+\begin{example}
+Найти предел:
+\[
+\Lim{x}{0}\frac{\sin 3x}{x}.
+\]
+
+\[
+\frac{\sin 3x}{x}
+=
+\frac{\sin 3x}{3x}\cdot 3
+\to 1\cdot 3=3.
+\]
+\end{example}
+
+\begin{example}
+Найти предел:
+\[
+\Lim{x}{0}\frac{1-\cos x}{x^2}.
+\]
+
+Используем тождество:
+\[
+1-\cos x = 2\sin^2\frac{x}{2}.
+\]
+
+Тогда
+\[
+\frac{1-\cos x}{x^2}
+=
+\frac{2\sin^2\frac{x}{2}}{x^2}
+=
+2\left(\frac{\sin\frac{x}{2}}{\frac{x}{2}}\right)^2
+\cdot
+\frac{1}{4}
+\to
+\frac12.
+\]
+\end{example}
