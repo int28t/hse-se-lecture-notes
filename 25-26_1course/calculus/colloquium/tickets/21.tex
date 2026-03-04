@@ -1,1 +1,53 @@
 \section{Понятия разбиения отрезка, разметки разбиения, интегральной суммы. Определенный интеграл Римана на отрезке. Ограниченность интегрируемой функции.}
+
+\begin{definition}
+    Разбиение отрезка: $\tau = \Subst{\{[x_{i-1}, x_i]\}}{i = 1}{n}$
+
+    $a = x_0 < x_1 < ... < x_n = b$
+\end{definition}
+
+\begin{definition}
+    Диаметр разбиения - макс расстояние между $x_i \text{ и } x_{i+1}$\\
+
+    $d(\tau) = \Subst{max\{|{\D x_i}|\}}{i = 1}{n}$
+\end{definition}
+
+\begin{definition}
+    Разметка разбиения $\xi = \xi(\tau) = \Subst{\{\xi_i\}}{i = 1}{n}$ - множество значений, попавших в $\D x_i$
+\end{definition}
+
+\begin{definition}
+    Интегральная сумма: $\sigma (\tau, \xi) = \Sum{i = 1}{n}f(\xi_i)|\D x_i|$
+\end{definition}
+
+\begin{definition}
+    По Риману(Коши): 
+    
+    $f(x)$ называется интегрируемой на [a, b] и I - её интегралом по Риману, если:
+
+$\forall \eps > 0~ \exists \delta > 0 ~\forall \tau~ d(\tau) < \delta ~\forall \xi: |\sigma(\tau, ~\xi) - I| < \eps$
+
+$f(x) \in R[a, b]$(интегрируется по Риману на отрезке а, b)\\
+$I = \Int{a}{b}{f(x)\diff x}$
+\end{definition}
+
+\begin{theorem}
+    Если $f(x) \in R[a, b]$, то $f(x) - \text{огр на }[a, b]$
+\end{theorem}
+
+\begin{Proof}
+    От противного:\\
+    По определению Коши: $\forall \eps > 0 ~\exists \delta > 0 ~\forall \tau ~d(\tau) < \delta: |\sigma(\tau, ~\xi) - I| < \eps$\\
+    Так как доказываем от противного, то если мы зафиксируем некоторую $\eps$ и докажем для неё, что условие не выполнено, то мы получим противоречие.\\
+    Возьмем $\eps_0 = \frac{1}{2}$\\
+    Отрицание: $\exists \delta_0 > 0 ~\forall \tau ~d(\tau) < \delta_0 ~\forall \xi: |\sigma(\tau, ~\xi) - I| < \frac{1}{2}$\\
+    Зафиксируем $\tau_0$(разбиение): так как у нас функция по предположению неограниченна, то $\exists \D x_i^0: f(x) - \text{неограничена на } \D x_i^0$; Пусть i = 1
+    
+    Зафиксируем все разметки $\xi_2^0,~...,~\xi_n^0$
+
+    $|f(\xi_1)\cdot\D x^0_1 + \Sum{i = 2}{n}f(\xi_i^0)\cdot \D x_i^0| < \frac{1}{2};~ \xi_1 \in \D x_1^0$\\
+    $|f(\xi_1)\cdot\D x^0_1| < \frac{1}{2} - \Sum{i = 2}{n}f(\xi_i^0)\cdot \D x_i^0$\\
+    Что-то бесконечно большое < const - противоречие $\bot$\\
+    $\forall C > 0 ~\exists \xi_1 \in x_1^0: |f(\xi_1)| > C$\\
+
+\end{Proof}
