@@ -1,1 +1,295 @@
 \section{Верхние и нижние суммы Дарбу. Их свойства. Верхний и нижний интеграл Дарбу. Критерий интегрируемости Дарбу.}
+
+\subsection{Верхние и нижние суммы Дарбу}
+\begin{definition}
+    Верхняя сумма Дарбу: $S_\tau = \Sum{i = 1}{n}M_i\cdot|\D x_i|$\\
+    $M_i = \subs{sup f(x)}{x \in \D x_i}$
+\end{definition}
+
+\begin{definition}
+    Нижняя сумма Дарбу: $s_\tau = \Sum{i = 1}{n}m_i\cdot|x_i|$\\
+    $m_i = \subs{inf f(x)}{x \in \D x_i}$
+\end{definition}
+
+\subsection{Свойства сумм Дарбу}
+\begin{definition}
+    Свойства сумм Дарбу:\\
+    1. $S_\tau, s_\tau$ - Определены (Т.к. интегрируются только огр функции)\\
+    2. $s_\tau < S_\tau$ при одинаковых разбиениях\\
+    3. $S_\tau = \subs{sup~\sigma(\tau, \xi)}{\xi}$\\
+    $s_\tau = \subs{inf~\sigma(\tau, \xi)}{\xi}$\\
+    4. $\text{Разбиение } \tau' = \Subst{\{[x_{i-1}'; x_i']\}}{i = 1}{n}$ является измельчением $\tau = \Subst{\{[x_{j-1}; x_j]\}}{j = 1}{k}$\\
+    $\forall j ~\exists i: x_j = x_i' (n \geq k)$\\
+    Обозначается: $\tau' \succ \tau$ 
+\end{definition}
+
+\begin{theorem}[4 свойство]
+    Дано: $\tau' \succ \tau$\\
+    $S_{\tau'} \leq S_\tau$\\
+    $s_{\tau'} \geq s_\tau$
+\end{theorem}
+
+\begin{Proof}
+    1. Пусть $\tau' \succ \tau \text{ причем } \tau' \text{ отличается от } \tau \text{добавлением одной точки в } \D x_i$\\
+    \begin{center}
+\begin{tikzpicture}[x=1.5cm, y=1cm]
+    % --- Верхняя прямая (разбиение tau) ---
+    \draw[thick, ->] (0,0) -- (5,0) node[right] {$\tau$};
+    
+    % Ставим 3 точки (тики) сверху
+    \foreach \x in {0.5, 1.5, 4} 
+        \draw (\x, 0.1) -- (\x, -0.1);
+        
+    % Подписи для точек сверху
+    \node[below] at (0.5, -0.1) {$x_{i-2}$}; % Дополнительная точка для счета
+    \node[below] at (1.5, -0.1) {$x_{i-1}$};
+    \node[below] at (4, -0.1) {$x_{i}$};
+    
+    % Синий отрезок Delta x_i
+    \draw[blue, thick, |-|] (1.5, 0.5) -- (4, 0.5) node[midway, above] {$\Delta x_i$};
+
+    % --- Нижняя прямая (разбиение tau') ---
+    \begin{scope}[yshift=-2.5cm]
+        \draw[thick, ->] (0,0) -- (5,0) node[right] {$\tau'$};
+        
+        % Ставим 4 точки (тики) снизу
+        \foreach \x in {0.5, 1.5, 3, 4} 
+            \draw (\x, 0.1) -- (\x, -0.1);
+            
+        % Подписи для точек снизу
+        \node[below] at (0.5, -0.1) {$x_{i-2}$};
+        \node[below] at (1.5, -0.1) {$x_{i-1}$};
+        \node[below, red] at (3, -0.1) {$x^*$}; % Новая точка
+        \node[below] at (4, -0.1) {$x_{i}$};
+        
+        % Красные подотрезки
+        \draw[red, thick, |-|] (1.5, 0.6) -- (3, 0.6) node[midway, above, scale=0.8] {$\Delta x'_i$};
+        \draw[red, thick, |-|] (3, 0.6) -- (4, 0.6) node[midway, above, scale=0.8] {$\Delta x'_{i+1}$};
+    \end{scope}
+
+    % --- Пунктирные линии связи между общими точками ---
+    \draw[dashed, gray!60] (1.5, 0) -- (1.5, -2.5);
+    \draw[dashed, gray!60] (4, 0) -- (4, -2.5);
+    \draw[dashed, gray!60] (0.5, 0) -- (0.5, -2.5);
+
+\end{tikzpicture}
+\end{center}
+
+    $\text{Рассмотрим разность } S_\tau $ и $S_{\tau'}$\\
+    Наша новая точка на разбиении находиться на позиции *\\
+    $S_\tau - S_{\tau'} = \Sum{i = 1}{n}M_i\cdot|\D x_i| - \Sum{i = 1}{n + 1}M'_i\cdot|\D x'_i| = M_i\cdot|\D x_i| - (M'_i\cdot|\D x'_i| + M'_i\cdot|\D x'_{i+1}|) = $\\
+    Последнее равенство выполнено, потому все подотрезки $\D x_i$ совпадают кроме позиций i и i + 1\\
+    $|\D x_i| = |\D x'_i| + |\D x'_{i + 1}|$\\
+    $ = (M_i - M'_i)\cdot|\D x'_i| + (M_i - M'_{i + 1})\cdot|\D x'_{i + 1}|$\\
+    Разность между $M_i \text{ и } M'_i\geq 0$ и разность между $M_i \text{ и } M'_{i + 1} \geq 0$ \\
+    Сумма двух неотрицательных чисел всегда положительна или равна 0
+
+    2. $\tau' \succ \tau$\\
+    Построим последовательность $\tau^*_k$\\
+    $\tau^*_k = \tau' \succ \tau^*_{k - 1} ... \succ \tau^*_1 = \tau$\\
+    $\tau^*_{i} \succ \tau^*_{k - 1}$ отличаются на одну точку $\implies S_{\tau^*_{i - 1}} \geq S_{\tau^*_{i}}$\\
+    Из такого ряда неравенств получим, что $S_{\tau'} \geq S_{\tau}$\\
+    Аналогично доказывается для нижних сумм Дарбу.
+\end{Proof}
+
+\begin{theorem}[5 свойство]
+    $\forall \tau_1, \tau_2: s_{\tau_1} \leq S_{\tau_2}$\\
+\end{theorem}
+
+\begin{Proof}
+    Построим измельчение $\tau$, которое состоит из точек $\tau_1$ и $\tau_2 \implies$\\
+    $\implies \tau \succ \tau_1 \text{ и } \tau \succ \tau_2$\\
+    Тогда: $s_{\tau_1} \leq s_\tau \leq S_\tau \leq S_{\tau_2}$ чтд
+\end{Proof}
+
+\subsection{Верхний и нижний интеграл Дарбу}
+
+\begin{definition}
+    Верхний интеграл Дарбу: $I^* = \subs{inf(S_\tau)}{\tau}$
+
+\end{definition}
+
+\begin{definition}
+    Нижний интеграл Дарбу: $I_* = \subs{sup(s_\tau)}{\tau}$
+
+\end{definition}
+
+\subsection{Критерий интегрируемости Дарбу}
+
+\begin{theorem}[Критерий интегрируемости Дарбу]
+    \[
+    f(x) \in R[a, b] \iff 
+    \begin{cases} 
+        f(x) \text{ - огр на } [a; b]\\
+        I^* = I_*
+    \end{cases}
+    \]
+\end{theorem}
+
+
+\begin{Proof}[Достаточность]
+    Докажем от противного: $f(x) \in R[a, b]$ и $ f(x) \text{ - огр на }[a; b]$\\
+    Но $I^* \neq I_*$\\
+    Если $I^* \neq I_*$, то $I^* > I_*$ (Доказывается от противного -> смотрим на рисунок -> видим противоречие с 5 свойством сумм Дарбу)\\
+    \begin{center}
+    \begin{tikzpicture}[x=2cm, y=1cm, >=stealth]
+    % Горизонтальная ось
+    \draw[thick, ->] (-0.5, 0) -- (4, 0);
+
+    % Засечки на оси (4 штуки)
+    \foreach \x in {0.5, 1.3, 2.2, 3.2}
+        \draw[thick] (\x, 0.1) -- (\x, -0.1);
+
+    % Подписи крайних точек
+    \node[below=5pt] at (0.5, 0) {$I^*$};
+    \node[below=5pt] at (3.2, 0) {$I_*$};
+
+    % Красная стрелка снизу (s_tau)
+    \draw[red, thick, ->] (1.3, -1.2) -- (1.3, -0.15) 
+        node[pos=0, below, black] {$s_\tau$};
+
+    % Зеленая стрелка сверху (s_tau')
+    \draw[green!60!black, thick, ->] (2.2, 1.2) -- (2.2, 0.15) 
+        node[pos=0, above, black] {$s_{\tau'}$};
+
+    
+
+    \end{tikzpicture}
+    \end{center}
+
+    \begin{center}
+\begin{tikzpicture}[x=2.5cm, y=1.2cm, >=stealth]
+    % Горизонтальная ось
+    \draw[thick, ->] (-0.5, 0) -- (4, 0);
+
+    % Координаты точек
+    \coordinate (stau) at (0.2, 0);   % s_tau
+    \coordinate (Ilow) at (1.0, 0);   % I_*
+    \coordinate (Iup)  at (2.5, 0);   % I^*
+    \coordinate (Stau) at (3.3, 0);   % S_tau
+
+    % Рисуем засечки
+    \foreach \p in {stau, Ilow, Iup, Stau}
+        \draw[thick] (\p) +(0, 0.15) -- +(0, -0.15);
+
+    % Подписи точек
+    \node[below=8pt] at (stau) {$s_\tau$};
+    \node[below=8pt] at (Ilow) {$I_*$};
+    \node[below=8pt] at (Iup)  {$I^*$};
+    \node[below=8pt] at (Stau) {$S_\tau$};
+
+    % Внешняя дуга (теперь без подписи)
+    \draw[blue!70!black, thick] (stau) to[bend left=50] (Stau);
+
+    % Внутренняя дуга с гаммой СВЕРХУ
+    \draw[red!70!black, thick] (Ilow) to[bend left=40] node[above=1pt] {$\gamma$} (Iup);
+
+    % Дополнительная надпись (как на фото)
+    \node[above=28pt] at (2.0, 0.8) {$\frac{2}{3} \gamma$};
+
+
+\end{tikzpicture}
+\end{center}
+
+$\forall\eps > 0~\exists\delta > 0~\forall\tau~d(\tau)~ <~\delta~ \forall\xi:~|\sigma(\tau;\xi) - I| < \eps$\\
+$I - \eps < \sigma(\tau, \xi) < I + \eps$\\
+$I - \eps \leq s_\tau$ и $S_\tau \leq I + \eps \implies |S_\tau - s_\tau| \leq 2\eps$\\
+Возьмем $\eps = \frac{\gamma}{3}$ и перейдем к рисунку и увидим противоречие.\\
+
+\end{Proof}
+
+\begin{Proof}[Необходимость]
+    Докажем две леммы, которые доказывают критерий Дарбу:\\
+    1. $\tau' \succ \tau$ отличаются p точками $p \in \N \implies S_\tau - S_{\tau'} \leq (M - m)\cdot p\cdot\delta$\\ $d(\tau) < \delta$ \\
+    p = 1:\\
+    $S_\tau - S_{\tau'} = M_i|\D x_i| - (M'_i|\D x'_i| + M'_{i+1}|\D x'_{i+1}| = (M_i - M'_i)|\D x'_i| + (M_i - M'_{i+1})|\D x'_{i+1}|) \leq (M - m)|\D x'_{i}| + (M - m)|\D x'_{i+1}| = (M - m)|\D x_{i}| < (M - m)\cdot\delta$\\
+
+    2. Лемма Дарбу: $I^* = \Lim{d(\tau)}{0}S_\tau \iff \forall\eps > 0~\exists\delta~\forall\tau~d(\tau) < \delta: |i^* - S_\tau| < \eps$\\
+    Шаг 1: если $M = m = const = f(x)$ на [a; b] очевидно, что $\forall\tau ~ \forall\xi:~\sigma(\tau, \xi) = const\cdot[a; b]$\\
+    Шаг 2: если M > m:\\
+    \begin{center}
+\begin{tikzpicture}[x=2.5cm, y=1.2cm, >=stealth]
+    % Горизонтальная ось
+    \draw[thick, ->] (-0.5, 0) -- (5.5, 0);
+
+    % Координаты точек (I*, S_tau', S_tau*, S_tau)
+    \coordinate (I) at (0, 0);          % I*
+    \coordinate (Stp) at (1.5, 0);      % S_tau' (левая S)
+    \coordinate (Sts) at (3.2, 0);      % S_tau* (средняя S)
+    \coordinate (St) at (4.8, 0);       % S_tau (правая S)
+
+    % Рисуем засечки на оси для всех точек
+    \foreach \p in {I, Stp, Sts, St}
+        \draw[thick] (\p) +(0, 0.15) -- +(0, -0.15);
+
+    % Подписи точек снизу
+    \node[below=8pt] at (I) {$I^*$};
+    \node[below=8pt] at (Stp) {$S_{\tau'}$};
+    \node[below=8pt] at (Sts) {$S_{\tau^*}$};
+    \node[below=8pt] at (St) {$S_{\tau}$};
+
+    % 1. Черная П-образная скобка: связывает I* и S_tau
+    \draw[thick] (0, 0.6) -- (0, 2.2) -- (4.8, 2.2) -- (4.8, 0.6);
+    \node[above] at (2.4, 2.2) {$< \eps$};
+
+    % 2. Черная дуга СВЕРХУ: связывает I* и S_tau*
+    \draw[thick] (0, 0.3) to[bend left=35] node[above, scale=0.8] {$< \eps/2$} (3.2, 0.3);
+
+    % 3. Красная дуга СНИЗУ: связывает S_tau' и S_tau
+    \draw[red, thick] (1.5, -0.5) to[bend right=30] node[below, scale=0.8, black] {$< \eps/2$} (4.8, -0.5);
+
+\end{tikzpicture}
+\end{center}
+    \newpage
+    (*)$\forall\eps > 0 ~\exists\tau^*~ \text{(в нем p точек)}:~ S_{\tau^*} - I^* < \frac{\eps}{2}$\\
+    Возьмем $\delta = \frac{\eps}{2(M - m)p}$\\
+    Возьмем $\forall\tau:~ d(\tau) < \delta$\\
+    Построим $\tau' \text{ - объединение } \tau $ и $\tau^*$\\
+    (*)$\tau' \succ \tau^* \implies S_{\tau'} \leq S_{\tau^*}$\\
+    (*)$\tau' \succ \tau \implies S_{\tau} - S_{\tau'} \leq (M - m)p\delta = \frac{\eps}{2}$\\
+    Из (*)-ек $\implies S_\tau - I^* < \eps$\\
+    На рисунок смотреть обязательно, чтобы точно понять, как это доказательство работает!\\
+
+    Переходим к доказательству самого критерия Дарбу:\\
+    $I^* = I_* = I$\\
+    $\forall \eps > 0~ \exists\delta_1~\forall\tau~ d(\tau < \delta_1):~ S_\tau - I^* < \eps$\\
+    $\forall \eps > 0~ \exists\delta_2~\forall\tau~ d(\tau < \delta_2):~ I_* - s_\tau < \eps$\\
+    \begin{center}
+\begin{tikzpicture}[x=2.5cm, y=1cm, >=stealth]
+    % Горизонтальная ось
+    \draw[thick, ->] (-0.5, 0) -- (4, 0);
+
+    % Координаты
+    \coordinate (L_paren) at (0.8, 0);
+    \coordinate (stau) at (1.2, 0);
+    \coordinate (Stau) at (2.4, 0);
+    \coordinate (R_paren) at (2.8, 0);
+    \coordinate (I_point) at (1.8, 0); % ТОЧКА ПОСЕРЕДИНЕ (1.2 + 2.4) / 2
+
+    % Заштрихованная область
+    \fill[pattern=north east lines, pattern color=gray!60] 
+        (stau) + (0, 0.25) rectangle (2.4, -0.25);
+
+    % Рисуем скобки
+    \node at (L_paren) {\Large (};
+    \node at (R_paren) {\Large )};
+
+    % Засечки для s_tau, S_tau и теперь для I
+    \draw[thick] (stau) +(0, 0.25) -- +(0, -0.25);
+    \draw[thick] (Stau) +(0, 0.25) -- +(0, -0.25);
+    \draw[thick, blue] (I_point) +(0, 0.3) -- +(0, -0.3); % Засечка для I (чуть длиннее и синяя)
+
+    % Подписи точек
+    \node[below=8pt, red!70!black] at (stau) {$s_\tau$};
+    \node[below=8pt, red!70!black] at (Stau) {$S_\tau$};
+    \node[above=10pt, blue] at (I_point) {$I$}; % Подпись I сверху для наглядности
+
+    % Общее равенство внизу (как было)
+    \node[below=25pt] at (1.8, 0) {$I = I_* = I^*$};
+
+\end{tikzpicture}
+\end{center}
+$\exists \delta = min{\delta_1; \delta_2}\forall\tau~ d(\tau) < \delta: I - \eps < \sigma(\tau, \xi) < I + \eps$ - Интегральная сумма попадает в $\eps$ окрестность\\
+Мы утверждаем, что когда мы выбираем некоторую $\eps$, то все S попадут правее I, а все s - левее\\
+Интегральная сумма лежит между s и S, а значит она лежит в изначальной эпсилон окрестности I и поэтому у нас выполнено определение интегрируемости по Риману
+\end{Proof}
