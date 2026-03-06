@@ -18,4 +18,4 @@
 - [Бакшинский Павел](https://github.com/kirsanoww)
 - [Шадрин Михаил](https://github.com/48a)
 - [Мелкумян Нарек](https://github.com/Nar2924)
-- Годунов Борис
+- [Годунов Борис](https://github.com/BGODUNOV2007)
