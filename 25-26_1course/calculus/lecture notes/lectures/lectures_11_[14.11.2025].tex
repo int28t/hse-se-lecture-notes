@@ -1,20 +1,93 @@
-$\Lim{n}{\infty} \l(1 + \frac{1}{n}\r)^n = e$,\ $\Lim{n}{\infty} \l(1 - \frac{1}{n}\r)^{-n} = e$
+\subsection{Замечательные пределы}
 
-\begin{remark}
-    Неопределенность $\frac{0}{0}: \Lim{x}{x_0} \frac{f(x)}{g(x)}; \Lim{x}{x_0} f(x) = 0,\ \Lim{x}{x_0} g(x) = 0 $, а также $\frac{\infty}{\infty}, \infty - \infty$
+\begin{definition}
+    Неопределенностью вида $\frac{0}{0} \l(\frac{\infty }{\infty  }\r)$ называется:
+    \[
+        \Lim{x}{x_0} \frac{f(x)}{g(x)},\ \Lim{x}{x_0} f(x) = \Lim{x}{x_0} g(x) = 0\ (\infty ),\ x_0 \in \overline{\R} = \R \cup \{\pm \infty \}
+    \]
+\end{definition}
 
-    $x_0 \in \overline{\R} = \R \cup \{\pm \infty\}$
-\end{remark}
+Неопределенность --- т.к ответ может быть любым
+
+\begin{exercise}
+    $\cos x$ непрерывен на $\R$
+\end{exercise}
+
+\begin{solution}
+    \[
+        \Lim{x}{x_0} \cos x = \cos x_0
+    \]
+    \[
+        \Updownarrow
+    \]
+    \[
+        \cos x - \cos x_0 = \overline{o}(1) \text{ при }  x \to x_0
+    \]
+    \[
+        \l| -2 \cdot \sin \frac{x + x_0}{2} \cdot \sin \frac{x - x_0}{2} \r| \leq 2 \cdot 1 \cdot \l|\frac{x - x_0}{2}\r| \to 0
+    \]
+\end{solution}
+
+\subsubsection{Первый замечательный предел}
+
+\begin{theorem}[Первый замечательный предел]
+    $$\Lim{x}{0} \frac{\sin x}{x} = 1$$
+\end{theorem}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{lectures/files/lec_10_14-13-30.png}
+  \label{fig:lec_10_14-13-30.png}
+\end{figure}
 
 \begin{Proof}
+Рассмотрим единичную окружность ($R=1$) и угол $x \in (0, \pi/2)$.
+Сравним площади:
+1. Площадь внутреннего треугольника: $S_{\triangle} = \frac{1}{2} R^2 \sin x = \frac{\sin x}{2}$.
+
+2. Площадь сектора: $S_{sect} = \pi \cdot \frac{x}{2\pi } = \frac{x}{2}$.
+
+3. Площадь внешнего треугольника (основание 1, высота $\tan x$): $S_{\text{внеш}} = \frac{1}{2} \tan x$.
+
+Из чертежа очевидно: $S_{\triangle} < S_{sect} < S_{\text{внеш}}$.
+Отсюда: $\frac{\sin x}{2} < \frac{x}{2} < \frac{\tan x}{2} \implies \sin x < x < \tan x$.
+\end{Proof}
+\begin{Proof}[]
+Как мы знаем, в силу нечетности $\sin x : \frac{\sin x}{x} = \frac{\sin |x|}{|x|}$ и четности $\cos x : \cos |x| = \cos x$
+
+Рассмотрим проколотую окрестность $\overset{\circ}{U}_{\pi/2}(0)$. 
+Для $x \in (0, \pi/2)$ из геометрических соображений (сравнение площадей сектора и треугольников) справедливо:
+\[ \sin x < x < \tan x. \]
+Разделим все части на $\sin x > 0$:
+\[ 1 < \frac{x}{\sin x} < \frac{1}{\cos x} \implies \cos x < \frac{\sin x}{x} < 1. \]
+Так как функции $\cos x$ и $f(x) = \frac{\sin x}{x}$ являются четными, данное двойное неравенство верно для любого $x \in \overset{\circ}{U}_{\pi/2}(0)$ (включая отрицательные значения).
+
+Поскольку $\lim_{x \to 0} \cos x = 1$ и $\lim_{x \to 0} 1 = 1$, то по теореме о зажатой функции:
+\[ \lim_{x \to 0} \frac{\sin x}{x} = 1. \]
+\end{Proof}
+
+\subsubsection{Второй замечательный предел}
+
+\begin{theorem}[Второй замечательный предел]
+\[
+    \Lim{x}{0} (1 + x)^\frac{1}{x} = e
+\]
+\end{theorem}
+
+\begin{Proof}
+    Мы знаем:
+
+    $$\Lim{n}{\infty} \l(1 + \frac{1}{n}\r)^n = e$$
+
     Хотим:
     
-    $\Lim{n}{+\infty} \l(1 + \frac{1}{t}\r)^t = e$,\ $\Lim{n}{-\infty} \l(1 + \frac{1}{t}\r)^{t} = e$
+    $$\Lim{t}{+\infty} \l(1 + \frac{1}{t}\r)^t = e$$
 
+    Воспользуемся неубываением $y = x^t$
     \[
-        \l(1 + \frac{1}{[t] + 1} \r)^{[t]} \leq \l(1 + \frac{1}{t} \r)^{[t]} \leq \l(1 + \frac{1}{[t]} \r)^{[t] + 1},\ \fbox{$t \geq 1, t \in \R$}
+        \l(1 + \frac{1}{[t] + 1} \r)^{[t]} \leq \l(1 + \frac{1}{t} \r)^{t} \leq \l(1 + \frac{1}{[t]} \r)^{[t] + 1},\ \fbox{$t \geq 1, t \in \R$}
     \]
-
+% 17:08 11 lec
     \[
         \forall \eps > 0\ \exists N(\eps) \forall n > N(\eps) \l| \l(1 + \frac{1}{n}\r)^{n+1} - e \r| < \eps 
     \]
