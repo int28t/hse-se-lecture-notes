@@ -81,46 +81,98 @@
 
     Хотим:
     
-    $$\Lim{t}{+\infty} \l(1 + \frac{1}{t}\r)^t = e$$
+    \[
+    \Lim{t}{+\infty} \l(1 + \frac{1}{t}\r)^t = e \tag{1}
+    \]
 
     Воспользуемся неубываением $y = x^t$
     \[
-        \l(1 + \frac{1}{[t] + 1} \r)^{[t]} \leq \l(1 + \frac{1}{t} \r)^{t} \leq \l(1 + \frac{1}{[t]} \r)^{[t] + 1},\ \fbox{$t \geq 1, t \in \R$}
+        \underbrace{\l(1 + \frac{1}{[t] + 1} \r)^{[t]}}_{g(t)} \leq \underbrace{\l(1 + \frac{1}{t} \r)^{t}}_{f(t)} \leq \underbrace{\l(1 + \frac{1}{[t]} \r)^{[t] + 1}}_{h(t)},\ \fbox{$t \geq 1, t \in \R$}
     \]
-% 17:08 11 lec
-    \[
-        \forall \eps > 0\ \exists N(\eps) \forall n > N(\eps) \l| \l(1 + \frac{1}{n}\r)^{n+1} - e \r| < \eps 
-    \]
-    $h(t)$ принимают те же значения, что и $a_n$
 
-    {\bf Утверждение:} $\Lim{t}{+\infty} h(t) = e$
+    Мы знаем: $\Lim{n}{\infty} \l(1 + \frac{1}{n + 1} \r)^{n} = e$
 
     \[
-        \forall \eps > 0\ \exists M(\eps)\ \forall t > M(\eps) \l|\l(1 + \frac{1}{[t]} \r)^{[t] + 1} - e\r| < \eps
+        \forall \eps > 0\ \exists N(\eps ) \in \N\ \forall n > N(\eps )\ \l|\l(1 + \frac{1}{n + 1}\r)^n - e \r| < \eps 
     \]
 
-    $M(\eps) = N(\eps) + 1$
+    {\bf Утверждение:} $\Lim{t}{+\infty} g(t) = e$
 
     \[
-        \forall t > M(\eps)\ \text{верно}\ [t] > N(\eps)
+        \forall \eps > 0\ \exists M(\eps )\ \forall t > M(\eps ) \l|\l(1 + \frac{1}{[t] + 1} \r)^{[t]} - e\r| < \eps
     \]
 
-    Аналогично рассмотрим $\Lim{n}{\infty} \l(1 + \frac{1}{n + 1} \r)^{n} = e$
+    $M(\eps) = N(\eps) + 1$, так как:
+    \[
+        \forall t > N(\eps ) + 1 : [t] > N(\eps )
+    \]
 
-    Аналогично доказывается $\Lim{n}{-\infty} \l(1 + \frac{1}{t}\r)^{t} = e$
+    Аналогично доказывается $h(t) \xrightarrow[t \to \infty ]{} e$
+
+    По теореме о зажатой функции:
+    \[
+        g(t) \to e, h(t) \to e \Rightarrow f(t) \to e
+    \]
+\end{Proof}
+\begin{Proof}[]
+    Хотим:
+    \[
+        \Lim{n}{-\infty } \left( 1 + \frac{1}{t} \right)^t = e  \tag{2}
+    \]
+
+    Замена $y = -t$
+
+    \[
+        \Lim{y}{+\infty } \left( 1 - \frac{1}{y} \right)^{-y} = \Lim{y}{+\infty } \left(\frac{y - 1}{y} \right)^{-y} = \Lim{y}{+\infty } \left(\frac{y}{y-1} \right)^{y} = \Lim{y}{+\infty } \left(1 + \frac{1}{y - 1} \right)^{y} =
+    \]
+    \[
+        = \Lim{y}{+\infty } \underbrace{\left(1 + \frac{1}{y - 1} \right)^{y - 1}}_{\to e} \underbrace{\left(1 + \frac{1}{y - 1} \right)}_{1} = e
+    \]
+\end{Proof}
+\begin{Proof}[]
+    Хотим:
+    \[
+        \Lim{x}{0} (1 + x)^\frac{1}{x} = e
+    \]
+    \[
+        \Updownarrow
+    \]
+    \[
+        \Lim{x}{0^{\pm}} (1 + x)^{\frac{1}{x}} = e
+    \]
+
+    \begin{itemize}
+        \item[1)] $\Lim{x}{0^{+}} (1 + x)^{\frac{1}{x}} =$
+    \end{itemize}
+
+    Замена $x = \frac{1}{t}$
+
+    \[
+        = \Lim{t}{+\infty} \l(1 + \frac{1}{t}\r)^t = e \text{ по (1) }
+    \]
+
+    \begin{itemize}
+        \item[2)] $\Lim{x}{0^{-}} (1 + x)^{\frac{1}{x}} =$
+    \end{itemize}
+
+    Замена $x = \frac{1}{t}$
+
+    \[
+        = \Lim{t}{-\infty} \l(1 + \frac{1}{t}\r)^t = e \text{ по (2) }
+    \]
 \end{Proof}
 
-\fbox{2} $\Lim{x}{0} (1 + x)^{\frac{1}{x}} = e \Leftrightarrow \Lim{x}{0^{\pm}} (1 + x)^{\frac{1}{x}} = e$
+\begin{remark}
+    \[
+        \Lim{y}{y_0} h(y)
+    \]
+    Замена $y = f(x)$, при $y \to y_0, x \to x_0$. Тогда:
+    \[
+        \Lim{y}{y_0} h(y) = \Lim{x}{x_0} h(f(x))
+    \]
+\end{remark}
 
-\begin{Proof}
-Замена $t = \frac{1}{x}$
-\[
-    \Lim{x}{0^+} (1 + x)^{\frac{1}{x}} = \Lim{t}{+\infty} \l(1 + \frac{1}{t}\r)^{t} = e
-\]
-\[
-    \Lim{x}{0^-} (1 + x)^{\frac{1}{x}} = \Lim{t}{-\infty} \l(1 + \frac{1}{t}\r)^{t} = e
-\]
-\end{Proof}
+\subsubsection{Следствия из 2ого замечательного предела}
 
 {\bf Следствие 1} 
 \[
@@ -148,12 +200,6 @@ $t + 1 = e^x, x = \ln (t + 1)$
     \frac{t}{\ln (t + 1)} = \frac{1}{\frac{\ln(t + 1)}{t} \to 1} \to 1
 \]
 
-$\Lim{x}{0} \frac{e^x - e^0}{x - 0} = (e^x)^{'} |_{x=0}$
-
-\[
-    f'(x_0) = \Lim{x}{x_0} \frac{f(x) - f(x_0)}{x - x_0}
-\]
-
 \subsection{Непрерывность функции на отрезке}
 
 \begin{definition}
@@ -161,110 +207,122 @@ $\Lim{x}{0} \frac{e^x - e^0}{x - 0} = (e^x)^{'} |_{x=0}$
 
     \begin{itemize}
         \item[1)] $[a;b] \subset D_f$
-        \item[2)] $f(x)$ непрерывна в т. $x_0 \in (a;b)$
+        \item[2)] $f(x)$ непрерывна $ \forall x_0 \in (a;b)$
         \item[3)] $\Lim{x}{a^+} f(x) = f(a)\ \Lim{x}{b^-} f(x) = f(b)$
     \end{itemize}
 \end{definition}
 
-TODO: рисунок
+\begin{remark}
+    В дальнейшем будем считать что $D_f = [a;b]$
+\end{remark}
 
 \begin{theorem}
     Если функция непрерывна на отрезке $[a;b]$, то 
     \begin{itemize}
         \item[1)] она ограничена на $[a;b]$
-        \item[2)] достигает $\sup f(x) x \in [a;b] = \sup E_f$ и $\inf f(x) x \in [a;b] = \inf E_f$
+        \item[2)] достигает $\sup f(x)\ x \in [a;b] = \sup E_f$ и $\inf f(x)\ x \in [a;b] = \inf E_f$
     \end{itemize}
 \end{theorem}
 
-\[
-    M = \sup f(x) x \in [a;b] \in \overline{\R}
-\]
-\[
-    m = \inf f(x) x \in [a;b] \in \overline{\R}
-\]
+\begin{Proof}
+    Пусть $M = \sup f(x)\ x \in [a;b] \in \overline{\R}, m = \inf f(x)\ x \in [a;b] \in \overline{\R}$
 
-\begin{itemize}
-    \item[1)] $M \in \R$
-    \item[2)] $\exists x_0 \in [a;b] M = f(x_0)$
-\end{itemize}
+    Хотим (докажем сверху):
+    \begin{itemize}
+        \item[1)] $M \in \R$
+        \item[2)] $\exists x_0 : f(x_0) = M$ 
+    \end{itemize}
 
-Построим $a_n \uparrow M$
+    Докажем 2), 1) следует из него (очевидно, что если $\exists x_0 : f(x_0) = M$, то $x \neq \infty$)
+
+    Построим последовательность $a_n \uparrow M : a_n$ строго возрастает и $\Lim{n}{\infty} a_n = M$. Тогда: 
+    \[
+        \forall n\ \exists x_n \in [a;b]\ f(x_n) \geq a_n
+    \]
+\end{Proof}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{lectures/files/2239703.png}
+  \label{fig:2239703.png}
+\end{figure}
+
+\begin{Proof}[]
+Предположим противное:
 \[
-    \forall n \exists x_n f(x_n) \geq a_n
+    \exists n_0\ \forall x \in [a;b]\ f(x) < a_{n_0}
 \]
-
-TODO: рисунок
-
-\[
-    \text{Пп} \exists n_0 \forall x \in [a;b] f(x) < a_{n_0}\ \text{$a_{n_0}$ --- верхняя грань для $E_+$} \text{противоречие}
-\]
+$a_{n_0}$ --- верхняя грань для $E_f$, $\bot$
 
 Построили $\{x_n\}$: 
 \[
-    a_n \leq f(x_n) \leq M
+    \underbrace{a_n}_{\to M} \leq f(x_n) \leq \underbrace{M}_{\to M}
 \]
 \[
     \Lim{n}{\infty} f(x_n) = M
 \]
-$x_n \in [a;b] \Rightarrow \text{ограничена}$
+
+$x_n \in [a;b] \Rightarrow \exists x_{n_k} : x_{n_k} \underset{k \to \infty}{\rightarrow} x_0$. Тогда по теореме Б-В она ограничена.
+
 \[
-    \exists x_{n_k} : x_{n_k} \underset{k \to \infty}{\rightarrow} x_0
+    f(x_{n_k}) \xrightarrow[k \to \infty ]{} M
 \]
+Определение непрерывности по Гейне:
 \[
-    \text{Предельный переход в нер-вах}\ a \leq x_{n_k} \leq b \Rightarrow x_0 \in [a;b]
+    f(x_{n_k}) \xrightarrow[k \to \infty ]{} f(x_0)
 \]
+По теореме о единственности предела:
 \[
-    \text{Определение непрерывности по Гейне}\ f(x_{n_k}) \underset{k \to \infty}{\rightarrow} f(x_0)
+    M = f(x_0)
 \]
-\[
-    f(x_{n_k}) \underset{k \to \infty}{\rightarrow} M
-\]
+\end{Proof}
 
 \begin{theorem}
     Непрерывная на отрезке функция принимает все промежуточные значения, т.е $f(x), [a;b]$
 
-    $A = f(x_1), B = f(x_2), A < B\ x_1, x_2 \in [a;b]$
+    $$A = f(x_1),\ B = f(x_2),\ A < B,\ x_1, x_2 \in [a;b]$$
 
-    тогда $\forall C \in (A;B) \exists x_0 \in [a;b] : f(x_0) = C$
+    тогда:
+    $$\forall C \in (A;B)\ \exists x_0 \in [a;b] : f(x_0) = C$$
 \end{theorem}
 
 {\bf Следствие} $f(x)\ \text{непрерывна на}\ [a;b] = D_f, \text{то}\ E_f = [m; M]$
 
 \begin{Proof}
-Построим последовательность влож отрезков $\l\{[a_k; b_k] \r\}_{k \in \N}$, будем считать $x_1 < x_2$
+Построим последовательность вложенных отрезков $\l\{[a_k; b_k] \r\}_{k \in \N}$, будем считать $x_1 < x_2$
 
 $[a_1; b_1] = [x_1; x_2]$
+
+\[
+    f(a_1) = f(x_1) < C,\ f(b_1) = f(x_2) > C
+\]
 
 Возьмем середину $x_3 = \frac{x1 + x2}{2}$
 
 \begin{itemize}
-    \item[1.] $f(x_3) = C$ чтд
+    \item[1.] $f(x_3) = C$ ч.т.д.
     \item[2.] $f(x_3) < C$ $[a_2; b_2] = [x_3; b_1]$
     \item[3.] $f(x_3) > C$ $[a_2; b_2] = [a_1; x_3]$
 \end{itemize}
-\end{Proof}
 
-TODO: рисунок
+По теореме Вейерштрасса:
 
-\begin{Proof}[]
-$\{a_k\}_k$ --- неубывающая и огр сверху b
+$\{a_k\}_k$ --- неубывающая и огр сверху b $\Rightarrow a_k \xrightarrow[k \to \infty ]{} \alpha $
 
-$\{b_k\}_k$ --- невозрастает и огр снизу a
+$\{b_k\}_k$ --- невозрастает и огр снизу a $\Rightarrow b_k \xrightarrow[k \to \infty ]{} \beta $
 
-При $k \to \infty$: $a_k \to \alpha$, $b_k \to \beta$
-
-$b_k - a_k = \frac{1}{2^{k - 1}} (x_2 - x_1) \underset{k \to \infty}{\to} 0$
-
-Следовательно по теореме Вейерштрасса: $\alpha = \beta$
-
+$\underbrace{b_k}_{\to \beta } - \underbrace{a_k}_{\to \alpha } = \frac{1}{2^{k - 1}} (x_2 - x_1) \underset{k \to \infty}{\to} 0 \Rightarrow \alpha = \beta $
 \[
-    f(a_k) < C \to f(\alpha) \leq C
+    \underbrace{f(a_k)}_{\xrightarrow[k \to \infty ]{} f(\alpha) } < C
 \]
-Непрерывность $f$ по Гейне в т. $x_0 = \alpha$
+По теореме о предельном переходе:
 \[
-    f(b_k) > C \to f(\beta) \geq C
+    f(\alpha) \leq C
 \]
+Аналогично $f(b_k)$
+
+Тогда если $\alpha = \beta = x_0$:
 \[
-    f(\alpha) = f(\beta) = C
+    f(x_0) = f(\alpha) = f(\beta) = C
 \]
 \end{Proof}
