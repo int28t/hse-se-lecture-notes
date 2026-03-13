@@ -1,1 +1,169 @@
-\section{Правило Лопиталя (для неопределенности 0/0 и неопределенности). Сравнение скоростей роста стандартных функций (логарифмической, степенной, показательной).}
+\section{Правило Лопиталя (для неопределенности \(\frac{0}{0}\) и \(\frac{\infty}{\infty}\)). Сравнение скоростей роста стандартных функций
+(логарифмической, степенной, показательной).}
+
+\subsection{Случай 1: Неопределенность \(\displaystyle \frac{0}{0}\), \(x \to a+\), \(A\) — конечное число}
+
+\begin{theorem}
+\textbf{Правило Лопиталя для \(\frac{0}{0}\), конечный предел.}
+    Пусть \(f(x), g(x)\) определены на \((a, b)\) и:
+    \begin{enumerate}
+        \item \(\Lim{x}{a+} f(x) = \Lim{x}{a+} g(x) = 0\)
+        \item \(f, g\) дифференцируемы на \((a, b)\)
+        \item \(g'(x) \neq 0\) на \((a, b)\)
+        \item \(\exists \Lim{x}{a+} \dfrac{f'(x)}{g'(x)} = A \in \R\)
+    \end{enumerate}
+    Тогда \(\Lim{x}{a+} \dfrac{f(x)}{g(x)} = A\).
+\end{theorem}
+
+\begin{Proof}
+    Доопределим \(f(a) = g(a) = 0\) (это не влияет на предел, но делает функции непрерывными в точке \(a\)).\\
+    Для \(x \in (a, b)\) применим теорему Коши к отрезку \([a, x]\):
+    \[
+    \exists \xi \in (a, x): \frac{f(x) - f(a)}{g(x) - g(a)} = \frac{f'(\xi)}{g'(\xi)}.
+    \]
+    Так как \(f(a) = g(a) = 0\), получаем:
+    \[
+    \frac{f(x)}{g(x)} = \frac{f'(\xi)}{g'(\xi)}.
+    \]
+    При \(x \to a+\) имеем \(\xi \to a+\), следовательно:
+    \[
+    \Lim{x}{a+} \frac{f(x)}{g(x)} = \Lim{\xi}{a+} \frac{f'(\xi)}{g'(\xi)} = A.
+    \]
+\end{Proof}
+
+\subsection{Случай 2: Неопределенность \(\displaystyle \frac{0}{0}\), другие типы пределов (\(x \to a-\), \(x \to a\), \(x \to \pm\infty\))}
+
+\begin{theorem}
+\textbf{Правило Лопиталя для \(\frac{0}{0}\), общий случай.}
+    Пусть выполнены условия 1)-4) из Случая 1 для соответствующего предела (\(x \to a-\), \(x \to a\), \(x \to +\infty\) или \(x \to -\infty\)). Тогда
+    \[
+    \Lim{x}{a-} \frac{f(x)}{g(x)} = A,\quad \Lim{x}{a} \frac{f(x)}{g(x)} = A,\quad \Lim{x}{+\infty} \frac{f(x)}{g(x)} = A,\quad \Lim{x}{-\infty} \frac{f(x)}{g(x)} = A
+    \]
+    соответственно.
+\end{theorem}
+
+\begin{Proof}
+    \begin{itemize}
+        \item Для \(x \to a-\) доказательство симметрично Случаю 1 (рассматриваем отрезок \([x, a]\)).
+        \item Для \(x \to a\) двусторонний предел существует, так как существуют и равны односторонние пределы.
+        \item Для \(x \to +\infty\) делаем замену \(t = \frac{1}{x}\). Тогда \(x \to +\infty\) переходит в \(t \to 0+\), и мы попадаем в Случай 1:
+        \[
+        \Lim{x}{+\infty} \frac{f(x)}{g(x)} = \Lim{t}{0+} \frac{f(1/t)}{g(1/t)}.
+        \]
+        Для функций \(\tilde{f}(t) = f(1/t)\), \(\tilde{g}(t) = g(1/t)\) выполнены условия Случая 1.
+        \item Для \(x \to -\infty\) аналогично, замена \(t = -\frac{1}{x}\) или \(t = \frac{1}{x}\) переводит в \(t \to 0+\) или \(t \to 0-\).
+    \end{itemize}
+\end{Proof}
+
+\subsection{Случай 3: Неопределенность \(\displaystyle \frac{0}{0}\), \(A = \pm\infty\)}
+
+\begin{theorem}
+\textbf{Правило Лопиталя для \(\frac{0}{0}\), бесконечный предел.}
+    Пусть выполнены условия 1)-3) из Случая 1 и
+    \[
+    \Lim{x}{a+} \frac{f'(x)}{g'(x)} = \pm\infty.
+    \]
+    Тогда \(\Lim{x}{a+} \frac{f(x)}{g(x)} = \pm\infty\).
+\end{theorem}
+
+\begin{Proof}
+    Рассмотрим случай \(+\infty\) (для \(-\infty\) аналогично). Так как \(\frac{f'(x)}{g'(x)} \to +\infty\), то \(\frac{g'(x)}{f'(x)} \to 0\). Применяя Случай 1 к отношению \(\frac{g}{f}\) (которое имеет конечный предел 0), получаем:
+    \[
+    \Lim{x}{a+} \frac{g(x)}{f(x)} = 0.
+    \]
+    Если предел обратной величины равен 0, то сама величина стремится к \(\infty\). Уточним знак: из \(\frac{g'}{f'} \to 0\) и \(f', g'\) не меняют знак вблизи \(a\) (можно выбрать окрестность), получаем, что \(\frac{f}{g} \to +\infty\).
+\end{Proof}
+
+\subsection{Случай 4: Неопределенность \(\displaystyle \frac{\infty}{\infty}\)}
+
+\begin{theorem}
+\textbf{Правило Лопиталя для \(\frac{\infty}{\infty}\).}
+    Пусть выполнены условия 2), 3), 4) из Случая 1, но вместо 1):
+    \[
+    \Lim{x}{a+} f(x) = \Lim{x}{a+} g(x) = \infty.
+    \]
+    Тогда \(\Lim{x}{a+} \dfrac{f(x)}{g(x)} = A\) (где \(A \in \R \cup \{\pm\infty\}\)).
+\end{theorem}
+
+\begin{Proof}
+    Рассмотрим \(A \in \R\) (случай \(A = \pm\infty\) сводится к конечному заменой ролями \(f\) и \(g\)).\\
+    Фиксируем \(\varepsilon > 0\). Из п.4 \(\exists \delta_1 > 0: \forall t \in (a, a+\delta_1)\)
+    \[
+    \Bigl| \frac{f'(t)}{g'(t)} - A \Bigr| < \frac{\varepsilon}{2}.
+    \]
+    Выберем \(x_0 = a + \frac{\delta_1}{2}\). Из условия \(\Lim{x}{a+} f(x) = \Lim{x}{a+} g(x) = \infty\) следует:
+    \[
+    \exists \delta_2 > 0: \forall x \in (a, a+\delta_2) \quad |f(x)| > \frac{|f(x_0)|}{\varepsilon}, \; |g(x)| > \frac{|g(x_0)|}{\varepsilon}.
+    \]
+    Положим \(\delta = \min\{\delta_1, \delta_2\}\). Для \(x \in (a, a+\delta)\) применим теорему Коши к отрезку \([x_0, x]\):
+    \[
+    \exists \xi \in (x_0, x): \frac{f(x) - f(x_0)}{g(x) - g(x_0)} = \frac{f'(\xi)}{g'(\xi)}.
+    \]
+    Тогда
+    \[
+    \Bigl| \frac{f(x) - f(x_0)}{g(x) - g(x_0)} - A \Bigr| < \frac{\varepsilon}{2}. \tag{1}
+    \]
+    
+    Преобразуем искомую разность:
+    \[
+    \frac{f(x)}{g(x)} - A = \underbrace{\Bigl( \frac{f(x)}{g(x)} - \frac{f(x) - f(x_0)}{g(x) - g(x_0)} \Bigr)}_{=:P} + \underbrace{\Bigl( \frac{f(x) - f(x_0)}{g(x) - g(x_0)} - A \Bigr)}_{< \varepsilon/2 \text{ по (1)}}.
+    \]
+    
+    Оценим \(P\). Заметим, что
+    \[
+    \frac{f(x)}{g(x)} = \frac{f(x) - f(x_0) + f(x_0)}{g(x) - g(x_0) + g(x_0)}.
+    \]
+    Выражая \(P\) и упрощая, получаем:
+    \[
+    P = \frac{ \frac{f(x_0)}{g(x)} - \frac{g(x_0)}{g(x)} \cdot \frac{f(x) - f(x_0)}{g(x) - g(x_0)} }{ 1 - \frac{g(x_0)}{g(x)} }.
+    \]
+    Обозначим \(\alpha = \frac{f(x_0)}{g(x)}\), \(\beta = \frac{g(x_0)}{g(x)}\), \(u = \frac{f(x) - f(x_0)}{g(x) - g(x_0)}\). Тогда
+    \[
+    |P| = \left| \frac{\alpha - \beta u}{1 - \beta} \right|.
+    \]
+    Из выбора \(\delta_2\): \(|\alpha| < \varepsilon\), \(|\beta| < \varepsilon\). Из (1): \(|u| < |A| + 1\). Следовательно,
+    \[
+    |P| < \frac{\varepsilon + \varepsilon(|A| + 1)}{1 - \varepsilon} = \varepsilon \cdot \frac{|A| + 2}{1 - \varepsilon}.
+    \]
+    При \(\varepsilon < \frac{1}{2(|A|+2)}\) получаем \(|P| < \varepsilon/2\). Окончательно:
+    \[
+    \Bigl| \frac{f(x)}{g(x)} - A \Bigr| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.
+    \]
+    Таким образом, \(\Lim{x}{a+} \frac{f(x)}{g(x)} = A\).
+\end{Proof}
+
+\subsection{Сравнение скоростей роста стандартных функций}
+
+\begin{theorem}[Сравнение скоростей роста]
+    При \(x \to +\infty\) справедлива следующая иерархия:
+    \[
+    \text{Логарифмическая} \;\; \ll \;\; \text{Степенная} \;\; \ll \;\; \text{Показательная}
+    \]
+    То есть:
+    \begin{enumerate}
+        \item \(\displaystyle \lim_{x \to +\infty} \frac{\ln x}{x^\alpha} = 0 \quad (\alpha > 0)\)
+        \item \(\displaystyle \lim_{x \to +\infty} \frac{x^\alpha}{a^x} = 0 \quad (\alpha > 0, a > 1)\)
+    \end{enumerate}
+\end{theorem}
+
+\begin{Proof}
+    \begin{enumerate}
+        \item Имеем неопределенность \(\frac{\infty}{\infty}\). По правилу Лопиталя:
+        \[
+        \lim_{x \to +\infty} \frac{\ln x}{x^\alpha} = \lim_{x \to +\infty} \frac{1/x}{\alpha x^{\alpha-1}} = \lim_{x \to +\infty} \frac{1}{\alpha x^\alpha} = 0.
+        \]
+        \item Также \(\frac{\infty}{\infty}\). Применяем правило Лопиталя \(n = \lceil \alpha \rceil\) раз:
+        \[
+        \lim_{x \to +\infty} \frac{x^\alpha}{a^x} = \lim_{x \to +\infty} \frac{\alpha x^{\alpha-1}}{a^x \ln a} = \ldots = \lim_{x \to +\infty} \frac{\text{const}}{a^x (\ln a)^n} = 0.
+        \]
+    \end{enumerate}
+\end{Proof}
+
+\begin{consequence}
+    Для любых \(\alpha > 0, \beta > 0, a > 1\):
+    \[
+    \lim_{x \to +\infty} \frac{\ln^\beta x}{x^\alpha} = 0, \quad
+    \lim_{x \to +\infty} \frac{x^\alpha}{a^x} = 0.
+    \]
+    Показательная функция растет быстрее любой степени, а степень — быстрее любого логарифма.
+\end{consequence}

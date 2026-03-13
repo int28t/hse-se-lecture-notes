@@ -1,5 +1,6 @@
 \section{Формула подстановки и формула замены переменной в неопределенном интеграле + теорема, на которой они основаны. Формула интегрирования по частям.}
 
+\subsection{Формулы подстановки и замены переменной + теорема, на которой они основаны.}
 \begin{definition}
     Формула подстановки: $\int f(\vphi(t)) \cdot \vphi'(x) \diff t = \subs{\int f(x) \diff x} {x = \vphi t}$ 
 
@@ -10,26 +11,31 @@
 
 \begin{theorem}
     Если у $f(x) ~\exists$ первообразная на интервале (а, b) и $\vphi(t)$ диффeренцруема на (c, d) и $\subs{\vphi(t)}{t \in (c,~d)} \implies \int f(\vphi(t))\cdot\vphi'(t)\diff t = F(\vphi(t)) + C;~C\in\R$
-    \begin{proof}
+
+\end{theorem}
+
+
+\begin{Proof}
     Продифференцируем правую часть:
 
     $F(\vphi(t)) + C = F'(\vphi(t))\cdot\vphi'(t) = f(\vphi(t))\cdot\vphi'(t)$
-    \end{proof}
-\end{theorem}
-    
-\begin{theorem}
-    Интегрирование по частям: 
+\end{Proof}
 
+
+
+\subsection{Интегрирование по частям}
+\begin{theorem}[Интегрирование по частям]
+    
     $f(x), g(x) -~$ дифференцируемы на (a, b) $\implies \int f(x)\diff g(x) = f(x)\cdot g(x) - \int g(x)\diff f(x)$
 
-    \begin{proof}
-        Проинтегрируем $(f(x)\cdot g(x))'$
-
-        $(f(x)\cdot g(x))' = f'(x)g(x) + f(x)g'(x)$\\
-        $\int (f'(x)g(x) + f(x)g'(x))\diff x = f(x)\cdot g(x) + C;~ C \in \R$\\
-        $\int (f'(x)g(x) + f(x)g'(x))\diff x = \int g(x)\diff f(x) + \int f(x)\diff g(x)$\\
-        $\int f(x)\diff g(x) = f(x)\cdot g(x) - \int g(x) \diff f(x)$
-
-    \end{proof}
-
 \end{theorem}
+
+\begin{Proof}
+Проинтегрируем $(f(x)\cdot g(x))'$
+
+$(f(x)\cdot g(x))' = f'(x)g(x) + f(x)g'(x)$\\
+$\int (f'(x)g(x) + f(x)g'(x))\diff x = f(x)\cdot g(x) + C;~ C \in \R$\\
+$\int (f'(x)g(x) + f(x)g'(x))\diff x = \int g(x)\diff f(x) + \int f(x)\diff g(x)$\\
+$\int f(x)\diff g(x) = f(x)\cdot g(x) - \int g(x) \diff f(x)$
+
+\end{Proof}

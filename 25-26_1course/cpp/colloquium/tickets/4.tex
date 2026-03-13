@@ -1,0 +1,258 @@
+\section{Потоки и строки STL}
+
+\subsection{Темы}
+Материал этого раздела преимущественно рассматривается в рамках лекций 4--5. Включает:
+\begin{itemize}
+  \item Вводо\-выводная модель консольного приложения (stdin/stdout).
+  \item Понятие потока в STL: \texttt{std::istream}, \texttt{std::ostream}, потомки потоков.
+  \item Операторы ввода/вывода \texttt{>>} и \texttt{<<} и их поведение с пробелами.
+  \item Состояние потока: флаги \texttt{good}, \texttt{eof}, \texttt{fail}, \texttt{bad}; методы \texttt{good()}, \texttt{eof()}, \texttt{fail()}, \texttt{bad()}, \texttt{clear()}, \texttt{setstate()}.
+  \item Идиомы последовательной вычитки (цикл while с \texttt{getline} и с оператором \texttt{>>}).
+  \item Перенаправление стандартных потоков на другие устройства (файлы) во время исполнения.
+  \item Строки и кодировки: ASCII, Unicode, UTF-8; типы \texttt{char}, \texttt{char16\_t}, \texttt{char32\_t}, \texttt{wchar\_t}, литералы \texttt{u8"", u"", U"", L""}.
+  \item C-массивы, C-строки (нулевой терминатор '\textbackslash 0'), decay массива в указатель, вычисление размера через \texttt{sizeof}.
+  \item Класс \texttt{std::string}: инициализация, методы, гарантия \texttt{.c\_str()} на непрерывность и завершающий нулевой символ (с C++11), short-string optimization.
+  \item Строковый поток \texttt{std::stringstream}: сборка строк, парсинг чисел, тестирование без файлов.
+\end{itemize}
+
+\subsection{Контрольные вопросы и ответы}
+
+\subsubsection{Что подразумевают под моделью ввода-вывода консольного приложения (CLI-application)? Какие основные компоненты ввода-вывода задействуются для него?}
+Модель CLI-приложения подразумевает, что программа взаимодействует с пользователем или окружением через текстовые/байтовые потоки: стандартный ввод (stdin), стандартный вывод (stdout) и стандартный поток ошибок (stderr). Основные компоненты:
+\begin{itemize}
+  \item Устройства ввода/вывода (терминал, перенаправлённые файлы, пайпы).
+  \item Библиотечные абстракции (в C++: \texttt{std::istream}, \texttt{std::ostream} и их конкретные потомки).
+  \item Форматирование/разбор данных (операторы \texttt{<<}/\texttt{>>}, вспомогательные функции).
+\end{itemize}
+
+\subsubsection{Что такое стандартный поток ввода и стандартный поток вывода? Какими объектами они представлены? Какая область видимости этих объектов?}
+Стандартные потоки:
+\begin{itemize}
+  \item \texttt{std::cin} --- стандартный поток ввода, объект типа \texttt{std::istream}.
+  \item \texttt{std::cout} --- стандартный поток вывода, объект типа \texttt{std::ostream}.
+  \item \texttt{std::cerr} / \texttt{std::clog} --- потоки ошибок/логирования (объекты \texttt{std::ostream}).
+\end{itemize}
+Эти объекты объявлены в заголовке \texttt{<iostream>} и находятся в пространстве имён \texttt{std}. Они описываются (declaration) в заголовках библиотеки и определяются (definition) в реализациях стандартной библиотеки (бинарных/линкованных объектах).
+
+\subsubsection{Какой заголовочный файл необходим для доступа к стандартным потокам? Где описаны и где определены эти объекты?}
+Подключать нужно:
+\begin{verbatim}
+#include <iostream>
+\end{verbatim}
+Описание (прототипы/extern) потоков даётся в заголовке; фактические определения находятся в реализации стандартной библиотеки, поставляемой с компилятором/системой (они линкуются при сборке).
+
+\subsubsection{Какие типы данных у стандартных потоков и какая иерархия наследования?}
+Типы потоков основаны на шаблонах:
+\begin{itemize}
+  \item \texttt{std::basic\_ios<CharT,Traits>} --- базовая инфраструктура.
+  \item \texttt{std::basic\_istream<CharT,Traits>} и \texttt{std::basic\_ostream<CharT,Traits>} --- ввод/вывод.
+  \item \texttt{std::basic\_iostream<CharT,Traits>} --- наследует и ввод, и вывод.
+  \item Специальизации для char: \texttt{std::istream}, \texttt{std::ostream}, \texttt{std::iostream}.
+  \item Потомки: \texttt{std::ifstream}, \texttt{std::ofstream} (файловые); \texttt{std::istringstream}, \texttt{std::ostringstream}, \texttt{std::stringstream} (строковые).
+\end{itemize}
+
+\textbf{Ромбовидное наследование (Deadly Diamond):} \texttt{basic\_iostream} наследует от \texttt{basic\_istream} и \texttt{basic\_ostream}, которые оба используют общую базу \texttt{basic\_ios}. В стандартной библиотеке это организовано корректно, чтобы не создавать конфликтов; концептуальная проблема «алмазного» наследования показывает, почему нужно аккуратно проектировать и использовать виртуальные базовые классы или хорошо продуманную иерархию.
+
+\subsubsection{Какие операции ввода/вывода используются (операторы \texttt{>>} и \texttt{<<})? Можно ли их перепутать? Как они работают с пробелами? Что возвращают эти операторы?}
+\begin{itemize}
+  \item Оператор \texttt{operator>>} читает следующий токен (по умолчанию разделитель --- пробельные символы) и преобразует в запрошенный тип (при возможности).
+  \item Оператор \texttt{operator<<} записывает в поток представление объекта (поток форматируется с учётом флагов).
+  \item Нельзя использовать оператор \texttt{>>} для объектов \texttt{std::ostream} или \texttt{<<} для \texttt{std::istream}; они перегружены для правильных комбинаций типов.
+  \item При чтении строк с пробелами \texttt{>>} остановится на первом пробельном символе; для чтения строки с пробелами используют \texttt{std::getline}.
+  \item Возвращаемое значение у \texttt{>>} и \texttt{<<} --- ссылка на поток (\texttt{std::istream\&} или \texttt{std::ostream\&}), что позволяет цепочку вызовов: \texttt{std::cout << a << b;} или \texttt{std::cin >> x >> y;} .
+\end{itemize}
+
+\subsubsection{Какие функции ввода/вывода можно использовать наравне с операторами? Как прочитать целиком строку с пробелами?}
+Альтернативы/дополнения:
+\begin{itemize}
+  \item \texttt{std::getline(std::istream\&, std::string\&)} --- читает строку до символа новой строки, включая пробелы.
+  \item Методы потоков: \texttt{get()}, \texttt{getline()} (член класса), \texttt{read()} (для бинарных данных).
+  \item Для форматного ввода/вывода можно использовать \texttt{std::scanf}/\texttt{printf} (C-style) — но они отличаются по семантике и безопасности.
+\end{itemize}
+
+\subsubsection{Что такое состояние потока? Какие флаги идентифицируют состояние (\texttt{good}, \texttt{eof}, \texttt{fail}, \texttt{bad})? Примеры «сломать» поток поправимо и непоправимо; как сбросить флаги?}
+Состояние потока хранится в битовом наборе флагов:
+\begin{itemize}
+  \item \texttt{goodbit} --- всё в порядке.
+  \item \texttt{eofbit} --- достигнут конец файла.
+  \item \texttt{failbit} --- логическая ошибка формата (например, не удалось преобразовать токен).
+  \item \texttt{badbit} --- серьёзная ошибка (например, аппаратная ошибка/поток сломан).
+\end{itemize}
+
+Примеры:
+\begin{itemize}
+  \item Поправимая ошибка: попытка прочитать число из токена, который не является числом \(\Rightarrow\) устанавливается \texttt{failbit}, поток можно восстановить с помощью \texttt{clear()} и, возможно, удалив неверные данные.
+  \item Непоправимая ошибка: аппаратная ошибка чтения или непоправимый отказ устройства \(\Rightarrow\) \texttt{badbit}.
+\end{itemize}
+
+Сброс флагов:
+\begin{verbatim}
+if (!std::cin) {
+    std::cin.clear();         // сбрасывает флаги
+    std::cin.ignore( ... );   // перебросить неверные данные из буфера
+}
+\end{verbatim}
+
+\subsubsection{Что такое неявное приведение потока к булевому типу? Как работают проверки \texttt{if (s)} и \texttt{if (!s)}?}
+Поток имеет оператор приведения к состоянию (в современном C++ это неявное приведение к булевому контексту через специфику класса потока). Выражение \texttt{if (s)} эквивалентно проверке \texttt{s.good()} в смысле «поток в хорошем состоянии и готов к операциям». \texttt{if (!s)} используется для проверки несостоятельности (например, \texttt{fail} или \texttt{bad}).
+
+\subsubsection{Идиоматические конструкции: чтение файла строка за строкой и чтение слов (токенов)}
+Чтение строк (включая пробелы):
+\begin{verbatim}
+std::string line;
+while (std::getline(std::cin, line)) {
+    // обработать line
+}
+\end{verbatim}
+
+Чтение слов (токенов, разделённых пробелами):
+\begin{verbatim}
+std::string token;
+while (std::cin >> token) {
+    // обработать token
+}
+\end{verbatim}
+
+Эти конструкции корректно завершаются при достижении EOF или при ошибке потока.
+
+\subsubsection{Как переназначить стандартные потоки на другие устройства (например, файлы) без перекомпиляции?}
+Перенаправление во время запуска:
+\begin{itemize}
+  \item В shell: \texttt{./program < input.txt > output.txt} (никакой перекомпиляции не требуется).
+\end{itemize}
+Переназначение в коде:
+\begin{verbatim}
+std::ifstream infile("input.txt");
+auto cinbuf = std::cin.rdbuf(infile.rdbuf()); // перенаправляем std::cin
+// ... читать из std::cin как обычно ...
+std::cin.rdbuf(cinbuf); // восстановить
+\end{verbatim}
+Аналогично для \texttt{std::cout} и его \texttt{rdbuf()}.
+
+\subsubsection{Что такое "кодирование символов"? Как Unicode решает проблему больших наборов символов? Структурное деление и максимальные codepoint'ы.}
+\textbf{Кодирование} --- правило отображения символов (code points) в последовательности байтов. Unicode --- это стандарт, задающий уникальное число (code point) для каждого символа; он не фиксирует единственное байтовое представление. Unicode использует модель plane'ов; базовая многоязычная плоскость (BMP) содержит кодовые позиции U+0000..U+FFFF. Полный диапазон Unicode ограничен U+0000..U+10FFFF (то есть 1\,114\,112 возможных code points).
+
+\subsubsection{Пример 8-битной кодировки, ограничения, и что определяет первую половину}
+Пример: ASCII (7-бит) и расширенные 8-битные кодировки (например, ISO-8859-1). Ограничения: 8-битная кодировка может напрямую представить только 256 различных кодовых позиций; это недостаточно для всех мировых алфавитов. Первая половина 8-битных кодировок (первые 128 кодов) обычно совпадает с ASCII; стандарт ASCII определяет первые 128 символов.
+
+\subsubsection{Пример кодировки с переменной длиной (UTF-8), преимущества и недостатки}
+UTF-8 кодирует Unicode code points в от 1 до 4 байт:
+\begin{itemize}
+  \item Преимущества: обратная совместимость с ASCII, эффективная в использовании для латиницы, самосинхронизируемость.
+  \item Недостатки: случайный доступ по «символам» (code points) сложнее, т.к. один символ может занимать несколько байт.
+\end{itemize}
+
+\subsubsection{Типы для представления символов в C++ и литералы}
+\begin{itemize}
+  \item \texttt{char} --- обычно байт (unit of storage), используют для UTF-8 или байтовых данных.
+  \item \texttt{wchar\_t} --- ширина зависит от реализации; может быть 16 или 32 бита.
+  \item \texttt{char16\_t} --- 16-битный тип для UTF-16 code units.
+  \item \texttt{char32\_t} --- 32-битный тип для UTF-32 code units.
+\end{itemize}
+Литералы:
+\begin{itemize}
+  \item \texttt{u8"..." } --- UTF-8 строка (char[] в C++20 пометка менялась, но семантика понятна),
+  \item \texttt{u"..." } --- char16\_t literal,
+  \item \texttt{U"..." } --- char32\_t literal,
+  \item \texttt{L"..." } --- wide string literal (wchar\_t).
+\end{itemize}
+
+\subsubsection{Пример статического C-массива и вычисление числа элементов (sizeof); decay массивов}
+Пример:
+\begin{verbatim}
+int arr[] = {1,2,3,4};      // статический массив из 4 элементов
+std::size_t n = sizeof(arr) / sizeof(arr[0]); // 4
+\end{verbatim}
+При передаче массива в функцию он \emph{декэйт} (decay) в указатель на первый элемент: формально тип \texttt{int[N]} превращается в \texttt{int*} в большинстве контекстов (за исключением \texttt{sizeof}, \texttt{decltype}, инициализации).
+
+\subsubsection{Связь между C-массивами и C-строками; можно ли по типу \texttt{char*} понять, C-массив это или C-строка?}
+C-строка --- это массив \texttt{char} с нуль-терминатором '\textbackslash 0' как признак конца. Тип \texttt{char*} сам по себе не указывает, является ли память массивом или строкой; это просто указатель. Для определения того, корректно ли это C-строка, нужна договорённость о содержимом (наличие '\textbackslash 0').
+
+\subsubsection{Что такое '\textbackslash 0' и отличие от '0'?}
+\texttt{'\textbackslash 0'} --- нулевой символ (ASCII NUL), его код 0; он используется как признак конца C-строки. Символ \texttt{'0'} --- это символ '0' с кодом 48 (в ASCII). Они разные: \texttt{'\textbackslash 0'} означает отсутствие символа (терминатор), \texttt{'0'} представляет собой символ цифры ноль.
+
+\subsubsection{Для чего используется \texttt{std::string}? Основные операции, инициализация, внутреннее представление}
+\texttt{std::string} --- удобный класс для хранения и работы со строками. Основные операции: \texttt{size()/length()}, \texttt{empty()}, \texttt{operator+}, \texttt{append()}, \texttt{substr()}, \texttt{c\_str()}, индексация \texttt{operator[]}, итераторы и т.д.
+
+Инициализация:
+\begin{verbatim}
+std::string s1 = "hello";
+std::string s2("world");
+std::string s3 = s1 + " " + s2;
+\end{verbatim}
+
+Внутреннее представление: буфер хранится динамически (в куче), но реализации обычно применяют SSO (short string optimization) --- когда короткая строка хранится прямо внутри объекта \texttt{std::string} без выделения внешней памяти. Стандарт гарантирует, что \texttt{c\_str()} возвращает непрерывный массив символов, оканчивающийся нулём (начиная с C++11).
+
+\subsubsection{Как прочитать токен и как прочитать строку с пробелами в \texttt{std::string}?}
+\begin{verbatim}
+std::string token;
+std::cin >> token;           // читает до первого пробельного символа
+
+std::string line;
+std::getline(std::cin, line); // читает строку целиком (включая пробелы)
+\end{verbatim}
+
+\subsubsection{Связь между \texttt{sizeof(std::string)} и \texttt{s.length()}; что такое SSO}
+\texttt{sizeof(std::string)} возвращает размер объекта (фиксированное число байт), зависящее от реализации — это не длина строки. \texttt{s.length()} — логическая длина строки в символах. SSO --- оптимизация, при которой короткая строка хранится непосредственно в памяти объекта \texttt{std::string} (без вложенного выделения динамической памяти), что ускоряет операции для коротких строк.
+
+\subsubsection{Преобразования между строками и числами (в стиле C и C++)}
+\begin{itemize}
+  \item C-style: \texttt{std::atoi}, \texttt{std::strtol}, \texttt{sprintf}.
+  \item C++-style: \texttt{std::stoi}, \texttt{std::stol}, \texttt{std::to\_string}.
+  \item Потоковый подход: \texttt{std::istringstream} / \texttt{std::ostringstream} (или \texttt{std::stringstream}).
+\end{itemize}
+
+\subsubsection{Как осуществляется конкатенация строк; что эффективнее}
+\begin{itemize}
+  \item Простейший способ: \texttt{a + b} (удобно, но может создавать временные объекты).
+  \item Более эффективно: использовать \texttt{a.append(b)} или \texttt{reserve()} заранее, чтобы избежать многократных аллокаций:
+\begin{verbatim}
+std::string s;
+s.reserve(estimated_size);
+for (...) s.append(chunk);
+\end{verbatim}
+  \item Для множественных конкатенаций удобен \texttt{std::ostringstream} или \texttt{std::string::append} с резервированием.
+\end{itemize}
+
+\subsubsection{Как \texttt{std::stringstream} помогает при множественной конкатенации и при преобразованиях}
+\begin{itemize}
+  \item \texttt{std::ostringstream} позволяет «потоково» накапливать строку без явного управления буферами:
+\begin{verbatim}
+std::ostringstream oss;
+oss << x << ' ' << y << '\n';
+std::string result = oss.str();
+\end{verbatim}
+  \item Для преобразования числа в строку: \texttt{oss << number; std::string s = oss.str();}
+  \item Для преобразования строки в число: \texttt{std::istringstream iss(s); iss >> number;}
+\end{itemize}
+
+\subsubsection{Как \texttt{std::stringstream} используется в модульном тестировании?}
+\begin{itemize}
+  \item Вместо реального файла можно передать \texttt{std::istringstream} в функцию, принимающую \texttt{std::istream\&}, и проверить поведение парсинга:
+\begin{verbatim}
+void parse(std::istream &in);
+
+std::istringstream fake("1 2 3\n");
+parse(fake); // проверяем поведение без файлов
+\end{verbatim}
+  \item Аналогично для вывода: использовать \texttt{std::ostringstream} и затем проверить строку, полученную через \texttt{oss.str()}.
+\end{itemize}
+
+\subsubsection{Какой статус \texttt{std::stringstream} в иерархии потоков STL?}
+\texttt{std::stringstream} --- специализация потокового класса, комбинирующая вход и выход в памяти; функционально это наследник \texttt{std::iostream}, предоставляющий буфер \texttt{std::stringbuf}.
+
+\bigskip
+\textbf{Краткая сводка:} все контрольные вопросы по теме «Потоки и строки STL» раскрыты:
+\begin{itemize}
+  \item стандартные потоки, заголовки, объекты --- объяснены;
+  \item иерархия потоков и проблема ромбовидного наследования обсуждены;
+  \item операции \texttt{>>} / \texttt{<<}, \texttt{getline}, состояние потока и методы управления -- приведены;
+  \item идиоматическое чтение строк и токенов показано;
+  \item перенаправление потоков в рантайме --- показано;
+  \item кодировки, Unicode, UTF-8, типы символов и литералы --- описаны;
+  \item C-массивы, decay, C-строки, '\textbackslash 0' --- ясно объяснены;
+  \item \texttt{std::string}, .c\_str(), SSO, sizeof vs length --- разъяснено;
+  \item конкатенация, преобразования и использование \texttt{std::stringstream} и тестирование --- разобраны.
+\end{itemize}
+
+% Конец билета 4 --- Потоки и строки STL

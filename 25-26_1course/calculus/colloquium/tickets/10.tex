@@ -1,1 +1,106 @@
-    \section{Теорема о производной сложной функции. Производная обратной функции. Производная показательной, логарифмической, степенной и обр.триг. функций.}
+\section{Теорема о производной сложной функции. Производная обратной функции. Производная показательной, логарифмической, степенной и обр.триг. функций.}
+
+\subsection{Производная показательной, логарифмической, степенной и обр. триг. функций.}
+\begin{theorem}
+\begin{itemize}
+\item \textbf{Показательная:}\quad $(a^x)'=a^x\ln a,\quad a>0,\ a\ne 1;\qquad (e^x)'=e^x.$
+\item \textbf{Логарифмическая:}\quad $(\ln x)'=\dfrac1x,\ x>0;\qquad $
+\item \textbf{Степенная:}\quad $(x^\alpha)'=\alpha x^{\alpha-1},\ x>0,\ \alpha\in\mathbb{R}.$
+\item \textbf{Обр. триг.:}\quad
+$(\arcsin x)'=\dfrac1{\sqrt{1-x^2}},\ 
+(\arccos x)'=-\dfrac1{\sqrt{1-x^2}},\ |x|<1.$
+\item \textbf{Обр. триг.:}\quad
+$(\arctan x)'=\dfrac1{1+x^2},\ 
+(\operatorname{arccot} x)'=-\dfrac1{1+x^2},\ x\in\mathbb{R}.$
+\end{itemize}
+\end{theorem}
+
+
+\begin{Proof}
+\begin{itemize}
+\item \textbf{Логарифмическая.}\quad $(\ln x)'=\dfrac1x,\ x>0.$
+
+Пусть $h=x-x_0$ (т.е.\ $x=x_0+h$, $h\to 0$). По определению производной:
+\[
+(\ln x)'\big|_{x=x_0 + h}
+=\lim_{h\to 0}\frac{\ln(x_0+h)-\ln x_0}{h}.
+\]
+Преобразуем:
+\[
+\ln(x_0+h)-\ln x_0=\ln\!\left(\frac{x_0+h}{x_0}\right)=\ln\!\left(1+\frac{h}{x_0}\right),
+\]
+поэтому
+\[
+(\ln x)'\big|_{x=x_0 + h}
+=\lim_{h\to 0}\frac{\ln\!\left(1+\frac{h}{x_0}\right)}{h}.
+\]
+Сделаем замену $t=\frac{h}{x_0}$ (тогда $h=x_0t$, $t\to 0$):
+\[
+(\ln x)'\big|_{x=x_0+h}
+=\frac1{x_0}\lim_{t\to 0}\frac{\ln(1+t)}{t}.
+\]
+Оценим предел. Для $t>-1$ верно неравенство
+\[
+\frac{t}{1+t}\le \ln(1+t)\le t.
+\]
+Тогда при $t>0$:
+\[
+\frac{1}{1+t}\le \frac{\ln(1+t)}{t}\le 1,
+\]
+а при $-1<t<0$:
+\[
+1\le \frac{\ln(1+t)}{t}\le \frac{1}{1+t}.
+\]
+Следовательно,
+\[
+\lim_{t\to 0}\frac{\ln(1+t)}{t}=1
+\quad\Longrightarrow\quad
+(\ln x)'\big|_{x=x_0}=\frac1{x_0}.
+\]
+Так как $x_0>0$ произвольно, то $(\ln x)'=\dfrac1x$.
+
+\bigskip
+
+\item \textbf{Производная показательной.}\quad $(e^x)'=e^x,\ x\in\mathbb{R}.$
+
+По определению производной:
+\[
+(e^x)'=\lim_{h\to 0}\frac{e^{x_0+h}-e^{x_0}}{h}
+=e^{x_0}\lim_{h\to 0}\frac{e^h-1}{h}.
+\]
+Так как
+\[
+\lim_{h\to 0}\frac{e^h-1}{h}=1,
+\]
+то
+\[
+(e^x)'=e^x.
+\]
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Производная степенной (для $\alpha\in\mathbb{R}$).}\quad
+$(x^\alpha)'=\alpha x^{\alpha-1},\ x>0.$
+
+Пусть $x>0$. Определим $x^\alpha=e^{\alpha\ln x}$. Тогда
+\[
+(x^\alpha)'=(e^{\alpha\ln x})'.
+\]
+По правилу производной сложной функции:
+\[
+(e^{\alpha\ln x})'=e^{\alpha\ln x}\cdot(\alpha\ln x)'.
+\]
+Так как $\alpha$ — константа, то
+\[
+(\alpha\ln x)'=\alpha(\ln x)'=\alpha\cdot\frac1x.
+\]
+Следовательно,
+\[
+(x^\alpha)'=e^{\alpha\ln x}\cdot\alpha\cdot\frac1x
+=x^\alpha\cdot\frac{\alpha}{x}=\alpha x^{\alpha-1}.
+\]
+
+\bigskip
+
+\end{itemize}
+\end{Proof}

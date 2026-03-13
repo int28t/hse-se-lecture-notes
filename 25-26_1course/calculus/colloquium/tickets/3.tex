@@ -2,4 +2,217 @@
 
 \subsection{Теорема о пределе сложной функции}
 
+\begin{remark}
+    Вернемся к арифметике предела функции. Хотим:
+
+\begin{enumerate}
+    \item[5.] \sout{Если $\Lim{x}{x_0} f(x) = A, \Lim{y}{A} h(y) = A$, то $\Lim{x}{x_0} h(f(x)) = A$}. Это неправда
+\end{enumerate}
+
+Контрпример:
+\[
+    f(x) \equiv 0, x_n \to 0
+\]
+\[
+    \Lim{x}{0} f(x) \to 0
+\]
+\[
+    h(y) = |sign\ y|,\ sign(y) = \\
+    \begin{dcases}
+        1, &y > 0\\
+        0, &y = 0\\
+        -1, &y < 0
+    \end{dcases}
+\]
+\[
+    \Lim{y}{0} h(y) = 1
+\]
+Хотим: 
+\[
+    h(f(x)) \xrightarrow[x \to 0]{} 1
+\]
+Но: 
+\[
+    h(f(x)) \implies h(0) \implies 0 \text{. Противоречие}
+\]
+Мы всегда смотрели на аргумент из проколотой окрестности, а $f(x)$ попал в центр окрестности
+\end{remark}
+
+\begin{theorem}[Теорема о пределе сложной функции]
+    Если $f(x) \xrightarrow[x \to x_0]{} A,\ h(y) \xrightarrow[y \to A]{} h(A)$, тогда: 
+    \[
+        h(f(x)) \xrightarrow[x \to x_0]{} h(A)
+    \]
+\end{theorem}
+\begin{Proof}
+\[
+    \forall \omega > 0\ \exists \delta = \delta (\omega )\ \forall x \in \overset{\circ}{U}_{\delta }(x_0)\ |f(x) - A| < \omega
+\]
+\[
+    \forall \eps > 0\ \exists \eta = \eta (\eps )\ \forall y \in \overset{\circ}{U}_{\eta }(A)\ |h(y) - h(A)| < \eps 
+\]
+Добавляем в окрестность $\eta_0$, так как неравенство выполнено $(0 < \eps )$
+\[
+    \forall \eps > 0\ \exists \eta = \eta (\eps )\ \forall y \in {U}_{\eta }(A)\ |h(y) - h(A)| < \eps 
+\]
+Нужно доказать: 
+\[
+    \forall \eps > 0\ \exists \delta_1 = \delta_1(\eps )\ \forall x \in \overset{\circ}{U}_{\delta_1}(x_0)\ |h(f(x)) - h(A)| < \eps 
+\]
+Верно, если $f(x) \in U_{\eta (\eps )}(A)$
+\[
+    \exists \delta = \delta (\eta (\eps ))\ \forall x \in \overset{\circ}{U}_{\delta }(x_0)\ |f(x) - A| < \eta (\eps )
+\]
+Возьмем $\delta_1(\eps ) = \delta (\eta (\eps ))$
+\end{Proof}
+
+\begin{example}
+    \[
+        \Lim{x}{0} \frac{\sin x}{x} = 1
+    \]
+    \[
+        \Lim{x}{0} \frac{\sin 5x}{x} =\ ?
+    \]
+    \[
+        \Lim{x}{0} \frac{\sin 5x}{x} = \Lim{x}{0} \frac{\sin 5x}{5x} \cdot 5 = \Lim{x}{0} \frac{\sin t}{t} \cdot 5 = 1 \cdot 5 = 5
+    \]
+    Рассмотрим обоснование: 
+    \[
+        h(y) = \frac{\sin y}{y},\ f(x) = 5x
+    \]
+    Кажется нужно искать $h(f(x))$ и тогда: 
+    \[
+        \Lim{x}{0} h(f(x)) \sim h(0) \sim 1
+    \]
+    В чем кроется замена переменной: если найдем предел $h(y)$, то $h(f(x))$ будет такой же. Но эта теорема неверна (см контрпример выше). Тогда требуются доп ограничения (спойлер: теорема ниже)
+\end{example}
+
+\begin{theorem}[Вторая теорема о пределе сложной функции]
+    $f(x) \xrightarrow[x \to x_0]{} f(x_0)$, $f(x)$ --- строго монотонна в какой-то окрестности $x_0$, $h(y) \xrightarrow[y \to f(x_0)]{} A$
+
+    Тогда:
+    \[
+        h(f(x)) \xrightarrow[x \to x_0]{} A
+    \]
+\end{theorem}
+
+\begin{Proof}
+    \[
+        \forall \omega > 0\ \exists \delta = \delta (\omega )\ \forall x \in \overset{\circ}{U}_{\delta }(x_0)\ |f(x) - f(x_0)| < \omega
+    \]
+    \[
+        \forall \omega > 0\ \exists \delta = \delta (\omega )\ \forall x \in \overset{\circ}{U}_{\delta }(x_0)\ 0 < |f(x) - f(x_0)| < \omega
+    \]
+    \[
+        \forall \eps > 0\ \exists \eta = \eta (\eps )\ \forall y \in \overset{\circ}{U}_{\eta }(f(x_0))\ |h(y) - A| < \eps 
+    \]
+    Нужно: 
+    \[
+        \forall \eps > 0\ \exists \delta_1 = \delta_1 (\eps )\ \forall y \in \overset{\circ}{U}_{\delta_1 }(x_0)\ |h(f(x)) - A| < \eps 
+    \]
+    Верно при $f(x) \in \overset{\circ}{U}_{\eta(\eps ) }(f(x_0)) \Rightarrow 0 < |f(x) - f(x_0)| < \eta(\eps )$. Это верно при $x \in \overset{\circ}{U}_{\delta(\eta (\eps )) }(x_0) $
+
+    Возьмем $\delta_1(\eps ) = \delta (\eta (\eps ))$
+\end{Proof}
+
 \subsection{Первый замечательный предел}
+
+\begin{theorem}[Первый замечательный предел]
+\[
+\Lim{x}{0}\frac{\sin x}{x}=1.
+\]
+\end{theorem}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{files/3-18-27-57.png}
+  \label{fig:3-18-27-57.png}
+\end{figure}
+\begin{Proof}
+Рассмотрим единичную окружность ($R=1$) и угол $x \in (0, \pi/2)$.
+Сравним площади:
+1. Площадь внутреннего треугольника: $S_{\triangle} = \frac{1}{2} R^2 \sin x = \frac{\sin x}{2}$.
+2. Площадь сектора: $S_{sect} = \frac{1}{2} R^2 x = \frac{x}{2}$.
+3. Площадь внешнего треугольника (основание 1, высота $\tan x$): $S_{\text{внеш}} = \frac{1}{2} \tan x$.
+
+Из чертежа очевидно: $S_{\triangle} < S_{sect} < S_{\text{внеш}}$.
+Отсюда: $\frac{\sin x}{2} < \frac{x}{2} < \frac{\tan x}{2} \implies \sin x < x < \tan x$.
+\end{Proof}
+\begin{Proof}[]
+Рассмотрим проколотую окрестность $\overset{\circ}{U}_{\pi/2}(0)$. 
+Для $x \in (0, \pi/2)$ из геометрических соображений (сравнение площадей сектора и треугольников) справедливо:
+\[ \sin x < x < \tan x. \]
+Разделим все части на $\sin x > 0$:
+\[ 1 < \frac{x}{\sin x} < \frac{1}{\cos x} \implies \cos x < \frac{\sin x}{x} < 1. \]
+Так как функции $\cos x$ и $f(x) = \frac{\sin x}{x}$ являются четными, данное двойное неравенство верно для любого $x \in \overset{\circ}{U}_{\pi/2}(0)$ (включая отрицательные значения).
+
+Поскольку $\lim_{x \to 0} \cos x = 1$ и $\lim_{x \to 0} 1 = 1$, то по теореме о зажатой функции:
+\[ \lim_{x \to 0} \frac{\sin x}{x} = 1. \]
+\end{Proof}
+
+
+\subsection{Следствия первого замечательного предела}
+
+\begin{enumerate}
+\item
+\[
+\Lim{x}{0}\frac{\sin(kx)}{kx}=1,
+\qquad
+\Lim{x}{0}\frac{\sin(kx)}{x}=k.
+\]
+
+\item
+\[
+\Lim{x}{0}\frac{\tan x}{x}=1.
+\]
+
+\item
+\[
+\Lim{x}{0}\frac{1-\cos x}{x}=0.
+\]
+
+\item
+\[
+\Lim{x}{0}\frac{1-\cos x}{x^2}=\frac12.
+\]
+\end{enumerate}
+
+\subsection{Примеры}
+
+\begin{example}
+Найти предел:
+\[
+\Lim{x}{0}\frac{\sin 3x}{x}.
+\]
+
+\[
+\frac{\sin 3x}{x}
+=
+\frac{\sin 3x}{3x}\cdot 3
+\to 1\cdot 3=3.
+\]
+\end{example}
+
+\begin{example}
+Найти предел:
+\[
+\Lim{x}{0}\frac{1-\cos x}{x^2}.
+\]
+
+Используем тождество:
+\[
+1-\cos x = 2\sin^2\frac{x}{2}.
+\]
+
+Тогда
+\[
+\frac{1-\cos x}{x^2}
+=
+\frac{2\sin^2\frac{x}{2}}{x^2}
+=
+2\left(\frac{\sin\frac{x}{2}}{\frac{x}{2}}\right)^2
+\cdot
+\frac{1}{4}
+\to
+\frac12.
+\]
+\end{example}
