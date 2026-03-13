@@ -1,5 +1,10 @@
 \ProvidesPackage{header}
 
+\RequirePackage{setspace}
+\onehalfspacing       % Полуторный интервал (самый популярный)
+% \doublespacing        % Двойной интервал
+% \setstretch{1.25}     % Произвольный коэффициент (например, 1.25)
+
 \RequirePackage{cmap}                    
 \RequirePackage[T2A, T1]{fontenc}      
 \RequirePackage[utf8]{inputenc}        
@@ -107,6 +112,9 @@
 \newcommand{\eqind}[1]{\underset{#1}{=}}             % Равно с пояснением под ним
 \newcommand{\D}{\Delta}                              % Теперь \D даст треугольник
 \newcommand{\implunder}[1]{\xRightarrow[#1]{}}          % Стрелка следовательно с подписью снизу
+\newcommand{\tounder}[1]{\xrightarrow[#1]{}}         % Стрелка одинарная с подписью снизу
+\providecommand{\Union}[2]{\bigcup\limits_{#1}^{#2}}    % Большое объединение
+
 
 \definecolor{theorem_frame}{HTML}{B46A55}
 \definecolor{theorem_back}{HTML}{FFF6F3}
