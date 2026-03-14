@@ -6,12 +6,12 @@
     Вернемся к арифметике предела функции. Хотим:
 
 \begin{enumerate}
-    \item[5.] \sout{Если $\Lim{x}{x_0} f(x) = A, \Lim{y}{A} h(y) = A$, то $\Lim{x}{x_0} h(f(x)) = A$}. Это неправда
+    \item[5.] \sout{Если $\Lim{x}{x_0} f(x) = A, \Lim{y}{A} h(y) = L$, то $\Lim{x}{x_0} h(f(x)) = L$}. Это неправда
 \end{enumerate}
 
 Контрпример:
 \[
-    f(x) \equiv 0, x_n \to 0
+    f(x) \equiv 0, x \to 0
 \]
 \[
     \Lim{x}{0} f(x) \to 0
@@ -108,7 +108,7 @@
     \]
     Нужно: 
     \[
-        \forall \eps > 0\ \exists \delta_1 = \delta_1 (\eps )\ \forall y \in \overset{\circ}{U}_{\delta_1 }(x_0)\ |h(f(x)) - A| < \eps 
+        \forall \eps > 0\ \exists \delta_1 = \delta_1 (\eps )\ \forall x \in \overset{\circ}{U}_{\delta_1 }(x_0)\ |h(f(x)) - A| < \eps 
     \]
     Верно при $f(x) \in \overset{\circ}{U}_{\eta(\eps ) }(f(x_0)) \Rightarrow 0 < |f(x) - f(x_0)| < \eta(\eps )$. Это верно при $x \in \overset{\circ}{U}_{\delta(\eta (\eps )) }(x_0) $
 
@@ -131,13 +131,17 @@
 Рассмотрим единичную окружность ($R=1$) и угол $x \in (0, \pi/2)$.
 Сравним площади:
 1. Площадь внутреннего треугольника: $S_{\triangle} = \frac{1}{2} R^2 \sin x = \frac{\sin x}{2}$.
-2. Площадь сектора: $S_{sect} = \frac{1}{2} R^2 x = \frac{x}{2}$.
+
+2. Площадь сектора: $S_{sect} = \pi \cdot \frac{x}{2\pi } = \frac{x}{2}$.
+
 3. Площадь внешнего треугольника (основание 1, высота $\tan x$): $S_{\text{внеш}} = \frac{1}{2} \tan x$.
 
 Из чертежа очевидно: $S_{\triangle} < S_{sect} < S_{\text{внеш}}$.
 Отсюда: $\frac{\sin x}{2} < \frac{x}{2} < \frac{\tan x}{2} \implies \sin x < x < \tan x$.
 \end{Proof}
 \begin{Proof}[]
+Как мы знаем, в силу нечетности $\sin x : \frac{\sin x}{x} = \frac{\sin |x|}{|x|}$ и четности $\cos x : \cos |x| = \cos x$
+
 Рассмотрим проколотую окрестность $\overset{\circ}{U}_{\pi/2}(0)$. 
 Для $x \in (0, \pi/2)$ из геометрических соображений (сравнение площадей сектора и треугольников) справедливо:
 \[ \sin x < x < \tan x. \]

@@ -11,7 +11,7 @@
         \Updownarrow
     \]
     \[
-        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta \Rightarrow |f(x) - A| < \eps
     \]
 \end{definition}
 
@@ -68,7 +68,7 @@
 
     Имеем:
     \[
-        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta \Rightarrow |f(x) - A| < \eps
     \]
     Предположим, что посылка истинна. Тогда также имеем:
     \[
@@ -123,13 +123,13 @@
 \begin{definition}
     {\bf Односторонним пределом} $\Lim{x}{x_{0-}^+} f(x) = A$ называется такое число, что: 
     \begin{itemize}
-        \item $\Lim{x}{x_{0}^+} f(x) = A$
+        \item $\Lim{x}{x_{0}^+} f(x) = A \text{ --- \textbf{правосторонний предел}}$
         \[
-            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x - x_0 < \delta (\eps )\ |f(x) - A| < \eps \text{ --- \textbf{правосторонний предел}}
+            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x - x_0 < \delta (\eps ) \Rightarrow |f(x) - A| < \eps 
         \]
-        \item $\Lim{x}{x_{0-}} f(x) = A$
+        \item $\Lim{x}{x_{0-}} f(x) = A \text{ --- \textbf{левосторонний предел}}$
         \[
-            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x_0 - x < \delta (\eps )\ |f(x) - A| < \eps \text{ --- \textbf{левосторонний предел}}
+            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x_0 - x < \delta (\eps ) \Rightarrow |f(x) - A| < \eps
         \]
     \end{itemize}
 \end{definition}
@@ -151,7 +151,7 @@
     т.е.
     \[
         \forall \eps > 0\ \exists \delta = \delta(\eps )\ 
-        \forall x:\ 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+        \forall x:\ 0 < |x - x_0| < \delta \Rightarrow |f(x) - A| < \eps
     \]
 
     Тогда, если $0 < x - x_0 < \delta$, автоматически выполнено
@@ -188,14 +188,14 @@
     \[
         \forall \eps > 0\ 
         \exists \delta_1 = \delta_1(\eps )\ 
-        \forall x:\ 0 < x - x_0 < \delta_1\ 
+        \forall x:\ 0 < x - x_0 < \delta_1 \Rightarrow 
         |f(x) - A| < \eps
     \]
     и
     \[
         \forall \eps > 0\ 
         \exists \delta_2 = \delta_2(\eps )\ 
-        \forall x:\ 0 < x_0 - x < \delta_2\ 
+        \forall x:\ 0 < x_0 - x < \delta_2 \Rightarrow 
         |f(x) - A| < \eps
     \]
 
