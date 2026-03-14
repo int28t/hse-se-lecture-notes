@@ -1,41 +1,83 @@
 \section{Свойства непрерывных на отрезке функций:
 достижение точной верхней и нижней грани.
-Теорема о промежуточных значениях. (Beta)}
+Теорема о промежуточных значениях.}
 
-\subsection{Ограниченность непрерывной функции на отрезке}
+\begin{definition}
+    Функция непрерывна на $[a; b]$, если
 
-\begin{theorem}[Теорема Вейерштрасса]
-Если функция $f$ непрерывна на отрезке $[a,b]$, то она ограничена на этом отрезке.
+    \begin{itemize}
+        \item[1)] $[a;b] \subset D_f$
+        \item[2)] $f(x)$ непрерывна $ \forall x_0 \in (a;b)$
+        \item[3)] $\Lim{x}{a^+} f(x) = f(a)\ \Lim{x}{b^-} f(x) = f(b)$
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    В дальнейшем будем считать что $D_f = [a;b]$
+\end{remark}
+
+\subsection{Ограниченность непрерывной функции на отрезке, достижение точной верхней и нижней грани}
+
+\begin{theorem}
+    Если функция непрерывна на отрезке $[a;b]$, то 
+    \begin{itemize}
+        \item[1)] она ограничена на $[a;b]$
+        \item[2)] достигает $\sup f(x)\ x \in [a;b] = \sup E_f$ и $\inf f(x)\ x \in [a;b] = \inf E_f$
+    \end{itemize}
 \end{theorem}
 
 \begin{Proof}
-Предположим противное: пусть функция не ограничена сверху.
-Тогда существует последовательность $x_n \in [a,b]$, такая что
-$f(x_n)\to +\infty$.
+    Пусть $M = \sup f(x)\ x \in [a;b] \in \overline{\R}, m = \inf f(x)\ x \in [a;b] \in \overline{\R}$
 
-Так как отрезок $[a,b]$ компактен, из последовательности $x_n$
-можно выделить сходящуюся подпоследовательность
-$x_{n_k}\to x_0\in[a,b]$.
+    Хотим (докажем сверху):
+    \begin{itemize}
+        \item[1)] $M \in \R$
+        \item[2)] $\exists x_0 : f(x_0) = M$ 
+    \end{itemize}
 
-По непрерывности:
-\[
-f(x_{n_k}) \to f(x_0),
-\]
-что противоречит $f(x_{n_k})\to +\infty$.
-Следовательно, функция ограничена.
+    Докажем 2), 1) следует из него (очевидно, что если $\exists x_0 : f(x_0) = M$, то $x \neq \infty$)
+
+    Построим последовательность $a_n \uparrow M : a_n$ строго возрастает и $\Lim{n}{\infty} a_n = M$. Тогда: 
+    \[
+        \forall n\ \exists x_n \in [a;b]\ f(x_n) \geq a_n
+    \]
 \end{Proof}
 
-\subsection{Достижение точной верхней и нижней грани}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{files/2239703.png}
+  \label{fig:2239703.png}
+\end{figure}
 
-\begin{theorem}[О достижении экстремумов]
-Если функция $f$ непрерывна на отрезке $[a,b]$, то существуют точки
-$x_{\min}, x_{\max} \in [a,b]$, такие что
+\begin{Proof}[]
+Предположим противное:
 \[
-f(x_{\min})=\min_{[a,b]} f(x),
-\qquad
-f(x_{\max})=\max_{[a,b]} f(x).
+    \exists n_0\ \forall x \in [a;b]\ f(x) < a_{n_0}
 \]
-\end{theorem}
+$a_{n_0}$ --- верхняя грань для $E_f$, $\bot$
+
+Построили $\{x_n\}$: 
+\[
+    \underbrace{a_n}_{\to M} \leq f(x_n) \leq \underbrace{M}_{\to M}
+\]
+\[
+    \Lim{n}{\infty} f(x_n) = M
+\]
+
+$x_n \in [a;b] \Rightarrow \exists x_{n_k} : x_{n_k} \underset{k \to \infty}{\rightarrow} x_0$. Тогда по теореме Б-В она ограничена.
+
+\[
+    f(x_{n_k}) \xrightarrow[k \to \infty ]{} M
+\]
+Определение непрерывности по Гейне:
+\[
+    f(x_{n_k}) \xrightarrow[k \to \infty ]{} f(x_0)
+\]
+По теореме о единственности предела:
+\[
+    M = f(x_0)
+\]
+\end{Proof}
 
 \begin{remark}
 То есть точные верхняя и нижняя грани совпадают соответственно
@@ -45,41 +87,63 @@ f(x_{\max})=\max_{[a,b]} f(x).
 \subsection{Теорема о промежуточных значениях}
 
 \begin{theorem}
-Если функция $f$ непрерывна на $[a,b]$, то она принимает все значения
-между $f(a)$ и $f(b)$.
+    Непрерывная на отрезке функция принимает все промежуточные значения, т.е $f(x), [a;b]$
+
+    $$A = f(x_1),\ B = f(x_2),\ A < B,\ x_1, x_2 \in [a;b]$$
+
+    тогда:
+    $$\forall C \in (A;B)\ \exists x_0 \in [a;b] : f(x_0) = C$$
 \end{theorem}
 
-То есть если число $C$ лежит между $f(a)$ и $f(b)$, то существует
-точка $c\in[a,b]$, такая что
-\[
-f(c)=C.
-\]
+{\bf Следствие} $f(x)\ \text{непрерывна на}\ [a;b] = D_f, \text{то}\ E_f = [m; M]$
 
-\begin{Proof}[Идея доказательства]
-Рассматривается множество
-\[
-E=\{x\in[a,b]: f(x)\le C\}.
-\]
-Берётся его точная верхняя грань $c=\sup E$.
-Используя непрерывность функции, доказывается, что $f(c)=C$.
-\end{Proof}
-
-\subsection{Следствие (Теорема Больцано)}
-
-Если $f$ непрерывна на $[a,b]$ и
+{\bf Следствие.} Если $f$ непрерывна на $[a,b]$ и
 \[
 f(a)\cdot f(b)<0,
 \]
-то существует $c\in(a,b)$ такая, что
+то существует $c\in(a,b)$ такое, что
 \[
 f(c)=0.
 \]
 
-\subsection{Геометрический смысл}
+\begin{Proof}
+Построим последовательность вложенных отрезков $\l\{[a_k; b_k] \r\}_{k \in \N}$, будем считать $x_1 < x_2$
 
-График функции, непрерывной на отрезке,
-можно провести, не отрывая карандаша от бумаги.
-Он не имеет разрывов и «скачков».
+$[a_1; b_1] = [x_1; x_2]$
+
+\[
+    f(a_1) = f(x_1) < C,\ f(b_1) = f(x_2) > C
+\]
+
+Возьмем середину $x_3 = \frac{x1 + x2}{2}$
+
+\begin{itemize}
+    \item[1.] $f(x_3) = C$ ч.т.д.
+    \item[2.] $f(x_3) < C$ $[a_2; b_2] = [x_3; b_1]$
+    \item[3.] $f(x_3) > C$ $[a_2; b_2] = [a_1; x_3]$
+\end{itemize}
+
+По теореме Вейерштрасса:
+
+$\{a_k\}_k$ --- неубывающая и огр сверху b $\Rightarrow a_k \xrightarrow[k \to \infty ]{} \alpha $
+
+$\{b_k\}_k$ --- невозрастает и огр снизу a $\Rightarrow b_k \xrightarrow[k \to \infty ]{} \beta $
+
+$\underbrace{b_k}_{\to \beta } - \underbrace{a_k}_{\to \alpha } = \frac{1}{2^{k - 1}} (x_2 - x_1) \underset{k \to \infty}{\to} 0 \Rightarrow \alpha = \beta $
+\[
+    \underbrace{f(a_k)}_{\xrightarrow[k \to \infty ]{} f(\alpha) } < C
+\]
+По теореме о предельном переходе:
+\[
+    f(\alpha) \leq C
+\]
+Аналогично $f(b_k)$
+
+Тогда если $\alpha = \beta = x_0$:
+\[
+    f(x_0) = f(\alpha) = f(\beta) = C
+\]
+\end{Proof}
 
 \subsection{Примеры}
 
