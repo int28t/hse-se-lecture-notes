@@ -140,7 +140,7 @@
     $\boxed{3}$\\
     3.1) Если $f(x) \in R[a; b]$, то $|f(x)| \in R[a; b]$\\
     3.2) Если $f(x), g(x) \in R[a; b]$ и $f(x) \leq g(x) \text{ на } [a; b]$, то $\Int{a}{b}{f(x)\diff x} \leq \Int{a}{b}{g(x)\diff x}$\\
-    3.3) Если $f(x) \in R[a; b]$, то $|\Int{a}{b}{f(x)\diff x}| \leq \Int{a}{b}{|f(x)|\diff x}$ - Обобщенное неравенство треугольника\\
+    3.3) Если $f(x) \in R[a; b]$, то $\l|\Int{a}{b}{f(x)\diff x}\r| \leq \Int{a}{b}{|f(x)|\diff x}$ - Обобщенное неравенство треугольника\\
 \end{definition}
 
 \begin{Proof}[Докажем 3.3]
@@ -214,13 +214,13 @@
         Рассмотрим $\Lim{x}{x_0}$
         \[
         \begin{aligned}
-            |F(x_0 + \D x) - F(x_0)| &= \\
-            |\Int{a}{x + \D x_0}f(t)\diff t - \Int{a}{x_0}f(t)\diff t| &= |\Int{x_0}{x + \D x_0}f(t)\diff t|\\
+            \l|F(x_0 + \D x) - F(x_0)\r| &= \\
+        \l|\Int{a}{x + \D x_0}f(t)\diff t - \Int{a}{x_0}f(t)\diff t\r| &= \l|\Int{x_0}{x + \D x_0}f(t)\diff t\r|\\
         \end{aligned}
         \]
         \[
         \begin{aligned}
-            |\Int{x_0}{x + \D x_0}f(t)\diff t| \leq |\Int{x_0}{x + \D x_0}|f(t)|\diff t| \leq M |\Int{x_0}{x + \D x_0}1\diff t| = M|\D x| \tounder{\D x \to 0} 0
+            \l|\Int{x_0}{x + \D x_0}f(t)\diff t\r| \leq \l|\Int{x_0}{x + \D x_0}\r|f(t)\l|\diff t\r| \leq M \l|\Int{x_0}{x + \D x_0}1\diff t\r| = M\l|\D x\r| \tounder{\D x \to 0} 0
         \end{aligned}
         \]
     \end{Proof}
@@ -256,12 +256,12 @@
 
 \subsection{Формула Ньютона-Лейбница}
     \begin{theorem}
-        Если $f(x)$ непрерывна на $[\alpha; \beta]$ и $\Phi(x)$ первообразная $f(x)$ на $(\alpha; \beta)$, то\\
+        Если $f(x)$ непрерывна на $[\alpha; \beta]$ и $\Phi(x)$ первообразная $f(x)$ на $(\alpha; \beta)$, то:
         \[
-        \begin{aligned}
-            &\forall a, b \in (\alpha; \beta)\\
-            &\Int{a}{b}f(x)\diff x = \Phi(b) - \Phi(a)
-        \end{aligned}
+            \forall a, b \in (\alpha; \beta)
+        \]
+        \[
+\Int{a}{b}f(x)\diff x = \Phi(b) - \Phi(a)
         \]
     \end{theorem}
 
