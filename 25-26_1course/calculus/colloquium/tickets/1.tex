@@ -115,7 +115,18 @@
     \]
     Значит $f(x_n) \xrightarrow[n \to \infty ]{} A$
 
-    Но $|f(x) - A| \geq \eps$. Получили противоречие (расписать определение и в качестве $\eps$ взять $\eps_0$)
+    Но из $f(x_n)\to A$ следует:
+    \[
+    \forall \varepsilon>0\ \exists N\ \forall n>N:\ |f(x_n)-A|<\varepsilon.
+    \]
+    При $\varepsilon=\varepsilon_0$ получаем
+    \[
+    \exists N:\ \forall n>N\ \ |f(x_n)-A|<\varepsilon_0,
+    \]
+    что противоречит условию $|f(x_n)-A|\ge \varepsilon_0$ для всех $n$.
+    \[
+    \Rightarrow\ \bot.
+    \]
 \end{Proof}
 
 \subsection{Односторонние пределы}
