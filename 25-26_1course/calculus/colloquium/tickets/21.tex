@@ -2,44 +2,66 @@
 
 
 \subsection{Понятия разбиения отрезка, разметки разбиения, интегральной суммы.}
-\begin{definition}[Разбиение отрезка]
-    Разбиение отрезка: $\tau = \Subst{\{[x_{i-1}, x_i]\}}{i = 1}{n}$
+
+Пусть $f(x) \text{ задана на } [a;b]$
+\begin{definition}
+    Разбиение отрезка: $\tau = \{[x_{i-1}, x_i]\}_{i = 1}^{n}$
 
     $a = x_0 < x_1 < ... < x_n = b$
 \end{definition}
 
-\begin{definition}[Диаметр разбиения]
-    Диаметр разбиения - макс расстояние между $x_i \text{ и } x_{i+1}$\\
+\begin{definition}
+    Диаметр разбиения --- максимальное расстояние между $x_i \text{ и } x_{i-1}$
 
-    $d(\tau) = \Subst{max\{|{\D x_i}|\}}{i = 1}{n}$
+    $$d(\tau) = max\{|{\D x_i}|\}_{i = 1}^{n}$$
 \end{definition}
 
-\begin{definition}[Разметка разбиения]
-    Разметка разбиения $\xi = \xi(\tau) = \Subst{\{\xi_i\}}{i = 1}{n}$ - множество значений, попавших в $\D x_i$
+\begin{definition}
+    Разметка разбиения $\xi = \xi(\tau) = \{\xi_i\}_{i = 1}^{n}$ --- множество значений, попавших в $\D x_i$
+
+    $$\xi_i \in [x_{i-1}; x_i] = \Delta x_i$$
 \end{definition}
 
-\begin{definition}[Интегральная сумма]
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{files/21-16-06-00.png}
+  \label{fig:21-16-06-00.png}
+\end{figure}
+
+\begin{definition}
     Интегральная сумма: $\sigma (\tau, \xi) = \Sum{i = 1}{n}f(\xi_i)|\D x_i|$
 \end{definition}
 
 \subsection{Определённый интеграл Римана на отрезке.}
 \begin{definition}[Определённый интеграл Римана на отрезке. Определение по Коши.]
-    
-    \noindent
+
+$f(x)$ называется интегрируемой на $[a; b]$ по Риману и $I$ --- ее интеграл, если:
+
 \[
 \forall \varepsilon>0\ \exists \delta>0\ \forall \tau:
 \quad d(\tau)<\delta,\ \forall \xi \quad |\sigma(\tau,\xi)-I|<\varepsilon
+\]
+\[
+I = \int\limits_a^b f(x)\,dx
 \]
 \[
 f(x)\in R[a,b]
 \quad
 \text{(интегрируется по Риману на отрезке)}
 \]
-\[
-I = \int\limits_a^b f(x)\,dx
-\]
 \end{definition}
 
+\begin{definition}[Определённый интеграл Римана на отрезке. Определение по Гейне.]
+    \[
+        \forall \tau_n : d(\tau_n) \xrightarrow[n \to \infty ]{} 0
+    \]
+    \[
+        \forall \xi_n
+    \]
+    \[
+        \sigma(\tau_n; \xi_n) \xrightarrow[n\to \infty ]{} I
+    \]
+\end{definition}
 
 \subsection{Ограниченность интегрируемой функции}
 \begin{theorem}[Теорема об ограниченности интегрируемой функции]
@@ -90,9 +112,12 @@ f(x)\in R[a,b]\;\Rightarrow\; f(x)\ \text{--- огр на }[a,b].
 -I
 \right| \quad
 \forall \xi_1 \in \Delta x_1^{0}
-\] - $\bot$
-
-
+\] 
+Но:
+\[
+    \forall C\ \exists \xi_1 \in \Delta x_1^{0} : |f(\xi_1)| > C
+\]
+$$\bot$$
 
 
 \end{Proof}
