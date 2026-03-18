@@ -32,7 +32,7 @@
     Хотим (докажем сверху):
     \begin{itemize}
         \item[1)] $M \in \R$
-        \item[2)] $\exists x_0 : f(x_0) = M$ 
+        \item[2)] $\exists x_0 \in [a, b] : f(x_0) = M$ 
     \end{itemize}
 
     Докажем 2), 1) следует из него (очевидно, что если $\exists x_0 : f(x_0) = M$, то $M \neq \infty$)
@@ -65,6 +65,11 @@ $a_{n_0}$ --- верхняя грань для $E_f$, $\bot$
 \]
 
 $x_n \in [a;b] \text{ --- ограничена. Тогда по теореме Б-В } \Rightarrow \exists x_{n_k} : x_{n_k} \underset{k \to \infty}{\rightarrow} x_0$
+
+Так как $x_{n_k} \in [a;b]$ и отрезок $[a;b]$ является замкнутым, то предел последовательности также принадлежит этому отрезку, то есть
+\[
+x_0 \in [a;b].
+\]
 
 \[
     f(x_{n_k}) \xrightarrow[k \to \infty ]{} M
