@@ -1,1 +1,266 @@
-    \section{Теорема о производной сложной функции. Производная обратной функции. Производная показательной, логарифмической, степенной и обр.триг. функций.}
+\section{Теорема о производной сложной функции. Производная обратной функции. Производная показательной, логарифмической, степенной и обр.триг. функций.}
+
+
+
+\subsection{Теорема о дифференцируемости сложной функции}
+
+\begin{theorem}
+Пусть функция $g(x)$ дифференцируема в точке $x_0$, а функция $f(y)$
+дифференцируема в точке
+\[
+y_0 = g(x_0).
+\]
+Тогда сложная функция $f(g(x))$ дифференцируема в точке $x_0$, и
+\[
+\left.(f(g(x)))'\right|_{x=x_0} = f'(g(x_0)) \cdot g'(x_0).
+\]
+\end{theorem}
+
+\begin{Proof}
+Так как функция $g(x)$ дифференцируема в точке $x_0$, то
+\[
+g(x) = g(x_0) + g'(x_0)(x-x_0) + \overline{o}(x-x_0).
+\]
+
+Так как функция $f(y)$ дифференцируема в точке $y_0 = g(x_0)$, то
+\[
+f(y) = f(y_0) + f'(y_0)(y-y_0) + \overline{o}(y-y_0).
+\]
+
+Подставим
+\[
+y = g(x), \qquad y_0 = g(x_0).
+\]
+Тогда получаем:
+\[
+f(g(x))
+=
+f(g(x_0))
++
+f'(g(x_0))\bigl(g(x)-g(x_0)\bigr)
++
+\overline{o}\bigl(g(x)-g(x_0)\bigr).
+\]
+
+Теперь подставим разложение для $g(x)-g(x_0)$:
+\[
+g(x)-g(x_0)
+=
+g'(x_0)(x-x_0) + \overline{o}(x-x_0).
+\]
+
+Следовательно,
+\[
+f(g(x))
+=
+f(g(x_0))
++
+f'(g(x_0))
+\Bigl(
+g'(x_0)(x-x_0) + \overline{o}(x-x_0)
+\Bigr)
++
+\overline{o}\Bigl(
+g'(x_0)(x-x_0) + \overline{o}(x-x_0)
+\Bigr).
+\]
+
+Раскрывая скобки, получаем
+\[
+f(g(x))
+=
+f(g(x_0))
++
+f'(g(x_0))\,g'(x_0)(x-x_0)
++
+f'(g(x_0))\,\overline{o}(x-x_0)
++
+\overline{o}\Bigl(
+g'(x_0)(x-x_0) + \overline{o}(x-x_0)
+\Bigr).
+\]
+
+Последние два слагаемых имеют порядок $\overline{o}(x-x_0)$, поэтому
+\[
+f(g(x))
+=
+f(g(x_0))
++
+f'(g(x_0))\,g'(x_0)(x-x_0)
++
+\overline{o}(x-x_0).
+\]
+
+Значит, по определению производной,
+\[
+\left.(f(g(x)))'\right|_{x=x_0}
+=
+f'(g(x_0)) \cdot g'(x_0).
+\]
+\end{Proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Теорема о производной обратной функции}
+
+\begin{theorem}
+Пусть функция $f(x)$ непрерывна и обратима на $[a,b]$, 
+$x_0 \in (a,b)$, и существует производная $f'(x_0)\neq 0$.
+Тогда существует производная обратной функции в точке
+\[
+y_0 = f(x_0),
+\]
+и выполняется формула
+\[
+\left.(f^{-1}(y))'\right|_{y=y_0} = \frac{1}{f'(x_0)}.
+\]
+\end{theorem}
+
+\begin{Proof}
+Рассмотрим предел
+\[
+\left.(f^{-1}(y))'\right|_{y=y_0}
+=
+\lim_{y\to y_0}\frac{f^{-1}(y)-f^{-1}(y_0)}{y-y_0}.
+\]
+
+Сделаем замену
+\[
+y = f(x), \qquad y_0 = f(x_0).
+\]
+
+Тогда при $y\to y_0$ имеем $x\to x_0$, и потому
+\[
+\lim_{y\to y_0}\frac{f^{-1}(y)-f^{-1}(y_0)}{y-y_0}
+=
+\lim_{x\to x_0}\frac{f^{-1}(f(x)) - f^{-1}(f(x_0))}{f(x)-f(x_0)}.
+\]
+
+Так как
+\[
+f^{-1}(f(x)) = x, \qquad f^{-1}(f(x_0)) = x_0,
+\]
+получаем
+\[
+\lim_{x\to x_0}\frac{x-x_0}{f(x)-f(x_0)}.
+\]
+
+Перепишем:
+\[
+\lim_{x\to x_0}\frac{x-x_0}{f(x)-f(x_0)}
+=
+\frac{1}{\displaystyle \lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}}.
+\]
+
+По определению производной
+\[
+\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0} = f'(x_0).
+\]
+
+Следовательно,
+\[
+\left.(f^{-1}(y))'\right|_{y=y_0}
+=
+\frac{1}{f'(x_0)}.
+\]
+\end{Proof}
+
+
+
+\subsection{Производная показательной, логарифмической, степенной и обр. триг. функций.}
+\begin{theorem}
+\begin{itemize}
+\item \textbf{Показательная:}\quad $(a^x)'=a^x\ln a,\quad a>0,\ a\ne 1;\qquad (e^x)'=e^x.$
+\item \textbf{Логарифмическая:}\quad $(\ln x)'=\dfrac1x,\ x>0;\qquad $
+\item \textbf{Степенная:}\quad $(x^\alpha)'=\alpha x^{\alpha-1},\ x>0,\ \alpha\in\mathbb{R}.$
+\item \textbf{Обр. триг.:}\quad
+$(\arcsin x)'=\dfrac1{\sqrt{1-x^2}},\ 
+(\arccos x)'=-\dfrac1{\sqrt{1-x^2}},\ |x|<1.$
+\item \textbf{Обр. триг.:}\quad
+$(\arctan x)'=\dfrac1{1+x^2},\ 
+(\operatorname{arccot} x)'=-\dfrac1{1+x^2},\ x\in\mathbb{R}.$
+\end{itemize}
+\end{theorem}
+
+\begin{Proof}
+\begin{itemize}
+\item \textbf{Логарифмическая.}\quad $(\ln x)'=\dfrac1x,\ x>0.$
+
+Пусть $h=x-x_0$ (т.е.\ $x=x_0+h$, $h\to 0$). По определению производной:
+\[
+(\ln x)'\big|_{x=x_0 + h}
+=\lim_{h\to 0}\frac{\ln(x_0+h)-\ln x_0}{h}.
+\]
+Преобразуем:
+\[
+\ln(x_0+h)-\ln x_0=\ln\!\left(\frac{x_0+h}{x_0}\right)=\ln\!\left(1+\frac{h}{x_0}\right),
+\]
+поэтому
+\[
+(\ln x)'\big|_{x=x_0 + h}
+=\lim_{h\to 0}\frac{\ln\!\left(1+\frac{h}{x_0}\right)}{h}.
+\]
+Сделаем замену $t=\frac{h}{x_0}$ (тогда $h=x_0t$, $t\to 0$):
+\[
+(\ln x)'\big|_{x=x_0+h}
+=\frac1{x_0}\lim_{t\to 0}\frac{\ln(1+t)}{t} = \frac1{x_0}\
+\]
+$(\ln x)'=\dfrac1{x}$.
+
+\bigskip
+
+\item \textbf{Производная показательной.}\quad $(e^x)'=e^x,\ x\in\mathbb{R}.$
+
+По определению производной:
+\[
+(e^x)'=\lim_{h\to 0}\frac{e^{x_0+h}-e^{x_0}}{h}
+=e^{x_0}\lim_{h\to 0}\frac{e^h-1}{h}.
+\]
+Так как
+\[
+\lim_{h\to 0}\frac{e^h-1}{h}=1,
+\]
+то
+\[
+(e^x)'=e^x.
+\]
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Производная степенной (для $\alpha\in\mathbb{R}$).}\quad
+$(x^\alpha)'=\alpha x^{\alpha-1},\ x>0.$
+
+Пусть $x>0$. Определим $x^\alpha=e^{\alpha\ln x}$. Тогда
+\[
+(x^\alpha)'=(e^{\alpha\ln x})'.
+\]
+По правилу производной сложной функции:
+\[
+(e^{\alpha\ln x})'=e^{\alpha\ln x}\cdot(\alpha\ln x)'.
+\]
+Так как $\alpha$ — константа, то
+\[
+(\alpha\ln x)'=\alpha(\ln x)'=\alpha\cdot\frac1x.
+\]
+Следовательно,
+\[
+(x^\alpha)'=e^{\alpha\ln x}\cdot\alpha\cdot\frac1x
+=x^\alpha\cdot\frac{\alpha}{x}=\alpha x^{\alpha-1}.
+\]
+
+\bigskip
+
+\end{itemize}
+\end{Proof}

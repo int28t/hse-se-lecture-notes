@@ -1,1 +1,208 @@
 \section{Теорема о показательной функции (без док.). Определение логарифмической функции и доказательство ее свойств. Определение степенной функции для произвольного показателя, ее свойства. Второй замечательный предел. Следствия.}
+
+\subsection{Теорема о показательной функции (без док.)}
+
+\begin{theorem}[Теорема о показательной функции (без док.)]
+Рассмотрим: $y=a^x$
+
+\textbf{1.} $D_f = \mathbb{R}, E_f = (0; +\infty)$
+
+\textbf{2.} монотонность:
+$a > 1: \nearrow$
+
+$0 < a < 1: \searrow$
+
+\textbf{3.} непрерывна на $D_f$
+
+\textbf{4.} свойства к которым мы привыкли: $a^x \cdot a^y = a^{x+y}$
+
+$(a^x)^y=a^{x\cdot y}$
+
+\end{theorem}
+
+\subsection{Определение логарифмической функции и доказательство ее свойств.}
+
+\begin{theorem}[Определение логарифмической функции и доказательство ее свойств.]
+$y = \log_{a} x $ - обратная к $y=a^x$
+
+обратная существует и обладает свойствами:
+
+Все свойства следуют из теоремы об обратной функции (для показательной функции выше)
+
+\textbf{1.} $D_f = (0; +\infty), E_f = \mathbb{R}$
+
+\textbf{2.} $a>1 \nearrow$
+
+$0<a<1: \searrow$
+
+\textbf{3.} непрерывна на $D_f$
+
+\textbf{4.} свойства логарифма следуют из соответствующих свойств показательных функций просто обращением этих равенств:
+
+$\log_a x + \log_a y = \log_a (x \cdot y)$
+
+$\alpha \cdot \log_a x = \log_a x^{\alpha}$
+
+остальные свойства логарифмов можно вытащить из этих двух
+
+\end{theorem}
+
+\subsection{Определение степенной функции для произвольного показателя, ее свойства}
+
+\begin{theorem}[Определение степенной функции для произвольного показателя и ее свойства]
+
+степенная функция в общем случае:
+
+$y=x^{\alpha}, \alpha \in \mathbb{R}$
+
+$D_f = (0; +\infty)$
+
+$x^{\alpha}=e^{\alpha \cdot \ln(x)}$ (можем так сделать благодаря $D_f$)
+
+непрерывна потому что это сложная функция от непрерывных функций 
+
+монотонность:
+
+возрастающая от возрастающей возрастает
+
+возрастающая от убывающей убывает
+
+$e^{(\overbrace{\alpha \cdot \overbrace{\ln(x)}^{\text{строго возрастает}}}^{\text{зависит от знака}})}$
+
+
+\end{theorem}
+
+\subsection{Второй замечательный предел}
+
+\begin{theorem}[Второй замечательный предел]
+\[
+	\Lim{x}{0} (1 + x)^\frac{1}{x} = e
+\]
+\end{theorem}
+
+\begin{Proof}
+	Мы знаем:
+
+	$$\Lim{n}{\infty} \l(1 + \frac{1}{n}\r)^n = e$$
+
+	Хотим:
+	
+	\[
+	\Lim{t}{+\infty} \l(1 + \frac{1}{t}\r)^t = e \tag{1}
+	\]
+
+	Воспользуемся неубываением $y = x^t$
+	\[
+		\underbrace{\l(1 + \frac{1}{[t] + 1} \r)^{[t]}}_{g(t)} \leq \underbrace{\l(1 + \frac{1}{t} \r)^{t}}_{f(t)} \leq \underbrace{\l(1 + \frac{1}{[t]} \r)^{[t] + 1}}_{h(t)},\ \fbox{$t \geq 1, t \in \R$}
+	\]
+
+	Мы знаем: $\Lim{n}{\infty} \l(1 + \frac{1}{n + 1} \r)^{n} = e$
+
+	\[
+		\forall \eps > 0\ \exists N(\eps ) \in \N\ \forall n > N(\eps )\ \l|\l(1 + \frac{1}{n + 1}\r)^n - e \r| < \eps 
+	\]
+
+	{\bf Утверждение:} $\Lim{t}{+\infty} g(t) = e$
+
+	\[
+		\forall \eps > 0\ \exists M(\eps )\ \forall t > M(\eps ) \l|\l(1 + \frac{1}{[t] + 1} \r)^{[t]} - e\r| < \eps
+	\]
+
+	$M(\eps) = N(\eps) + 1$, так как:
+	\[
+		\forall t > N(\eps ) + 1 : [t] > N(\eps )
+	\]
+
+	Аналогично доказывается $h(t) \xrightarrow[t \to \infty ]{} e$
+
+	По теореме о зажатой функции:
+	\[
+		g(t) \to e, h(t) \to e \Rightarrow f(t) \to e
+	\]
+\end{Proof}
+\begin{Proof}[]
+	Хотим:
+	\[
+		\Lim{n}{-\infty } \left( 1 + \frac{1}{t} \right)^t = e  \tag{2}
+	\]
+
+	Замена $y = -t$
+
+	\[
+		\Lim{y}{+\infty } \left( 1 - \frac{1}{y} \right)^{-y} = \Lim{y}{+\infty } \left(\frac{y - 1}{y} \right)^{-y} = \Lim{y}{+\infty } \left(\frac{y}{y-1} \right)^{y} = \Lim{y}{+\infty } \left(1 + \frac{1}{y - 1} \right)^{y} =
+	\]
+	\[
+		= \Lim{y}{+\infty } \underbrace{\left(1 + \frac{1}{y - 1} \right)^{y - 1}}_{\to e} \underbrace{\left(1 + \frac{1}{y - 1} \right)}_{1} = e
+	\]
+\end{Proof}
+\begin{Proof}[]
+	Хотим:
+	\[
+		\Lim{x}{0} (1 + x)^\frac{1}{x} = e
+	\]
+	\[
+		\Updownarrow
+	\]
+	\[
+		\Lim{x}{0^{\pm}} (1 + x)^{\frac{1}{x}} = e
+	\]
+
+	\begin{itemize}
+		\item[1)] $\Lim{x}{0^{+}} (1 + x)^{\frac{1}{x}} =$
+	\end{itemize}
+
+	Замена $x = \frac{1}{t}$
+
+	\[
+		= \Lim{t}{+\infty} \l(1 + \frac{1}{t}\r)^t = e \text{ по (1) }
+	\]
+
+	\begin{itemize}
+		\item[2)] $\Lim{x}{0^{-}} (1 + x)^{\frac{1}{x}} =$
+	\end{itemize}
+
+	Замена $x = \frac{1}{t}$
+
+	\[
+		= \Lim{t}{-\infty} \l(1 + \frac{1}{t}\r)^t = e \text{ по (2) }
+	\]
+\end{Proof}
+
+\begin{remark}
+	\[
+		\Lim{y}{y_0} h(y)
+	\]
+	Замена $y = f(x)$, при $y \to y_0, x \to x_0$. Тогда:
+	\[
+		\Lim{y}{y_0} h(y) = \Lim{x}{x_0} h(f(x))
+	\]
+\end{remark}
+
+\subsection{Следствия из 2ого замечательного предела}
+
+{\bf Следствие 1} 
+\[
+	\Lim{x}{0} \frac{\ln (1 + x)}{x} = 1
+\]
+\[
+	\frac{1}{x} \cdot \ln (1 + x) = \ln (1 + x)^{\frac{1}{x}} \rightarrow \ln e = 1
+\]
+
+Непрерывность $f(x)$ в т $x_0$
+\[
+	\Lim{x}{x_0} f(x) = f(x_0) = f(\Lim{x}{x_0} x)
+\]
+\[
+	\Lim{x}{x_0} \ln (x) = \ln (x_0)
+\]
+
+{\bf Следствие 2}
+\[
+	\Lim{x}{0} \frac{e^x - 1}{x} = 1
+\]
+Замена $t = e^x - 1$, при $x \to 0,\ t = e^x - 1 \to 0$,\
+$t + 1 = e^x, x = \ln (t + 1)$
+\[
+	\frac{t}{\ln (t + 1)} = \frac{1}{\frac{\ln(t + 1)}{t} \to 1} \to 1
+\]
+

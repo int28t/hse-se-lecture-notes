@@ -11,7 +11,7 @@
         \Updownarrow
     \]
     \[
-        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta \Rightarrow |f(x) - A| < \eps
     \]
 \end{definition}
 
@@ -68,7 +68,7 @@
 
     Имеем:
     \[
-        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+        \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < |x - x_0| < \delta \Rightarrow |f(x) - A| < \eps
     \]
     Предположим, что посылка истинна. Тогда также имеем:
     \[
@@ -100,7 +100,7 @@
 
     Пп т.е верно:
     \[
-        \exists \eps > 0\ \forall \delta > 0\ \exists x(\delta ) \in \overset{\circ}{U}_{\delta } (x_0)\ |f(x) - A| \geq \eps 
+        \exists \eps_0 > 0\ \forall \delta > 0\ \exists x(\delta ) \in \overset{\circ}{U}_{\delta } (x_0)\ |f(x) - A| \geq \eps_0 
     \]
     Для каждого $\delta = \frac{1}{n} \text{ найдем } x_n \in \overset{\circ}{U}_{\delta } (x_0)$
 
@@ -115,7 +115,18 @@
     \]
     Значит $f(x_n) \xrightarrow[n \to \infty ]{} A$
 
-    Но $|f(x) - A| \geq \eps$. Получили противоречие (расписать определение и в качестве $\eps$ взять $\eps_0$)
+    Но из $f(x_n)\to A$ следует:
+    \[
+    \forall \varepsilon>0\ \exists N\ \forall n>N:\ |f(x_n)-A|<\varepsilon.
+    \]
+    При $\varepsilon=\varepsilon_0$ получаем
+    \[
+    \exists N:\ \forall n>N\ \ |f(x_n)-A|<\varepsilon_0,
+    \]
+    что противоречит условию $|f(x_n)-A|\ge \varepsilon_0$ для всех $n$.
+    \[
+    \Rightarrow\ \bot.
+    \]
 \end{Proof}
 
 \subsection{Односторонние пределы}
@@ -123,20 +134,20 @@
 \begin{definition}
     {\bf Односторонним пределом} $\Lim{x}{x_{0-}^+} f(x) = A$ называется такое число, что: 
     \begin{itemize}
-        \item $\Lim{x}{x_{0}^+} f(x) = A$
+        \item $\Lim{x}{x_{0}^+} f(x) = A \text{ --- \textbf{правосторонний предел}}$
         \[
-            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x - x_0 < \delta (\eps )\ |f(x) - A| < \eps \text{ --- \textbf{правосторонний предел}}
+            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x - x_0 < \delta (\eps ) \Rightarrow |f(x) - A| < \eps 
         \]
-        \item $\Lim{x}{x_{0-}} f(x) = A$
+        \item $\Lim{x}{x_{0-}} f(x) = A \text{ --- \textbf{левосторонний предел}}$
         \[
-            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x_0 - x < \delta (\eps )\ |f(x) - A| < \eps \text{ --- \textbf{левосторонний предел}}
+            \forall \eps > 0\ \exists \delta = \delta (\eps )\ \forall x : 0 < x_0 - x < \delta (\eps ) \Rightarrow |f(x) - A| < \eps
         \]
     \end{itemize}
 \end{definition}
 
 \begin{theorem}[Теорема]
     \[
-        \exists \Lim{x}{x_0} f(x) \Leftrightarrow \exists \Lim{x}{x_{0}^+} f(x) = \exists \Lim{x}{x_{0-}} f(x)
+        \exists \Lim{x}{x_0} f(x) \Leftrightarrow \exists \Lim{x}{x_{0}^+} f(x) = \exists \Lim{x}{x_{0}^{-}} f(x)
     \]
 \end{theorem}
 
@@ -151,7 +162,7 @@
     т.е.
     \[
         \forall \eps > 0\ \exists \delta = \delta(\eps )\ 
-        \forall x:\ 0 < |x - x_0| < \delta\ |f(x) - A| < \eps
+        \forall x:\ 0 < |x - x_0| < \delta \Rightarrow |f(x) - A| < \eps
     \]
 
     Тогда, если $0 < x - x_0 < \delta$, автоматически выполнено
@@ -188,14 +199,14 @@
     \[
         \forall \eps > 0\ 
         \exists \delta_1 = \delta_1(\eps )\ 
-        \forall x:\ 0 < x - x_0 < \delta_1\ 
+        \forall x:\ 0 < x - x_0 < \delta_1 \Rightarrow 
         |f(x) - A| < \eps
     \]
     и
     \[
         \forall \eps > 0\ 
         \exists \delta_2 = \delta_2(\eps )\ 
-        \forall x:\ 0 < x_0 - x < \delta_2\ 
+        \forall x:\ 0 < x_0 - x < \delta_2 \Rightarrow 
         |f(x) - A| < \eps
     \]
 
