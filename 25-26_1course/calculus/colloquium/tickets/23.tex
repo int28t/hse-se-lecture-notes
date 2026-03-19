@@ -1,25 +1,39 @@
 \section{Интегрируемость непрерывных и монотонных на отрезке функций по Риману.}
 
 \begin{theorem}[Интегрируемость монотонных функций]
-    Если f(x) монотонна на [a; b], то $f(x) \in R[a; b]$
+    Если $f(x)$ монотонна на $[a; b]$, то $f(x) \in R[a; b]$
 \end{theorem}
 
 \begin{Proof}
-    Докажем к примеру для неубывания по критерию Дарбу
+   Пусть $f(x)$ неубывает
 
-    1) $f(x) \text{огр сверху} f(b) \text{и огр снизу } f(a)$\\
-    2) Предположим противное:
+    1) $f(x) \text{ огр сверху } f(b) \text{ и огр снизу } f(a)$
 
-    Пусть $I^* \neq I_*\implies 0 < I^* - I_* \leq S_\tau - s_\tau = \Sum{i = 1}{n}(M_i - m_i)|\D x_i|\leq d(\tau)\Sum{i = 1}{n}(M_i - m_i) = d(\tau)\Sum{i = 1}{n}(f(x_i) - f(x_{i-1})) = d(\tau)(f(b) - f(a))$\\
-    $\D x_i = [x_{i-1}; x_i]$\\
-    Возьмем $\tau$: $d(\tau) < \frac{I^* - I_*}{f(b) - f(a)}\cdot\frac{1}{2}$\\
-    $0 < I^* - I_* \leq (I^* - I_*)\cdot\frac{1}{2}$\\
+    2) Предположим противное. Пусть $I^* \neq I_*$:
+    \[
+        0 < I^* - I_* \leq S_\tau - s_\tau\ \forall \tau = \Sum{i = 1}{n}(M_i - m_i)|\D x_i|\leq d(\tau)\Sum{i = 1}{n}(M_i - m_i) =
+    \]
+    \[
+        = d(\tau)\Sum{i = 1}{n}(f(x_i) - f(x_{i-1})) = d(\tau)(f(b) - f(a)) \text{ --- сколь угодно малое число}
+    \]
+    $\D x_i = [x_{i-1}; x_i]$
+
+    Возьмем $\tau$: $d(\tau) < \frac{I^* - I_*}{f(b) - f(a)}\cdot\frac{1}{2}$
+
+    \[
+        d(\tau)(f(b) - f(a)) < (I^* - I_*)\cdot\frac{1}{2}
+    \]
+
+    \[
+        0 < I^* - I_* \leq (I^* - I_*)\cdot\frac{1}{2},\ \bot
+    \]
 \end{Proof}
 
 \begin{definition}[Опр1]
-    $f(x) \text{ называется равн непр на E, если}$\\
-    $\forall \eps > 0~ \exists\delta > 0 ~\forall x_1, x_2 \in E: |x_1 - x_2| < \delta$\\
-    Верно $|f(x_1) - f(x_2)| < \eps$
+    $f(x)$ называется равномерно непрерывной на $E$, если:
+    \[
+        \forall \eps > 0~ \exists\delta > 0 ~\forall x_1, x_2 \in E: |x_1 - x_2| < \delta \text{ верно } |f(x_1) - f(x_2)| < \eps
+    \]
 \end{definition}
 
 \begin{definition}[Опр2]
@@ -97,9 +111,9 @@
 
     2) Докажем от противного
 
-    $0 < I^* - I_* \leq_\forall\tau S_\tau - s_\tau = Sum{i = 1}{n}(M_i - m_i)|\D x_i|$\\
+    $0 < I^* - I_* \leq_\forall\tau S_\tau - s_\tau = \Sum{i = 1}{n}(M_i - m_i)|\D x_i|$\\
     $\exists \xi_i, \eta_i \in \D x_i: |\xi_i - \eta_i| \leq d(\tau)< \delta$\\
-    $Sum{i = 1}{n}(M_i - m_i)|\D x_i| = Sum{i = 1}{n}(f(\xi_i) - f(\eta_i))|\D x_i| < \eps \Sum{i = 1}{n}|\D x_i|$\\
+    $\Sum{i = 1}{n}(M_i - m_i)|\D x_i| = \Sum{i = 1}{n}(f(\xi_i) - f(\eta_i))|\D x_i| < \eps \Sum{i = 1}{n}|\D x_i|$\\
     Возьмем $\eps = \frac{I^* - I_*}{b - a} \cdot \frac{1}{2} \rightarrow \delta(\eps)$\\
     Построим по полученной $\delta(\eps) d(\tau)$
     $\eps \Sum{i = 1}{n}|\D x_i| = \eps(b - a) = \frac{I^* - I_*}{2}$ - Противоречие\\
