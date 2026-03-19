@@ -12,24 +12,50 @@
 \end{definition}
 
 \subsection{Свойства сумм Дарбу}
-\begin{definition}
-    Свойства сумм Дарбу:\\
-    1. $S_\tau, s_\tau$ - Определены (Т.к. интегрируются только огр функции)\\
-    2. $s_\tau < S_\tau$ при одинаковых разбиениях\\
-    3. $S_\tau = \subs{sup~\sigma(\tau, \xi)}{\xi}$\\
-    $s_\tau = \subs{inf~\sigma(\tau, \xi)}{\xi}$\\
-    4. $\text{Разбиение } \tau' = \Subst{\{[x_{i-1}'; x_i']\}}{i = 1}{n}$ является измельчением $\tau = \Subst{\{[x_{j-1}; x_j]\}}{j = 1}{k}$\\
-    $\forall j ~\exists i: x_j = x_i' (n \geq k)$\\
-    Обозначается: $\tau' \succ \tau$ 
+\begin{definition}[Свойства сумм Дарбу]
+\noindent
+\renewcommand{\labelenumi}{\fbox{\arabic{enumi}}}
+\begin{enumerate}
+    \item $S_{\tau},\, s_{\tau}$ --- определены
+    (т.к.\ интегрируются только огр функции).
+    
+    \item $s_{\tau}\leq S_{\tau}$ при одинаковых разбиениях.
+    
+    \item
+    \[
+    S_{\tau}=\sup \sigma(\tau,\xi)\big|_{\xi},
+    \qquad
+    s_{\tau}=\inf \sigma(\tau,\xi)\big|_{\xi}.
+    \]
+    
+    \item Разбиение
+    \[
+    \tau'=\bigl\{[x'_{i-1};x'_i]\bigr\}_{i=1}^{n}
+    \]
+    является измельчением
+    \[
+    \tau=\bigl\{[x_{j-1};x_j]\bigr\}_{j=1}^{k},
+    \]
+    \[
+    \forall j\ \exists i:\ x_j=x'_i\ (n\ge k).
+    \]
+    
+    Обозначение: $\tau' \succ \tau$.\\
+    Если: $\tau' \succ \tau$, то:
+    \[
+    \begin{aligned}
+        S_{\tau'} \leq S_{\tau} \text{ и } s_{\tau'} \geq s_{\tau}
+    \end{aligned}
+    \]
+    
+    \item
+    \[
+    \forall \tau_1,\tau_2:\ s_{\tau_1}\le S_{\tau_2}.
+    \]
+\end{enumerate}
 \end{definition}
 
-\begin{theorem}[4 свойство]
-    Дано: $\tau' \succ \tau$\\
-    $S_{\tau'} \leq S_\tau$\\
-    $s_{\tau'} \geq s_\tau$
-\end{theorem}
-
-\begin{Proof}
+\begin{Proof}[Доказательство 4-го пункта]
     1. Пусть $\tau' \succ \tau \text{ причем } \tau' \text{ отличается от } \tau \text{добавлением одной точки в } \D x_i$\\
     \begin{center}
 \begin{tikzpicture}[x=1.5cm, y=1cm]
@@ -92,14 +118,12 @@
     Аналогично доказывается для нижних сумм Дарбу.
 \end{Proof}
 
-\begin{theorem}[5 свойство]
-    $\forall \tau_1, \tau_2: s_{\tau_1} \leq S_{\tau_2}$\\
-\end{theorem}
 
-\begin{Proof}
+\begin{Proof}[Доказательство 5-го пункта]
     Построим измельчение $\tau$, которое состоит из точек $\tau_1$ и $\tau_2 \implies$\\
     $\implies \tau \succ \tau_1 \text{ и } \tau \succ \tau_2$\\
-    Тогда: $s_{\tau_1} \leq s_\tau \leq S_\tau \leq S_{\tau_2}$ чтд
+    Тогда: $s_{\tau_1} \leq s_\tau \leq S_\tau \leq S_{\tau_2}$ \\
+    Что и требовалось доказать.
 \end{Proof}
 
 \subsection{Верхний и нижний интеграл Дарбу}
@@ -127,7 +151,8 @@
 \end{theorem}
 
 
-\begin{Proof}[Достаточность]
+\begin{Proof}
+    {\LARGE \textbf{«\(\Longrightarrow\)»}}\\
     Докажем от противного: $f(x) \in R[a, b]$ и $ f(x) \text{ - огр на }[a; b]$\\
     Но $I^* \neq I_*$\\
     Если $I^* \neq I_*$, то $I^* > I_*$ (Доказывается от противного -> смотрим на рисунок -> видим противоречие с 5 свойством сумм Дарбу)\\
@@ -196,61 +221,78 @@ $I - \eps < \sigma(\tau, \xi) < I + \eps$\\
 $I - \eps \leq s_\tau$ и $S_\tau \leq I + \eps \implies |S_\tau - s_\tau| \leq 2\eps$\\
 Возьмем $\eps = \frac{\gamma}{3}$ и перейдем к рисунку и увидим противоречие.\\
 
-\end{Proof}
+    
+    \noindent {\Huge \textbf{\#}}\quad\\
+    \\
+\textbf{\textit{Для начала рассмотрим две леммы, которые помогают в доказательстве критерия Дарбу:}}
 
-\begin{Proof}[Необходимость]
-    Докажем две леммы, которые доказывают критерий Дарбу:\\
-    1. $\tau' \succ \tau$ отличаются p точками $p \in \N \implies S_\tau - S_{\tau'} \leq (M - m)\cdot p\cdot\delta$\\ $d(\tau) < \delta$ \\
-    p = 1:\\
-    $S_\tau - S_{\tau'} = M_i|\D x_i| - (M'_i|\D x'_i| + M'_{i+1}|\D x'_{i+1}| = (M_i - M'_i)|\D x'_i| + (M_i - M'_{i+1})|\D x'_{i+1}|) \leq (M - m)|\D x'_{i}| + (M - m)|\D x'_{i+1}| = (M - m)|\D x_{i}| < (M - m)\cdot\delta$\\
+\textit{\textbf{\fbox{1} Лемма.}}
 
-    2. Лемма Дарбу: $I^* = \Lim{d(\tau)}{0}S_\tau \iff \forall\eps > 0~\exists\delta~\forall\tau~d(\tau) < \delta: |i^* - S_\tau| < \eps$\\
-    Шаг 1: если $M = m = const = f(x)$ на [a; b] очевидно, что $\forall\tau ~ \forall\xi:~\sigma(\tau, \xi) = const\cdot[a; b]$\\
-    Шаг 2: если M > m:\\
-    \begin{center}
+$\tau' \succ \tau$ отличаются $p$ точками, $p \in \N \implies S_\tau - S_{\tau'} \leq (M - m)\cdot p\cdot\delta$\\
+$d(\tau) < \delta$\\
+
+\begin{proof}[\textbf{Доказательство.}]
+    
+
+\noindent\\
+$p = 1$:\\
+$S_\tau - S_{\tau'} = M_i|\D x_i| - (M'_i|\D x'_i| + M'_{i+1}|\D x'_{i+1}| = (M_i - M'_i)|\D x'_i| + (M_i - M'_{i+1})|\D x'_{i+1}|) \leq (M - m)|\D x'_{i}| + (M - m)|\D x'_{i+1}| = (M - m)|\D x_{i}| < (M - m)\cdot\delta$\\
+\end{proof}
+\bigskip
+
+\textit{\textbf{\fbox{2} Лемма Дарбу.}}
+
+$I^* = \Lim{d(\tau)}{0}S_\tau \iff \forall\eps > 0~\exists\delta~\forall\tau~d(\tau) < \delta: |i^* - S_\tau| < \eps$\\
+
+\begin{proof}[\textbf{Доказательство.}]
+\noindent\\
+Шаг 1: если $M = m = const = f(x)$ на $[a; b]$ очевидно, что $\forall\tau ~ \forall\xi:~\sigma(\tau, \xi) = const\cdot[a; b]$\\
+Шаг 2: если $M > m$:\\
+
+\begin{center}
 \begin{tikzpicture}[x=2.5cm, y=1.2cm, >=stealth]
     % Горизонтальная ось
     \draw[thick, ->] (-0.5, 0) -- (5.5, 0);
 
-    % Координаты точек (I*, S_tau', S_tau*, S_tau)
-    \coordinate (I) at (0, 0);          % I*
-    \coordinate (Stp) at (1.5, 0);      % S_tau' (левая S)
-    \coordinate (Sts) at (3.2, 0);      % S_tau* (средняя S)
-    \coordinate (St) at (4.8, 0);       % S_tau (правая S)
+    % Координаты точек
+    \coordinate (I) at (0, 0);
+    \coordinate (Stp) at (1.5, 0);
+    \coordinate (Sts) at (3.2, 0);
+    \coordinate (St) at (4.8, 0);
 
-    % Рисуем засечки на оси для всех точек
+    % Засечки
     \foreach \p in {I, Stp, Sts, St}
         \draw[thick] (\p) +(0, 0.15) -- +(0, -0.15);
 
-    % Подписи точек снизу
+    % Подписи
     \node[below=8pt] at (I) {$I^*$};
     \node[below=8pt] at (Stp) {$S_{\tau'}$};
     \node[below=8pt] at (Sts) {$S_{\tau^*}$};
     \node[below=8pt] at (St) {$S_{\tau}$};
 
-    % 1. Черная П-образная скобка: связывает I* и S_tau
+    % Скобка
     \draw[thick] (0, 0.6) -- (0, 2.2) -- (4.8, 2.2) -- (4.8, 0.6);
     \node[above] at (2.4, 2.2) {$< \eps$};
 
-    % 2. Черная дуга СВЕРХУ: связывает I* и S_tau*
+    % Верхняя дуга
     \draw[thick] (0, 0.3) to[bend left=35] node[above, scale=0.8] {$< \eps/2$} (3.2, 0.3);
 
-    % 3. Красная дуга СНИЗУ: связывает S_tau' и S_tau
+    % Нижняя дуга
     \draw[red, thick] (1.5, -0.5) to[bend right=30] node[below, scale=0.8, black] {$< \eps/2$} (4.8, -0.5);
-
 \end{tikzpicture}
 \end{center}
-    \newpage
-    (*)$\forall\eps > 0 ~\exists\tau^*~ \text{(в нем p точек)}:~ S_{\tau^*} - I^* < \frac{\eps}{2}$\\
-    Возьмем $\delta = \frac{\eps}{2(M - m)p}$\\
-    Возьмем $\forall\tau:~ d(\tau) < \delta$\\
-    Построим $\tau' \text{ - объединение } \tau $ и $\tau^*$\\
-    (*)$\tau' \succ \tau^* \implies S_{\tau'} \leq S_{\tau^*}$\\
-    (*)$\tau' \succ \tau \implies S_{\tau} - S_{\tau'} \leq (M - m)p\delta = \frac{\eps}{2}$\\
-    Из (*)-ек $\implies S_\tau - I^* < \eps$\\
-    На рисунок смотреть обязательно, чтобы точно понять, как это доказательство работает!\\
 
-    Переходим к доказательству самого критерия Дарбу:\\
+(*)$\forall\eps > 0 ~\exists\tau^*~ \text{(в нем p точек)}:~ S_{\tau^*} - I^* < \frac{\eps}{2}$\\
+Возьмем $\delta = \frac{\eps}{2(M - m)p}$\\
+Возьмем $\forall\tau:~ d(\tau) < \delta$\\
+Построим $\tau' \text{ - объединение } \tau $ и $\tau^*$\\
+(*)$\tau' \succ \tau^* \implies S_{\tau'} \leq S_{\tau^*}$\\
+(*)$\tau' \succ \tau \implies S_{\tau} - S_{\tau'} \leq (M - m)p\delta = \frac{\eps}{2}$\\
+Из (*)-ек $\implies S_\tau - I^* < \eps$\\
+На рисунок смотреть обязательно, чтобы точно понять, как это доказательство работает!\\
+\end{proof}
+\noindent {\Huge \textbf{\#}}\quad\\ \\
+    {\LARGE \textbf{«\(\Longleftarrow\)»}} \\ 
     $I^* = I_* = I$\\
     $\forall \eps > 0~ \exists\delta_1~\forall\tau~ d(\tau < \delta_1):~ S_\tau - I^* < \eps$\\
     $\forall \eps > 0~ \exists\delta_2~\forall\tau~ d(\tau < \delta_2):~ I_* - s_\tau < \eps$\\
@@ -293,3 +335,5 @@ $\exists \delta = min{\delta_1; \delta_2}\forall\tau~ d(\tau) < \delta: I - \eps
 Мы утверждаем, что когда мы выбираем некоторую $\eps$, то все S попадут правее I, а все s - левее\\
 Интегральная сумма лежит между s и S, а значит она лежит в изначальной эпсилон окрестности I и поэтому у нас выполнено определение интегрируемости по Риману
 \end{Proof}
+
+ 
