@@ -111,9 +111,9 @@
 
     2) Докажем от противного
 
-    $0 < I^* - I_* \leq_\forall\tau S_\tau - s_\tau = Sum{i = 1}{n}(M_i - m_i)|\D x_i|$\\
+    $0 < I^* - I_* \leq_\forall\tau S_\tau - s_\tau = \Sum{i = 1}{n}(M_i - m_i)|\D x_i|$\\
     $\exists \xi_i, \eta_i \in \D x_i: |\xi_i - \eta_i| \leq d(\tau)< \delta$\\
-    $Sum{i = 1}{n}(M_i - m_i)|\D x_i| = Sum{i = 1}{n}(f(\xi_i) - f(\eta_i))|\D x_i| < \eps \Sum{i = 1}{n}|\D x_i|$\\
+    $\Sum{i = 1}{n}(M_i - m_i)|\D x_i| = \Sum{i = 1}{n}(f(\xi_i) - f(\eta_i))|\D x_i| < \eps \Sum{i = 1}{n}|\D x_i|$\\
     Возьмем $\eps = \frac{I^* - I_*}{b - a} \cdot \frac{1}{2} \rightarrow \delta(\eps)$\\
     Построим по полученной $\delta(\eps) d(\tau)$
     $\eps \Sum{i = 1}{n}|\D x_i| = \eps(b - a) = \frac{I^* - I_*}{2}$ - Противоречие\\
