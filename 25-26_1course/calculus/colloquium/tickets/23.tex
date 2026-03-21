@@ -29,24 +29,25 @@
     \]
 \end{Proof}
 
-\begin{definition}[Опр1]
+\begin{definition}[Определение 1]
     $f(x)$ называется равномерно непрерывной на $E$, если:
     \[
-        \forall \eps > 0~ \exists\delta > 0 ~\forall x_1, x_2 \in E: |x_1 - x_2| < \delta \text{ верно } |f(x_1) - f(x_2)| < \eps
+        \forall \eps > 0~ \exists\delta > 0 ~\forall x_1, x_2 \in E: |x_1 - x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps
     \]
 \end{definition}
 
-\begin{definition}[Опр2]
-    $f(x)$ непр на E, если\\
-    $\forall x_1 \in E~ \forall \eps > 0~ \exists\delta > 0 ~\forall x_2 \in E: |x_1 - x_2| < \delta$\\
-    Верно $|f(x_1) - f(x_2)| < \eps$
+\begin{definition}[Определение 2]
+    $f(x)$ непрерывна на E, если\\
+    \[
+        \forall x_1 \in E~ \forall \eps > 0~ \exists\delta > 0 ~\forall x_2 \in E: |x_1 - x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps
+    \]
 
 \end{definition}
 
 \begin{consequence}
-    Опр1 $\implies$ Опр2
+    Определение 1 $\implies$ Определение 2
 
-    Опр2 $\nRightarrow$ Опр1
+    Определение 2 $\nRightarrow$ Определение 1 $\left(f(x) = \frac{1}{x} \text{ на } (0, 1),\ x_n = \frac{1}{n},\ |x_{n+1} - x_n| \xrightarrow[n \to \infty ]{} 0 \right)$
 \end{consequence}
 
 \begin{theorem}[Кантора]

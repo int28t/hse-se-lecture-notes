@@ -12,6 +12,15 @@
 \end{definition}
 
 \subsection{Свойства сумм Дарбу}
+\begin{definition}
+    Разбиение $\tau'=\bigl\{[x'_{i-1};x'_i]\bigr\}_{i=1}^{n}$ является измельчением разбиения $\tau=\bigl\{[x_{j-1};x_j]\bigr\}_{j=1}^{k}$
+
+    \[
+        \forall j\ \exists i:\ x_j=x'_i\ (n\ge k)
+    \]
+
+    Обозначение: $\tau' \succ \tau$
+\end{definition}
 \begin{definition}[Свойства сумм Дарбу]
 \noindent
 \renewcommand{\labelenumi}{\fbox{\arabic{enumi}}}
@@ -23,25 +32,11 @@
     
     \item
     \[
-    S_{\tau}=\sup \sigma(\tau,\xi)\big|_{\xi},
+    S_{\tau}=\underset{\xi}{\sup}\ \sigma(\tau,\xi),
     \qquad
-    s_{\tau}=\inf \sigma(\tau,\xi)\big|_{\xi}.
+    s_{\tau}=\underset{\xi}{\inf}\ \sigma(\tau,\xi)
     \]
-    
-    \item Разбиение
-    \[
-    \tau'=\bigl\{[x'_{i-1};x'_i]\bigr\}_{i=1}^{n}
-    \]
-    является измельчением
-    \[
-    \tau=\bigl\{[x_{j-1};x_j]\bigr\}_{j=1}^{k},
-    \]
-    \[
-    \forall j\ \exists i:\ x_j=x'_i\ (n\ge k).
-    \]
-    
-    Обозначение: $\tau' \succ \tau$.\\
-    Если: $\tau' \succ \tau$, то:
+    \item Если: $\tau' \succ \tau$, то:
     \[
     \begin{aligned}
         S_{\tau'} \leq S_{\tau} \text{ и } s_{\tau'} \geq s_{\tau}
@@ -56,7 +51,7 @@
 \end{definition}
 
 \begin{Proof}[Доказательство 4-го пункта]
-    1. Пусть $\tau' \succ \tau \text{ причем } \tau' \text{ отличается от } \tau \text{добавлением одной точки в } \D x_i$\\
+    {\bf 1.} Пусть $\tau' \succ \tau \text{ причем } \tau' \text{ отличается от } \tau \text{ добавлением одной точки в } \D x_i$\\
     \begin{center}
 \begin{tikzpicture}[x=1.5cm, y=1cm]
     % --- Верхняя прямая (разбиение tau) ---
@@ -103,38 +98,37 @@
 
     $\text{Рассмотрим разность } S_\tau $ и $S_{\tau'}$\\
     Наша новая точка на разбиении находиться на позиции *\\
-    $S_\tau - S_{\tau'} = \Sum{i = 1}{n}M_i\cdot|\D x_i| - \Sum{i = 1}{n + 1}M'_i\cdot|\D x'_i| = M_i\cdot|\D x_i| - (M'_i\cdot|\D x'_i| + M'_{i+1}\cdot|\D x'_{i+1}|) = $\\
-    Последнее равенство выполнено, потому все подотрезки $\D x_i$ совпадают кроме позиций i и i + 1\\
-    $|\D x_i| = |\D x'_i| + |\D x'_{i + 1}|$\\
-    $ = (M_i - M'_i)\cdot|\D x'_i| + (M_i - M'_{i + 1})\cdot|\D x'_{i + 1}|$\\
-    Разность между $M_i \text{ и } M'_i\geq 0$ и разность между $M_i \text{ и } M'_{i + 1} \geq 0$ \\
-    Сумма двух неотрицательных чисел всегда положительна или равна 0
-
-    2. $\tau' \succ \tau$\\
+    $$S_\tau - S_{\tau'} = \Sum{i = 1}{n}M_i\cdot|\D x_i| - \Sum{i = 1}{n + 1}M'_i\cdot|\D x'_i| = M_i\cdot|\D x_i| - (M'_i\cdot|\D x'_i| + M'_{i+1}\cdot|\D x'_{i+1}|) = $$
+    $$ = (M_i - M'_i)\cdot|\D x'_i| + (M_i - M'_{i + 1})\cdot|\D x'_{i + 1}|\ \text{так как } |\D x_i| = |\D x'_i| + |\D x'_{i + 1}|$$
+    Так как $M_i - M'_i\geq 0$ и $M_i - M'_{i + 1} \geq 0$. Тогда:
+    \[
+        (M_i - M'_i)\cdot|\D x'_i| + (M_i - M'_{i + 1})\cdot|\D x'_{i + 1}| \geq 0
+    \]
+    {\bf 2.} $\tau' \succ \tau$\\
     Построим последовательность $\tau^*_k$\\
-    $\tau^*_k = \tau' \succ \tau^*_{k - 1} ... \succ \tau^*_1 = \tau$\\
-    $\tau^*_{i} \succ \tau^*_{k - 1}$ отличаются на одну точку $\implies S_{\tau^*_{i - 1}} \geq S_{\tau^*_{i}}$\\
+    $$\tau^*_k = \tau' \succ \tau^*_{k - 1} ... \succ \tau^*_1 = \tau$$
+    $$\tau^*_{i} \succ \tau^*_{i - 1} \text{ отличаются на одну точку } \implies S_{\tau^*_{i}} \leq S_{\tau^*_{i - 1}}$$
     Из такого ряда неравенств получим, что $S_{\tau'} \leq S_{\tau}$\\
     Аналогично доказывается для нижних сумм Дарбу.
 \end{Proof}
 
 
 \begin{Proof}[Доказательство 5-го пункта]
-    Построим измельчение $\tau$, которое состоит из точек $\tau_1$ и $\tau_2 \implies$\\
-    $\implies \tau \succ \tau_1 \text{ и } \tau \succ \tau_2$\\
-    Тогда: $s_{\tau_1} \leq s_\tau \leq S_\tau \leq S_{\tau_2}$ \\
-    Что и требовалось доказать.
+    Построим измельчение $\tau$, которое состоит из точек $\tau_1$ и $\tau_2 \implies$
+
+    $\implies \tau \succ \tau_1 \text{ и } \tau \succ \tau_2$
+
+    Тогда: $s_{\tau_1} \leq s_\tau \leq S_\tau \leq S_{\tau_2}$
 \end{Proof}
 
 \subsection{Верхний и нижний интеграл Дарбу}
 
 \begin{definition}
-    Верхний интеграл Дарбу: $I^* = \subs{inf(S_\tau)}{\tau}$
-
+    Верхний интеграл Дарбу: $I^* = \underset{\tau}{inf}(S_\tau)$
 \end{definition}
 
 \begin{definition}
-    Нижний интеграл Дарбу: $I_* = \subs{sup(s_\tau)}{\tau}$
+    Нижний интеграл Дарбу: $I_* = \underset{\tau}{sup}(s_\tau)$
 
 \end{definition}
 
