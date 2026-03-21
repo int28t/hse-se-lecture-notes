@@ -1,7 +1,7 @@
 \section{Свойства определенного интеграла. Интеграл с переменным верхним пределом. Его свойства. Формула Ньютона-Лейбница.}
 
 \subsection{Свойства определенного интеграла}
-\begin{theorem}[Замечание]
+\begin{theorem}
     
     Если\\
     \[
@@ -26,14 +26,13 @@
     \]
     Нужно:\\
     \[
-        \forall \eps > 0~ \exists N'(\eps)~ \forall n > N'(\eps):~ |\sigma(\tau_n; \xi_n - I)| < \eps\\
+        \forall \eps > 0~ \exists N'(\eps)~ \forall n > N'(\eps):~ |\sigma(\tau_n; \xi_n) - I| < \eps\\
     \]
 
     Начиная с $N'(\eps) = N(\delta(\eps))$ всё выполнено
 \end{Proof}
 
-\begin{definition}
-    $\boxed{1}$(Линейность)\\
+\begin{theorem}[Линейность]
     Если
     \[
         f(x), g(x) \in R[a; b]
@@ -46,62 +45,29 @@
     \[
         \Int{a}{b}{(\alpha f(x) + \beta g(x))\diff x} = \alpha\Int{a}{b}{f(x)\diff x} + \beta\Int{a}{b}{g(x)\diff x}
     \]
-\end{definition}
+\end{theorem}
 
-\begin{Proof}[Докажем интегрируемость]
-        Проверим критерий Лебега интегрируемости по Риману\\
-        1) ограниченность очевидна\\
-        2) По свойствам множеств меры ноль:\\
-        \begin{center}
-\begin{tikzpicture}[x=1cm, y=1cm, >=stealth]
-    % Левая рамка
-    \draw[thick] (0,0) rectangle (5, 1.5);
-    \node at (2.5, 0.75) {$\{{ \text{т. разрыва } \alpha f(x) + \beta g(x) }\}$};
-    
-    % Знак включения посередине
-    \node at (5.7, 0.75) {\Large $\subseteq$};
-    
-    % Правая рамка
-    \draw[thick] (6.5, -0.5) rectangle (12.5, 1.8);
-    \node (trf) at (8, 1) {$\{{ \text{т. р. } f }\}$};
-    \node at (9.5, 1) {\Large $\cup$};
-    \node (trg) at (11, 1) {$\{{ \text{т. р. } g }\}$};
-    
-    % Стрелочки и подписи внутри правой рамки
-    \draw[->, gray] (trf) -- (8, 0.2) node[below, black, scale=0.8] {$\lambda(\cdot) = 0$};
-    \draw[->, gray] (trg) -- (11, 0.2) node[below, black, scale=0.8] {$\lambda(\cdot) = 0$};
-    
-    % Общие подписи меры под рамками
-    \node[below=10pt] at (2.5, 0) {$\lambda(\dots) = 0$};
-    \node[below=25pt] at (9.5, 0) {$\lambda(\dots) = 0$};
+\begin{Proof}
+\textbf{Интегрируемость:} 
+$f,g$ ограничены $\Rightarrow \alpha f + \beta g$ ограничена.  
+Множество точек разрыва:
+\[
+D(\alpha f + \beta g) \subseteq D(f) \cup D(g),
+\]
+а объединение множества меры ноль снова имеет меру ноль $\Rightarrow \alpha f + \beta g \in R[a,b]$.
 
-\end{tikzpicture}
-\end{center}
+\textbf{Свойство интеграла:} 
+Для суммы Римана
+\[
+\sigma_{\alpha f + \beta g}(\tau;\xi) = \sum_{k=1}^n (\alpha f(\xi_k) + \beta g(\xi_k))\Delta x_k
+= \alpha \sum_{k=1}^n f(\xi_k)\Delta x_k + \beta \sum_{k=1}^n g(\xi_k)\Delta x_k
+= \alpha \sigma_f + \beta \sigma_g.
+\]
 
-
-\end{Proof}
-\begin{Proof}[Докажем связь интегралов]
-    Возьмем
-    \[
-    \begin{aligned}
-        &\tau_n: d(\tau_n) \to 0 \text{ и } \xi_n\\
-        &\sigma_{\alpha f(x) + \beta g(x)}(\tau_n; \xi_n) = \Sum{k = 1}{n} \alpha f(\xi_k) + \beta g(\xi_k)|\D x_k| =  \alpha \sigma_f(\tau_n; \xi_n) + \beta \sigma_g(\tau_n; \xi_n)\\
-    \end{aligned}
-    \]
-    Из замечания получаем
-    \[
-    \begin{aligned}
-        &\sigma_{\alpha f(x) + \beta g(x)}(\tau_n; \xi_n) \tounder{n \to \infty}\Int{a}{b}(\alpha f(x) + \beta g(x))\diff x\\
-        &\alpha \sigma_f(\tau_n; \xi_n) + \beta \sigma_g(\tau_n; \xi_n) \tounder{n \to \infty} \alpha\Int{a}{b}{f(x)\diff x} + \beta\Int{a}{b}{g(x)\diff x}\\
-    \end{aligned}
-    \]
-    Из единственности предела последовательности
-    \[
-    \begin{aligned}
-        \Int{a}{b}(\alpha f(x) + \beta g(x))\diff x =  \alpha\Int{a}{b}{f(x)\diff x} + \beta\Int{a}{b}{g(x)\diff x}\\
-    \end{aligned}
-    \]
-
+Переходя к пределу $d(\tau)\to 0$, получаем:
+\[
+\int_a^b (\alpha f + \beta g) = \alpha \int_a^b f + \beta \int_a^b g.
+\]
 \end{Proof}
     
 \begin{definition}
@@ -188,70 +154,82 @@
 
 
 \subsection{Интеграл с переменным верхним пределом}
-    \begin{definition}
-        Пусть $f(x) \in R[\alpha; \beta],\quad a, x \in [\alpha; \beta]$\\
-        Интегралом с переменным верхним пределом определим функцию $F(x) = \Int{a}{x}f(t)\diff t$\\
-    \end{definition}
-
-    \begin{remark}
-        \[
-            F(a) = 0\\
-        \]
-    \end{remark}
+\begin{definition}
+    Пусть $f(x) \in R[\alpha; \beta],\quad a, x \in [\alpha; \beta]$\\
+    Интегралом с переменным верхним пределом определим функцию $F(x) = \Int{a}{x}f(t)\diff t$
+\end{definition}
 
 
 \subsection{Свойства интеграла с переменным верхним пределом}
-    \begin{theorem}[Свойство $boxed{1} - $ непрерывность]
-        $F(x)$ непрерывна на $[\alpha; \beta]$\\
-    \end{theorem}
+\begin{remark}
+    \[
+        F(a) = 0
+    \]
+\end{remark}
 
-    \begin{Proof}
-        \[
-        \begin{aligned}
-            x_0 \in [\alpha; \beta]\\
-        \end{aligned}
-        \]
-        Рассмотрим $\Lim{x}{x_0}$
-        \[
-        \begin{aligned}
-            \l|F(x_0 + \D x) - F(x_0)\r| &= \\
-        \l|\Int{a}{x + \D x_0}f(t)\diff t - \Int{a}{x_0}f(t)\diff t\r| &= \l|\Int{x_0}{x + \D x_0}f(t)\diff t\r|\\
-        \end{aligned}
-        \]
-        \[
-        \begin{aligned}
-            \l|\Int{x_0}{x + \D x_0}f(t)\diff t\r| \leq \l|\Int{x_0}{x + \D x_0}\r|f(t)\l|\diff t\r| \leq M \l|\Int{x_0}{x + \D x_0}1\diff t\r| = M\l|\D x\r| \tounder{\D x \to 0} 0
-        \end{aligned}
-        \]
-    \end{Proof}
+\begin{theorem}[Свойство 1 --- непрерывность]
+    $F(x)$ непрерывна на $[\alpha; \beta]$
+\end{theorem}
+
+\begin{Proof}
+    Пусть $x_0 \in [\alpha,\beta]$. Тогда
+\[
+F(x)-F(x_0)=\int_{x_0}^{x} f(t)\,dt.
+\]
+
+Так как $f$ интегрируема на $[\alpha,\beta]$, она ограничена, то есть существует $M>0$, такое что
+\[
+|f(t)| \le M \quad \text{для всех } t \in [\alpha,\beta].
+\]
+
+Тогда
+\[
+\left|F(x)-F(x_0)\right|
+=
+\left|\int_{x_0}^{x} f(t)\,dt\right|
+\le
+\int_{x_0}^{x} |f(t)|\,dt
+\le
+M|x-x_0|.
+\]
+
+Переходя к пределу при $x \to x_0$, получаем
+\[
+|F(x)-F(x_0)| \to 0,
+\]
+следовательно,
+\[
+\lim_{x \to x_0} F(x)=F(x_0).
+\]
+
+Значит, $F$ непрерывна в точке $x_0$. Так как $x_0$ произвольно, $F$ непрерывна на $[\alpha,\beta]$.
+\end{Proof}
 
     \begin{theorem}
         Если $f(x)$ - непрерывна на $(\alpha; \beta)$, то $F(x)$ дифференцируема на $(\alpha; \beta)$ и $F'(x) = f(x)$\\
     \end{theorem}
-    \begin{Proof}
-        $x_0 \in (\alpha; \beta)$
-        \[
-        \begin{aligned}
-            &\frac{F(x) - F(x_0)}{x - x_0} =\\
-            &=\frac{1}{x - x_0}\Int{x_0}{x}f(x)\diff x &&=\\
-            &=\frac{1}{\D x}\Int{x_0}{x_0 + \D x}f(x)\diff x &&=\\
-        \end{aligned}
-        \]
-        По теореме о среднем:\\
-        \[
-        \begin{aligned}
-            \exists &\xi \in (x_0; x_0 + \D x): \qquad
-            f(\xi) \tounder{\D x \to 0} f(x_0)\\
-            &\xi \tounder{\D x \to 0} x_0   
-        \end{aligned}
-        \]
-        А значит
-        \[
-        \begin{aligned}
-            &\frac{F(x) - F(x_0)}{x - x_0} \tounder{x\to x_0} f(x_0)\\
-            &\Lim{x}{x_0}\frac{F(x) - F(x_0)}{x - x_0} = f(x_0) \implies F'(x) = f(x)
-        \end{aligned}
-        \]
+\begin{Proof}
+    Пусть $x_0\in (\alpha,\beta)$ и $\Delta x \neq 0$ малое. Тогда
+\[
+\frac{F(x_0+\Delta x)-F(x_0)}{\Delta x}
+=
+\frac{1}{\Delta x}\int_{x_0}^{x_0+\Delta x} f(t)\,dt.
+\]
+
+По теореме о среднем для интеграла существует $\xi \in (x_0, x_0+\Delta x)$, такое что
+\[
+\int_{x_0}^{x_0+\Delta x} f(t)\,dt = f(\xi)\,\Delta x.
+\]
+
+Следовательно,
+\[
+\frac{F(x_0+\Delta x)-F(x_0)}{\Delta x} = f(\xi).
+\]
+
+При $\Delta x \to 0$ имеем $\xi \to x_0$, а из непрерывности $f(\xi) \to f(x_0)$. Следовательно,
+\[
+F'(x_0) = \lim_{\Delta x \to 0} \frac{F(x_0+\Delta x)-F(x_0)}{\Delta x} = f(x_0).
+\]
     \end{Proof}
 
 \subsection{Формула Ньютона-Лейбница}
@@ -266,25 +244,30 @@
     \end{theorem}
 
     \begin{Proof}
-        \[
-        \begin{aligned}
-            &F(x) = \Int{a}{x}f(t)\diff t \text{ - первообразная } f(x) \text{ на } (\alpha; \beta)\\
-            &F(a) = 0\\
-            &\exists c:\qquad F(x) = \Phi(x) + c \text{ на } (\alpha; \beta) \implies\\
-        \end{aligned}
-        \]
-        \[
-        \begin{aligned}
-            \implies F(a) = \Phi(a) + c = 0 \implies c = -\Phi(a)\\
-        \end{aligned}
-        \]
-        \[
-        \begin{aligned}
-            \Int{a}{b}f(x)\diff x = F(b) = \Phi(b) + c = \Phi(b) - \Phi(a)\\
-            \text{Ч.Т.Д.}
-        \end{aligned}
-        \]
-        
+Рассмотрим функцию с переменным верхним пределом:
+\[
+F(x) = \int_a^x f(t)\,dt.
+\]
+
+По теореме о производной интеграла имеем
+\[
+F'(x) = f(x) \quad \text{для всех } x \in (\alpha,\beta),
+\]
+то есть $F$ и $\Phi$ — первообразные одной и той же функции. Значит, они отличаются константой:
+\[
+F(x) = \Phi(x) + C.
+\]
+
+Подставим $x=a$:
+\[
+F(a) = \int_a^a f(t)\,dt = 0 = \Phi(a) + C \quad \Rightarrow \quad C = -\Phi(a).
+\]
+
+Следовательно,
+\[
+F(b) = \int_a^b f(t)\,dt = \Phi(b) + C = \Phi(b) - \Phi(a),
+\]
+что и требовалось доказать.
     \end{Proof}
 
     Если вы это читаете, то в вашу подготовку было вложено очень много сил! Спасибо, что решили готовиться по нашему конспекту, ибо сил было в это вложено вагон и много маленьких тележек... Но мы старались!
