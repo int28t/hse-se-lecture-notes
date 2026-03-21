@@ -70,46 +70,42 @@ D(\alpha f + \beta g) \subseteq D(f) \cup D(g),
 \]
 \end{Proof}
     
-\begin{definition}
-    $\boxed{2}$(Аддитивность)\\
-    Если\\
+\begin{theorem}[Аддитивность]
+    Если
     \[
         f(x) \in R[a; b]
     \]
-    То\\
+    То
     \[
         \forall c \in (a; b): f(x) \in R[a; c] \text{ и } f(x) \in R[c; b]
     \]
-    И\\
+    И
     \[
         \Int{a}{b}{f(x)\diff x} = \Int{a}{c}{f(x)\diff x} + \Int{c}{b}{f(x)\diff x}
     \]
-\end{definition}
+\end{theorem}
 \begin{Proof}
-    1) Доказательство интегрируемости очевидно\\
-    2) Связь интегралов
+    Берём разбиения $\tau'_n$ на $[a,c]$ и $\tau''_n$ на $[c,b]$ с шагами стремящимися к нулю.  
+Объединяем их в $\tau_n = \tau'_n \cup \tau''_n$, выбираем соответствующие точки $\xi_n$.  
 
-    Построим последовательность $\tau'_n \text{ отрезка } [a; c] \text{ и возьмем } \xi'_n$\\
-    Построим последовательность $\tau''_n \text{ отрезка } [c; b] \text{ и возьмем } \xi''_n$\\
-    Объединим разбиения и получим $\tau_n \text{ отрезка } [a; b] \text{ и разбиение } \xi_n$\\
-    \[
-        \sigma_f(\tau_n; \xi_n) = \sigma_f(\tau'_n; \xi'_n) + \sigma_f(\tau''_n; \xi''_n)
-    \]
-    А значит
-    \[
-        \Int{a}{b}{f(x)\diff x} = \Int{a}{c}{f(x)\diff x} + \Int{c}{b}{f(x)\diff x}
-    \]
+Для суммы Римана:
+\[
+\sigma_f(\tau_n;\xi_n) = \sigma_f(\tau'_n;\xi'_n) + \sigma_f(\tau''_n;\xi''_n).
+\]
 
+Переходя к пределу $d(\tau_n)\to 0$:
+\[
+\int_a^b f = \int_a^c f + \int_c^b f.
+\]
 \end{Proof}
 
-\begin{definition}
-    $\boxed{3}$\\
+\begin{theorem}[Неравенства]
     3.1) Если $f(x) \in R[a; b]$, то $|f(x)| \in R[a; b]$\\
     3.2) Если $f(x), g(x) \in R[a; b]$ и $f(x) \leq g(x) \text{ на } [a; b]$, то $\Int{a}{b}{f(x)\diff x} \leq \Int{a}{b}{g(x)\diff x}$\\
     3.3) Если $f(x) \in R[a; b]$, то $\l|\Int{a}{b}{f(x)\diff x}\r| \leq \Int{a}{b}{|f(x)|\diff x}$ - Обобщенное неравенство треугольника\\
-\end{definition}
+\end{theorem}
 
-\begin{Proof}[Докажем 3.3]
+\begin{Proof}
     \[
     \begin{aligned}
         &-|f(x)| \leq f(x) \leq |f(x)|\\
@@ -117,8 +113,8 @@ D(\alpha f + \beta g) \subseteq D(f) \cup D(g),
     \end{aligned}
     \]
 \end{Proof}
-\pagebreak
-\begin{theorem}[$\boxed{4}$ Теорема о среднем]
+
+\begin{theorem}[Теорема о среднем]
     Если $f(x)$ - непрерывна на [a; b], то:\\
     \[
         \exists\xi\in(a; b):\quad \Int{a}{b}{f(x)\diff x} = f(\xi)(b - a)
@@ -133,7 +129,6 @@ D(\alpha f + \beta g) \subseteq D(f) \cup D(g),
         &M = \sup f(x)\\
     \end{aligned} 
     \]
-    Начало доказательства:\\
     \[
     \begin{aligned}
         m &\leq f(x) \leq M\\
@@ -147,11 +142,6 @@ D(\alpha f + \beta g) \subseteq D(f) \cup D(g),
     \end{aligned}
     \]
 \end{Proof}
-
-\begin{remark}
-    В предыдущем доказательстве равенство в неравенстве возможно только в случае, если $f(x) - const$
-\end{remark}
-
 
 \subsection{Интеграл с переменным верхним пределом}
 \begin{definition}
