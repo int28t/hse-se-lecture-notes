@@ -1,0 +1,255 @@
+\section{Класс \texttt{std::string\_view}}
+
+\subsection{Ключевое слово \texttt{auto}: назначение, правила применения, ограничения}
+\begin{definition}[\texttt{auto}]
+\texttt{auto} — это ключевое слово, которое позволяет компилятору вывести тип переменной из инициализатора.
+\end{definition}
+
+Основные назначения:
+\begin{itemize}
+    \item сокращение записи длинных и сложных типов;
+    \item уменьшение жёсткой привязки к конкретной реализации типа;
+    \item удобство при работе с итераторами, шаблонами и обобщённым кодом.
+\end{itemize}
+
+\begin{example}
+\begin{verbatim}
+auto x = 42;              // int
+auto y = 3.14;            // double
+auto it = v.begin();      // тип итератора выводится автоматически
+\end{verbatim}
+\end{example}
+
+Ограничения:
+\begin{itemize}
+    \item \texttt{auto} должен иметь инициализатор;
+    \item он не задаёт тип сам по себе, а только выводит его;
+    \item при использовании \texttt{auto} важно понимать, что вывод может убрать ссылки и \texttt{const}, если не указать \texttt{auto\&} или \texttt{const auto\&}.
+\end{itemize}
+
+\begin{remark}
+На практике \texttt{auto} особенно полезен там, где тип либо слишком длинный, либо несущественен для понимания кода.
+\end{remark}
+
+\subsection{Строковые литералы, глобальная доступность и слияние одинаковых литералов}
+\begin{definition}[Строковый литерал]
+Строковый литерал — это текст в двойных кавычках, например \texttt{"hello"}.
+\end{definition}
+
+Строковые литералы:
+\begin{itemize}
+    \item имеют статическое время жизни;
+    \item обычно доступны на всём протяжении выполнения программы;
+    \item являются глобально доступными в смысле времени жизни и адресуемости.
+\end{itemize}
+
+\begin{remark}
+Одинаковые строковые литералы компилятор или линкер может \textit{сливать} (\textit{merge}): несколько одинаковых литералов могут указывать на один и тот же участок памяти. Но полагаться на это как на строгое правило языка не следует.
+\end{remark}
+
+\subsection{\texttt{std::string\_view} как разновидность косвенной адресации}
+\begin{definition}[std::string\_view]
+\texttt{std::string\_view} — это невладеющее представление последовательности символов: он хранит ссылку на данные и длину, но не управляет памятью.
+\end{definition}
+
+С точки зрения косвенной адресации это:
+\begin{itemize}
+    \item не копия строки;
+    \item не владелец данных;
+    \item лёгкая обёртка над «окном» в строку;
+    \item средство доступа к подстроке без выделения новой памяти.
+\end{itemize}
+
+\subsection{Какие объекты нужны для представления Null-terminated строки?}
+Для представления Null-terminated строки обычно достаточно:
+\begin{itemize}
+    \item одного массива символов \texttt{char[]};
+    \item или одного указателя \texttt{char*}, если сам массив уже существует и конец строки обозначен символом \texttt{'\textbackslash 0'}.
+\end{itemize}
+
+\begin{example}
+\begin{verbatim}
+char s[] = "hello";
+const char* p = s;
+\end{verbatim}
+\end{example}
+
+\begin{remark}
+Смысл Null-terminated строки задаётся именно наличием завершающего нулевого символа, а не отдельным объектом длины.
+\end{remark}
+
+\subsection{Какие объекты нужны для представления суффикса, префикса и инфикса Null-terminated строки?}
+Для подстрок возможны разные представления.
+
+\begin{itemize}
+    \item \textbf{Префикс}: достаточно указателя на начало строки, если подстрока заканчивается \texttt{\textbackslash0}, либо указателя + длина, если конец не совпадает с физическим концом.
+    \item \textbf{Суффикс}: часто достаточно указателя на начало суффикса, если строка уже null-terminated.
+    \item \textbf{Инфикс}: обычно нужны либо два указателя \texttt{[first, last)}, либо указатель + длина.
+\end{itemize}
+
+\begin{remark}
+Для общего случая подстроки удобнее хранить не только начало, но и длину. Тогда можно обращаться и к суффиксу, и к инфиксу без поиска конца.
+\end{remark}
+
+\subsection{Два указателя против указателя + длина}
+Есть два основных способа представить подстроку:
+\begin{itemize}
+    \item \textbf{пара указателей} \texttt{[first, last)};
+    \item \textbf{указатель + длина} \texttt{(ptr, size)}.
+\end{itemize}
+
+\textbf{Пара указателей} хорошо соотносится с концепцией range в C++:
+\[
+[first, last)
+\]
+где \texttt{last} указывает на элемент \textbf{после} последнего.
+
+Плюсы:
+\begin{itemize}
+    \item естественная модель диапазона;
+    \item удобна для алгоритмов;
+    \item не нужно отдельно хранить длину.
+\end{itemize}
+
+Минусы:
+\begin{itemize}
+    \item длину приходится вычислять как расстояние между указателями;
+    \item не всякий код удобно писать в таком виде.
+\end{itemize}
+
+\textbf{Указатель + длина}:
+\begin{itemize}
+    \item удобно хранить длину явно;
+    \item быстро проверять размер;
+    \item удобно для строковых view.
+\end{itemize}
+
+Минусы:
+\begin{itemize}
+    \item нужно следить за согласованностью начала и длины;
+    \item это не совсем та же форма, что классический range \texttt{[first, last)}.
+\end{itemize}
+
+\subsection{Передача и возврат \texttt{std::string\_view} из функций}
+\texttt{std::string\_view} обычно передают и возвращают \textbf{по значению}.
+
+\begin{example}
+\begin{verbatim}
+void print(std::string_view sv) {
+    std::cout << sv << '\n';
+}
+
+std::string_view head(std::string_view sv) {
+    return sv.substr(0, 3);
+}
+\end{verbatim}
+\end{example}
+
+\begin{remark}
+Такой объект считается «нетяжёлым»: он обычно хранит только указатель и длину, поэтому копировать его дёшево.
+\end{remark}
+
+\subsection{Конструирование и копирование \texttt{std::string\_view}. Почему это невладеющий тип?}
+\texttt{std::string\_view} можно создать из:
+\begin{itemize}
+    \item строкового литерала;
+    \item C-строки;
+    \item \texttt{std::string};
+    \item другого \texttt{std::string\_view}.
+\end{itemize}
+
+\begin{example}
+\begin{verbatim}
+std::string s = "hello";
+std::string_view v1 = s;
+std::string_view v2 = "world";
+std::string_view v3 = v1;
+\end{verbatim}
+\end{example}
+
+Он \textbf{не владеет} данными:
+\begin{itemize}
+    \item не выделяет память под строку;
+    \item не освобождает память;
+    \item лишь ссылается на уже существующий буфер.
+\end{itemize}
+
+\begin{remark}
+Из-за этого главное ограничение \texttt{string\_view}: он не должен жить дольше, чем данные, на которые ссылается.
+\end{remark}
+
+\subsection{Ограничения \texttt{std::string\_view} как невладеющего типа}
+Поскольку \texttt{string\_view} не владеет данными, возникают ограничения:
+\begin{itemize}
+    \item нельзя сохранять view дольше, чем живёт исходная строка;
+    \item нельзя использовать его как замену владению;
+    \item нужно быть осторожным с временными объектами;
+    \item модификация исходной строки может сделать view невалидным.
+\end{itemize}
+
+\begin{example}
+\begin{verbatim}
+std::string_view bad() {
+    std::string s = "temp";
+    return s; // dangling view
+}
+\end{verbatim}
+\end{example}
+
+\subsection{Ограничение \texttt{std::string\_view} при работе со стандартной библиотекой}
+\texttt{std::string\_view} не всегда можно передавать туда, где ждут \texttt{const char*}.
+
+\begin{itemize}
+    \item если функция принимает именно C-строку, ей нужен нуль-терминированный буфер;
+    \item \texttt{string\_view} гарантирует диапазон символов, но не всегда гарантирует наличие завершающего \texttt{'\textbackslash0'} в конце именно подстроки;
+    \item поэтому иногда требуется явное преобразование в \texttt{std::string} или использование \texttt{.data()} с осторожностью.
+\end{itemize}
+
+\begin{remark}
+Если API библиотеки требует \texttt{const char*} и предполагает нуль-терминацию, \texttt{string\_view} можно использовать не во всех случаях без дополнительной проверки.
+\end{remark}
+
+\subsection{Ключевые операции над строками с помощью \texttt{std::string\_view}}
+Основные операции:
+\begin{itemize}
+    \item \texttt{size()}, \texttt{length()};
+    \item \texttt{empty()};
+    \item \texttt{substr()};
+    \item \texttt{remove\_prefix()};
+    \item \texttt{remove\_suffix()};
+    \item \texttt{compare()};
+    \item \texttt{starts\_with()}, \texttt{ends\_with()} в современных стандартах.
+\end{itemize}
+
+\begin{example}
+\begin{verbatim}
+std::string_view sv = "hello world";
+auto prefix = sv.substr(0, 5);
+sv.remove_prefix(6);
+\end{verbatim}
+\end{example}
+
+\subsection{Что происходит, если модифицировать подстроку через \texttt{std::string\_view}?}
+\texttt{std::string\_view} сам по себе не модифицирует данные, потому что он не владеет памятью и не является изменяемой строкой.
+
+\begin{itemize}
+    \item можно изменить сам \textbf{view}: например, сдвинуть начало через \texttt{remove\_prefix()};
+    \item нельзя изменить символы исходной строки через \texttt{string\_view};
+    \item если нужна модификация текста, нужно работать со \texttt{std::string} или другим изменяемым буфером.
+\end{itemize}
+
+\begin{remark}
+После изменения самого view это уже тот же объект \texttt{string\_view}, но он начинает указывать на другой участок того же исходного буфера.
+\end{remark}
+
+\subsection{Краткие ответы на контрольные вопросы}
+\begin{itemize}
+    \item \textbf{Какие объекты нужны для null-terminated строки?} Обычно один массив \texttt{char[]} или указатель на него.
+    \item \textbf{Какие объекты нужны для подстроки?} Для общего случая удобны либо пара указателей, либо указатель + длина.
+    \item \textbf{Как связаны пары \texttt{char*} и \texttt{char* + size\_t}?} Это два способа задать границы подстроки; они не полностью взаимозаменяемы без потери информации о конце или длине.
+    \item \textbf{Как передают \texttt{string\_view}?} Обычно по значению.
+    \item \textbf{Глобально ли доступен строковый литерал?} Да, по времени жизни он статический.
+    \item \textbf{Гарантирует ли \texttt{string\_view} нуль-терминацию?} Нет, только если view охватывает строку целиком и источник это обеспечивает.
+    \item \textbf{Можно ли всегда подставить \texttt{string\_view} вместо \texttt{const char*}?} Нет, только когда требуется нестрогая работа с диапазоном или когда гарантирована нуль-терминация.
+    \item \textbf{Можно ли модифицировать подстроку через \texttt{string\_view}?} Сам view — да (например, сдвиг границ), сами символы — нет.
+\end{itemize}

@@ -1,387 +1,536 @@
 \section{Базовые конструкции C++}
 
-\subsection{Темы}
-Материал этого раздела преимущественно рассматривается в рамках лекций 2--4. Включает следующие направления:
+\subsection{Алфавит языка C++. Простая программа C++, структура, основные действующие лица}
+\begin{definition}[Алфавит языка]
+Алфавит C++ — это набор допустимых символов, из которых строится исходный текст программы: латинские буквы, цифры, знаки препинания, пробелы, табуляции, символы переноса строки и специальные символы препроцессора.
+\end{definition}
+
+В исходном тексте программы обычно выделяют следующие «действующие лица»:
 \begin{itemize}
-  \item Алфавит языка C++.
-  \item Простая программа на C++: структура, основные действующие лица.
-  \item Ключевые слова; важнейшие ключевые слова (включая новшества C++11+).
-  \item Идентификаторы, правила их составления; влияние кодстайла.
-  \item Инструкция (statement) --- понятие, классификация.
-  \item Инструкции описания (declaration): объектов данных, функций; ключевое слово \texttt{extern}; прототип функции.
-  \item Инструкции определения (definition) и описание с инициализацией.
-  \item Варианты инициализации объектов: \texttt{=}, \texttt{()}, списковая инициализация \{\}, различия, narrowing.
-  \item Блок инструкций, область видимости (scope).
-  \item Функция как именованный блок инструкций: интерфейс и реализация, сигнатура.
-  \item Объекты и типы: характеристики, представление в памяти, \texttt{sizeof}.
-  \item Классификации типов: классическая трёхтаксонная и двухтаксонная (cppreference).
-  \item Числовые типы: целые (знаковость, размеры, \texttt{<cstdint>}, \texttt{<climits>}), плавующие.
-  \item POD-типы и их особенности.
-  \item Выражения и операторы: арность, приоритет, ассоциативность; инструкция-выражение.
-  \item Управляющие конструкции: ветвления (\texttt{if}, \texttt{switch}), тернарный оператор, циклы (\texttt{while}, \texttt{for}, range-based \texttt{for}, \texttt{do..while}), \texttt{break}/\texttt{continue}/\texttt{return}.
+    \item \textbf{препроцессор} — обрабатывает директивы \texttt{\#include}, \texttt{\#define}, \texttt{\#if} и т.д.;
+    \item \textbf{компилятор} — проверяет синтаксис и семантику, строит объектный код;
+    \item \textbf{линкер} — собирает объектные файлы и библиотеки в исполняемую программу;
+    \item \textbf{runtime-среда} — окружение, в котором программа реально выполняется.
 \end{itemize}
 
-\subsection{Контрольные вопросы и развернутые ответы}
-
-\subsubsection{Какие ключевые слова введены/важны (особенно с C++11 и новее) и каково их назначение?}
-Ниже перечислены ключевые слова, которые особенно важны начиная с C++11, с краткой ролью:
-\begin{itemize}
-  \item \texttt{auto} --- автоматическое выведение типа для переменных и возвращаемых значений функций (синтаксически упрощает код, особенно с шаблонными типами).
-  \item \texttt{nullptr} --- литерал нулевого указателя, безопасная замена \texttt{NULL} / \texttt{0}.
-  \item \texttt{constexpr} --- константные выражения, вычисляемые на этапе компиляции при возможности; позволяет писать вычисления в контексте компиляции.
-  \item \texttt{decltype} --- оператор для получения типа выражения.
-  \item \texttt{override}, \texttt{final} --- спецификаторы виртуальных методов (проверка корректности переопределения, запрет дальнейшего переопределения).
-  \item \texttt{thread\_local} --- спецификатор для переменных с локальным потоком хранения.
-  \item \texttt{noexcept} --- спецификация, указывающая, что функция не выбрасывает исключений (может влиять на оптимизации и семантику move).
-  \item \texttt{static\_assert} --- статическая проверка условий на этапе компиляции.
-  \item \texttt{alignas}, \texttt{alignof} --- управление выравниванием объектов.
-\end{itemize}
-
-\subsubsection{Какова базовая структура программы на C++? Какие основные компоненты и на каком уровне видимости встречаются? Какие из них обрабатываются какими инструментами построения программы?}
-Базовая структура:
-\begin{itemize}
-  \item \textbf{Препроцессорные директивы} (\texttt{\#include}, \texttt{\#define}) --- текстовая вставка/макросы, обрабатываются препроцессором.
-  \item \textbf{Декларации и определения} (функций, классов, глобальных объектов) --- обрабатываются компилятором в единицах трансляции.
-  \item \textbf{main} --- точка входа программы (функция \texttt{int main(...)}).
-  \item \textbf{Пространства имён} (\texttt{namespace}) --- логическая группировка имён.
-\end{itemize}
-
-Инструменты:
-\begin{itemize}
-  \item Препроцессор обрабатывает \texttt{\#include} и макросы.
-  \item Компилятор операции синтаксического и семантического анализа, генерации объектного кода для каждой единицы трансляции.
-  \item Линкер связывает объектные модули и библиотеки.
-\end{itemize}
-
-Уровни видимости:
-\begin{itemize}
-  \item \textbf{scope блока} (локальные переменные).
-  \item \textbf{function scope} (имена параметров, локальные метки).
-  \item \textbf{namespace scope} (глобальные имена видимые в неймспейсе).
-  \item \textbf{class scope} (члены класса).
-\end{itemize}
-
-\subsubsection{Какие идентификаторы корректны для объектов, типов, функций, глобальных констант, символов препроцессора? Как влияют кодстайл договорённости?}
-Правила (общие):
-\begin{itemize}
-  \item Идентификатор начинается с буквы (A--Z, a--z, \_ (нижнее подчёркивание)); далее буквы, цифры или \_.
-  \item Не может совпадать с ключевым словом.
-  \item Имена, начинающиеся с одного подчёркивания и большого символа или с двух подчёркиваний, зарезервированы для реализации (стандарт).
-\end{itemize}
-
-Рекомендации по кодстайлу (проектные договорённости):
-\begin{itemize}
-  \item \texttt{snake\_case} для переменных/функций или \texttt{camelCase} --- выбирать одно.
-  \item Типы и классы часто пишут в \texttt{PascalCase} или с префиксом (внутренние соглашения).
-  \item Глобальные константы часто в \texttt{UPPER\_SNAKE\_CASE} или в \texttt{constexpr} внутри namespace.
-  \item Символы препроцессора (макросы) обычно в \texttt{UPPER\_SNAKE\_CASE}.
-\end{itemize}
-
-\subsubsection{Что такое инструкция (statement)? Какой признак указывает на появление инструкции? Примеры исключений.}
-\textbf{Инструкция} --- завершённое предложение языка, выполняемое во время исполнения; обычно заканчивается точкой с запятой \texttt{;}. Примеры: выражение- инструкция (\texttt{x++;}), инструкция присваивания, инструкция возврата (\texttt{return}), инструкция выбора (\texttt{if}), цикл (\texttt{for}), блок (\{\ ...\ \}).
-
-Исключения:
-\begin{itemize}
-  \item Объявления (декларации) иногда не заканчиваются \texttt{;} (например \texttt{if (int x = f()) ...} --- объявление внутри заголовка \texttt{if}).
-  \item Блоки сами по себе --- инструкция без завершающей точки с запятой.
-\end{itemize}
-
-\subsubsection{Что такое инструкция описания объекта? Пример.}
-\textbf{Описание (declaration)} сообщает компилятору о существовании сущности без её полной реализации. Пример:
+Минимальная программа в C++ обычно содержит функцию \texttt{main}:
 \begin{verbatim}
-extern int global_value; // описание: говорит о существовании с внешней связью
+int main() {
+    return 0;
+}
 \end{verbatim}
 
-\subsubsection{Что такое инструкция описания функции? Пример.}
-\textbf{Прототип (declaration)}:
-\begin{verbatim}
-int add(int a, int b); // прототип функции — описание интерфейса
-\end{verbatim}
+\begin{remark}
+С точки зрения языка C++ это уже полноценная программа. Всё остальное — подключение библиотек, объявление типов, функции, классы — лишь расширяет её структуру.
+\end{remark}
 
-\subsubsection{Что такое инструкция определения и описания объекта? Пример.}
-\textbf{Определение} выделяет хранилище/реализует сущность:
-\begin{verbatim}
-int global_value = 42; // определение и инициализация
-\end{verbatim}
+\subsection{Ключевые слова. Основные ключевые слова}
+\begin{definition}[Ключевое слово]
+\textit{Keyword} — это зарезервированное слово языка C++, имеющее специальный синтаксический смысл и не допускающееся в качестве идентификатора.
+\end{definition}
 
-\subsubsection{Может ли существовать только описание без определения и наоборот? Примеры.}
-Да.
+К основным ключевым словам относятся:
 \begin{itemize}
-  \item Только описание: \texttt{extern int x;} --- требуется определение в другом модуле.
-  \item Только определение без предварительного описания: \texttt{int x = 0;} --- это одновременно и определение, и описание.
+    \item для типов и объявлений: \texttt{int}, \texttt{double}, \texttt{char}, \texttt{bool}, \texttt{class}, \texttt{struct}, \texttt{enum}, \texttt{void};
+    \item для управления потоком: \texttt{if}, \texttt{else}, \texttt{switch}, \texttt{case}, \texttt{for}, \texttt{while}, \texttt{do}, \texttt{break}, \texttt{continue}, \texttt{return};
+    \item для описания сущностей: \texttt{const}, \texttt{constexpr}, \texttt{static}, \texttt{extern}, \texttt{inline}, \texttt{virtual}, \texttt{namespace};
+    \item для препроцессора и специальных механизмов: \texttt{new}, \texttt{delete}, \texttt{try}, \texttt{catch}, \texttt{throw}, \texttt{public}, \texttt{private}, \texttt{protected}.
 \end{itemize}
 
-Для функции:
+\begin{remark}
+Не все «служебные слова» языка являются ключевыми в строгом смысле, но для коллоквиума важно понимать, что они имеют фиксированное значение и не могут использоваться произвольно.
+\end{remark}
+
+\subsection{Идентификаторы, правило составления идентификаторов. Влияние кодстайла на правило именования}
+\begin{definition}[Идентификатор]
+\textit{Identifier} — имя объекта, функции, типа, namespace, макроса и других сущностей программы.
+\end{definition}
+
+Формально идентификатор в C++:
+\begin{itemize}
+    \item состоит из букв, цифр и символа подчёркивания;
+    \item не может начинаться с цифры;
+    \item чувствителен к регистру;
+    \item не должен совпадать с ключевыми словами.
+\end{itemize}
+
+\begin{remark}
+Стандарт языка даёт лишь минимальные ограничения. Практика code style добавляет дополнительные соглашения: например, типы пишут в \texttt{PascalCase}, функции и переменные — в \texttt{camelCase}, константы — в \texttt{kPascalCase} или \texttt{UPPER\_CASE}, а макросы — только \texttt{UPPER\_CASE}.
+\end{remark}
+
+\subsection{Инструкция (statement) как предложение языка. Классификация инструкций}
+\begin{definition}[Инструкция]
+\textit{Statement} — это законченная синтаксическая конструкция языка C++, выражающая действие или описание.
+\end{definition}
+
+Обычно инструкции разделяют на несколько больших классов:
+\begin{itemize}
+    \item \textbf{инструкция-описание} — объявляет сущность;
+    \item \textbf{инструкция-определение} — создаёт сущность;
+    \item \textbf{инструкция-выражение} — вычисляет выражение и завершается \texttt{;};
+    \item \textbf{инструкции управления потоком} — \texttt{if}, \texttt{switch}, \texttt{for}, \texttt{while}, \texttt{do}, \texttt{break}, \texttt{continue}, \texttt{return};
+    \item \textbf{блок инструкций} — составная инструкция в фигурных скобках.
+\end{itemize}
+
+\begin{remark}
+Не каждое законченное действие в тексте программы начинается с новой строки, и не каждая строка — это отдельная инструкция. Видимым признаком инструкции обычно служит точка с запятой или фигурные скобки, но есть исключения: например, блок и управляющие конструкции могут не оканчиваться \texttt{;}.
+\end{remark}
+
+\subsection{Инструкции описания объекта данных и объекта действия (функции). \texttt{extern}. Прототип функции}
+\begin{definition}[Описание]
+\textit{Declaration} — это сообщение компилятору о существовании сущности и её свойствах без обязательного создания самой сущности.
+\end{definition}
+
+\begin{definition}[Описание объекта данных]
+Это инструкция, которая сообщает компилятору о переменной или константе:
 \begin{verbatim}
-int f(); // описание (прототип)
-... (где-то else)
-int f() { return 1; } // определение
+extern int x;
+const double pi = 3.14159;
+\end{verbatim}
+\end{definition}
+
+\begin{definition}[Описание функции]
+Это инструкция, которая сообщает сигнатуру функции:
+\begin{verbatim}
+int sum(int a, int b);
+\end{verbatim}
+Такая запись называется \textit{prototype} или \textit{function declaration}.
+\end{definition}
+
+Ключевое слово \texttt{extern} обычно означает, что определение находится в другом месте:
+\begin{verbatim}
+extern int counter;
 \end{verbatim}
 
-\subsubsection{Как производится инициализация объектов и когда? Варианты и различия.}
-Инициализация происходит в момент определения объекта (или при создании временного объекта). Основные формы:
-\begin{itemize}
-  \item copy-initialization: \texttt{T x = a;}
-  \item direct-initialization: \texttt{T x(a);} или \texttt{T x\{a\};}
-  \item list-initialization (унифицированная): \texttt{T x\{a, b\};} или \texttt{T x = \{a,b\};}
-  \item aggregate initialization: \texttt{S s\{1,2\};} для aggregate.
-\end{itemize}
+\begin{remark}
+\texttt{extern} особенно важно для глобальных объектов и связки между несколькими translation units.
+\end{remark}
 
-Общее: инициализация задаёт начальное значение/состояние объекта. Различие:
-\begin{itemize}
-  \item \texttt{\{\}} предотвращает narrowing (в большинстве случаев) и предпочтительна для безопасной инициализации.
-  \item \texttt{= } позволяет неявные преобразования, включая narrowing при приведениях.
-\end{itemize}
+\subsection{Инструкции определения и описания объекта данных}
+\begin{definition}[Определение]
+\textit{Definition} — это инструкция, которая создаёт сущность. Для объекта данных это обычно означает выделение памяти.
+\end{definition}
 
-\subsubsection{Что такое унифицированный (list-)инициализатор? Когда рекомендуется применять?}
-Унифицированный инициализатор --- это синтаксис \texttt{\{\ ...\ \}}. Рекомендуется применять для:
-\begin{itemize}
-  \item предотвращения нежелательного сужения (narrowing),
-  \item явной инициализации aggregate-типов,
-  \item единообразного стиля.
-\end{itemize}
-
-\subsubsection{Пример инструкции определения и описания с инициализацией. Когда это важно?}
+\begin{example}
 \begin{verbatim}
-static const int MAX = 100; // определение и инициализация (видимо глобальная константа)
-struct Point { int x, y; };
-Point p{1, 2}; // aggregate initialization
+int a;          // definition + declaration
+extern int b;   // declaration only
+int c = 10;     // definition + declaration
 \end{verbatim}
+\end{example}
 
-Важно: для глобальных констант в заголовках использовать \texttt{inline constexpr} или \texttt{extern} + определение в .cpp, чтобы избежать множественного определения.
+\begin{remark}
+В C++ определение объекта данных почти всегда одновременно является и его описанием. Исключение — \texttt{extern}-объявление, которое только описывает объект.
+\end{remark}
 
-\subsubsection{Блок инструкций: зачем и можно ли использовать блок без заголовка?}
-Блок создаёт локальную область видимости и ограничивает время жизни переменных:
+\subsection{Инициализация объектов. Конструкции \texttt{=}, \texttt{()}, \texttt{\{\}}, \texttt{=\{\}}}
+\begin{definition}[Инициализация]
+\textit{Initialization} — задание начального значения объекту в момент его создания.
+\end{definition}
+
+Основные формы:
+\begin{itemize}
+    \item \textbf{copy-initialization}: \texttt{T x = value;}
+    \item \textbf{direct-initialization}: \texttt{T x(value);}
+    \item \textbf{list-initialization}: \texttt{T x\{value\};}
+    \item \textbf{copy-list-initialization}: \texttt{T x = \{value\};}
+\end{itemize}
+
+Общее:
+\begin{itemize}
+    \item все они могут задавать начальное значение;
+    \item все относятся к созданию объекта.
+\end{itemize}
+
+Различия:
+\begin{itemize}
+    \item \texttt{\{\}} лучше ловит narrowing;
+    \item \texttt{()} может вызывать конструкторы и иногда попадает в эффект \textit{most vexing parse};
+    \item \texttt{=} исторически выглядит как присваивание, но при объявлении это именно инициализация;
+    \item \texttt{=\{\}} сочетает синтаксис \texttt{=} и семантику списка инициализации.
+\end{itemize}
+
+\begin{example}
+\begin{verbatim}
+int a = 5;
+int b(5);
+int c{5};
+int d = {5};
+\end{verbatim}
+\end{example}
+
+\subsection{Блок инструкций. Scope}
+\begin{definition}[Блок инструкций]
+\textit{Compound statement} — это последовательность инструкций в фигурных скобках \texttt{\{} \texttt{\}}.
+\end{definition}
+
+Блок используется для:
+\begin{itemize}
+    \item последовательного выполнения нескольких инструкций;
+    \item создания локальной области видимости;
+    \item группировки инструкций в теле \texttt{if}, \texttt{for}, \texttt{while}, функции и т.д.
+\end{itemize}
+
+\begin{definition}[Scope]
+\textit{Scope} — область видимости, в пределах которой имя доступно без дополнительной квалификации.
+\end{definition}
+
+Блок создаёт \textbf{local scope}: объявленные внутри него сущности живут и видны только до конца блока.
+
+\begin{example}
 \begin{verbatim}
 {
-    int tmp = compute();
-    // tmp недоступен за пределами блока
+    int x = 1;
+    int y = x + 2;
 }
 \end{verbatim}
-Да, блок без заголовка можно использовать для локализации временных переменных или ограничивания области видимости ресурсов (RAII).
+\end{example}
 
-\subsubsection{Как блок влияет на область видимости?}
-Переменные, объявленные в блоке, видимы только внутри него; они уничтожаются при выходе из блока. Это позволяет контролировать время жизни и избегать конфликтов имён.
+\subsection{Функция как именованный блок инструкций с заданным входом и выходом}
+\begin{definition}[Функция]
+\textit{Function} — именованный блок инструкций с параметрами на входе и, как правило, возвращаемым значением на выходе.
+\end{definition}
 
-\subsubsection{Как в C++ определить именованный блок инструкций (функцию)?}
-Функция --- именованный блок с параметрами:
+Функция задаёт:
+\begin{itemize}
+    \item имя;
+    \item список параметров;
+    \item возвращаемый тип;
+    \item тело — блок инструкций;
+    \item контракт вызова.
+\end{itemize}
+
+\begin{example}
 \begin{verbatim}
-int sum(int a, int b) { return a + b; }
-\end{verbatim}
-Параметры задают входные данные; возвращаемое значение --- выход.
-
-\subsubsection{Объекты и типы: связь, характеристики объектов и типов.}
-\begin{itemize}
-  \item \textbf{Объект} --- region of storage with an associated type and value.
-  \item \textbf{Тип} определяет представление и допустимые операции (семантика).
-  \item Характеристики объекта: адрес (если применимо), время жизни, выравнивание, размер, значение.
-  \item Характеристики типа: whether it is POD, trivial, standard-layout, signed/unsigned, arithmetic/aggregate, etc.
-\end{itemize}
-
-\subsubsection{Может ли существовать объект без типа?}
-Нет в традиционном C++: каждый объект имеет тип. Исключения --- низкоуровневые конструкции (например, память, выделенная через \texttt{void*}), но сам \texttt{void*} не является объектом, это указатель на неуказанный тип.
-
-\subsubsection{Как объекты представляются в оперативной памяти? Какие характеристики влияют?}
-Представление зависит от:
-\begin{itemize}
-  \item типа (фундаментальный/производный/пользовательский),
-  \item размера (\texttt{sizeof}),
-  \item выравнивания (\texttt{alignof}),
-  \item кодировки для целых/символьных типов и представления для float/double,
-  \item конвенций платформы (endianness --- обычно little-endian на x86).
-\end{itemize}
-
-\subsubsection{Оператор \texttt{sizeof}: применение и возвращаемый тип}
-\begin{itemize}
-  \item \texttt{sizeof(T)} или \texttt{sizeof expr} возвращает значение типа \texttt{std::size\_t}.
-  \item Часто используется для определения количества элементов в статическом массиве: \texttt{sizeof arr / sizeof arr[0]}.
-  \item Результат обычно вычисляется на этапе компиляции (если тип известен и не VLA).
-\end{itemize}
-
-\subsubsection{Что такое операционная семантика типа? ADT примеры}
-Операционная семантика --- набор операций, определённых для типа, и их поведение (например, для \texttt{int}: +, -, *, /, побитовые операции; для \texttt{std::string}: конкатенация, длина, доступ по индексу). ADT (Abstract Data Type) --- стек, очередь, словарь, множество и т.д.; примеры: \texttt{std::vector<T>} как ADT динамического массива.
-
-\subsubsection{Классификация типов в C++ (трёхтакcонная и двухтаксонная)}
-\begin{itemize}
-  \item Трёхтаксонная (классическая): фундаментальные (int, char, float...), производные (указатели, массивы, ссылки, функции), пользовательские (class/struct/enum).
-  \item Двухтаксонная (cppreference): фундаментальные и производные (включает пользовательские в производные/фундаментальные по контексту).
-\end{itemize}
-
-\subsubsection{Модификаторы типов для производных типов}
-Примеры: указатель (\texttt{T*}), ссылка (\texttt{T\&}), массив (\texttt{T[N]}), функция типа (\texttt{T(Args...)}), cv-квалификаторы (\texttt{const}, \texttt{volatile}).
-
-\subsubsection{Целочисленные типы: какие и как определяется знаковость, диапазоны}
-\begin{itemize}
-  \item Базовые типы: \texttt{char}, \texttt{short}, \texttt{int}, \texttt{long}, \texttt{long long} (со знаковостью implementation-defined для \texttt{char}).
-  \item Для фиксированных размеров: \texttt{int8\_t}, \texttt{int16\_t}, \texttt{int32\_t}, \texttt{int64\_t} в \texttt{<cstdint>} (если доступны).
-  \item Диапазоны можно узнать через \texttt{<climits>} (макросы) или \texttt{std::numeric\_limits<T>::min()/max()}.
-  \item Знаковость: \texttt{signed} или \texttt{unsigned}; операции и преобразования зависят от этого.
-\end{itemize}
-
-\subsubsection{Типы с плавающей точкой: структура и специальные значения}
-Типы: \texttt{float}, \texttt{double}, \texttt{long double}. Специальные значения: \texttt{NaN}, \texttt{+inf}, \texttt{-inf}, представляются согласно IEEE-754 на большинстве платформ.
-
-\subsubsection{Инициализация числовых объектов, литералы, narrowing}
-\begin{itemize}
-  \item Литералы: \texttt{42} (int), \texttt{42u} (unsigned), \texttt{42L} (long), \texttt{3.14} (double), \texttt{3.14f} (float).
-  \item Narrowing: потеря точности/диапазона при преобразовании (например, \texttt{double -> int} или \texttt{long -> int}).
-  \item Списковая инициализация \texttt{\{\}} запрещает narrowing в большинстве ситуаций (даёт ошибку компиляции).
-\end{itemize}
-
-\subsubsection{Что такое POD-тип? Примеры и особенности}
-POD (Plain Old Data) --- историческое понятие; в C++11 POD означает тип, который одновременно \emph{trivial} и \emph{standard-layout}. Примеры: простые структуры без пользовательских конструкторов, виртуальных функций или нестандартного размещения полей:
-\begin{verbatim}
-struct S { int a; double b; }; // POD в большинстве случаев
-\end{verbatim}
-Особенность: POD-типы совместимы с C-структурами, их можно бинарно копировать без вызова конструкторов.
-
-\subsubsection{Что такое выражение, оператор, операнд? Может ли выражение состоять из одного операнда/оператора?}
-\begin{itemize}
-  \item \textbf{Выражение} --- комбинация операндов и операторов, дающая значение/эффект.
-  \item \textbf{Операнд} --- объект, литерал, функция, результат другого выражения.
-  \item \textbf{Оператор} --- синтаксическая конструкция, выполняющая операцию (например, \texttt{+}, \texttt{-}, \texttt{*}, \texttt{?:}).
-  \item Выражение может состоять из одного операнда (например, \texttt{x}), или одного оператора в случае унарных операторов (\texttt{-x}).
-\end{itemize}
-
-\subsubsection{Классификация операторов по арности и приоритетности}
-\begin{itemize}
-  \item Арность: унарные, бинарные, тернарный (только \texttt{?:}).
-  \item Приоритет (precedence) и ассоциативность определяют порядок вычисления; при необходимости используют скобки \texttt{(...)} для явного порядка.
-\end{itemize}
-
-\subsubsection{Охарактеризуйте оператор (на примере): возвращаемое значение и случаи отсутствия возвращаемого значения}
-Разные операторы имеют разную семантику:
-\begin{itemize}
-  \item \texttt{sizeof} --- возвращает \texttt{std::size\_t} (имеет значение при компиляции).
-  \item Присваивание (\texttt{=}) --- возвращает ссылку на левый операнд (lvalue), поэтому можно цепочить: \texttt{a = b = 0;} .
-  \item Операторы управления потоком (\texttt{if}, \texttt{for}) не являются выражениями и не возвращают значение.
-\end{itemize}
-
-\subsubsection{Постройте дерево разбора для выражения (пример)}
-Для выражения: \texttt{a + b * c - d} дерево разбора (с учётом приоритета \texttt{*} > \texttt{+} = \texttt{-}):
-\begin{verbatim}
-        (-)
-       /   \
-     (+)    d
-    /   \
-   a    (*)
-        / \
-       b   c
-\end{verbatim}
-Это показывает, что сначала вычисляется \texttt{b * c}, затем \texttt{a + (b*c)}, затем результат минус \texttt{d}.
-
-\subsubsection{Операция присваивания. Различие между инициализацией и присваиванием}
-\begin{itemize}
-  \item \textbf{Инициализация} задаёт начальное значение при создании объекта: \texttt{int x = 5;} или \texttt{int x\{5\};}
-  \item \textbf{Присваивание} изменяет значение уже существующего объекта: \texttt{x = 6;}
-  \item Разница важна для объектов с конструкторами, для const-объектов (нельзя присваивать после инициализации) и для ресурсов (RAII).
-\end{itemize}
-
-\subsubsection{Что такое инструкция-выражение?}
-Инструкция-выражение (expression-statement) --- выражение, за которым следует \texttt{;}:
-\begin{verbatim}
-i += 1; // инструкция-выражение
-\end{verbatim}
-
-\subsubsection{Как работает \texttt{if} (короткий, длинный, с инициализацией)?}
-\begin{itemize}
-  \item \textbf{Короткий:} \texttt{if (cond) stmt;}
-  \item \textbf{Длинный:} \texttt{if (cond) stmt1 else stmt2;}
-  \item \textbf{C++17: if с инициализацией:} \texttt{if (Type var = expr; cond(var)) stmt;}
-\end{itemize}
-В C++17 можно объявлять переменную прямо в header \texttt{if}, видимую только в условии и теле.
-
-\subsubsection{Как работает \texttt{switch}? Зачем \texttt{break} и когда его не использовать?}
-\texttt{switch} сравнивает целочисленное или перечислимое выражение с \texttt{case} константами. \texttt{break} предотвращает \emph{fall-through} (проваливание) к следующему case. Иногда fall-through желателен (например, группировка случаев):
-\begin{verbatim}
-switch (x) {
-  case 1:
-  case 2:
-    handle_1_or_2();
-    break;
-  case 3:
-    handle_3();
-    // fall-through intentionally not used here if we want separate behavior
+int sum(int a, int b) {
+    return a + b;
 }
 \end{verbatim}
+\end{example}
 
-\subsubsection{Соотношение тернарного оператора \texttt{?:} и \texttt{if}}
+\subsection{Объекты и типы. Характеристики объектов и характеристик типов}
+\begin{definition}[Объект]
+Объект — это область памяти, в которой хранятся данные некоторого типа.
+\end{definition}
+
+\begin{definition}[Тип]
+Тип — это описание множества значений и множества допустимых операций над ними.
+\end{definition}
+
+\textbf{Характеристики объекта}:
 \begin{itemize}
-  \item \texttt{?:} --- выражение, возвращает значение, удобно в контекстах, где ожидается выражение.
-  \item \texttt{if} --- инструкция, позволяет выполнять сложные блоки, несколько инструкций и т.д.
-  \item Ограничение \texttt{?:}: оба ветвящихся операнда должны быть совместимых типов; нельзя легко выполнять несколько инструкций без объединения в блок/функцию.
+    \item имя (может отсутствовать);
+    \item тип;
+    \item значение;
+    \item адрес;
+    \item размер;
+    \item время жизни;
+    \item область видимости имени.
 \end{itemize}
 
-\subsubsection{Цикл \texttt{while}: назначение и особенности}
-\texttt{while (cond) stmt;} --- выполняет \texttt{stmt} пока \texttt{cond} истинно. Удобно для ситуаций, где количество итераций заранее неизвестно.
-
-\subsubsection{Цикл \texttt{for} и range-based \texttt{for}}
+\textbf{Характеристики типа}:
 \begin{itemize}
-  \item Классический \texttt{for}: \texttt{for (init; cond; incr) body;}
-  \item Range-based (C++11): \texttt{for (auto\& elem : container) body;} --- удобен для перебора коллекций.
+    \item множество допустимых значений;
+    \item операции;
+    \item представление в памяти;
+    \item размер и выравнивание;
+    \item правила инициализации, преобразований и сравнения.
 \end{itemize}
 
-\textbf{Эквивалент range-based \texttt{for} классическим:}
+\begin{remark}
+В C++ тип и объект тесно связаны, но это не одно и то же: тип определяет свойства, а объект является конкретной реализацией этих свойств в памяти.
+\end{remark}
+
+\subsection{Представление объектов в оперативной памяти. \texttt{sizeof()}}
+\begin{definition}[Footprint]
+\textit{Footprint} объекта — это то, сколько памяти объект занимает и как эта память устроена.
+\end{definition}
+
+На представление влияют:
+\begin{itemize}
+    \item тип объекта;
+    \item размер типа;
+    \item выравнивание (\textit{alignment});
+    \item способ кодирования чисел;
+    \item наличие служебных полей у классов;
+    \item оптимизации компилятора.
+\end{itemize}
+
+Оператор \texttt{sizeof} позволяет узнать размер объекта или типа:
 \begin{verbatim}
-std::vector<int> v = {1,2,3,4};
-// range-based
-for (auto &x : v) { use(x); }
-
-// классический (итераторы)
-for (auto it = v.begin(); it != v.end(); ++it) {
-    auto &x = *it;
-    use(x);
-}
-
-// или индексный, если допустимо:
-for (std::size_t i = 0; i < v.size(); ++i) {
-    auto &x = v[i];
-    use(x);
-}
+sizeof(int)
+sizeof x
 \end{verbatim}
-Требование: контейнер должен быть \emph{идентифицируемым} через \texttt{begin()/end()} (ADL допускает свободные begin/end), либо быть массивом с допустимым порядком доступа.
 
-\subsubsection{Цикл \texttt{do..while}: особенности}
-\texttt{do { body } while (cond);} --- гарантированно выполняет тело хотя бы один раз. Удобен, если условие должно проверяться после первой итерации.
+\begin{itemize}
+    \item применим к типам и объектам;
+    \item результат имеет тип \texttt{std::size\_t};
+    \item возвращает размер в байтах.
+\end{itemize}
 
-\subsubsection{Может ли описание существовать без определения и наоборот?}
-Уже обсуждалось: описание (declaration) может существовать отдельно (прототипы, \texttt{extern}); определение должно присутствовать при линковке (либо в текущем модуле, либо в подключаемых библиотеках).
+\begin{remark}
+\texttt{sizeof} не вычисляет выражение как runtime-операция; обычно это compile-time информация.
+\end{remark}
 
-\subsubsection{Как с помощью блока преодолеть ограничение одной инструкции, например в теле \texttt{if}?}
-В теле \texttt{if} требуется одна инструкция; чтобы выполнить несколько, используют блок:
+\subsection{Операционная семантика типа. Абстрактный тип данных}
+\begin{definition}[Операционная семантика]
+Операционная семантика типа — это набор операций, которые можно выполнять над объектами этого типа, и смысл этих операций.
+\end{definition}
+
+Например, для \texttt{int} доступны сложение, вычитание, сравнение, инкремент и т.д.
+
+\begin{definition}[ADT]
+\textit{Abstract Data Type} — абстрактный тип данных, для которого важны интерфейс и набор операций, а не конкретная внутренняя реализация.
+\end{definition}
+
+Примеры ADT:
+\begin{itemize}
+    \item стек;
+    \item очередь;
+    \item множество;
+    \item ассоциативный словарь.
+\end{itemize}
+
+\subsection{Классификация типов в C++: трехтаксонная и двухтаксонная}
+Классическая \textbf{трёхтаксонная} классификация:
+\begin{itemize}
+    \item \textbf{фундаментальные} типы;
+    \item \textbf{производные} типы;
+    \item \textbf{пользовательские} типы.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Фундаментальные}: \texttt{int}, \texttt{char}, \texttt{bool}, \texttt{float}, \texttt{double}, \texttt{void}, \texttt{nullptr\_t}.
+    \item \textbf{Производные}: указатели, ссылки, массивы, функции, указатели на члены.
+    \item \textbf{Пользовательские}: \texttt{class}, \texttt{struct}, \texttt{enum}, \texttt{union}.
+\end{itemize}
+
+По cppreference часто используют \textbf{двухтаксонную} классификацию:
+\begin{itemize}
+    \item \textbf{fundamental};
+    \item \textbf{compound (derived-like)}.
+\end{itemize}
+
+\begin{remark}
+Для курса полезно уметь оперировать обеими схемами: трёхтаксонная удобнее для учебного объяснения, а двухтаксонная чаще встречается в документации.
+\end{remark}
+
+\subsection{Целочисленные типы данных: размеры, знаковость, диапазоны. \texttt{<cstdint>}, \texttt{<climits>}, \texttt{<limits>}, Little Endian}
+\begin{definition}[Целочисленные типы]
+К целочисленным типам относятся \texttt{char}, \texttt{short}, \texttt{int}, \texttt{long}, \texttt{long long} и их unsigned-версии.
+\end{definition}
+
+\begin{itemize}
+    \item размеры зависят от платформы, кроме некоторых минимальных гарантий стандарта;
+    \item знаковость определяется либо явно (\texttt{signed}/\texttt{unsigned}), либо по умолчанию;
+    \item диапазон зависит от числа бит и способа кодирования.
+\end{itemize}
+
+Псевдонимы фиксированного размера из \texttt{<cstdint>}:
+\begin{itemize}
+    \item \texttt{std::int8\_t}, \texttt{std::uint8\_t};
+    \item \texttt{std::int16\_t}, \texttt{std::uint16\_t};
+    \item \texttt{std::int32\_t}, \texttt{std::uint32\_t};
+    \item \texttt{std::int64\_t}, \texttt{std::uint64\_t}.
+\end{itemize}
+
+Диапазоны целых типов можно смотреть:
+\begin{itemize}
+    \item в \texttt{<climits>} — через макросы вроде \texttt{INT\_MIN}, \texttt{INT\_MAX};
+    \item в \texttt{<limits>} — через \texttt{std::numeric\_limits<T>}.
+\end{itemize}
+
+\begin{remark}
+Для хранения многобайтовых чисел важен порядок байт. На большинстве современных платформ используется \textit{Little Endian}: младший байт идёт по меньшему адресу.
+\end{remark}
+
+\subsection{Типы чисел с плавающей точкой: \texttt{float}, \texttt{double}}
+Основные типы с плавающей точкой:
+\begin{itemize}
+    \item \texttt{float};
+    \item \texttt{double};
+    \item \texttt{long double}.
+\end{itemize}
+
+Их представление обычно основано на стандарте IEEE 754 и включает:
+\begin{itemize}
+    \item знак;
+    \item порядок (exponent);
+    \item мантиссу (fraction/significand).
+\end{itemize}
+
+\begin{itemize}
+    \item \texttt{float} обычно занимает 4 байта;
+    \item \texttt{double} обычно 8 байт;
+    \item \texttt{long double} зависит от платформы.
+\end{itemize}
+
+Такие типы позволяют представлять:
+\begin{itemize}
+    \item обычные числа;
+    \item очень большие и очень маленькие числа;
+    \item специальные значения: \texttt{+inf}, \texttt{-inf}, \texttt{NaN}.
+\end{itemize}
+
+\subsection{Инициализация числовых объектов. Числовые литералы, narrowing, \texttt{=} и \texttt{\{\}}}
+Числовой литерал может уточняться суффиксами:
+\begin{itemize}
+    \item \texttt{1u} — \texttt{unsigned};
+    \item \texttt{1l} — \texttt{long};
+    \item \texttt{1ll} — \texttt{long long};
+    \item \texttt{1.0f} — \texttt{float};
+    \item \texttt{1.0l} — \texttt{long double}.
+\end{itemize}
+
+\begin{definition}[Narrowing]
+\textit{Narrowing} — сужение типа, при котором значение может потерять часть информации, например при переводе \texttt{double} в \texttt{int}.
+\end{definition}
+
+Сравнение:
+\begin{itemize}
+    \item \texttt{int x = 3.14;} — может пройти с потерей дробной части;
+    \item \texttt{int x\{3.14\};} — ошибка компиляции из-за narrowing.
+\end{itemize}
+
+\begin{remark}
+Именно поэтому список инициализации \texttt{\{\}} считается более безопасным.
+\end{remark}
+
+\subsection{POD-типы и их особенность}
+\begin{definition}[POD]
+\textit{POD} (\textit{Plain Old Data}) — исторический класс простых типов без сложного поведения. В современном C++ это понятие в значительной мере заменено более точными категориями вроде \textit{trivial} и \textit{standard-layout}.
+\end{definition}
+
+Примеры учебно:
+\begin{itemize}
+    \item \texttt{int};
+    \item \texttt{double};
+    \item простая \texttt{struct} без пользовательских конструкторов и виртуальных функций.
+\end{itemize}
+
+\begin{remark}
+Особенность таких типов — простота представления в памяти и предсказуемое копирование побайтно, если это допускается стандартом.
+\end{remark}
+
+\subsection{Выражения и операторы. Арность, приоритет, instruction-expression. Инициализация и присваивание}
+\begin{definition}[Выражение]
+\textit{Expression} — конструкция языка, которая вычисляется и даёт значение или effect.
+\end{definition}
+
+\begin{definition}[Оператор и операнд]
+Оператор — символ или ключевое слово, задающее операцию. Операнд — объект, над которым выполняется операция.
+\end{definition}
+
+\begin{itemize}
+    \item по арности операторы бывают унарные, бинарные и тернарные;
+    \item приоритет определяет порядок вычисления;
+    \item если порядок неочевиден, его задают скобками.
+\end{itemize}
+
+\begin{definition}[Instruction-expression]
+Инструкция-выражение — это выражение, завершённое \texttt{;}, например:
+\begin{verbatim}
+x = y + 1;
+f();
+\end{verbatim}
+\end{definition}
+
+\begin{remark}
+Инициализация и присваивание — не одно и то же. Инициализация происходит при создании объекта, а присваивание — после его создания.
+\end{remark}
+
+\subsection{Логические выражения и control flow. \texttt{if}, \texttt{if} с инициализацией, \texttt{switch}, тернарный оператор}
+\begin{definition}[Control flow]
+\textit{Control flow} — это управление порядком выполнения инструкций в программе.
+\end{definition}
+
+Логические операции:
+\begin{itemize}
+    \item \texttt{\&\&} — logical and;
+    \item \texttt{||} — logical or;
+    \item \texttt{!} — logical not;
+    \item сравнения: \texttt{==}, \texttt{!=}, \texttt{<}, \texttt{<=}, \texttt{>} , \texttt{>=}.
+\end{itemize}
+
+\texttt{if}:
 \begin{verbatim}
 if (cond) {
-    stmt1;
-    stmt2;
+    ...
+} else {
+    ...
 }
 \end{verbatim}
 
-\subsubsection{Разница между \texttt{short} и \texttt{int} кроме размера?}
-Принципиально различие --- не строгое, но важные отличия:
+\texttt{if} с инициализацией:
+\begin{verbatim}
+if (auto x = f(); x > 0) {
+    ...
+}
+\end{verbatim}
+
+\texttt{switch} удобен для выбора по целочисленному или перечислимому значению:
+\begin{verbatim}
+switch (n) {
+case 1:
+    ...
+    break;
+default:
+    ...
+}
+\end{verbatim}
+
+Тернарный оператор:
+\begin{verbatim}
+cond ? expr1 : expr2
+\end{verbatim}
+
+Он компактнее \texttt{if}, но удобен в основном для выбора значения, а не для сложной логики с несколькими инструкциями.
+
+\subsection{Циклы: \texttt{while}, \texttt{for}, range-based for, \texttt{do..while}. \texttt{break}, \texttt{continue}, \texttt{return}}
+\texttt{while} используется, когда число итераций заранее неизвестно:
+\begin{verbatim}
+while (cond) {
+    ...
+}
+\end{verbatim}
+
+\texttt{for} удобен для циклов со счётчиком:
+\begin{verbatim}
+for (int i = 0; i < n; ++i) {
+    ...
+}
+\end{verbatim}
+
+Range-based for применяют для обхода коллекции:
+\begin{verbatim}
+for (const auto& x : container) {
+    ...
+}
+\end{verbatim}
+
+\texttt{do..while} гарантирует хотя бы одну итерацию:
+\begin{verbatim}
+do {
+    ...
+} while (cond);
+\end{verbatim}
+
+\texttt{break} завершает цикл или \texttt{switch}, \texttt{continue} переходит к следующей итерации, \texttt{return} завершает функцию.
+
+\begin{remark}
+Range-based for можно переписать классическим \texttt{for} через итераторы, если коллекция поддерживает \texttt{begin()} и \texttt{end()}.
+\end{remark}
+
+\subsection{Краткие ответы на контрольные вопросы}
 \begin{itemize}
-  \item Семантика арифметики --- промоции целых: при арифметике типы \texttt{short}, \texttt{char} обычно продвигаются до \texttt{int} (integral promotion), что влияет на вычисления и перегрузку функций.
-  \item Диапазон и поведение при переполнении (для знаковых типов переполнение неопределено).
+    \item \textbf{Что такое инструкция?} Законченная синтаксическая конструкция языка, обычно отделяемая \texttt{;} или оформленная блоком.
+    \item \textbf{Что такое описание?} Сообщение компилятору о сущности без обязательного создания.
+    \item \textbf{Что такое определение?} Создание сущности, например объекта или функции.
+    \item \textbf{Может ли быть только описание без определения?} Да, например \texttt{extern int x;}.
+    \item \textbf{Может ли быть только определение без отдельного описания?} Да, потому что определение обычно само по себе является и описанием.
+    \item \textbf{Можно ли использовать блок без заголовка?} Да, как отдельный локальный scope.
+    \item \textbf{Как получить named block?} Через функцию.
+    \item \textbf{Есть ли объект без типа?} В C++ нет: объект всегда имеет тип.
+    \item \textbf{Какая разница между \texttt{short} и \texttt{int}?} Помимо размера, \texttt{int} обычно является базовым типом, к которому выполняются integer promotions; \texttt{short} часто приводится к \texttt{int} в выражениях.
+    \item \textbf{Какая разница между \texttt{char} и \texttt{int}?} \texttt{char} — отдельный тип для символов и байтов; он может быть signed или unsigned и участвует в специальных правилах преобразования.
 \end{itemize}
-
-Пример: если \texttt{short a = 30000; short b = 30000; int sum = a + b;} промежуточное поведение в \texttt{int} важно для предотвращения переполнения.
-
-\subsubsection{Разница между \texttt{char} и \texttt{int} кроме размера?}
-Да:
-\begin{itemize}
-  \item \texttt{char} может быть \texttt{signed} или \texttt{unsigned} в зависимости от реализации; это влияет на сравнения и расширение при промоции.
-  \item \texttt{char} часто используется для хранения символов и кодировок; \texttt{int} --- для арифметики.
-  \item При выражениях \texttt{char} обычно продвигается до \texttt{int} при выполнении арифметики.
-\end{itemize}
-Пример: \texttt{char c = '\textbackslash xFF'; if (c < 0) ...} --- поведение зависит от того, является ли \texttt{char} знаковым.
-
-\bigskip
-\textbf{Краткие практические советы для подготовки:}
-\begin{itemize}
-  \item Уметь различать описание и определение; знать роль \texttt{extern} и прототипов.
-  \item На практике демонстрировать разные виды инициализации и объяснять, почему \texttt{\{\}} предпочтительнее для предотвращения narrowing.
-  \item Понимать поведение \texttt{sizeof} и операции промоции целых.
-  \item Быть готовым показать эквивалент range-based \texttt{for} через итераторы/индексы.
-  \item Уметь объяснить, какие выражения дают значение и какие нет (операторы vs инструкции).
-\end{itemize}
-
-% Конец билета 3 --- Базовые конструкции C++
