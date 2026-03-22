@@ -34,7 +34,9 @@ int main() {
     \item для типов и объявлений: \texttt{int}, \texttt{double}, \texttt{char}, \texttt{bool}, \texttt{class}, \texttt{struct}, \texttt{enum}, \texttt{void};
     \item для управления потоком: \texttt{if}, \texttt{else}, \texttt{switch}, \texttt{case}, \texttt{for}, \texttt{while}, \texttt{do}, \texttt{break}, \texttt{continue}, \texttt{return};
     \item для описания сущностей: \texttt{const}, \texttt{constexpr}, \texttt{static}, \texttt{extern}, \texttt{inline}, \texttt{virtual}, \texttt{namespace};
-    \item для препроцессора и специальных механизмов: \texttt{new}, \texttt{delete}, \texttt{try}, \texttt{catch}, \texttt{throw}, \texttt{public}, \texttt{private}, \texttt{protected}.
+    \item для управления памятью: \texttt{new}, \texttt{delete};
+    \item для исключений: \texttt{try}, \texttt{catch}, \texttt{throw};
+    \item для управления доступом: \texttt{public}, \texttt{private}, \texttt{protected};
 \end{itemize}
 
 \begin{remark}
@@ -84,8 +86,10 @@ int main() {
 \begin{definition}[Описание объекта данных]
 Это инструкция, которая сообщает компилятору о переменной или константе:
 \begin{verbatim}
-extern int x;
-const double pi = 3.14159;
+extern int x;      // declaration only
+\end{verbatim}
+\begin{verbatim}
+const double pi = 3.14159; // definition
 \end{verbatim}
 \end{definition}
 
@@ -471,6 +475,17 @@ if (auto x = f(); x > 0) {
 \texttt{switch} удобен для выбора по целочисленному или перечислимому значению:
 \begin{verbatim}
 switch (n) {
+case 1:
+    ...
+    break;
+default:
+    ...
+}
+\end{verbatim}
+
+\texttt{switch} с инициализацией (C++17):
+\begin{verbatim}
+switch (int x = f(); x) {
 case 1:
     ...
     break;
