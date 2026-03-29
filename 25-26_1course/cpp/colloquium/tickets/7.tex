@@ -182,19 +182,23 @@ auto it2 = std::begin(v);
 \subsection{Какие категории итераторов выделяли до стандарта C++20?}
 До C++20 обычно выделяли:
 \begin{itemize}
+    \item \textbf{input iterators};
+    \item \textbf{output iterators};
     \item \textbf{forward iterators};
     \item \textbf{bidirectional iterators};
     \item \textbf{random access iterators}.
 \end{itemize}
 
 \begin{itemize}
+    \item input — чтение последовательности вперёд;
+    \item output — запись последовательности вперёд;
     \item forward — движение только вперёд;
     \item bidirectional — вперёд и назад;
     \item random access — произвольный доступ, прыжки на несколько позиций и арифметика итераторов.
 \end{itemize}
 
 \begin{remark}
-Категории вложены по возрастанию возможностей: random access сильнее bidirectional, а bidirectional сильнее forward.
+Категории чтения/записи и категории перемещения частично ортогональны, а по «силе перемещения» действует вложенность: random access сильнее bidirectional, а bidirectional сильнее forward.
 \end{remark}
 
 \subsection{Какие типы итераторов использует \texttt{std::vector}? А \texttt{std::list}?}
@@ -226,6 +230,14 @@ for (auto it = c.rbegin(); it != c.rend(); ++it) {
 
 Если есть bidirectional iterator, можно двигаться назад через \texttt{--it}.  
 Если есть random access iterator, доступны также \texttt{it += n} и \texttt{it + n}.
+
+Четыре типичных сценария из контрольных вопросов:
+\begin{itemize}
+    \item от первого к запоследнему: \texttt{it = begin(); ++it ... it == end()};
+    \item после достижения \texttt{end()} вернуться к первому: просто присвоить \texttt{it = begin()};
+    \item от последнего к передпервому: \texttt{it = rbegin(); ++it ... it == rend()} или через \texttt{--} для bidirectional;
+    \item после достижения начала в обратном обходе вернуться к последнему: \texttt{it = rbegin()} (или \texttt{it = --end()} для bidirectional).
+\end{itemize}
 
 \subsection{Движение итераторов: \texttt{++it}, \texttt{it++}, \texttt{it += n}, \texttt{it + n}}
 \begin{itemize}
@@ -317,6 +329,19 @@ for (auto it = c.rbegin(); it != c.rend(); ++it) {
 auto it = v.erase(it); // старый it уничтожен, используется возвращённый
 \end{verbatim}
 \end{example}
+
+\subsection{Когда итераторы остаются валидными, а когда нет?}
+Правило зависит от контейнера и операции.
+
+\begin{itemize}
+    \item Для \texttt{std::vector} вставка или удаление в середине сдвигает элементы, а при переаллоцировании инвалидируются все итераторы, ссылки и указатели на элементы.
+    \item Для \texttt{std::list} и похожих связных структур удаление инвалидирует обычно только итератор на удалённый элемент, остальные остаются валидными.
+    \item Для \texttt{std::set} и \texttt{std::map} вставка обычно не инвалидирует существующие итераторы, а удаление инвалидирует только итератор на удалённый элемент.
+\end{itemize}
+
+\begin{remark}
+Если алгоритм хранит итератор на элемент контейнера, нужно знать правила инвалидирования именно для этого контейнера. Иначе можно продолжить работу с уже невалидной позицией.
+\end{remark}
 
 \subsection{Краткие ответы на контрольные вопросы}
 \begin{itemize}

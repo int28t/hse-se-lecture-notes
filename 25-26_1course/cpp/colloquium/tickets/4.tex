@@ -152,23 +152,30 @@ std::cin >> x;   // если введено "abc", будет failbit
 stream.clear();
 \end{verbatim}
 
+После ошибок форматного ввода обычно дополнительно очищают «плохой» хвост строки:
+\begin{verbatim}
+std::cin.clear();
+std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+\end{verbatim}
+
 \subsection{Что такое неявное приведение потока к bool? Как оно применяется в проверках вида «если поток»?}
 Поток в C++ можно неявно преобразовать к булевому значению. Это удобно для проверки, можно ли продолжать работу с потоком.
 
 \begin{definition}[Поток как bool]
-Если поток преобразуется к \texttt{true}, то он находится в рабочем состоянии; если к \texttt{false}, значит установлен хотя бы один проблемный флаг.
+Если поток преобразуется к \texttt{true}, то не установлены \texttt{failbit} и \texttt{badbit}; если к \texttt{false}, значит установлен хотя бы один из этих двух флагов.
 \end{definition}
 
-Эквивалентные записи:
+Идиоматическая проверка:
 \begin{verbatim}
 if (s) { ... }
-if (s.good()) { ... }
+if (!s) { ... }
 \end{verbatim}
 
-Однако это не полная эквивалентность:
+Важно: \texttt{if (s)} и \texttt{s.good()} — не одно и то же.
 \begin{itemize}
-    \item \texttt{s.good()} требует строгого отсутствия любых ошибок;
-    \item \texttt{if (s)} обычно проверяет, что поток ещё пригоден для дальнейших операций, то есть нет критических проблем.
+    \item \texttt{s.good()} истинно только при состоянии \texttt{goodbit} (вообще нет флагов ошибок);
+    \item булево преобразование потока эквивалентно проверке «нет \texttt{failbit} и \texttt{badbit}»;
+    \item поэтому связь с \texttt{good} такая: \texttt{s.good() => bool(s)}, но не наоборот.
 \end{itemize}
 
 \subsection{Приведите идиоматические конструкции чтения до конца потока}
@@ -224,7 +231,7 @@ Unicode решает задачу так:
 \end{itemize}
 
 \begin{remark}
-Максимум для Unicode в современной модели — до $2^{21}$ кодовых позиций, то есть более миллиона возможных code point-ов.
+Максимум для Unicode в современной модели — $0x10FFFF + 1 = 1\,114\,112$ кодовых позиций, то есть $2^{21}$ возможных code point-ов.
 \end{remark}
 
 \subsection{8-битные кодировки: примеры, ограничения, ASCII}
@@ -252,6 +259,27 @@ ASCII занимает первую половину многих 8-битных
 \texttt{U+0000}–\texttt{U+007F} и входят в блок \textit{Basic Latin},
 который является частью \textit{Basic Multilingual Plane (BMP)}.
 \end{remark}
+
+\subsection{Что такое \texttt{std::stringstream} и когда он нужен?}
+\texttt{std::stringstream} — это потоковая обёртка над строкой, которая одновременно является и входным, и выходным потоком.
+
+\begin{itemize}
+    \item \texttt{std::istringstream} — только ввод из строки;
+    \item \texttt{std::ostringstream} — только вывод в строку;
+    \item \texttt{std::stringstream} — и ввод, и вывод в одну и ту же строку.
+\end{itemize}
+
+\begin{example}
+\begin{verbatim}
+std::stringstream ss;
+ss << 10 << ' ' << 20;
+
+int a, b;
+ss >> a >> b;
+\end{verbatim}
+\end{example}
+
+Такие потоки удобны для парсинга, форматирования и промежуточной обработки текста без реального файла или консоли.
 
 \subsection{Типы символов в C++ и символьные литералы}
 Основные типы символов:
