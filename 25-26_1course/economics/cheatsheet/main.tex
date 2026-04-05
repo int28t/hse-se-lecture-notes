@@ -1,0 +1,208 @@
+\documentclass[14pt,a4paper]{article}
+% -----------------------------------
+%         settings and packages
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=1cm,right=1cm,top=1.5cm,bottom=1cm]{geometry}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+
+\setlist[itemize]{nosep}
+\setlist[enumerate]{nosep}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\textbf{Лист по Экономике №\thepage}}
+\newenvironment{insep}
+	{\noindent\begin{minipage}{\linewidth}}
+	{\hspace*{1cm}\end{minipage}}
+
+\begin{document}
+\begin{multicols}{2} % Текст в две колонки
+
+% -----------------------------------
+%       main economics document
+\begin{insep}
+	\textbf{Микро/Макро:}
+	\begin{itemize}
+		\item \textbf{Микро:} отличается упором на конкретный \textbf{товар}.
+		\item \textbf{Макро:} экономика в целом (ВВП, инфляция, ГРЭ).
+	\end{itemize}
+	
+	\textbf{Альтернативные издержки:}
+	\begin{itemize}
+		\item \textbf{Альтернативные издержки (OC)} = $\max$ прибыль от невыбранного варианта
+		\item \textbf{Бух. Pr} = $TR - \text{Явные}$ (чеки, счета)
+		\item \textbf{Экон. Pr} = $TR - (\text{Явные} + \text{Неявные})$
+		\item \textbf{Неявные (OC)} = ценность \textit{лучшей} упущенной альтернативы
+	\end{itemize}
+	
+	\textbf{Производство и издержки:}
+	\begin{itemize}
+		\item $TC = FC(const) + VC$ (общие издержки)
+		\item $MP = \Delta TP / \Delta L$ (предельный продукт).
+		\item $AP = TP / L$ (средний продукт).
+		\item $MC = TC' (= VC')$ (предельные издержки).
+		\item $ATC = TC / Q$ (средние общие)
+		\item $AVC = VC / Q$ (средние переменные)
+		\item $TP_n = TP_{n-1} + MP_n$ (новый общий продукт)
+		\item $Pr = TR - TC$ (прибыль)
+		\item $TR = P \cdot Q$ (выручка/доход)
+		\item $AFC = FC / Q$ (средние постоянные — всегда падают)
+	\end{itemize}
+	
+	\textbf{Пример $TC = 200 + 6Q$:}
+	\begin{itemize}
+		\item $FC = 200$ (пост. издержки, без $Q$)
+		\item $VC = 6Q$ (перем. издержки, с $Q$)
+		\item $AVC = VC/Q = 6$
+	\end{itemize}
+	
+	\textbf{Совершенная конкуренция:}
+	\begin{itemize}
+		\item Условие максимизации прибыли: $MR = MC$.
+		\item Эффективный объем выпуска: $MC = P$.
+	\end{itemize}
+\end{insep}
+
+\begin{insep}
+	\textbf{Рыночные структуры:}
+	\begin{enumerate}
+		\item \textbf{Сов. конкуренция:} много фирм, товар однородный, цена $P=MC$, барьеров нет.
+		\item \textbf{Монополия:} одна фирма, уникальный товар, диктует цену ($P>MC$), вход заблокирован.
+		\item \textbf{Олигополия:} мало крупных фирм, товар схож/разный, сильная взаимозависимость, высокие барьеры.
+		\item \textbf{Монопол. конкуренция:} много фирм, товар дифференцирован (бренды), низкие барьеры.
+	\end{enumerate}
+\end{insep}
+
+\begin{insep}
+	\textbf{Сдвиги рыночного равновесия:} \\
+	\textbf{Спрос($D$)} --- график $\diagdown$, \textbf{Предложение($S$)} --- график $\diagup$ \\
+	\textbf{Цена товара($P$)} --- ось ординат, \textbf{$Q_d$} --- величина спроса.
+	\begin{itemize}
+		\item $D \uparrow ($кривая $\rightarrow) \implies P \uparrow, Q \uparrow$
+		\item $D \downarrow ($кривая $\leftarrow) \implies P \downarrow, Q \downarrow$
+		\item $S \uparrow ($кривая $\leftarrow) \implies P \uparrow, Q \downarrow$
+		\item $S \downarrow ($кривая $\rightarrow) \implies P \downarrow, Q \uparrow$
+		\item $P \uparrow \implies Q_d \downarrow$
+		\item $P \downarrow \implies Q_d \uparrow$
+	\end{itemize}
+	
+	\begin{multicols}{2}
+		\textbf{1. Изменение цены (движение по $D$):} \\
+		\begin{tikzpicture}[scale=0.4]
+			\draw[->] (0,0) -- (5,0) node[right] {$Q$};
+			\draw[->] (0,0) -- (0,5) node[above] {$P$};
+			\draw (1,4) -- (4,1) node[right] {$D$};
+			\filldraw (1.5,3.5) circle (2pt) node[right] {$A$};
+			\filldraw (3,2) circle (2pt) node[right] {$B$};
+			\draw[->, bend right] (3,2) to (1.5,3.5);
+		\end{tikzpicture} \\
+		$P \uparrow \Rightarrow Q_d \downarrow$ (закон спроса)
+	
+		\textbf{2. Рост издержек (сдвиг $S$ влево):} \\
+		\begin{tikzpicture}[scale=0.4]
+			\draw[->] (0,0) -- (5,0) node[right] {$Q$};
+			\draw[->] (0,0) -- (0,5) node[above] {$P$};
+			\draw (1,1) -- (4,4) node[right] {$S_1$};
+			\draw (2,1) -- (5,4) node[right] {$S_0$};
+			\draw (1,4) -- (4,1) node[right] {$D$};
+			\draw[->] (3.5,2.5) -- (2.5,2.5); % стрелка сдвига
+		\end{tikzpicture} \\
+		Издержки $\uparrow \Rightarrow S \leftarrow$: $P \uparrow, Q \downarrow$
+	\end{multicols}
+\end{insep}
+
+\begin{insep}
+	\textbf{Эластичность (E):}
+	\begin{itemize}
+		\item $E_P^D = \frac{\% \Delta Q}{\% \Delta P} = Q'(P) \cdot \frac{P}{Q}$ (по цене)
+		\item $|E| > 1$ --- эластичен; $|E| < 1$ --- неэластичен.
+		\item $|E| = 1$ --- единичная; $|E| = 0$ --- абс. неэласт. ($Q=const$); $|E| \to \infty$ --- абс. эласт. ($P=const$).
+	\end{itemize}
+	
+	\textbf{По доходу ($E_I$):}
+	\begin{itemize}
+		\item $E_I < 0$ --- \textbf{инфериорные} (низшие): $I \uparrow \Rightarrow Q \downarrow$
+		\item $E_I > 0$ --- \textbf{нормальные}: $I \uparrow \Rightarrow Q \uparrow$.
+		\begin{itemize}
+			\item $E_I > 1$ --- предметы \textbf{роскоши}
+			\item $0 < E_I < 1$ --- первой \textbf{необходимости}
+		\end{itemize}
+	\end{itemize}
+	
+	\textbf{Перекрестная ($E_{xy}$):}
+	\begin{itemize}
+		\item $E_{xy} = \frac{\% \Delta Q_x}{\% \Delta P_y}$
+		\item $E_{xy} > 0$ --- \textbf{субституты} (взаимозамен.): $P_y \uparrow \Rightarrow Q_x \uparrow$
+		\item $E_{xy} < 0$ --- \textbf{комплементы} (дополн.): $P_y \downarrow \Rightarrow Q_x \uparrow$
+		\item $E_{xy} = 0$ --- независимые товары
+	\end{itemize}
+\end{insep}
+
+\begin{insep}
+	\textbf{Валютный курс ($P$ за 1ед. ин.вал.):}
+	\begin{itemize} \setlength{\itemsep}{0pt}
+		\item \textbf{Укрепление:} курс $\downarrow$ (рубль дороже, за \$ дают меньше руб)
+		\item \textbf{Ослабление:} курс $\uparrow$ (рубль дешевле, за \$ дают больше руб)
+	\end{itemize}
+	
+	\textbf{Факторы курса (спрос/предложение валюты):}
+	\begin{itemize} \setlength{\itemsep}{0pt}
+		\item \textbf{Экспорт $\uparrow$:} приток валюты $\Rightarrow$ валюта дешевеет $\Rightarrow$ рубль \textbf{укрепляется}
+		\item \textbf{Импорт $\uparrow$:} отток валюты $\Rightarrow$ валюта дорожает $\Rightarrow$ рубль \textbf{ослабевает}
+		\item \textbf{Инвестиции/Капитал:} приток из-за рубежа $\Rightarrow$ рубль $\uparrow$; отток за рубеж $\Rightarrow$ рубль \textbf{ослабевает}
+		\item \textbf{Ключевая ставка $\uparrow$:} доходность активов в рублях $\uparrow$ $\Rightarrow$ спрос на рубль $\uparrow$ $\Rightarrow$ рубль \textbf{укрепляется}
+	\end{itemize}
+\end{insep}
+
+\begin{insep}
+	\textbf{Типы кривых безразличия (IC):}
+	\begin{itemize} \setlength{\itemsep}{0pt}
+		\item \textbf{Субституты ($\diagdown$):} Прямая $U = aX + bY$. Товары легко заменяют друг друга.
+		\item \textbf{Антиблаго ($\diagup$):} Прямая с положит. наклоном. Одно благо приносит вред/не нравится. Полезность растет при удалении от оси антиблага.
+		\item \textbf{Комплементы (L):} Полезность только в комплекте (Домик + Кукла). $U = \min\{aX, bY\}$.
+	\end{itemize}
+	
+	\textbf{Направление полезности ($\nabla U$)}
+	\begin{itemize}
+		\item \textbf{Субституты:} $U'_X, U'_Y > 0 \Rightarrow \nabla U \nearrow$. Оба --- блага
+		\item \textbf{Нейтрал:} $U'_Y = 0 \Rightarrow \nabla U \rightarrow$ $Y$ --- нейтрален
+		\item \textbf{Антиблаго:} $U'_Y < 0 \Rightarrow \nabla U \searrow$ (от оси $Y$ к $X$). $Y$ --- антиблаго
+	\end{itemize}
+\end{insep}
+
+\begin{insep}
+	\textbf{Расчет прибыли (Алгоритм):}
+	\begin{itemize}
+		\item \textbf{Выручка ($TR$):} $P \times Q$ (Цена $\times$ Кол-во).
+		\item \textbf{Неявные издержки ($OC$):} $\max(\text{ЗП}_1, \text{ЗП}_2, \dots)$ --- выбор \textit{лучшего} из доступных окладов
+		\item \textbf{Эконом. издержки:} Явные + Неявные
+		\item \textbf{Экон. Прибыль ($Pr$):} $TR$ - (Явные + Неявные)
+		\item \textit{Если $Pr < 0$ --- это экономический убыток}
+	\end{itemize}
+\end{insep}
+
+\begin{insep}
+	\textbf{Стратегия фирмы (SR и LR):}
+	\begin{itemize} \setlength{\itemsep}{0pt}
+		\item \textbf{Краткоср. (SR):} работаем, если $P \ge AVC_{min}$. 
+		\item \textit{Если $P < AVC_{min}$ — \textbf{Shut down} (закрытие), убытки = $FC$.}
+		\item \textbf{Долгоср. (LR):} работаем, если $P \ge ATC_{min}$.
+		\item \textit{Если $P < ATC_{min}$ — \textbf{Exit} (выход из отрасли).}
+		\item \textbf{Точка безубыточности:} $P = ATC_{min}$.
+	\end{itemize}
+	
+	\textbf{Анализ по MR и MC:}
+	\begin{itemize} \setlength{\itemsep}{0pt}
+		\item $MR > MC \Rightarrow$ \textbf{Увеличить} выпуск ($Q \uparrow$).
+		\item $MR < MC \Rightarrow$ \textbf{Сократить} выпуск ($Q \downarrow$).
+		\item $MR = MC \Rightarrow$ \textbf{Оптимум} (Max прибыль или Min убыток).
+	\end{itemize}
+\end{insep}
+
+% ===================================
+\end{multicols}
+\end{document}
