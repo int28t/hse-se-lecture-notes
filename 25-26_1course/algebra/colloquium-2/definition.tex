@@ -865,12 +865,14 @@
 
 \begin{theorem}
     Матрица линейного оператора диагонализируема
-    \[
+    $
         \Longleftrightarrow
-    \]
+    $
     для любого его собственного значения $\lambda_j$:
-    \[
+    $
         a_j = g_j,
+    $
+    \[
     \]
     то есть алгебраическая кратность $\lambda_j$ равна геометрической.
 \end{theorem}
@@ -1080,7 +1082,7 @@
     \[
         Gr(a_1, \ldots, a_k) = \det \Gamma(a_1, \ldots, a_k)
     \]
-    --- грамиан системы векторов $a_1, \ldots, a_k$, где
+    --- грамиан системы векторов $a_1, \ldots, a_k$
 
 \end{remark}
 
@@ -1095,6 +1097,61 @@
 \end{definition}
 
 \subsection{Дайте определения ортогональной проекции вектора на подпространство и ортогональной составляющей.}
+
+\begin{definition}
+    Пусть
+    \[
+        x = h + h^{\perp},
+    \]
+    где $x \in V$ и $h^{\perp} \in H^{\perp}$.
+    
+    Тогда $h$ --- ортогональная проекция $x$ на $H$, а $h^{\perp}$ --- ортогональная составляющая $x$ относительно $H$.
+\end{definition}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+
+    % координаты
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (5,0);
+    \coordinate (B) at (6,2);
+    \coordinate (C) at (1,2);
+
+    \coordinate (H) at (3.2,1.1);
+    \coordinate (X) at (3.2,3.5);
+
+    % плоскость H
+    \filldraw[fill=gray!15, draw=black, thick]
+        (O) -- (A) -- (B) -- (C) -- cycle;
+
+    \node at (5.0,1.55) {$H$};
+
+    % оси/направления на плоскости
+    
+
+    % проекция h
+    \draw[->, very thick] (O) -- (H) node[midway, below right] {$h$};
+
+    % ортогональная составляющая
+    \draw[->, very thick] (H) -- (X) node[midway, right] {$h^{\perp}$};
+
+    % исходный вектор x
+    \draw[->, very thick] (O) -- (X) node[midway, left] {};
+
+    % пунктир от x к проекции
+    \draw[dashed] (X) -- (H);
+
+
+    % точки
+    \fill (O) circle (1.5pt) node[below left] {};
+    \fill (H) circle (1.5pt) node[below] {};
+    \fill (X) circle (1.5pt) node[above] {};
+
+    % подпись разложения
+    \node at (1.7,3.0) {$x = h + h^{\perp}$};
+
+\end{tikzpicture}
+\end{center}
 
 \subsection{Выпишите формулу для ортогональной проекции вектора на подпространство, заданное как линейная оболочка данного линейно независимого набора векторов.}
 
