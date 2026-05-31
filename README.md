@@ -26,7 +26,7 @@
   <table>
   <tr>
     <td align="center" style="border:2px solid gold; border-radius:10px; padding:10px;">
-      <img src="https://github.com/user1.png" width="80" style="border-radius:50%;" /><br>
+      <img src="https://github.com/user0.png" width="80" style="border-radius:50%;" /><br>
       <b>Хрыстик Михаил Андреевич</b><br>
       <sub>За вклад в подготовку материалов по алгебре</sub>
     </td>
