@@ -10,14 +10,34 @@
   - cpp/ - файл к коллоквиуму (C++)
   - discret-math/ - конспекты семинаров (Дискретная математика)
 
-# Благодарности
-## Преподаватели
-Благодарность выражается
-- Хрыстику Михаилу Андреевичу за прекрасные листки по алгебре
-## Контрибьюторы
+# Наша команда
 Все те, кто писал и помогал писать конспекты
 - [Гришин Алексей](https://github.com/int28t)
 - [Бакшинский Павел](https://github.com/kirsanoww)
 - [Шадрин Михаил](https://github.com/48a)
 - [Мелкумян Нарек](https://github.com/Nar2924)
 - [Годунов Борис](https://github.com/BGODUNOV2007)
+
+# 🏆 Зал славы
+Благодарность от команды за работу над конспектами и общий вклад в учебные материалы.
+
+<div style="display:flex; gap:16px; flex-wrap:wrap;">
+
+  <div style="border:2px solid #FFD700; border-radius:12px; padding:12px; width:150px; text-align:center;">
+    <img src="https://github.com/user1.png" width="80" style="border-radius:50%;" />
+    <div><b>Хрыстик Михаил Андреевич</b></div>
+    <div style="font-size:12px; color:gray;">За вклад в подготовку и предоставление материалов по алгебре</div>
+  </div>
+
+  <!-- <div style="border:2px solid #C0C0C0; border-radius:12px; padding:12px; width:150px; text-align:center;">
+    <img src="https://github.com/user2.png" width="80" style="border-radius:50%;" />
+    <div><b>@user2</b></div>
+    <div style="font-size:12px; color:gray;">Мастер конспектов</div>
+  </div> -->
+
+  <!-- <div style="border:2px solid #CD7F32; border-radius:12px; padding:12px; width:150px; text-align:center;">
+    <img src="https://github.com/user3.png" width="80" style="border-radius:50%;" />
+    <div><b>@user3</b></div>
+    <div style="font-size:12px; color:gray;">Активный участник</div>
+  </div> -->
+</div>
