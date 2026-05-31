@@ -23,11 +23,15 @@
 
 <div style="display:flex; gap:16px; flex-wrap:wrap;">
 
-  <div style="border:2px solid #FFD700; border-radius:12px; padding:12px; width:150px; text-align:center;">
-    <img src="https://github.com/user1.png" width="80" style="border-radius:50%;" />
-    <div><b>Хрыстик Михаил Андреевич</b></div>
-    <div style="font-size:12px; color:gray;">За вклад в подготовку и предоставление материалов по алгебре</div>
-  </div>
+  <table>
+  <tr>
+    <td align="center" style="border:2px solid gold; border-radius:10px; padding:10px;">
+      <img src="https://github.com/user1.png" width="80" style="border-radius:50%;" /><br>
+      <b>Хрыстик Михаил Андреевич</b><br>
+      <sub>За вклад в подготовку материалов по алгебре</sub>
+    </td>
+  </tr>
+  </table>
 
   <!-- <div style="border:2px solid #C0C0C0; border-radius:12px; padding:12px; width:150px; text-align:center;">
     <img src="https://github.com/user2.png" width="80" style="border-radius:50%;" />
