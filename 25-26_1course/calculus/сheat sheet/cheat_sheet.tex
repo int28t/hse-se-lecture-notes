@@ -218,7 +218,7 @@
     \]
 \end{theorem}
 
-\begin{remark}[Область сходимости степенного ряда]
+\begin{lemma}[Область сходимости степенного ряда]
         Область сходимости --- это множество всех $x$, при которых ряд сходится.
 
     \[
@@ -227,7 +227,7 @@
         a-R<x<a+R.
     \]
     Концы $a-R$ и $a+R$ проверяются отдельно.
-\end{remark}
+\end{lemma}
 
 \begin{definition}
     Частная производная функции $f(x,y)$ по $x$ в точке $(x_0, y_0)$:
@@ -316,7 +316,72 @@
     \]
 \end{remark}
 
+\begin{hint}[Основные ряды Маклорена:]
+    \[
+        e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}
+    \]
+    \[
+        \sin x = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}
+    \]
+    \[
+        \cos x = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n}}{(2n)!}
+    \]
+    \[
+        (1+x)^{\alpha}
+        =
+        \sum_{n=0}^{\infty}
+        C_{\alpha}^{n}x^n
+    \]
+    \[
+        \ln(1+x)
+        =
+        \sum_{n=1}^{\infty}
+        (-1)^{n-1}\frac{x^n}{n}
+    \]
+    \[
+        \ln(1-x)
+        =
+        -\sum_{n=1}^{\infty}
+        \frac{x^n}{n}
+    \]
+    \[
+        \arctg x
+        =
+        \sum_{n=0}^{\infty}
+        (-1)^n\frac{x^{2n+1}}{2n+1}
+    \]
+    \[
+        \arcsin x
+        =
+        \sum_{n=0}^{\infty}
+        \frac{(2n)!}{4^n(n!)^2(2n+1)}x^{2n+1}
+    \]
+    \[
+        \arccos x = \frac{\pi}{2} - \arcsin x
+    \]
+    \[
+        \frac{1}{1-x}
+        =
+        \sum_{n=0}^{\infty}x^n
+    \]
+    \[
+        \frac{1}{1+x}
+        =
+        \sum_{n=0}^{\infty}(-1)^n x^n
+    \]
+    \[
+        (1+x)^{\alpha}
+        =
+        1 + \sum_{n=1}^{\infty} C_{\alpha}^{n}x^n
+    \]
+    \[
+        C_{\alpha}^{n}
+        =
+        \frac{\alpha(\alpha-1)\ldots(\alpha-n+1)}{n!}.
+    \]
 
+
+\end{hint}
 
 
 \end{multicols}
