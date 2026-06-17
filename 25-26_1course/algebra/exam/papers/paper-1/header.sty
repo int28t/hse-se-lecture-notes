@@ -1,0 +1,170 @@
+\ProvidesPackage{header}
+
+% \RequirePackage{setspace}
+% \onehalfspacing       % Полуторный интервал (самый популярный)
+% \doublespacing        % Двойной интервал
+% \setstretch{1.25}     % Произвольный коэффициент (например, 1.25)
+
+\RequirePackage{cmap}                    
+\RequirePackage[T2A, T1]{fontenc}      
+\RequirePackage[utf8]{inputenc}        
+\RequirePackage[english,russian]{babel}
+
+\RequirePackage{amssymb}   
+\RequirePackage{amsmath}
+\RequirePackage{mathtools} 
+
+\RequirePackage{microtype} 
+\RequirePackage[top=0.8in,bottom=0.8in,left=0.8in,right=0.8in,headheight=110pt]{geometry}
+
+\RequirePackage[normalem]{ulem} 
+
+\RequirePackage{fancyhdr}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+
+\RequirePackage{subfiles}
+\RequirePackage{textcomp}
+\RequirePackage{array}
+\RequirePackage{gensymb}
+\RequirePackage{amsthm}   
+\RequirePackage{bm}        
+\RequirePackage{icomma}
+\RequirePackage{enumitem}
+\RequirePackage{tikz}
+\usetikzlibrary{patterns}      % Для штриховок 
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\RequirePackage{indentfirst}
+\RequirePackage{authblk}
+\RequirePackage{float}
+
+\RequirePackage{bookmark}
+\hypersetup{
+    bookmarksnumbered=true,      
+    colorlinks=true,             
+    linkcolor=blue,             
+    urlcolor=blue,              
+    citecolor=blue
+}
+
+\RequirePackage{tcolorbox} 
+\tcbuselibrary{most}
+
+\tcbset{
+  myboxstyle/.style={
+    breakable,
+    enhanced,     
+    arc=2mm,    
+    boxrule=0.5pt,
+    fonttitle=\bfseries,
+    coltitle=black
+  }
+}
+
+
+\providecommand{\F}{\mathbb{F}}
+\renewcommand{\C}{\mathbb{C}}
+\providecommand{\N}{\mathbb{N}}
+\providecommand{\Z}{\mathbb{Z}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\Q}{\mathbb{Q}}
+
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\Ima}{\mathop{\rm Im}}
+\newcommand{\Rea}{\mathop{\rm Re}}  
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\St}{St}
+\DeclareMathOperator{\lker}{lker}
+\DeclareMathOperator{\rker}{rker}
+
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\providecommand{\Sum}[2]{\overset{#2}{\underset{#1}{\sum}}}
+\providecommand{\Prod}[2]{\overset{#2}{\underset{#1}{\prod}}}
+\providecommand{\Lim}[2]{\lim\limits_{#1 \to #2}}
+\providecommand{\pd}[2]{\frac{\partial #1}{\partial #2}}  
+
+\renewcommand{\Pr}{\mathsf{P}}
+\providecommand{\QQ}{\mathsf{Q}}
+\providecommand{\EE}{\operatorname{\mathsf{E}}}
+\providecommand{\DD}{\operatorname{\mathsf{D}}}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\providecommand{\diff}{\mathop{}\!\mathrm{d}}
+\renewcommand{\vec}[1]{\bm{#1}}
+\providecommand{\matr}[1]{\mathbf{#1}}
+\providecommand{\Ell}{\mathcal{L}}
+\providecommand{\eps}{\varepsilon}
+\providecommand{\Uniform}{\mathrm{U}}
+\everymath{\displaystyle}
+
+
+\providecommand{\Int}[2]{\int\limits_{#1}^{#2}}      % Определенный интеграл
+\providecommand{\vphi}{\varphi}                      % Красивая фи 
+\providecommand{\Subst}[3]{\l. #1 \r|_{#2}^{#3}}     % Подстановка (Ньютон-Лейбниц)
+\providecommand{\subs}[2]{\l. #1 \r|_{#2}}           % Подстановка с одним элементом снизу 
+\newcommand{\eqind}[1]{\underset{#1}{=}}             % Равно с пояснением под ним
+\newcommand{\D}{\Delta}                              % Теперь \D даст треугольник
+\newcommand{\implunder}[1]{\xRightarrow[#1]{}}          % Стрелка следовательно с подписью снизу
+\newcommand{\tounder}[1]{\xrightarrow[#1]{}}         % Стрелка одинарная с подписью снизу
+\providecommand{\Union}[2]{\bigcup\limits_{#1}^{#2}}    % Большое объединение
+
+\newenvironment{definition}[1][]
+{
+    \par\medskip
+    \noindent\textbf{Определение%
+    \if\relax\detokenize{#1}\relax
+    \else\ (\textit{#1})%
+    \fi
+    :}\enspace
+}
+{
+    \par\medskip
+}
+
+\newenvironment{theorem}[1][]
+{
+    \par\medskip
+    \noindent\textbf{Теорема%
+    \if\relax\detokenize{#1}\relax
+    \else\ (\textit{#1})%
+    \fi
+    :}\enspace
+}
+{
+    \par\medskip
+}
+
+\newenvironment{remark}[1][]
+{
+    \par\medskip
+    \noindent\textbf{Замечание%
+    \if\relax\detokenize{#1}\relax
+    \else\ (\textit{#1})%
+    \fi
+    :}\enspace
+}
+{
+    \par\medskip
+}
+
+\newenvironment{example}[1][]
+{
+    \par\medskip
+    \noindent\textbf{Пример%
+    \if\relax\detokenize{#1}\relax
+    \else\ (\textit{#1})%
+    \fi
+    :}\enspace
+}
+{
+    \par\medskip
+}
+
+\endinput

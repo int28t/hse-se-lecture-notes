@@ -1,0 +1,189 @@
+\section*{Примеры}
+\addcontentsline{toc}{section}{Примеры}
+
+\subsection*{Пример 1. Как из линейной оболочки получить систему уравнений}
+
+Пусть
+\[
+L=\left\langle
+\begin{pmatrix}
+1\\0\\1\\0
+\end{pmatrix},
+\begin{pmatrix}
+0\\1\\1\\0
+\end{pmatrix}
+\right\rangle \subset \mathbb{R}^4.
+\]
+Найти систему линейных уравнений, задающую $L$.
+
+\textbf{Решение.}
+Пусть $x=(x_1,x_2,x_3,x_4)^T\in L$. Тогда существуют числа $\alpha,\beta\in\mathbb{R}$ такие, что
+\[
+x=\alpha
+\begin{pmatrix}
+1\\0\\1\\0
+\end{pmatrix}
++\beta
+\begin{pmatrix}
+0\\1\\1\\0
+\end{pmatrix}
+=
+\begin{pmatrix}
+\alpha\\
+\beta\\
+\alpha+\beta\\
+0
+\end{pmatrix}.
+\]
+Значит, для любого $x\in L$ выполняются соотношения
+\[
+x_4=0,\qquad x_1+x_2-x_3=0.
+\]
+Проверим обратное: если вектор $x=(x_1,x_2,x_3,x_4)^T$ удовлетворяет этим уравнениям, то $x_4=0$ и $x_3=x_1+x_2$, следовательно
+\[
+x=
+\begin{pmatrix}
+x_1\\x_2\\x_1+x_2\\0
+\end{pmatrix}
+=
+x_1
+\begin{pmatrix}
+1\\0\\1\\0
+\end{pmatrix}
++x_2
+\begin{pmatrix}
+0\\1\\1\\0
+\end{pmatrix}
+\in L.
+\]
+Итак,
+\[
+L=\left\{x\in\mathbb{R}^4\mid x_4=0,\; x_1+x_2-x_3=0\right\}.
+\]
+
+\medskip
+\noindent
+\textbf{Комментарий к алгоритму.}
+В общем случае удобно записать векторы-образующие столбцами матрицы и искать все линейные функционалы, обращающиеся в ноль на этой системе. Именно так строится система уравнений, задающая подпространство.
+
+\subsection*{Пример 2. Как находить сумму и пересечение подпространств}
+
+Пусть
+\[
+U=\left\langle
+\begin{pmatrix}
+1\\0\\1\\0
+\end{pmatrix},
+\begin{pmatrix}
+0\\1\\1\\0
+\end{pmatrix}
+\right\rangle,
+\qquad
+V=\left\langle
+\begin{pmatrix}
+1\\1\\2\\0
+\end{pmatrix},
+\begin{pmatrix}
+0\\0\\0\\1
+\end{pmatrix}
+\right\rangle
+\subset \mathbb{R}^4.
+\]
+Найти $U\cap V$, $U+V$, а также их размерности.
+
+\textbf{Решение.}
+Параметризуем оба подпространства:
+\[
+U=\left\{
+\begin{pmatrix}
+a\\b\\a+b\\0
+\end{pmatrix}
+\ \middle|\ a,b\in\mathbb{R}
+\right\},
+\qquad
+V=\left\{
+\begin{pmatrix}
+c\\c\\2c\\d
+\end{pmatrix}
+\ \middle|\ c,d\in\mathbb{R}
+\right\}.
+\]
+Тогда вектор лежит в пересечении $U\cap V$ тогда и только тогда, когда
+\[
+\begin{pmatrix}
+a\\b\\a+b\\0
+\end{pmatrix}
+=
+\begin{pmatrix}
+c\\c\\2c\\d
+\end{pmatrix}.
+\]
+Отсюда получаем систему
+\[
+\begin{cases}
+a=c,\\
+b=c,\\
+a+b=2c,\\
+d=0.
+\end{cases}
+\]
+Первые два равенства дают $a=b=c$, а третье при этом выполняется автоматически. Следовательно,
+\[
+U\cap V=
+\left\{
+\begin{pmatrix}
+t\\t\\2t\\0
+\end{pmatrix}
+\ \middle|\ t\in\mathbb{R}
+\right\}
+=
+\left\langle
+\begin{pmatrix}
+1\\1\\2\\0
+\end{pmatrix}
+\right\rangle.
+\]
+Значит,
+\[
+\dim(U\cap V)=1.
+\]
+
+Теперь найдём размерность суммы. По формуле Грассмана:
+\[
+\dim(U+V)=\dim U+\dim V-\dim(U\cap V)=2+2-1=3.
+\]
+Один из базисов суммы можно получить, взяв базис $U$ и добавив к нему вектор из $V$, не лежащий в $U$, например
+\[
+\begin{pmatrix}
+0\\0\\0\\1
+\end{pmatrix}.
+\]
+Тогда
+\[
+U+V=
+\left\langle
+\begin{pmatrix}
+1\\0\\1\\0
+\end{pmatrix},
+\begin{pmatrix}
+0\\1\\1\\0
+\end{pmatrix},
+\begin{pmatrix}
+0\\0\\0\\1
+\end{pmatrix}
+\right\rangle,
+\qquad
+\dim(U+V)=3.
+\]
+
+\medskip
+\noindent
+\textbf{Комментарий к алгоритму.}
+Для вычисления размерности суммы часто используется
+\textbf{формула Грассмана}:
+\[
+\dim(U+V)=\dim U+\dim V-\dim(U\cap V).
+\]
+
+После нахождения базиса пересечения размерность суммы
+обычно удобнее вычислять именно по этой формуле.
