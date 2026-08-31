@@ -7,7 +7,7 @@
 
 ### 1 Курс (2025—2026)
 
-| Предмет | Что внутри? | Статус / Описание |
+|| ||
 | :--- | :--- | :--- |
 | **Algebra** | `colloquium-2`, `exam`, `lecture notes`, `seminar materials` | Конспекты лекций и листки с семинаров |
 | **Calculus** | `colloquium`, `lecture notes`, `сheat sheet` | Мат. анализ: лекции и материалы к коллоквиуму |
