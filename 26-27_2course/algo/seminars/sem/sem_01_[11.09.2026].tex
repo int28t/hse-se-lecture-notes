@@ -1,0 +1,209 @@
+\section{11.09.2026} 
+
+\subsection{Задача 1}
+
+\begin{exercise}
+\begin{lstlisting}
+int sum = 0;
+
+for (size_t i = 1; i < N: i *= 2) {
+    for (size_t j = N; j > 0; j /= 2) {
+        for (size_t k = j; k < N; k += 2) {
+            sum += (i + j * k);
+        }
+    }
+}
+
+\end{lstlisting}
+
+С помощью пошаговой трассировки составить точную функцию временной сложности $T(N)$ и оценить порядок роста этой функции
+\end{exercise}
+
+\begin{solution}
+    \[
+        \log_2 n
+    \]
+\begin{center}
+\begin{tabular}{Sl|Sl}
+$i$ & $k$\\
+\hline
+$N$   & $\frac{N}{2} - \frac{N}{2}$ \\
+\hline
+$\frac{N}{2}$   & $\frac{N}{2} - \frac{N}{4}$ \\
+\hline
+$\frac{N}{4}$   & $\frac{N}{2} - \frac{N}{8}$ \\
+\hline
+$\vdots$ & \\
+\hline
+$1$   & $\frac{N}{2} - \frac{1}{2}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\[
+    S = \frac{b_1}{1-q}
+\]
+
+\[
+    \log_2 N \cdot \frac{N}{2} - N \underbrace{\left( \frac{1}{2} + \frac{1}{4} + \ldots \right)}_{1}
+\]
+\[
+    T(N) = \left( \log _2 N\cdot \frac{N}{2} - N \right) \cdot \log _2 N = \log _2^2 N \cdot \frac{N}{2} - N\log _2 N
+\]
+\[
+    \Theta(\log ^2 N \cdot N)
+\]
+
+\end{solution}
+
+\subsection{Задача 2}
+
+\begin{exercise}
+
+\begin{lstlisting}
+int multiply(int a, int b) {
+    int result = 0;
+
+    for (int i = 0; i < a; ++i) {
+        result += b;
+    }
+
+    return result;
+}
+\end{lstlisting}
+
+\begin{itemize}
+    \item Подходит ли условие $P = \{2 + 2 = 4\}$ в качестве инварианта приведенного циклического алгоритма?
+    \item Какое условие является более подходящим в качестве инварианта?
+\end{itemize}
+    
+\end{exercise}
+
+\begin{solution}
+    \[
+        P = \{result = i \cdot b\} \text{ --- что вычисляется на конкретном этапе }
+    \]
+    \[
+        result = b + b + b + \ldots = a \cdot b
+    \]
+
+    \begin{enumerate}
+        \item[1)] $init : i = 0,\ result = 0 \cdot b = 0$
+        \item[2)] $mnt : result = (i - 1) \cdot b = i_{old} \cdot b$
+        \[
+            i_{new} = i_{old} + 1,\ result = (i-1) \cdot b + b = i_{new} \cdot b  
+        \]
+        \item[3)] $trm i = a,\ result = a \cdot b$
+    \end{enumerate}
+\end{solution}
+
+\subsection{Задача 3}
+
+\begin{exercise}
+\begin{lstlisting}
+int i = 2;
+
+while (i > 0) {
+    i = i + 1;
+    std::cout << i;
+}
+
+i = i - 1;
+\end{lstlisting}
+
+\begin{itemize}
+    \item Подходит ли условие $P = \{i \geq 0\}$ в качестве инварианта приведенного циклического алгоритма?
+    \item Как проверить выполнимость $P$ при выходе из цикла $[TRM]$?
+\end{itemize}
+\end{exercise}
+
+\subsection{Логика Хоара}
+
+\subsubsection{Тройка Хоара}
+
+\[
+    \underbrace{\{P\}}_{\text{предусловие}} S \underbrace{\{Q\}}_{\text{постусловие}}
+\]
+
+если $P$ --- истина и $S$ не завершается, то $Q$ --- истина
+
+\subsection{Задача 4}
+
+\begin{exercise}[Задача линейного поиска]
+
+\textbf{Вход:}
+
+Последовательность ключей $A = \{a_1, \ldots, a_n\}$ и значение $v$
+
+\textbf{Выход:}
+
+Индекс $1 \leq i \leq n$, для которого $A[i] = v$ или сообщение \textbf{NOT FOUND}, если такого индекса не существует. 
+
+\begin{itemize}
+    \item Разработайте циклический алгоритм линейного поиска
+    \item Докажите корректность разработанного алгоритма с помощью инварианта
+    \item Оцените сложность $T(n)$ разработанного алгоритма
+\end{itemize}
+\end{exercise}
+
+\begin{solution}
+\begin{lstlisting}
+for i = 1 ... n:
+    if (a[i] == v)
+        return i 
+return NOT FOUND
+\end{lstlisting}
+
+\begin{theorem}[Утверждение]
+\[
+    \boxed{v \in A \Leftrightarrow \exists i : A[i] = v} \text{ --- цель}
+\]
+\end{theorem}
+
+\[
+    P_{inv} = \{A[i] = = v \Leftrightarrow A[0] \neq v,\ A[1] \neq v, \ldots, A[i-1] \neq v\} 
+\]
+\end{solution}
+
+\subsection{Задача 5}
+
+\begin{exercise}[Задача бинарного поиска]
+
+\textbf{Вход:}
+
+Последовательность ключей $A = \{a_1, \ldots, a_n\}$ и значение $v$
+
+\textbf{Выход:}
+
+Индекс $1 \leq i \leq n$, для которого $A[i] = v$ или сообщение \textbf{NOT FOUND}, если такого индекса не существует. 
+
+\begin{itemize}
+    \item Разработайте циклический алгоритм бинарного поиска
+    \item Докажите корректность разработанного алгоритма с помощью инварианта
+    \item Оцените сложность $T(n)$ разработанного алгоритма
+\end{itemize}
+    
+\end{exercise}
+
+\begin{solution}
+\begin{lstlisting}
+left, right = 0, n - 1
+while left <= right: 
+    ind = floor((right + left) / 2)
+    if A[ind] == v: 
+        return ind
+    elif A[ind] < v: 
+        left = ind + 1
+    else:
+        right = ind 
+return NOT FOUND  
+\end{lstlisting}
+
+\begin{theorem}[Утверждение]
+    $$v \in A \Leftrightarrow \exists\ left \leq i \leq right : A[i] == v$$
+\end{theorem}
+
+\[
+    T(n) = \{5 \log ^ 2 n + 1\}
+\]
+\end{solution}

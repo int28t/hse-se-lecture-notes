@@ -1,0 +1,55 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{header}
+
+\usepackage[pages=all]{background}
+\backgroundsetup{
+  scale=3.7,
+  color=gray,
+  opacity=0.15,     
+  angle=45,         
+  contents={github.com/int28t/hse-se-lecture-notes}
+}
+
+\title{Семинары по АиСД (БПИ252)}
+\author{github.com/int28t/hse-se-lecture-notes}
+\date{}
+
+\usepackage{cellspace}
+\setlength{\cellspacetoplimit}{6pt}    % Отступ сверху ячейки
+\setlength{\cellspacebottomlimit}{6pt} % Отступ снизу ячейки
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    language=C++,                % Язык программирования
+    basicstyle=\small\ttfamily,  % Шрифт для кода (моноширинный)
+    keywordstyle=\color{blue}\bfseries, % Стиль ключевых слов (if, for и т.д.)
+    stringstyle=\color{red},     % Стиль строк
+    commentstyle=\color{olive},  % Стиль комментариев
+    numbers=left,                % Нумерация строк слева
+    numberstyle=\tiny\color{gray}, % Размер и цвет номеров строк
+    stepnumber=1,                % Шаг нумерации строк
+    backgroundcolor=\color{gray!5}, % Легкий фон для блока кода
+    frame=single,                % Рамка вокруг кода
+    tabsize=4,                   % Размер табуляции
+    breaklines=true,             % Автоматический перенос длинных строк
+    breakatwhitespace=false,     % Перенос строк только на пробелах
+    escapeinside={(*@}{@*)},     % Позволяет вставлять LaTeX внутри кода
+    extendedchars=true,          % Поддержка кириллицы в коде
+    keepspaces=true              % Сохранять пробелы
+}
+
+\begin{document}
+    \pagestyle{empty}
+	\maketitle
+    \begin{flushright}
+		Нестеров Роман Александрович
+	\end{flushright}
+	\tableofcontents{}
+    \newpage
+    \pagestyle{plain}
+
+    \input{sem/sem_01_[11.09.2026].tex}
+\end{document}
