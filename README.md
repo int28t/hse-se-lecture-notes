@@ -3,6 +3,14 @@
 
 Новости будут публиковаться в [Telegram-канал](https://t.me/hse_se_lecture_notes)
 
+<a href="https://www.star-history.com/?repos=int28t%2Fhse-se-lecture-notes&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=int28t/hse-se-lecture-notes&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=int28t/hse-se-lecture-notes&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=int28t/hse-se-lecture-notes&type=date&legend=top-left" />
+ </picture>
+</a>
+
 # Навигация
 
 ### 1 Курс (2025—2026)
