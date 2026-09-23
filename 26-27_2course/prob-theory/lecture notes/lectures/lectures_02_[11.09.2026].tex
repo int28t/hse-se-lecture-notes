@@ -55,7 +55,7 @@
 \end{exercise}
 
 
-\section{Важные понятия об условной вероятности}
+\section{Свойства вероятности и основные формулы}
 \subsection{$\sigma$ Аддитивность}
 \begin{definition}
     Если мы возьмем счетный набор событий $\mathcal{A}_1, \mathcal{A}_2, \dots \mathcal{A}_n\in \mathcal{F}$, (счетное количество событий)\\
@@ -91,7 +91,7 @@
     при условии события $\mathcal{B}$ называется число
     \[
         \Pr(\mathcal{A} \mid \mathcal{B})
-        :=
+        =
         \frac{\Pr(\mathcal{A} \cap \mathcal{B})}{\Pr(\mathcal{B})}.
     \]
 \end{definition}
@@ -271,36 +271,79 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
 \end{definition}
 
 \begin{Proof}
-    
+    Пусть $\Pr(\mathcal{A}_1 \cap \dots \cap \mathcal{A}_{n-1}) > 0$.
     По определению условной вероятности:
     \[
-\begin{aligned}
-    0 \neq {}&
-    \Pr(\mathcal{A}_1 \cap \dots \cap \mathcal{A}_n)
-    \\
-    ={}&
-    \Pr(\mathcal{A}_1)
-    \cdot \Pr(\mathcal{A}_2 \mid \mathcal{A}_1)
-    \cdot \Pr(\mathcal{A}_3 \mid \mathcal{A}_1 \cap \mathcal{A}_2)
-    \cdot \ldots \cdot
-    \Pr(\mathcal{A}_n \mid \mathcal{A}_1 \cap \dots \cap \mathcal{A}_{n-1})
-    \\
-    ={}&
-    \Pr(\mathcal{A}_1)
-    \cdot
-    \frac{\Pr(\mathcal{A}_1 \cap \mathcal{A}_2)}
-         {\Pr(\mathcal{A}_1)}
-    \cdot \ldots \cdot
-    \frac{\Pr(\mathcal{A}_1 \cap \dots \cap \mathcal{A}_n)}
-         {\Pr(\mathcal{A}_1 \cap \dots \cap \mathcal{A}_{n-1})}.
-\end{aligned}
-\]
-\[
-    \Pr(\mathcal{A}_i) \neq 0, 
-\]
-    Последнее равенство получается последовательным сокращением
-    числителей и знаменателей
+        \Pr(B \mid A)
+        =
+        \frac{\Pr(A \cap B)}{\Pr(A)}
+        \implies
+        \Pr(A \cap B) = \Pr(A)\Pr(B \mid A).
+    \]
+    Последовательно применяя эту формулу, получаем
+    \[
+        \begin{aligned}
+            &\Pr(\mathcal{A}_1 \cap \dots \cap \mathcal{A}_n)
+            \\
+            &=
+            \Pr(\mathcal{A}_1 \cap \dots \cap \mathcal{A}_{n-1})
+            \Pr(\mathcal{A}_n \mid
+                \mathcal{A}_1 \cap \dots \cap \mathcal{A}_{n-1})
+            \\
+            &= \dots =
+            \Pr(\mathcal{A}_1)
+            \Pr(\mathcal{A}_2 \mid \mathcal{A}_1)
+            \cdot \ldots \cdot
+            \Pr(\mathcal{A}_n \mid
+                \mathcal{A}_1 \cap \dots \cap \mathcal{A}_{n-1}).
+        \end{aligned}
+    \]
+    При подстановке условных вероятностей дробями
+    множители последовательно сокращаются:
+    \[
+        \begin{aligned}
+            &\Pr(\mathcal{A}_1)
+            \cdot
+            \frac{\Pr(\mathcal{A}_1 \cap \mathcal{A}_2)}
+                 {\Pr(\mathcal{A}_1)}
+            \cdot \ldots \cdot
+            \frac{\Pr(\mathcal{A}_1 \cap \dots \cap \mathcal{A}_n)}
+                 {\Pr(\mathcal{A}_1 \cap \dots \cap \mathcal{A}_{n-1})}
+            \\
+            &= \Pr(\mathcal{A}_1 \cap \dots \cap \mathcal{A}_n).
+        \end{aligned}
+    \]
 \end{Proof}
+\subsection{Формула Байеса}
+
+\begin{theorem}[Формула Байеса]
+    Пусть события $\mathcal{B}_1,\mathcal{B}_2,\dots$
+    :
+    \[
+        \bigsqcup_{i=1}^{\infty} \mathcal{B}_i = \Omega,
+        \qquad
+        \Pr(\mathcal{B}_i) \neq 0.
+    \]
+    Тогда для события $\mathcal{A}$, такого что
+    $\Pr(\mathcal{A}) \neq 0$, выполняется
+    \[
+        \Pr(\mathcal{B}_k \mid \mathcal{A})
+        =
+        \frac{\Pr(\mathcal{A} \cap \mathcal{B}_k)}
+             {\Pr(\mathcal{A})}
+        =
+        \frac{
+            \Pr(\mathcal{A} \mid \mathcal{B}_k)
+            \cdot \Pr(\mathcal{B}_k)
+        }{
+            \Sum{i=1}{\infty}
+            \Pr(\mathcal{A} \mid \mathcal{B}_i)
+            \cdot \Pr(\mathcal{B}_i)
+        }.
+    \]
+    Для конечной полной группы из $n$ событий
+    $\Sigma$ берётся от $1$ до $n$.
+\end{theorem}
 
 \subsection{Независимость событий}
 
@@ -327,6 +370,134 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
     То есть наступление события $\mathcal{B}$ не меняет
     вероятность события $\mathcal{A}$.
 \end{definition}
+
+\subsubsection{Попарная независимость и независимость в совокупности}
+
+\begin{definition}[Попарная независимость]
+    События $\mathcal{A}_1,\dots,\mathcal{A}_n$
+    называются \textbf{попарно независимыми}, если
+    \[
+        \Pr(\mathcal{A}_i \cap \mathcal{A}_j)
+        =
+        \Pr(\mathcal{A}_i)\cdot\Pr(\mathcal{A}_j)
+        \qquad
+        \forall\,1 \leq i < j \leq n.
+    \]
+\end{definition}
+
+
+
+
+
+\begin{definition}[Независимость в совокупности]
+    События $\mathcal{A}_1,\dots,\mathcal{A}_n$
+    называются \textbf{независимыми в совокупности}, если
+    для любого $k \in \{2,\dots,n\}$ и любых индексов
+    \[
+        1 \leq i_1 < i_2 < \dots < i_k \leq n
+    \]
+    выполняется
+    \[
+        \Pr(\mathcal{A}_{i_1} \cap \dots \cap \mathcal{A}_{i_k})
+        =
+        \Pr(\mathcal{A}_{i_1})\cdot\ldots\cdot
+        \Pr(\mathcal{A}_{i_k}).
+    \]
+    То есть равенство проверяется для любой выбранной группы
+    событий, а не только для пар.
+\end{definition}
+
+\begin{exercise}[Замечание]
+    Из независимости в совокупности следует попарная независимость.
+    Обратное утверждение в общем случае неверно.
+\end{exercise}
+
+\begin{example}[Пример Бернштейна]
+    Равновероятно выбирается одна из четырёх вершин тетраэдра
+    \begin{center}
+        \begin{tikzpicture}[scale=1.1]
+            \coordinate (v1) at (-2,0);
+            \coordinate (v2) at (2,0);
+            \coordinate (v3) at (0,-1.5);
+            \coordinate (v4) at (0,2);
+
+            \draw[thick] (v1) -- (v4) -- (v2) -- (v3) -- cycle;
+            \draw[thick] (v4) -- (v3);
+            \draw[thick,dashed] (v1) -- (v2);
+
+            \fill[red] (v1) circle (3pt);
+            \fill[blue] (v2) circle (3pt);
+            \fill[green!60!black] (v3) circle (3pt);
+            \fill (v4) circle (1.5pt);
+
+            \node[left] at (v1) {$1$};
+            \node[right] at (v2) {$2$};
+            \node[below] at (v3) {$3$};
+            \node[above] at (v4) {$4$};
+
+            \fill[red] (0.35,2.05) circle (3pt);
+            \fill[blue] (0.60,2.05) circle (3pt);
+            \fill[green!60!black] (0.85,2.05) circle (3pt);
+        \end{tikzpicture}
+    \end{center}
+
+    Получаем классическую модель:
+    \[
+        \Omega = \{\omega_1,\omega_2,\omega_3,\omega_4\},
+        \qquad
+        \Pr(\{\omega_i\}) = \frac14.
+    \]
+    Рассмотрим события:
+    \[
+        \begin{aligned}
+            \mathcal{A}_1
+            &= \{\text{выбранная вершина имеет красную отметку}\}
+            = \{\omega_1,\omega_4\},\\
+            \mathcal{A}_2
+            &= \{\text{выбранная вершина имеет синюю отметку}\}
+            = \{\omega_2,\omega_4\},\\
+            \mathcal{A}_3
+            &= \{\text{выбранная вершина имеет зелёную отметку}\}
+            = \{\omega_3,\omega_4\}.
+        \end{aligned}
+    \]
+    Каждое событие содержит два исхода, поэтому
+    \[
+        \Pr(\mathcal{A}_1)
+        =
+        \Pr(\mathcal{A}_2)
+        =
+        \Pr(\mathcal{A}_3)
+        =
+        \frac12.
+    \]
+
+    \[
+        \Pr(\mathcal{A}_i \cap \mathcal{A}_j)
+        =
+        \frac14
+        =
+        \frac12 \cdot \frac12
+        =
+        \Pr(\mathcal{A}_i)\Pr(\mathcal{A}_j),
+        \qquad i \neq j.
+    \]
+    Следовательно, события попарно независимы.
+
+    \[
+        \Pr(\mathcal{A}_1 \cap \mathcal{A}_2 \cap \mathcal{A}_3)
+        =
+        \frac14
+        \neq
+        \frac18
+        =
+        \Pr(\mathcal{A}_1)\Pr(\mathcal{A}_2)\Pr(\mathcal{A}_3).
+    \]
+    Независимости в совокупности нет.
+\end{example}
+
+
+
 
 \begin{example}[Пример: Формула умножения и независимость событий. Как их правильно отличать?]
     В урне 3 красных и 4 чёрных шара. Последовательно
@@ -406,7 +577,7 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
 \begin{definition}
     Система множеств $S$ называется полукольцом, если
     \begin{enumerate}[label=\arabic*)]
-        \item $S \neq \varnothing $
+        \item $\varnothing \in S$
         \item $A, B \in S,\text{ то }  A \cap B \in S $ - Замкнутость относительно операции пересечения
         \item $A, B \in S \text{, то  } \exists A_1, ..., A_n \in S:$
         \\
@@ -495,7 +666,7 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
 \begin{definition}
     Система множеств $R$ называется \textbf{кольцом}, если
     \begin{enumerate}[label=\arabic*)]
-        \item $\varnothing \in R$;
+        \item $\varnothing \neq R$;
         \item $\forall$ $A, B \in R$ выполняется
         \[
             A \cap B \in R,
@@ -688,3 +859,38 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
     \]
     где $I$ --- не более чем счётное множество индексов
 \end{exercise}
+
+\subsection{Полуалгебра и алгебра}
+
+\begin{definition}[Единица системы множеств]
+    Множество $X \in S$ называется \textbf{единицей}
+    системы множеств $S$, если
+    \[
+        A \subset X \qquad \forall A \in S.
+    \]
+\end{definition}
+
+\begin{definition}[Полуалгебра]
+    \textbf{Полуалгебра} --- это полукольцо с единицей.
+\end{definition}
+
+\begin{definition}[Алгебра]
+    \textbf{Алгебра} --- это кольцо с единицей.
+\end{definition}
+
+\section{Случайные величины}
+
+\begin{definition}
+    Функция $\xi \colon \Omega \to \mathbb{R}$
+    называется \textbf{случайной величиной}, если
+    \[
+        \xi^{-1}\bigl((-\infty;x]\bigr) \in \mathcal{F}
+        \qquad \forall x \in \mathbb{R}.
+    \]
+    Эквивалентная запись:
+    \[
+        \{\omega \in \Omega \colon \xi(\omega) \leq x\}
+        \in \mathcal{F}
+        \qquad \forall x \in \mathbb{R}.
+    \]
+\end{definition}

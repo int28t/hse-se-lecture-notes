@@ -42,7 +42,7 @@
 
 \section{События}
 
-\begin{definition}[Случайное событие]
+\begin{definition}
     \textbf{Случайное событие} --- это подмножество пространства элементарных исходов: $\mathcal{A} \subset \Omega$.
 \end{definition}
 
@@ -55,49 +55,221 @@
 
 \subsection{Математические модели}
 
-Любая математическая модель в теории вероятностей состоит из трех объектов: $(\Omega, \mathcal{F}, \Pr)$, где: 
-\begin{itemize}
-    \item $\Omega$ --- пространство элементарных исходов;
-    \item $\mathcal{F}$ --- множество событий, такое что $\mathcal{F} \subset 2^{\Omega}$ ($\sigma$-алгебра);
-    \item $\Pr$ --- вероятностная мера, задающая функцию $\Pr \colon \mathcal{F} \to [0; 1]$.
-\end{itemize}
+\begin{definition}[Математическая модель в теории вероятностей]
+    Любая математическая модель в теории вероятностей состоит
+    из трех объектов: $(\Omega, \mathcal{F}, \Pr)$, где:
+    \begin{itemize}
+        \item $\Omega$ --- пространство элементарных исходов;
+        \item $\mathcal{F}$ --- множество событий, такое что
+        $\mathcal{F} \subset 2^{\Omega}$ ($\sigma$-алгебра);
+        \item $\Pr$ --- вероятностная мера, задающая функцию
+        $\Pr \colon \mathcal{F} \to [0; 1]$.
+    \end{itemize}
+\end{definition}
 
 \begin{exercise}[О выборе $\mathcal{F}$]
-    Всегда ли $\mathcal{F} = 2^{\Omega}$? Верно ли, что $\Omega \in \mathcal{F}$?
+    Всегда ли $\mathcal{F} = 2^{\Omega}$?
+    Верно ли, что $\Omega \in \mathcal{F}$?
 \end{exercise}
+
+\subsubsection{Свойства $\sigma$-алгебры}
+\begin{exercise}[Свойства $\sigma$-алгебры]
+    $\sigma$-алгебра $\mathcal{F}$ замкнута относительно:
+    \begin{enumerate}[label=\arabic*)]
+        \item операций пересечения, объединения, разности
+        и симметрической разности:
+        \[
+            A, B \in \mathcal{F}
+            \implies
+            A \cap B,\;
+            A \cup B,\;
+            A \setminus B,\;
+            A \triangle B
+            \in \mathcal{F};
+        \]
+        \item счётных объединений:
+        \[
+            A_i \in \mathcal{F}
+            \quad \forall i \in \mathbb{N}
+            \implies
+            \bigcup_{i=1}^{\infty} A_i \in \mathcal{F}.
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{example}
+    \textit{Комментарий.} - расписано достаточно подробно, на лекции было сказано очень много словами
+    \\
+    \\
+    Рассмотрим систему всех открытых подмножеств $\mathbb{R}$.
+    Проверим, какие операции сохраняют открытость.
+
+    \textbf{1. Объединение любого семейства открытых множеств открыто.}
+
+    Пусть $A_\alpha$ открыто для каждого $\alpha \in I$ и
+    \[
+        A = \bigcup_{\alpha \in I} A_\alpha.
+    \]
+    Здесь множество индексов $I$ может быть конечным,
+    счётным или несчётным.
+
+    Возьмём произвольную точку $x \in A$.
+    По определению объединения
+    \[
+        \exists \alpha_0 \in I \colon x \in A_{\alpha_0}.
+    \]
+    Поскольку $A_{\alpha_0}$ открыто, существует $\delta_0 > 0$,
+    такое что
+    \[
+        U_{\delta_0}(x)
+        =
+        (x-\delta_0;\,x+\delta_0)
+        \subseteq A_{\alpha_0}.
+    \]
+    Выберем $\delta = \delta_0$. Тогда
+    \[
+        U_\delta(x) \subseteq A_{\alpha_0} \subseteq A.
+    \]
+    Таким образом, у каждой точки $x \in A$ есть окрестность,
+    целиком содержащаяся в $A$. Следовательно, $A$ открыто.
+
+    \textit{Комментарий.}
+    Радиус $\delta$ берётся из открытости $A_{\alpha_0}$:
+    отдельная числовая формула для него не нужна.
+    Для разных точек $x$ радиусы могут быть разными.
+
+    \medskip
+    \textbf{2. Пересечение конечного числа открытых множеств открыто.}
+
+    Пусть $A_1,\dots,A_n$ открыты и
+    \[
+        A = \bigcap_{i=1}^{n} A_i.
+    \]
+    Если $A = \varnothing$, то оно открыто.
+    Иначе возьмём произвольную точку $x \in A$.
+    Для каждого $i$ имеем $x \in A_i$, поэтому
+    \[
+        \exists \delta_i > 0 \colon
+        U_{\delta_i}(x) \subseteq A_i.
+    \]
+    Выберем
+    \[
+        \delta = \min\{\delta_1,\dots,\delta_n\} > 0.
+    \]
+    Тогда
+    \[
+        U_\delta(x) \subseteq A_i
+        \quad \forall i=1,\dots,n,
+    \]
+    следовательно,
+    \[
+        U_\delta(x) \subseteq \bigcap_{i=1}^{n} A_i = A.
+    \]
+    Значит, $A$ открыто.
+
+    \medskip
+    \textbf{3. Счётное пересечение открытых множеств
+    не обязательно открыто.}
+
+    Рассмотрим открытые интервалы
+    \[
+        A_n = \left(1-\frac{1}{n};\,2+\frac{1}{n}\right),
+        \qquad n \in \mathbb{N}.
+    \]
+    Тогда
+    \[
+        \bigcap_{n=1}^{\infty}
+        \left(1-\frac{1}{n};\,2+\frac{1}{n}\right)
+        =
+        [1;2].
+    \]
+    Действительно, все точки отрезка $[1;2]$ принадлежат
+    каждому $A_n$, поскольку
+    \[
+        1-\frac{1}{n} < 1 \leq x \leq 2 < 2+\frac{1}{n}.
+    \]
+    Если $x < 1$, выберем $n$ так, чтобы $\frac{1}{n} < 1-x$;
+    тогда $x \notin A_n$.
+    Если $x > 2$, выберем $n$ так, чтобы $\frac{1}{n} < x-2$;
+    тогда также $x \notin A_n$.
+
+    Полученный отрезок $[1;2]$ не открыт:
+    любая окрестность точки $1$ содержит точки,
+    меньшие $1$, которые не входят в отрезок.
+
+    \textit{Комментарий.}
+    Для бесконечного семейства положительных радиусов
+    их инфимум может равняться нулю.
+    Например, в точке $x=1$ можно взять
+    $\delta_n = \frac{1}{n}$, но
+    \[
+        \inf_{n \in \mathbb{N}} \delta_n = 0.
+    \]
+    Поэтому выбрать общий положительный радиус,
+    как в конечном случае, здесь нельзя.
+
+    \medskip
+    \textbf{Вывод.}
+    Система открытых множеств на $\mathbb{R}$ замкнута
+    относительно произвольных объединений и конечных пересечений,
+    но не замкнута относительно счётных пересечений.
+    Поэтому она не является $\sigma$-алгеброй.
+\end{example}
 
 \subsubsection{Свойства вероятностной меры}
 
-\begin{itemize}
-    \item Нормированность: $\Pr(\Omega) = 1$.
-    \item Вероятность невозможного события: $\Pr(\varnothing) = 0$. 
-    \item \textit{(Отсылка к линейности: $\Pr(\varnothing) = 0 \implies f(\alpha \vec{x} + \beta \vec{y}) = \alpha f(\vec{x}) + \beta f(\vec{y})$)}.
-    \item \textbf{Аддитивность:} для несовместных событий (т.е. $\mathcal{A} \cap \mathcal{B} = \varnothing$):
-    \[
-        \Pr(\mathcal{A} \sqcup \mathcal{B}) = \Pr(\mathcal{A}) + \Pr(\mathcal{B}),
-    \]
-    где $\sqcup$ --- дизъюнктивное объединение.
-\end{itemize}
+\begin{exercise}[Свойства вероятностной меры]
+    \begin{itemize}
+        \item Нормированность: $\Pr(\Omega) = 1$.
+        \item Вероятность невозможного события:
+        $\Pr(\varnothing) = 0$.
+        \item \textit{(Отсылка к линейности:
+        $\Pr(\varnothing) = 0 \implies
+        f(\alpha \vec{x} + \beta \vec{y})
+        = \alpha f(\vec{x}) + \beta f(\vec{y})$)}.
+        \item \textbf{Аддитивность:} для несовместных событий
+        (т.е. $\mathcal{A} \cap \mathcal{B} = \varnothing$):
+        \[
+            \Pr(\mathcal{A} \sqcup \mathcal{B})
+            =
+            \Pr(\mathcal{A}) + \Pr(\mathcal{B}),
+        \]
+        где $\sqcup$ --- дизъюнктивное объединение.
+    \end{itemize}
+\end{exercise}
 
 \subsection{Дискретные модели}
 
-Пусть $\Omega$ --- конечное множество. Тогда:
-\[
-    \mathcal{F} = 2^{\Omega} \implies \forall \omega \in \Omega \colon \{\omega\} \in \mathcal{F}, \quad |\mathcal{F}| = 2^{|\Omega|}
-\]
+\begin{definition}[Конечное пространство исходов]
+    Пусть $\Omega$ --- конечное множество. Тогда:
+    \[
+        \mathcal{F} = 2^{\Omega}
+        \implies
+        \forall \omega \in \Omega \colon
+        \{\omega\} \in \mathcal{F},
+        \quad
+        |\mathcal{F}| = 2^{|\Omega|}.
+    \]
+\end{definition}
 
-Как задается $\Pr$? Достаточно задать вероятности каждого исхода:
-\[
-    \forall \omega \in \Omega \colon \Pr(\omega)
-\]
-Тогда для любого события $\mathcal{A} \in \mathcal{F}$ ($\mathcal{A} \subset \Omega$) вероятность равна сумме вероятностей входящих в него исходов:
-\[
-    \Pr(\mathcal{A}) = \Sum{\omega \in \mathcal{A}}{} \Pr(\omega)
-\]
+\begin{exercise}[Задание вероятностей исходов и событий]
+    Как задается $\Pr$? Достаточно задать вероятности каждого исхода:
+    \[
+        \forall \omega \in \Omega \colon \Pr(\omega).
+    \]
+    Тогда для любого события $\mathcal{A} \in \mathcal{F}$
+    ($\mathcal{A} \subset \Omega$) вероятность равна сумме
+    вероятностей входящих в него исходов:
+    \[
+        \Pr(\mathcal{A})
+        =
+        \Sum{\omega \in \mathcal{A}}{} \Pr(\omega).
+    \]
+\end{exercise}
 
 \subsubsection{Классические дискретные модели}
 
-\begin{definition}[Классическая модель]
+\begin{definition}
     \textbf{Классическая модель} --- это дискретная модель, в которой все исходы равновероятны: $\Pr(\omega) = \text{const}$.
 \end{definition}
 
@@ -162,27 +334,52 @@
 \subsubsection{Неклассические дискретные модели}
 
 \begin{definition}[Схема испытаний Бернулли]
-    Обозначается $\mathrm{Bern}(n, p)$, где $n \in \N$ --- число испытаний, $p \in (0; 1)$ --- вероятность успеха. Исход каждого испытания: 0 (неудача) или 1 (успех).
+    Обозначается $\mathrm{Bern}(n, p)$, где $n \in \N$ ---
+    число независимых испытаний, $p \in (0; 1)$ ---
+    вероятность успеха в каждом испытании.
+    Исход каждого испытания: 0 (неудача) или 1 (успех).
+
+    Элементарный исход --- вектор результатов:
+    \[
+        \omega = (i_1, \dots, i_n), \quad
+        i_j \in \{0, 1\}
+        \implies |\Omega| = 2^n.
+    \]
+    Вероятность конкретного исхода $\omega$:
+    \[
+        \Pr(\omega)
+        =
+        p^{\Sum{j=1}{n} i_j}
+        \cdot (1-p)^{n-\Sum{j=1}{n} i_j}.
+    \]
+    При $p \neq \frac12$ исходы не равновероятны.
 \end{definition}
 
-Элементарный исход --- вектор результатов:
-\[
-    \omega = (i_1, \dots , i_n), \quad i_j \in \{0, 1\} \implies |\Omega| = 2^n
-\]
-Вероятность конкретного исхода $\omega$ (исходы не равновероятны):
-\[
-    \Pr(\omega) = p^{\Sum{j=1}{n} i_j} \cdot (1 - p)^{n - \Sum{j=1}{n} i_j}
-\]
-
-Проверим нормированность (сумма вероятностей всех исходов равна 1):
-\[
-\begin{aligned}
-    \Sum{\omega \in \Omega}{} \Pr(\omega) &= \Sum{\omega \in \Omega}{} p^{\Sum{j=1}{n} i_j} \cdot (1 - p)^{n - \Sum{j=1}{n} i_j} \\
-    &= \Sum{k = 0}{n} \left( \Sum{\omega \colon \Sum{j = 1}{n} i_j = k}{} p^k (1-p)^{n-k} \right) \\
-    &= \Sum{k = 0}{n} C_n^k \, p^k (1-p)^{n-k} \\
-    &= (p + (1 - p))^n = 1^n = 1
-\end{aligned}
-\]
+\begin{Proof}
+    Проверим нормированность:
+    \[
+    \begin{aligned}
+        \Sum{\omega \in \Omega}{} \Pr(\omega)
+        &=
+        \Sum{\omega \in \Omega}{}
+        p^{\Sum{j=1}{n} i_j}
+        \cdot (1-p)^{n-\Sum{j=1}{n} i_j}
+        \\
+        &=
+        \Sum{k=0}{n}
+        \left(
+            \Sum{\omega \colon \Sum{j=1}{n} i_j = k}{}
+            p^k (1-p)^{n-k}
+        \right)
+        \\
+        &=
+        \Sum{k=0}{n} C_n^k \, p^k (1-p)^{n-k}
+        \\
+        &=
+        (p+(1-p))^n = 1^n = 1.
+    \end{aligned}
+    \]
+\end{Proof}
 
 \subsection{Недискретные модели}
 \subsubsection{Геометрическая вероятность}
