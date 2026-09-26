@@ -847,6 +847,129 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
         \right\}.
     \]
 \end{theorem}
+\begin{Proof}
+    Обозначим множество из правой части как $K = \left\{ \bigsqcup_{i=1}^{n} A_i \;\middle|\; A_i \in S \right\}$. 
+    Нам нужно доказать два включения: $K \subset R(S)$ и $R(S) \subset K$. %[cite: 9]
+
+    \textbf{1. Включение $K \subset R(S)$.} \\
+    Возьмем произвольный элемент $x \in K$. По определению множества $K$, $x$ представим в виде дизъюнктного объединения конечного числа элементов полукольца:
+    \[
+        x = \bigsqcup_{i=1}^{n} A_i, \quad A_i \in S.
+    \]
+    Поскольку $S \subset R(S)$ (по определению наименьшего кольца), каждый $A_i \in R(S)$. Так как $R(S)$ --- кольцо, оно замкнуто относительно конечных объединений, следовательно, $x \in R(S)$. Включение доказано. %[cite: 9]
+
+    \textbf{2. Включение $R(S) \subset K$.} \\
+    Чтобы доказать это включение, достаточно показать, что $K$ само является кольцом. Так как $K$ содержит $S$ (достаточно взять $n=1$), а $R(S)$ --- \textit{наименьшее} кольцо, содержащее $S$, из того, что $K$ --- кольцо, мгновенно последует $R(S) \subset K$. %[cite: 9]
+    
+    Для доказательства того, что $K$ --- кольцо, нам понадобится вспомогательная лемма.
+\end{Proof}
+
+\subsection{Лемма о разности элементов полукольца}
+
+\begin{lemma}
+    Если $A, B_1, B_2, \dots, B_m \in S$, то существуют такие $A_1, A_2, \dots, A_n \in S$, что:
+    \[
+        A \setminus B_1 \setminus B_2 \setminus \dots \setminus B_m = \bigsqcup_{i=1}^{n} A_i.
+    \]
+\end{lemma}
+
+\begin{Proof}[Доказательство леммы]
+    Доказывать будем по индукции по $m$. %[cite: 9]
+    
+    \textbf{База индукции ($m=1$):} \\
+    Утверждение $A \setminus B_1 = \bigsqcup_{i=1}^{n} A_i$ выполняется по определению полукольца (свойство разности). %[cite: 9]
+
+    \textbf{Шаг индукции:} \\
+    Пусть утверждение верно для $m$. Докажем для $m+1$. %[cite: 9]
+    \[
+        A \setminus B_1 \setminus \dots \setminus B_m \setminus B_{m+1} = \left( \bigsqcup_{i=1}^{n} A_i \right) \setminus B_{m+1} = \bigsqcup_{i=1}^{n} (A_i \setminus B_{m+1}).
+    \]
+    Так как $A_i \in S$ и $B_{m+1} \in S$, по определению полукольца разность $A_i \setminus B_{m+1}$ представима в виде $\bigsqcup_{j=1}^{k_i} C_{ij}$, где $C_{ij} \in S$. %[cite: 9]
+    Тогда:
+    \[
+        \bigsqcup_{i=1}^{n} (A_i \setminus B_{m+1}) = \bigsqcup_{i=1}^{n} \left( \bigsqcup_{j=1}^{k_i} C_{ij} \right) = \bigsqcup_{i, j} C_{ij}.
+    \]
+    Получили дизъюнктивное объединение конечного числа элементов из $S$. Лемма доказана. %[cite: 9]
+\end{Proof}
+
+\begin{Proof}[{{Продолжение доказательства теоремы (проверка, что $K$ --- кольцо)}}]
+    \begin{enumerate}[label=\arabic*)]
+        \item $\varnothing \in K$, так как $S \subset K$ и $\varnothing \in S$. %[cite: 10]
+        \item Пусть $P, Q \in K$. Докажем, что $P \cap Q \in K$ и $P \triangle Q \in K$. %[cite: 10]
+        
+        По определению $K$, элементы $P$ и $Q$ имеют вид:
+        \[
+            P = \bigsqcup_{i=1}^{n} P_i, \quad Q = \bigsqcup_{j=1}^{m} Q_j, \qquad P_i, Q_j \in S.
+        \]
+        
+        \textbf{Пересечение:}
+        \[
+            P \cap Q = \left( \bigsqcup_{i=1}^{n} P_i \right) \cap \left( \bigsqcup_{j=1}^{m} Q_j \right) = \bigsqcup_{i=1}^{n} \bigsqcup_{j=1}^{m} (P_i \cap Q_j).
+        \]
+        Обозначим $D_{ij} = P_i \cap Q_j$. Так как $S$ замкнуто относительно пересечений, $D_{ij} \in S$. Значит, $P \cap Q = \bigsqcup_{i,j} D_{ij} \in K$. %[cite: 10]
+
+        \textbf{Симметрическая разность:} \\
+        Рассмотрим сначала разность $P \setminus Q$: %[cite: 11]
+        \[
+            P \setminus Q = \left( \bigsqcup_{i=1}^{n} P_i \right) \setminus \left( \bigsqcup_{j=1}^{m} Q_j \right) = \bigsqcup_{i=1}^{n} (P_i \setminus Q_1 \setminus Q_2 \setminus \dots \setminus Q_m).
+        \]
+        По доказанной лемме, каждый элемент $P_i \setminus Q_1 \setminus \dots \setminus Q_m$ представим как $\bigsqcup_{\ell=1}^{W_i} F_{i\ell}$, где $F_{i\ell} \in S$. %[cite: 11]
+        Отсюда $P \setminus Q = \bigsqcup_{i, \ell} F_{i\ell} \in K$.
+        
+        Аналогично расписывается $Q \setminus P$:
+        \[
+            Q \setminus P = \bigsqcup_{j=1}^{m} (Q_j \setminus P_1 \setminus \dots \setminus P_n) = \bigsqcup_{j=1}^{m} \bigsqcup_{k=1}^{T_j} E_{jk} \in K, \quad E_{jk} \in S. %[cite: 11]
+        \]
+        
+        Тогда симметрическая разность:
+        \[
+            P \triangle Q = (P \setminus Q) \sqcup (Q \setminus P) = \left( \bigsqcup_{i, \ell} F_{i\ell} \right) \sqcup \left( \bigsqcup_{j, k} E_{jk} \right) \in K. %[cite: 11]
+        \]
+    \end{enumerate}
+    Мы доказали, что $K$ --- кольцо. Следовательно, $R(S) = K$. Теорема полностью доказана. %[cite: 11]
+\end{Proof}
+
+\subsection{$\sigma$-кольца и $\delta$-кольца}
+
+\begin{definition}[$\delta$-кольцо]
+    $\delta$-кольцом называется кольцо, замкнутое относительно счетного пересечения:
+    \[
+        A_1, A_2, \dots \in R \implies \bigcap_{i=1}^{\infty} A_i \in R.
+    \] %[cite: 12]
+\end{definition}
+
+\begin{definition}[$\sigma$-кольцо]
+    $\sigma$-кольцом называется кольцо, замкнутое относительно счетного объединения:
+    \[
+        A_1, A_2, \dots \in R \implies \bigcup_{i=1}^{\infty} A_i \in R.
+    \] %[cite: 12]
+\end{definition}
+
+\begin{exercise}[Свойство вложенности]
+    Любое $\sigma$-кольцо является $\delta$-кольцом ($\sigma\text{-кольцо} \implies \delta\text{-кольцо}$). %[cite: 12]
+\end{exercise}
+
+\begin{Proof}
+    Пусть $R$ --- $\sigma$-кольцо и $A_1, A_2, \dots \in R$. Рассмотрим их счетное пересечение. Воспользуемся законами де Моргана: %[cite: 12]
+    \[
+        \bigcap_{i=1}^{\infty} A_i = \bigcap_{i=1}^{\infty} (A_1 \cap A_i) = A_1 \setminus \left( A_1 \setminus \bigcap_{i=2}^{\infty} A_i \right) = A_1 \setminus \bigcup_{i=2}^{\infty} (A_1 \setminus A_i).
+    \]
+    Проанализируем правую часть: %[cite: 12]
+    \begin{itemize}
+        \item $A_1 \setminus A_i \in R$, так как $R$ --- кольцо (замкнуто относительно разности).
+        \item $\bigcup_{i=2}^{\infty} (A_1 \setminus A_i) \in R$, так как $R$ --- $\sigma$-кольцо (замкнуто относительно счетного объединения).
+        \item Итоговая разность $A_1 \setminus \left( \dots \right)$ также принадлежит $R$, так как кольцо замкнуто относительно разности.
+    \end{itemize}
+    Следовательно, $\bigcap_{i=1}^{\infty} A_i \in R$, что и требовалось доказать. %[cite: 12]
+\end{Proof}
+
+\begin{example}
+    Обратное утверждение неверно: $\delta$-кольцо $\not\implies$ $\sigma$-кольцо. %[cite: 12]
+    \\
+    \\
+    В качестве контрпримера рассмотрим систему всех ограниченных подмножеств $\R$. %[cite: 12] 
+    Эта система образует $\delta$-кольцо, поскольку пересечение любого (в том числе счетного) числа ограниченных множеств остается ограниченным. Однако она не является $\sigma$-кольцом: счетное объединение ограниченных множеств может дать неограниченное множество. 
+\end{example}
 
 \begin{exercise}[Открытые множества на $\mathbb{R}$]
     Любое открытое множество $U \subseteq \mathbb{R}$
@@ -858,6 +981,8 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
         a_i,b_i \in \overline{\mathbb{R}},
     \]
     где $I$ --- не более чем счётное множество индексов
+
+    
 \end{exercise}
 
 \subsection{Полуалгебра и алгебра}
