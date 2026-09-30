@@ -1,0 +1,59 @@
+\section{25.09.2026}
+
+\subsection{Задачи}
+
+\subsubsection{Задача 2}
+
+\begin{task}
+Случайная точка $(\alpha; \beta)$ бросается на единичный квадрат
+
+\[
+    K = \{(u; v) : 0 \leq u \leq 1, 0 \leq v \leq 1\}
+\]
+
+Обозначим $\eta  $ число действительных корней многочлена
+
+\[
+    f_{\alpha, \beta } (x) = \frac{1}{3} x^3 - \alpha ^ 2 x + \beta 
+\]
+
+Найти вероятности $P \{\eta = k\}, k = 1;3$
+\end{task}
+
+\begin{solution}
+Заметим, что корней либо 1 либо 3
+
+\[
+    f_{\alpha, \beta } (x) = \frac{1}{3} x^3 - \alpha ^ 2 x + \beta 
+\]
+\[
+    f'_{\alpha, \beta } (x) = x^2 - \alpha ^ 2 = (x - \alpha )(x + \alpha )
+\]
+
+Если $\alpha = 0$: 
+\[
+    f_{\alpha, \beta } (x) = \frac{1}{3} x^3 + \beta 
+\]
+
+\[
+    \Pr_{}(\alpha = 0; \beta \in [0; 1]) = 0 
+\]
+\[
+    \Pr_{}(\eta = 1) = 0; 
+\]
+
+Если $\alpha > 0$: 
+
+\[
+    f(-\alpha ) > 0
+\]
+\[
+    f(\alpha ) < 0
+\]
+\[
+    \ldots
+\]
+\[
+    \int_0^1 \frac{2}{3} \alpha ^3 \mathrm{d} x = \ldots = \frac{1}{6}
+\]
+\end{solution}
