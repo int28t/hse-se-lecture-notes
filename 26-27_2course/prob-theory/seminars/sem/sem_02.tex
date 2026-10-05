@@ -1,0 +1,208 @@
+% Источник решений: «семинар 2.pdf», страницы 1--4.
+\section{Неклассические модели}
+
+\noindent Условия:
+\href{run:conditions/sem_02.pdf}{семинар 2 (PDF)}.
+
+\subsection{Задача 1}
+
+\begin{solution}
+    \textbf{Модель: геометрическая.}
+    $x$ --- опоздание семинариста, $y$ --- опоздание старосты.
+    Выбор равномерный и независимый.
+    \par\noindent
+    \begin{minipage}[c]{0.62\linewidth}
+        \[
+            \omega=(x,y),\qquad \Omega=[0;15]\times[0;10].
+        \]
+        \[
+            \mathcal{A}=\{(x,y)\in\Omega:x-10\leq y\leq x+5\}.
+        \]
+        \[
+            S_\Omega=150,\qquad S_1=S_2=\frac{5\cdot5}{2}.
+        \]
+        \[
+            \Pr(\mathcal{A})=\frac{150-S_1-S_2}{150}
+            =\frac{125}{150}=\boxed{\frac56}.
+        \]
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.36\linewidth}
+        \centering
+        \begin{tikzpicture}[x=0.25cm,y=0.25cm,>=Stealth]
+            \fill[definition_frame!25]
+                (0,0)--(10,0)--(15,5)--(15,10)--(5,10)--(0,5)--cycle;
+            \draw (0,0) rectangle (15,10);
+            \draw[thick] (0,5)--(5,10) (10,0)--(15,5);
+            \draw[->] (0,0)--(17,0) node[right] {$x$};
+            \draw[->] (0,0)--(0,12) node[above] {$y$};
+            \node[below left] at (0,0) {$0$};
+            \foreach \x in {5,10,15}
+                \draw (\x,0.15)--(\x,-0.15) node[below] {$\x$};
+            \foreach \y in {5,10}
+                \draw (0.15,\y)--(-0.15,\y) node[left] {$\y$};
+            \node at (1.4,8.5) {$S_1$};
+            \node at (13.6,1.5) {$S_2$};
+            \node at (7.5,5) {$\mathcal{A}$};
+        \end{tikzpicture}
+    \end{minipage}
+\end{solution}
+
+\subsection{Задача 2}
+
+\begin{solution}
+    \textbf{Модель: геометрическая.}
+    $\omega=(\alpha,\beta)$, $\Omega=[0;1]^2$;
+    $\eta$ --- число различных действительных корней.
+    \[
+        \begin{gathered}
+            f_{\alpha,\beta}(x)=\frac{x^3}{3}-\alpha^2x+\beta,
+            \qquad f'_{\alpha,\beta}(x)=x^2-\alpha^2;\\[4pt]
+            f_{\alpha,\beta}(-\alpha)=\frac{2\alpha^3}{3}+\beta\geq0,
+            \qquad f_{\alpha,\beta}(\alpha)=-\frac{2\alpha^3}{3}+\beta;\\[4pt]
+            \eta=3
+            \iff \alpha>0,\quad 0\leq\beta<\frac{2\alpha^3}{3}.
+        \end{gathered}
+    \]
+    \par\begingroup\centering
+        \begin{tikzpicture}[baseline=(current bounding box.center),
+            x=1.25cm,y=1.25cm,>=Stealth]
+            \draw[->] (-1.7,0)--(1.8,0) node[right] {$x$};
+            \draw[->] (0,-0.65)--(0,0.85) node[above] {$f$};
+            \draw[thick,domain=-1.6:1.6,samples=90]
+                plot (\x,{\x^3/3-0.64*\x+0.1});
+            \draw[dashed] (-0.8,0)--(-0.8,{2*0.8^3/3+0.1});
+            \draw[dashed] (0.8,0)--(0.8,{-2*0.8^3/3+0.1});
+            \node[below] at (-0.8,0) {$-\alpha$};
+            \node[above] at (0.8,0) {$\alpha$};
+        \end{tikzpicture}
+        \hspace{1.2cm}
+        \begin{tikzpicture}[baseline=(current bounding box.center),
+            x=2.4cm,y=2.4cm,>=Stealth]
+            \fill[definition_frame!25] (0,0)
+                plot[domain=0:1,samples=60] (\x,{2*\x^3/3})
+                --(1,1)--(0,1)--cycle;
+            \draw (0,0) rectangle (1,1);
+            \draw[thick,domain=0:1,samples=60]
+                plot (\x,{2*\x^3/3});
+            \draw[->] (0,0)--(1.15,0) node[right] {$\alpha$};
+            \draw[->] (0,0)--(0,1.15) node[above] {$\beta$};
+            \node[below left] at (0,0) {$0$};
+            \node[below] at (1,0) {$1$};
+            \node[left] at (0,1) {$1$};
+            \node[right] at (1,0.6667) {$\frac23$};
+            \node at (0.4,0.7) {$\eta=1$};
+            \node[font=\small] at (0.77,0.12) {$\eta=3$};
+        \end{tikzpicture}
+    \par\endgroup
+    Граница $\beta=2\alpha^3/3$ имеет нулевую площадь:
+    $\Pr(\eta=2)=0$.
+    \[
+        \Pr(\eta=3)=\int_0^1\frac{2\alpha^3}{3}\diff\alpha
+        =\boxed{\frac16},\qquad
+        \Pr(\eta=1)=1-\frac16=\boxed{\frac56}.
+    \]
+\end{solution}
+
+\clearpage
+\subsection{Задача 3}
+
+\begin{solution}
+    \textbf{Три геометрические модели.}
+    $\rho$ --- расстояние от центра до хорды, $\ell$ --- её длина.
+    \[
+        \ell=2\sqrt{R^2-\rho^2}>R\sqrt3
+        \iff \rho<\frac R2.
+    \]
+
+    \textbf{1) Равномерный выбор конца хорды на окружности.}
+    Один конец фиксирован; $s$ --- длина дуги до второго конца.
+    \[
+        \Omega=[0;2\pi R),\qquad
+        \mathcal{A}=\left(\frac{2\pi R}{3};\frac{4\pi R}{3}\right),
+        \qquad \Pr(\mathcal{A})=\frac{2\pi R/3}{2\pi R}
+        =\boxed{\frac13}.
+    \]
+
+    \textbf{2) Равномерный выбор середины хорды в круге.}
+    \[
+        \Omega=\{(u,v):u^2+v^2\leq R^2\},\qquad
+        \mathcal{A}=\{(u,v):u^2+v^2<R^2/4\}.
+    \]
+    \[
+        \Pr(\mathcal{A})=\frac{\pi(R/2)^2}{\pi R^2}
+        =\boxed{\frac14}.
+    \]
+    % При выборе центра направление диаметра задаётся произвольно:
+    % вероятность выбора этой точки равна нулю.
+
+    \textbf{3) Равномерный независимый выбор расстояния и угла.}
+    \[
+        \omega=(\rho,\varphi),\qquad
+        \Omega=[0;R]\times[0;2\pi),\qquad
+        \mathcal{A}=[0;R/2)\times[0;2\pi).
+    \]
+    \[
+        \Pr(\mathcal{A})=\frac{(R/2)\cdot2\pi}{R\cdot2\pi}
+        =\boxed{\frac12}.
+    \]
+
+    \par\begingroup\centering
+        \begin{tikzpicture}[scale=1.25,>=Stealth]
+            \draw (0,0) circle (1);
+            \draw (1,0)--(-0.5,0.866)--(-0.5,-0.866)--cycle;
+            \draw[definition_frame,very thick]
+                (120:1) arc[start angle=120,end angle=240,radius=1];
+            \fill (1,0) circle (0.025) node[right] {$A$};
+            \fill (0,0) circle (0.02);
+            \node at (0,-1.35) {1)};
+        \end{tikzpicture}
+        \hspace{1cm}
+        \begin{tikzpicture}[scale=1.25]
+            \fill[definition_frame!25] (0,0) circle (0.5);
+            \draw (0,0) circle (1);
+            \draw[thick] (0,0) circle (0.5);
+            \draw (0,0)--(0.5,0) node[midway,above] {$\frac R2$};
+            \fill (0,0) circle (0.02);
+            \node at (0,-1.35) {2)};
+        \end{tikzpicture}
+        \hspace{1cm}
+        \begin{tikzpicture}[scale=1.25,>=Stealth]
+            \draw (0,0) circle (1);
+            \draw[dashed] (0,0)--(1.1,0);
+            \draw[->] (0.42,0) arc[start angle=0,end angle=35,radius=0.42];
+            \node[below] at (0.48,-0.01) {$\varphi$};
+            \begin{scope}[rotate=35]
+                \draw[very thick,definition_frame] (0,0)--(0.65,0)
+                    node[midway,above] {$\rho$};
+                \draw[thick] (0.65,-0.7599)--(0.65,0.7599);
+                \draw (0.54,0)--(0.54,0.11)--(0.65,0.11);
+            \end{scope}
+            \fill (0,0) circle (0.02);
+            \node at (0,-1.35) {3)};
+        \end{tikzpicture}
+    \par\endgroup
+\end{solution}
+
+\subsection{Задача 4}
+
+\begin{solution}
+    \textbf{Модель: схема Бернулли $\mathrm{Bern}(2n,p)$.}
+    \[
+        \omega=(i_1,\ldots,i_{2n}),\qquad
+        \Omega=\{0,1\}^{2n},\qquad
+        \Pr(\{\omega\})=
+        p^{\Sum{j=1}{2n}i_j}(1-p)^{2n-\Sum{j=1}{2n}i_j}.
+    \]
+    \[
+        \mathcal{A}=
+        \left\{\omega:i_2=i_4=\cdots=i_{2n}=1,\
+        \Sum{j=1}{2n}i_j=n+m\right\}.
+    \]
+    В $n$ нечётных позициях должны стоять $m$ единиц:
+    \[
+        |\mathcal{A}|=C_n^m,\qquad
+        \Pr(\mathcal{A})=
+        \boxed{C_n^m p^{n+m}(1-p)^{n-m}},
+        \qquad 0\leq m\leq n.
+    \]
+\end{solution}

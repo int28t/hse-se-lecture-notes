@@ -1,6 +1,12 @@
 \documentclass[a4paper,12pt]{article}
 
 \usepackage{header}
+\tcbset{before upper={
+    \setlength{\abovedisplayskip}{6pt plus 2pt minus 1pt}
+    \setlength{\belowdisplayskip}{6pt plus 2pt minus 1pt}
+    \setlength{\abovedisplayshortskip}{4pt plus 2pt minus 1pt}
+    \setlength{\belowdisplayshortskip}{4pt plus 2pt minus 1pt}
+}}
 
 \usepackage[pages=all]{background}
 \backgroundsetup{
@@ -11,7 +17,7 @@
   contents={github.com/int28t/hse-se-lecture-notes}
 }
 
-\title{Семинары по теории вероятностей и математической статистике (БПИ252)}
+\title{Семинары по теории вероятностей и математической статистике (БПИ258)}
 \author{github.com/int28t/hse-se-lecture-notes}
 \date{}
 
@@ -19,12 +25,15 @@
     \pagestyle{empty}
 	\maketitle
     \begin{flushright}
-		Булычев Александр Викторович\\
-        @alexandresun
+		Эрлих Иван Генрихович\\
 	\end{flushright}
 	\tableofcontents{}
     \newpage
     \pagestyle{plain}
 
     \input{sem/sem_01_[11.09.2026].tex}
+    \clearpage
+    \input{sem/sem_02.tex}
+    \clearpage
+    \input{sem/sem_03.tex}
 \end{document}
