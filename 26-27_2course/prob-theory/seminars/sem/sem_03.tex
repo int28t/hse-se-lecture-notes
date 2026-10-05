@@ -1,0 +1,144 @@
+% Источник решений: «семинар 3 (1).pdf», страницы 1--3.
+\section{Формулы теории вероятностей}
+
+\noindent Условия:
+\href{run:conditions/sem_03.pdf}{семинар 3 (PDF)}.
+
+\subsection{Задача 1}
+
+\begin{solution}
+    \textbf{Модель: классическая. Условная вероятность.}
+    \[
+        \Omega=\{1,\ldots,6\}^3,\qquad \omega=(i_1,i_2,i_3),\qquad
+        \mathcal{A}=\{\text{хотя бы одна единица}\}.
+    \]
+    \textbf{а)} $\mathcal{B}_1=\{i_1,i_2,i_3\text{ попарно различны}\}$.
+    \[
+        |\mathcal{B}_1|=6\cdot5\cdot4,\qquad
+        |\mathcal{A}\cap\mathcal{B}_1|=3\cdot5\cdot4.
+    \]
+    \[
+        \Pr(\mathcal{A}\mid\mathcal{B}_1)
+        =\frac{|\mathcal{A}\cap\mathcal{B}_1|}{|\mathcal{B}_1|}
+        =\frac{3\cdot5\cdot4}{6\cdot5\cdot4}=\boxed{\frac12}.
+    \]
+    \textbf{б)} $\mathcal{B}_2=\{i_1=i_3\}$.
+    \[
+        |\mathcal{B}_2|=6\cdot6=36,\qquad
+        |\mathcal{A}\cap\mathcal{B}_2|=5\cdot1+1\cdot6=11.
+    \]
+    \[
+        \Pr(\mathcal{A}\mid\mathcal{B}_2)
+        =\frac{|\mathcal{A}\cap\mathcal{B}_2|}{|\mathcal{B}_2|}
+        =\boxed{\frac{11}{36}}.
+    \]
+\end{solution}
+
+\subsection{Задача 2}
+
+\begin{solution}
+    \textbf{Модель: классическая, упорядоченная выборка с возвращением.}
+    Нумеруем шары; первые $M$ --- белые.
+    \[
+        \omega=(i_1,\ldots,i_n),\qquad
+        \Omega=\{1,\ldots,N\}^n,\qquad |\Omega|=N^n.
+    \]
+    $\mathcal{A}_k$ --- $k$-й шар белый;
+    $\mathcal{B}_m$ --- всего вынуто $m$ белых шаров.
+    \[
+        |\mathcal{B}_m|=C_n^m M^m(N-M)^{n-m},
+    \]
+    \[
+        |\mathcal{A}_k\cap\mathcal{B}_m|
+        =C_{n-1}^{m-1}M^m(N-M)^{n-m}.
+    \]
+    При $\Pr(\mathcal{B}_m)>0$ и $1\leq m\leq n$:
+    \[
+        \Pr(\mathcal{A}_k\mid\mathcal{B}_m)
+        =\frac{|\mathcal{A}_k\cap\mathcal{B}_m|}{|\mathcal{B}_m|}
+        =\frac{C_{n-1}^{m-1}}{C_n^m}
+        =\boxed{\frac mn}.
+    \]
+    При $m=0$ и $\Pr(\mathcal{B}_0)>0$ условная вероятность равна $0$.
+\end{solution}
+
+\clearpage
+\subsection{Задача 3}
+
+\begin{solution}
+    \textbf{Модель: классическая на каждом этапе.
+    Формула полной вероятности.}
+
+    $\mathcal{A}$ --- из второй урны вынут белый шар.
+    Гипотезы о переложенных шарах:
+    \[
+        \begin{array}{c|c|c}
+            & \Pr(\mathcal{B}_i) & \Pr(\mathcal{A}\mid\mathcal{B}_i)\\[4pt] \hline
+            \mathcal{B}_1:\ \text{два белых}
+                & \frac35\cdot\frac24=\frac3{10} & \frac6{10}\\[10pt]
+            \mathcal{B}_2:\ \text{два чёрных}
+                & \frac25\cdot\frac14=\frac1{10} & \frac4{10}\\[10pt]
+            \mathcal{B}_3:\ \text{один белый, один чёрный}
+                & 2\cdot\frac35\cdot\frac24=\frac6{10} & \frac5{10}
+        \end{array}
+    \]
+    \[
+        \begin{aligned}
+            \Pr(\mathcal{A})
+            &=\Sum{i=1}{3}
+                \Pr(\mathcal{A}\mid\mathcal{B}_i)\Pr(\mathcal{B}_i)\\
+            &=\frac6{10}\cdot\frac3{10}
+             +\frac4{10}\cdot\frac1{10}
+             +\frac5{10}\cdot\frac6{10}
+             =\boxed{0{,}52}.
+        \end{aligned}
+    \]
+\end{solution}
+
+\subsection{Задача 4}
+
+\begin{solution}
+    \textbf{Модель: дискретная. Формула Байеса.}
+
+    $\mathcal{A}$ --- первым стрелял A;
+    $\mathcal{B}$ --- первым стрелял B;
+    $\mathcal{C}$ --- первый выстрел попал в цель.
+    \[
+        \Pr(\mathcal{A})=\Pr(\mathcal{B})=\frac12,\qquad
+        \Pr(\mathcal{C}\mid\mathcal{A})=\frac12,\qquad
+        \Pr(\mathcal{C}\mid\mathcal{B})=\frac45.
+    \]
+    \[
+        \begin{aligned}
+            \Pr(\mathcal{A}\mid\mathcal{C})
+            &=\frac{\Pr(\mathcal{C}\mid\mathcal{A})\Pr(\mathcal{A})}
+            {\Pr(\mathcal{C}\mid\mathcal{A})\Pr(\mathcal{A})
+             +\Pr(\mathcal{C}\mid\mathcal{B})\Pr(\mathcal{B})}\\
+            &=\frac{\frac12\cdot\frac12}
+                    {\frac12\cdot\frac12+\frac45\cdot\frac12}
+              =\boxed{\frac5{13}}.
+        \end{aligned}
+    \]
+\end{solution}
+
+\subsection{Задача 5}
+
+\begin{solution}
+    \textbf{Модель: классическая, выборка без возвращения.
+    Формула умножения.}
+
+    $\mathcal{B}_1$ --- первый шар белый;
+    $\mathcal{B}_2$ --- второй шар белый;
+    $\mathcal{B}_3$ --- третий шар красный.
+    \[
+        \begin{aligned}
+            \Pr(\mathcal{B}_1\cap\mathcal{B}_2\cap\mathcal{B}_3)
+            &=\Pr(\mathcal{B}_1)
+              \Pr(\mathcal{B}_2\mid\mathcal{B}_1)
+              \Pr(\mathcal{B}_3\mid\mathcal{B}_1\cap\mathcal{B}_2)\\
+            &=\frac5{12}\cdot\frac4{11}\cdot\frac7{10}
+              =\frac{140}{12\cdot11\cdot10}
+              =\boxed{\frac7{66}}.
+        \end{aligned}
+    \]
+\end{solution}
