@@ -774,21 +774,21 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
         содержащие $\chi$, и обозначим их
         $\{R_\alpha\}_{\alpha \in I}$. Положим
         \[
-            R_0 = \bigcap_{\alpha \in I} R_\alpha
+            R(\chi) = \bigcap_{\alpha \in I} R_\alpha
         \]
-        Докажем, что $R_0 = R(\chi)$
+        Проверим свойства $R(\chi)$.
     \end{enumerate}
 
-    \textbf{I. $R_0$ --- кольцо.}
+    \textbf{I. $R(\chi)$ --- кольцо.}
     \begin{enumerate}[label=\arabic*)]
         \item Поскольку $\varnothing \in R_\alpha$
         для каждого $\alpha \in I$, имеем
         \[
             \varnothing \in
-            \bigcap_{\alpha \in I} R_\alpha = R_0.
+            \bigcap_{\alpha \in I} R_\alpha = R(\chi).
         \]
 
-        \item Пусть $A, B \in R_0$. Тогда
+        \item Пусть $A, B \in R(\chi)$. Тогда
         \[
             A, B \in R_\alpha
             \qquad \forall \alpha \in I.
@@ -802,34 +802,54 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
         \]
         Следовательно,
         \[
-            A \cap B \in R_0,
+            A \cap B \in R(\chi),
             \qquad
-            A \triangle B \in R_0.
+            A \triangle B \in R(\chi).
         \]
     \end{enumerate}
 
-    \textbf{II. $\chi$  $\subset$ $R_0$}
+    \textbf{II. $\chi \subset R(\chi)$}
 
     Поскольку $\chi \subset R_\alpha$ для каждого $\alpha \in I$,
     \[
-        \chi \subset \bigcap_{\alpha \in I} R_\alpha = R_0.
+        \chi \subset \bigcap_{\alpha \in I} R_\alpha = R(\chi).
     \]
 
-    \textbf{III. $R_0$ --- наименьшее такое кольцо.}
+    \textbf{III. $R(\chi)$ --- наименьшее такое кольцо.}
 
-Пусть $R'$ --- произвольное кольцо, содержащее $\chi$:
+Пусть $R_0$ --- произвольное кольцо, содержащее $\chi$:
 \[
-    \chi \subset R'.
+    \chi \subset R_0.
 \]
-Тогда $R'$ входит в систему $\{R_\alpha\}_{\alpha \in I}$,
-то есть
+Рассмотрим
 \[
-    \exists \alpha_0 \in I \colon R' = R_{\alpha_0}
+    R_0' = \{A \in R_0 \colon A \subset \Omega\}.
+\]
+Тогда $\chi \subset R_0'$. Если $A,B \in R_0'$, то
+\[
+    A=A_0,\quad B=B_0,\qquad
+    A_0,B_0\in R_0,\quad A_0,B_0\subset\Omega.
+\]
+Поэтому
+\[
+    A\cap B=(A_0\cap B_0)\cap\Omega\in R_0',
+\]
+\[
+    A\triangle B
+    =(A_0\cap\Omega)\triangle(B_0\cap\Omega)
+    =(A_0\triangle B_0)\cap\Omega\in R_0',
+\]
+так как $A_0\triangle B_0\in R_0$ и
+$A_0\triangle B_0\subset\Omega$.
+Следовательно, $R_0'$ --- кольцо подмножеств $\Omega$,
+содержащее $\chi$, то есть
+\[
+    \exists \alpha_0 \in I \colon R_0' = R_{\alpha_0}.
 \]
 Следовательно,
 \[
-    R_0 = \bigcap_{\alpha \in I} R_\alpha
-    \subset R_{\alpha_0} = R'.
+    R(\chi) = \bigcap_{\alpha \in I} R_\alpha
+    \subset R_{\alpha_0} = R_0' \subset R_0.
 \]
 \end{Proof}
 
@@ -847,18 +867,6 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
         \right\}.
     \]
 \end{theorem}
-
-\begin{exercise}[Открытые множества на $\mathbb{R}$]
-    Любое открытое множество $U \subseteq \mathbb{R}$
-    представляется в виде конечного или счётного
-    дизъюнктного объединения открытых интервалов:
-    \[
-        U = \bigsqcup_{i \in I} (a_i;b_i),
-        \qquad
-        a_i,b_i \in \overline{\mathbb{R}},
-    \]
-    где $I$ --- не более чем счётное множество индексов
-\end{exercise}
 
 \subsection{Полуалгебра и алгебра}
 
@@ -878,19 +886,7 @@ $\mathcal{B}$, которые по-прежнему равновероятны.
     \textbf{Алгебра} --- это кольцо с единицей.
 \end{definition}
 
-\section{Случайные величины}
-
-\begin{definition}
-    Функция $\xi \colon \Omega \to \mathbb{R}$
-    называется \textbf{случайной величиной}, если
-    \[
-        \xi^{-1}\bigl((-\infty;x]\bigr) \in \mathcal{F}
-        \qquad \forall x \in \mathbb{R}.
-    \]
-    Эквивалентная запись:
-    \[
-        \{\omega \in \Omega \colon \xi(\omega) \leq x\}
-        \in \mathcal{F}
-        \qquad \forall x \in \mathbb{R}.
-    \]
-\end{definition}
+% Продолжение по лекциям 7--10: материал сгруппирован по темам.
+\input{./lectures/lectures_08_10_sets.tex}
+\input{./lectures/lecture_09_probability.tex}
+\input{./lectures/lectures_07_10_random_variables.tex}

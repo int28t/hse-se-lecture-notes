@@ -1,0 +1,232 @@
+% Источник: лекция 8, с. 5--8; лекция 9, с. 9;
+% лекция 10, с. 15--18 рукописного PDF.
+
+\subsection{Счётные операции над множествами}
+
+\begin{center}
+    \begin{tikzpicture}[>=Stealth, every node/.style={font=\small}]
+        \node (s) at (0,0) {Полукольцо};
+        \node (r) at (3,0) {Кольцо};
+        \node (sr) at (6.1,0.35) {$\sigma$-кольцо};
+        \node (dr) at (6.1,-0.55) {$\delta$-кольцо};
+        \draw[->] (s) -- (r);
+        \draw[->] (r) -- (4.6,0) |- (sr);
+        \draw[->] (4.6,0) |- (dr);
+        \draw[->] (sr) -- (dr);
+        \node (sa) at (0,-1.65) {Полуалгебра};
+        \node (a) at (3,-1.65) {Алгебра};
+        \node (sigma) at (6.1,-1.65) {$\sigma$-алгебра};
+        \node (delta) at (6.1,-2.65) {$\delta$-алгебра};
+        \draw[->] (sa) -- (a);
+        \draw[->] (a) -- (sigma);
+        \node at (6.1,-2.15) {$\Updownarrow$};
+    \end{tikzpicture}
+\end{center}
+
+\begin{definition}[$\sigma$-алгебра с единицей $\Omega$]
+    Система $\mathcal{F} \subset 2^\Omega$ называется
+    \textbf{$\sigma$-алгеброй с единицей $\Omega$}, если
+    \begin{enumerate}[label=\arabic*)]
+        \item $\Omega \in \mathcal{F}$;
+        \item $\mathcal{F}$ замкнута относительно операций
+        $\cap$, $\cup$, $\setminus$, $\triangle$:
+        \[
+            A,B \in \mathcal{F}
+            \implies A \star B \in \mathcal{F},
+            \qquad \star \in \{\cap,\cup,\setminus,\triangle\};
+        \]
+        \item для любой последовательности $A_i \in \mathcal{F}$
+        \[
+            \bigcup_{i=1}^{\infty} A_i \in \mathcal{F}.
+        \]
+    \end{enumerate}
+    При этом
+    \[
+        \varnothing = \Omega \setminus \Omega \in \mathcal{F},
+        \qquad
+        \bigcap_{i=1}^{\infty} B_i
+        = \overline{\bigcup_{i=1}^{\infty}\overline{B_i}}
+        \in \mathcal{F}
+        \quad (B_i \in \mathcal{F}).
+    \]
+\end{definition}
+
+\subsection{Наименьшая \texorpdfstring{$\sigma$}{σ}-алгебра}
+
+\begin{definition}
+    Пусть $\chi$ --- система множеств,
+    $\Omega = \bigcup_{A\in\chi} A$.
+    Наименьшая $\sigma$-алгебра $\sigma(\chi)$ определяется условиями:
+    \begin{enumerate}[label=\arabic*)]
+        \item $\chi \subset \sigma(\chi)$;
+        \item $\sigma(\chi)$ --- $\sigma$-алгебра с единицей $\Omega$;
+        \item для любой $\sigma$-алгебры $\mathcal{A}$
+        с той же единицей $\Omega$
+        \[
+            \chi \subset \mathcal{A}
+            \implies \sigma(\chi) \subset \mathcal{A}.
+        \]
+    \end{enumerate}
+\end{definition}
+
+\textbf{Построение:}
+\[
+    \sigma(\chi) = \bigcap_{\alpha} \mathcal{A}_\alpha,
+\]
+где $\mathcal{A}_\alpha$ --- все $\sigma$-алгебры
+с единицей $\Omega$, содержащие $\chi$.
+
+\subsection{Принцип подходящих множеств}
+
+\begin{task}
+    Для любого $A\in R(\chi)$ существует конечное покрытие
+    элементами $\chi$:
+    \[
+        \exists A_1,\ldots,A_n\in\chi\colon
+        A\subset\bigcup_{i=1}^{n} A_i.
+    \]
+\end{task}
+
+\begin{solution}
+    Рассмотрим
+    \[
+        R_0 = \left\{A\in R(\chi)\;\middle|\;
+        \exists A_1,\ldots,A_n\in\chi\colon
+        A\subset\bigcup_{i=1}^{n} A_i\right\}.
+    \]
+    Тогда
+    \[
+        R_0\subset R(\chi),\qquad
+        \chi\subset R_0,\qquad R_0\text{ --- кольцо}.
+    \]
+    По минимальности $R(\chi)$:
+    \[
+        R(\chi)\subset R_0
+        \quad\Longrightarrow\quad R_0=R(\chi).
+    \]
+\end{solution}
+
+\[
+    S\longrightarrow R(S)\longrightarrow\sigma(S),
+    \qquad
+    R(S)=\left\{\bigsqcup_{i=1}^{n}A_i\;\middle|\;
+    n\in\N,\ A_i\in S\right\}.
+\]
+
+\subsection{Борелевская \texorpdfstring{$\sigma$}{σ}-алгебра}
+
+\begin{definition}
+    \textbf{Борелевской $\sigma$-алгеброй} на пространстве $A$
+    называется наименьшая $\sigma$-алгебра, содержащая все
+    открытые множества этого пространства.
+    Обозначение: $\mathcal{B}(A)$.
+\end{definition}
+
+\subsubsection{Открытые множества на \texorpdfstring{$\mathbb{R}$}{R}}
+
+\begin{theorem}
+    Любое открытое множество $A\subset\R$ представляется
+    в виде конечного или счётного дизъюнктного объединения
+    открытых интервалов:
+    \[
+        A=\bigsqcup_{i\in I}(a_i;b_i),
+        \qquad a_i,b_i\in\overline{\R},
+    \]
+    где $I$ --- не более чем счётное множество индексов.
+\end{theorem}
+
+\begin{Proof}
+    Введём на $A$ отношение эквивалентности:
+    \[
+        x\sim y \quad\Longleftrightarrow\quad [x;y]\subset A.
+    \]
+    Здесь $[x;y]$ --- отрезок между $x$ и $y$.
+    \begin{enumerate}[label=\arabic*)]
+        \item Рефлексивность: $x\sim x$ для всех $x\in A$.
+        \item Симметричность: $x\sim y\implies y\sim x$.
+        \item Транзитивность:
+        $x\sim y$, $y\sim z\implies x\sim z$.
+    \end{enumerate}
+    Разобьём $A$ на классы эквивалентности:
+    \[
+        A=\bigsqcup_{\alpha} A_\alpha.
+    \]
+    \textbf{1. $A_\alpha$ --- открытый интервал.}
+    По определению отношения $A_\alpha$ является промежутком.
+    Пусть, например, $A_\alpha=(a;b]$.
+    Тогда $b\in A_\alpha\subset A$, поэтому
+    существует $U_\eps(b)\subset A$.
+    Пусть $(b;b+\eps)\subset A_\beta$.
+    При достаточно малом $\eps>0$:
+    \[
+        b-\frac{\eps}{2}\sim b+\frac{\eps}{2},
+    \]
+    что противоречит тому, что $b$ --- правый конец $A_\alpha$.
+
+    \textbf{2. Классов не более чем счётное число.}
+    В каждом $(a_\alpha;b_\alpha)$ выберем рациональное число:
+    \[
+        q_\alpha\in\Q\cap(a_\alpha;b_\alpha).
+    \]
+    Интервалы не пересекаются, поэтому выбранные числа различны.
+\end{Proof}
+
+\subsubsection{Порождающие системы}
+
+\begin{theorem}
+    \[
+        \begin{aligned}
+            \mathcal{B}(\R)
+            &=\sigma\bigl(\{(a;b)\}_{a,b\in\R}\bigr)
+              =\mathcal{B}_2\\
+            &=\sigma\bigl(\{[a;b]\}_{a,b\in\R}\bigr)
+              =\mathcal{B}_3\\
+            &=\sigma\bigl(\{(-\infty;x]\}_{x\in\R}\bigr)
+              =\mathcal{B}_4\\
+            &=\sigma\bigl(\{(a;b)\}_{a,b\in\Q}\bigr)
+              =\mathcal{B}_5.
+        \end{aligned}
+    \]
+\end{theorem}
+
+\begin{Proof}
+    \textbf{$\mathcal{B}(\R)=\mathcal{B}_4$.}
+    Так как $(x;+\infty)$ открыто, то
+    \[
+        (-\infty;x]=\R\setminus(x;+\infty)\in\mathcal{B}(\R).
+    \]
+    Следовательно, $\mathcal{B}_4\subset\mathcal{B}(\R)$.
+
+    Обратно, $(y;x]\in\mathcal{B}_4$ для всех $x,y\in\R$, и
+    \[
+        (a_i;b_i)=\bigcup_{n=1}^{\infty}
+        \left(a_i;b_i-\frac1n\right]\in\mathcal{B}_4.
+    \]
+    Любое открытое множество --- конечное или счётное
+    объединение интервалов. Поэтому
+    $\mathcal{B}(\R)\subset\mathcal{B}_4$.
+
+    \textbf{$\mathcal{B}_2=\mathcal{B}_5$.}
+    Очевидно, $\mathcal{B}_5\subset\mathcal{B}_2$.
+    Для любого $(a;b)$ выберем
+    \[
+        a_n,b_n\in\Q,\qquad a_n\downarrow a,
+        \qquad b_n\uparrow b.
+    \]
+    Тогда
+    \[
+        (a;b)=\bigcup_{n=1}^{\infty}(a_n;b_n)\in\mathcal{B}_5.
+    \]
+    Следовательно, $\mathcal{B}_2\subset\mathcal{B}_5$.
+\end{Proof}
+
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\begin{example}
+    \[
+        S=\bigl\{(a;b],\ (a;+\infty),\ (-\infty;b],\ \R
+        \;\bigm|\; a,b\in\R\bigr\}.
+    \]
+    Для этой системы $\sigma(S)=\mathcal{B}(\R)$.
+\end{example}
+\endgroup
