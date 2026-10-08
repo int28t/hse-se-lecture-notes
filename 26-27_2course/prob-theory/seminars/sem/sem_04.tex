@@ -1,0 +1,200 @@
+% Источник решений: «4 Семинар Ивана.pdf», страницы 2--6.
+% Условия не приложены; содержание задач не восстанавливается.
+\section{Независимость и дискретные распределения}
+
+\noindent Условия пока не приложены.
+
+\subsection{Задача 1}
+
+\begin{solution}
+    \textbf{Независимость событий.}
+
+    \textbf{а)} Дано: $\mathcal{A}\perp\!\!\!\perp\mathcal{B}$.
+    % В рукописи справа пропущено вычитание A.
+    \[
+        \overline{\mathcal{A}}\cap\mathcal{B}
+        =(\Omega\setminus\mathcal{A})\cap\mathcal{B}
+        =\mathcal{B}\setminus\mathcal{A}.
+    \]
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \draw (0,0) ellipse (2.5 and 1.3);
+            \node at (-1.9,0.45) {$\Omega$};
+            \begin{scope}
+                \clip (0.5,0) circle (0.8);
+                \fill[blue!20] (-2,-1) rectangle (2,1);
+                \fill[solution_back] (-0.5,0) circle (0.8);
+            \end{scope}
+            \draw (-0.5,0) circle (0.8);
+            \draw (0.5,0) circle (0.8);
+            \node at (-0.9,0.4) {$\mathcal{A}$};
+            \node at (0.9,0.4) {$\mathcal{B}$};
+        \end{tikzpicture}
+    \end{center}
+    \[
+        \begin{aligned}
+            \Pr(\overline{\mathcal{A}}\cap\mathcal{B})
+            &=\Pr(\mathcal{B})-\Pr(\mathcal{A}\cap\mathcal{B})\\
+            &=\Pr(\mathcal{B})-\Pr(\mathcal{A})\Pr(\mathcal{B})\\
+            &=\Pr(\mathcal{B})(1-\Pr(\mathcal{A}))
+             =\Pr(\mathcal{B})\Pr(\overline{\mathcal{A}}).
+        \end{aligned}
+    \]
+    Следовательно, $\overline{\mathcal{A}}\perp\!\!\!\perp\mathcal{B}$.
+
+    \medskip
+    \textbf{Модель: неклассическая дискретная. Схема Бернулли.}
+    \[
+        \Omega=\{0,1\}^n,\qquad
+        \omega=(i_1,\ldots,i_n),\qquad |\Omega|=2^n,\qquad n\geq2.
+    \]
+    \[
+        \Pr(\{\omega\})
+        =p^{\sum_{j=1}^n i_j}(1-p)^{n-\sum_{j=1}^n i_j}.
+    \]
+    \[
+        \mathcal{A}=\{\omega:i_1=1\},\qquad
+        \mathcal{B}=\{\omega:i_n=1\}.
+    \]
+    % В рукописи не дописана степень при (1-p).
+    \[
+        \begin{aligned}
+            \Pr(\mathcal{A})
+            &=\sum_{\omega:\,i_1=1}\Pr(\{\omega\})\\
+            &=p\sum_{i_2,\ldots,i_n\in\{0,1\}}
+                p^{\sum_{j=2}^n i_j}
+                (1-p)^{n-1-\sum_{j=2}^n i_j}
+             =p\cdot1=p.
+        \end{aligned}
+    \]
+    Аналогично $\Pr(\mathcal{B})=p$.
+    \[
+        \begin{aligned}
+            \Pr(\mathcal{A}\cap\mathcal{B})
+            &=\sum_{\omega:\,i_1=i_n=1}\Pr(\{\omega\})\\
+            &=p^2\sum_{i_2,\ldots,i_{n-1}\in\{0,1\}}
+                p^{\sum_{j=2}^{n-1}i_j}
+                (1-p)^{n-2-\sum_{j=2}^{n-1}i_j}\\
+            &=p^2=\Pr(\mathcal{A})\Pr(\mathcal{B}).
+        \end{aligned}
+    \]
+
+    \textbf{б)}
+    \[
+        \begin{aligned}
+            \mathcal{A}\perp\!\!\!\perp\mathcal{A}
+            &\iff\Pr(\mathcal{A}\cap\mathcal{A})=\Pr(\mathcal{A})^2\\
+            &\iff\Pr(\mathcal{A})=\Pr(\mathcal{A})^2\\
+            &\iff\Pr(\mathcal{A})=0\ \text{или}\ \Pr(\mathcal{A})=1.
+        \end{aligned}
+    \]
+\end{solution}
+
+\subsection{Задача 2}
+
+\begin{solution}
+    \textbf{Модель: дискретная.}
+
+    Дискретное распределение: $\{(x_i,p_i)\}$, где
+    \[
+        p_i=\Pr\{\xi=x_i\},\qquad \sum_i p_i=1.
+    \]
+    $\{\xi=x_i\}$ --- событие, элемент $\mathcal{F}$.
+    % В рукописи у суммы не указано ограничение на индекс.
+    \[
+        \Pr_\xi(B)=\sum_{i:\,x_i\in B}p_i.
+    \]
+    В задаче $x_i\in\{1,2,3\}$:
+    \[
+        \begin{aligned}
+            p_1&=\Pr\{\xi=1\}=\frac13,\\
+            p_2&=\Pr\{\xi=2\}=\frac23\cdot\frac12=\frac13,\\
+            p_3&=\Pr\{\xi=3\}=\frac23\cdot\frac12\cdot1=\frac13.
+        \end{aligned}
+    \]
+    \[
+        \boxed{\left\{\left(1,\frac13\right),
+            \left(2,\frac13\right),\left(3,\frac13\right)\right\}}.
+    \]
+\end{solution}
+
+\subsection{Задача 3}
+
+\begin{solution}
+    \textbf{Модель: дискретная. Геометрическое распределение.}
+    \[
+        \Pr\{\xi=k\}=(1-p)^{k-1}p,\qquad k\in\N,\qquad 0<p\leq1.
+    \]
+    Здесь $k-1$ неуспехов и затем успех.
+    \[
+        \eta=\frac{\xi}{2}\bigl(1-(-1)^\xi\bigr),\qquad
+        y_i\in\{0,1,3,5,\ldots\}.
+    \]
+    % Исправлено промежуточное суммирование геометрической прогрессии;
+    % итоговая вероятность в рукописи верна.
+    \[
+        \begin{aligned}
+            \Pr\{\eta=0\}
+            &=\sum_{n=1}^{\infty}\Pr\{\xi=2n\}
+             =p\sum_{n=1}^{\infty}(1-p)^{2n-1}\\
+            &=\frac{p(1-p)}{1-(1-p)^2}
+             =\frac{p(1-p)}{p(2-p)}
+             =\boxed{\frac{1-p}{2-p}}.
+        \end{aligned}
+    \]
+    \[
+        \Pr\{\eta=2k+1\}=\Pr\{\xi=2k+1\}
+        =\boxed{(1-p)^{2k}p},\qquad k=0,1,2,\ldots
+    \]
+\end{solution}
+
+\clearpage
+\subsection{Задача 4}
+
+\begin{solution}
+    \textbf{Модель: дискретная. Распределение Пуассона.}
+    \[
+        p_k=\Pr\{\xi=k\}=\frac{\lambda^k}{k!}e^{-\lambda},
+        \qquad k=0,1,2,\ldots
+    \]
+    Для дискретных случайных величин
+    \[
+        \xi\perp\!\!\!\perp\eta
+        \iff\forall\,i,j\quad
+        \{\omega:\xi(\omega)=x_i\}\perp\!\!\!\perp
+        \{\omega:\eta(\omega)=y_j\}.
+    \]
+    Пусть $\xi\sim\operatorname{Poiss}(\lambda_1)$,
+    $\eta\sim\operatorname{Poiss}(\lambda_2)$,
+    $\lambda_1,\lambda_2>0$, $\xi\perp\!\!\!\perp\eta$.
+    \[
+        \zeta=\xi+\eta\in\{0,1,2,\ldots\}.
+    \]
+    По формуле полной вероятности:
+    % В рукописи во второй сумме один раз ошибочно написано i=1.
+    \[
+        \begin{aligned}
+            \Pr\{\zeta=k\}
+            &=\sum_{i=0}^{\infty}\Pr\{\xi=i\}
+                \Pr\{\xi+\eta=k\mid\xi=i\}\\
+            &=\sum_{i=0}^{k}\Pr\{\xi=i\}
+                \Pr\{\eta=k-i\mid\xi=i\}\\
+            &=\sum_{i=0}^{k}\Pr\{\xi=i\}\Pr\{\eta=k-i\}.
+        \end{aligned}
+    \]
+    Последнее равенство следует из независимости. Тогда
+    \[
+        \begin{aligned}
+            \Pr\{\zeta=k\}
+            &=\sum_{i=0}^{k}\frac{\lambda_1^i}{i!}e^{-\lambda_1}
+                \frac{\lambda_2^{k-i}}{(k-i)!}e^{-\lambda_2}\\
+            &=\frac{e^{-(\lambda_1+\lambda_2)}}{k!}
+                \sum_{i=0}^{k}C_k^i\lambda_1^i\lambda_2^{k-i}\\
+            &=\frac{e^{-(\lambda_1+\lambda_2)}}{k!}
+                (\lambda_1+\lambda_2)^k.
+        \end{aligned}
+    \]
+    \[
+        \boxed{\xi+\eta\sim\operatorname{Poiss}(\lambda_1+\lambda_2)}.
+    \]
+\end{solution}

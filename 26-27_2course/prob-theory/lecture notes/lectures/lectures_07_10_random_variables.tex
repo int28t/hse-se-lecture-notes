@@ -1,0 +1,402 @@
+% Источник: лекция 7, с. 1--4; лекция 8, с. 8;
+% лекция 9, с. 11--14; лекция 10, с. 18 рукописного PDF.
+
+\section{Случайные величины}
+
+\begin{flushright}
+    \textit{Эмоции = результат $-$ ожидания.}
+\end{flushright}
+
+Пусть $(\Omega,\mathcal{F},\Pr)$ --- вероятностное пространство.
+Идея: случайная величина --- числовая характеристика
+случайного эксперимента.
+
+\begin{definition}
+    Функция $\xi\colon\Omega\to\R$ называется
+    \textbf{случайной величиной}, если
+    \[
+        \xi^{-1}\bigl((-\infty;x]\bigr)\in\mathcal{F}
+        \qquad\forall x\in\R.
+    \]
+    Эквивалентная запись:
+    \[
+        \{\omega\in\Omega\colon\xi(\omega)\leq x\}
+        \in\mathcal{F}
+        \qquad\forall x\in\R.
+    \]
+    Эквивалентное условие:
+    \[
+        \xi^{-1}(B)\in\mathcal{F}
+        \qquad\forall B\in\mathcal{B}(\R).
+    \]
+    Здесь $\mathcal{B}(\R)$ --- наименьшая $\sigma$-алгебра,
+    содержащая промежутки на $\R$, в частности
+    $(y;x]$, $(y;x)$, $[y;x]$, $[y;x)$.
+\end{definition}
+
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\begin{example}[Температура]
+    Пусть $t(\omega)$ --- температура в градусах Цельсия.
+    Рассматриваем вероятность \mbox{$\Pr\{t(\omega)>25\}$}.
+    Соответствующее событие:
+    \[
+        \begin{aligned}
+            \{\omega\in\Omega\colon t(\omega)>25\}
+            &=t^{-1}\bigl((25;+\infty)\bigr)\\
+            &=\Omega\setminus t^{-1}\bigl((-\infty;25]\bigr)
+            \in\mathcal{F}.
+        \end{aligned}
+    \]
+\end{example}
+\endgroup
+
+\subsection{Распределение случайной величины}
+
+Идея: распределение --- то, какие значения и с какими
+вероятностями принимает случайная величина.
+
+\begin{definition}
+    \textbf{Распределением случайной величины} $\xi$ называется
+    вероятностная мера на $\mathcal{B}(\R)$, определённая равенством
+    \[
+        \Pr_\xi(B)=\Pr\{\xi\in B\},
+        \qquad B\in\mathcal{B}(\R).
+    \]
+\end{definition}
+
+\begin{center}
+    \begin{tikzpicture}[>=Stealth]
+        \draw[thick] (0,0) ellipse (0.95cm and 1.15cm);
+        \node at (0,0) {$\Omega$};
+        \node at (0,-1.55) {$(\Omega,\mathcal{F},\Pr)$};
+        \draw[->,thick] (1.25,0) -- node[above] {$\xi$} (4.05,0);
+        \draw[->,thick] (4.45,-1.2) -- (4.45,1.35);
+        \node[right] at (4.45,1.15) {$\R$};
+        \node[right] at (4.45,0.6) {$\mathcal{B}(\R)$};
+        \node[right] at (4.45,-0.8)
+            {$\Pr_\xi(B)=\Pr\{\xi\in B\}$};
+        \draw[->] (0.55,-1.8) to[bend right=15] (4.35,-1.15);
+    \end{tikzpicture}
+\end{center}
+
+\subsection{Дискретные распределения}
+
+\begin{definition}
+    \textbf{Дискретным распределением} называется распределение
+    случайной величины, принимающей не более чем счётное
+    число значений.
+\end{definition}
+
+Для дискретного распределения $\{(x_i;p_i)\}_i$:
+\[
+    \Pr_\xi(B)=\sum_{j\colon x_j\in B}p_j,
+    \qquad B\in\mathcal{B}(\R).
+\]
+
+\begin{example}[Сумма очков двух кубиков]
+    \[
+        \omega=(i_1,i_2),\qquad i_j\in\{1,\ldots,6\},
+        \qquad \xi(\omega)=i_1+i_2.
+    \]
+    \begin{center}
+        \renewcommand{\arraystretch}{1.7}
+        \setlength{\tabcolsep}{5pt}
+        \begin{tabular}{c|*{11}{c}}
+            $x_i$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$
+                  & $8$ & $9$ & $10$ & $11$ & $12$ \\
+            \hline
+            $p_i$ & $\frac1{36}$ & $\frac2{36}$ & $\frac3{36}$
+                  & $\frac4{36}$ & $\frac5{36}$ & $\frac6{36}$
+                  & $\frac5{36}$ & $\frac4{36}$ & $\frac3{36}$
+                  & $\frac2{36}$ & $\frac1{36}$
+        \end{tabular}
+    \end{center}
+    \[
+        \Pr\{\xi(\omega)=2\}=\frac1{36}.
+    \]
+\end{example}
+
+\subsubsection{Бернуллиевское распределение}
+
+\begin{definition}
+    Смысл: Результат одного испытания: 1 — успех, 0 — неудача
+    \[
+        \begin{array}{c|cc}
+            x_i & 0 & 1\\\hline
+            p_i & 1-p & p
+        \end{array}
+    \]
+\end{definition}
+
+\subsubsection{Биномиальное распределение}
+
+\begin{definition}
+    \[
+        \operatorname{Bin}(n;p),\qquad n\in\N,\quad p\in(0;1).
+    \]
+    \[
+        p_k=\Pr\{\xi(\omega)=k\}=C_n^k p^k(1-p)^{n-k},
+        \qquad k\in\{0,\ldots,n\}.
+    \]
+\end{definition}
+
+Смысл: число успехов в схеме испытаний Бернулли.
+\[
+    \omega=(i_1,\ldots,i_n),\qquad i_j\in\{0;1\},
+    \qquad \xi(\omega)=i_1+\cdots+i_n.
+\]
+При $k\in\{0,\ldots,n\}$:
+\[
+    \begin{aligned}
+        p_k&=\Pr\{\xi(\omega)=k\}
+        =\sum_{\omega\colon\sum_{j=1}^{n}i_j=k}\Pr(\omega)\\
+        &=\sum_{\omega\colon\sum_{j=1}^{n}i_j=k}
+          p^k(1-p)^{n-k}
+        =C_n^k p^k(1-p)^{n-k}.
+    \end{aligned}
+\]
+\[
+    \sum_{k=0}^{n}C_n^k p^k(1-p)^{n-k}
+    =\bigl(p+(1-p)\bigr)^n=1.
+\]
+
+\begin{example}
+    При $n=10^4$, $p=0{,}003$:
+    \[
+        \Pr\{\xi\leq5\}
+        =\sum_{k=0}^{5}C_{10^4}^k\,
+        0{,}003^k\cdot0{,}997^{10^4-k}.
+    \]
+\end{example}
+
+\subsubsection{Пуассоновское распределение}
+
+\begin{definition}
+    \[
+        \operatorname{Poiss}(\lambda),\qquad\lambda>0.
+    \]
+    \[
+        x_k=k\in\{0,1,2,\ldots\},\qquad
+        p_k=\frac{\lambda^k}{k!}e^{-\lambda}.
+    \]
+\end{definition}
+
+\begingroup
+\small
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+\noindent Пояснение.
+Здесь $p_k=\Pr\{\xi=k\}$ --- вероятность значения $k$.
+Сумма $p_0+p_1+\cdots$ всех вероятностей должна равняться $1$.
+Используем ряд экспоненты:
+$\textstyle\sum_{k=0}^{\infty}\lambda^k/k!=e^\lambda$.
+\[
+    \sum_{k=0}^{\infty}p_k
+    =\sum_{k=0}^{\infty}\frac{\lambda^k}{k!}e^{-\lambda}
+    =e^\lambda e^{-\lambda}=1.
+\]
+\par\endgroup
+
+\begin{theorem}[Теорема Пуассона]
+    Рассмотрим серию схем испытаний Бернулли:
+    \[
+        \xi_n\sim\operatorname{Bin}(n;p_n),\qquad
+        np_n\xrightarrow[n\to\infty]{}\lambda,\qquad
+        \eta\sim\operatorname{Poiss}(\lambda).
+    \]
+    Тогда для каждого фиксированного $k=0,1,2,\ldots$
+    \[
+        \Pr\{\xi_n=k\}\xrightarrow[n\to\infty]{}\Pr\{\eta=k\}.
+    \]
+\end{theorem}
+
+\begin{Proof}
+    \[
+        \begin{aligned}
+            \Pr\{\xi_n=k\}
+            &=C_n^k p_n^k(1-p_n)^{n-k}\\
+            &=\frac{n!}{(n-k)!\,k!}\,p_n^k(1-p_n)^{n-k}\\
+            &=\frac1{k!}\,
+              \underbrace{\frac{n(n-1)\cdots(n-k+1)}{n^k}}
+              _{\longrightarrow\,1}\,
+              \underbrace{(np_n)^k}_{\longrightarrow\,\lambda^k}\,
+              \frac{(1-p_n)^n}
+              {\underbrace{(1-p_n)^k}_{\longrightarrow\,1}}.
+        \end{aligned}
+    \]
+    При этом
+    \[
+        (1-p_n)^n
+        =\left(\underbrace{(1-p_n)^{-1/p_n}}
+        _{\longrightarrow\,e}\right)^{-np_n}
+        \longrightarrow e^{-\lambda}.
+    \]
+    Следовательно,
+    \[
+        \Pr\{\xi_n=k\}\longrightarrow
+        \frac1{k!}\cdot1\cdot\lambda^k e^{-\lambda}
+        =\frac{\lambda^k}{k!}e^{-\lambda}.
+    \]
+\end{Proof}
+
+\begin{theorem}[Обобщение]
+    Пусть $\xi\sim\operatorname{Bin}(n;p)$,
+    $\eta\sim\operatorname{Poiss}(\lambda)$, $np=\lambda$.
+    Тогда
+    \[
+        \bigl|\Pr\{\xi\in B\}-\Pr\{\eta\in B\}\bigr|
+        \leq np^2
+        \qquad\forall B\in\mathcal{B}(\R).
+    \]
+\end{theorem}
+
+\subsubsection{Геометрическое распределение}
+
+\begin{definition}
+    \[
+        \operatorname{Geom}(p),\qquad p\in(0;1).
+    \]
+    Смысл: номер первого успеха в бесконечной схеме испытаний Бернулли.
+    \[
+        x_i=i\in\N,\qquad p_i=(1-p)^{i-1}p.
+    \]
+\end{definition}
+
+\begingroup
+\small
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+\noindent Пояснение.
+Здесь $p$ --- вероятность успеха в одном испытании,
+а $p_i$ --- вероятность первого успеха на $i$-м испытании.
+Складываем $p+(1-p)p+(1-p)^2p+\cdots$:
+это геометрическая прогрессия со знаменателем $1-p\in(0;1)$;
+сумма всех вероятностей равна $1$:
+\[
+    \sum_{i=1}^{\infty}(1-p)^{i-1}p
+    =p\sum_{i=1}^{\infty}(1-p)^{i-1}
+    =p\cdot\frac1{1-(1-p)}=1.
+\]
+\par\endgroup
+
+\subsection{Функция распределения}
+
+\begin{definition}
+    \textbf{Функцией распределения случайной величины} $\xi$
+    называется функция
+    \[
+        F_\xi(x)=\Pr\{\xi(\omega)\leq x\},\qquad x\in\R.
+    \]
+\end{definition}
+
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\begin{example}
+    Пусть $\xi\sim\operatorname{Bern}(p)$, $p=\frac14$.
+    \[
+        \Pr\{\xi(\omega)\leq0\}
+        =\Pr\{\xi(\omega)=0\}=\frac34.
+    \]
+    \begin{center}
+        \begin{tikzpicture}[x=2.5cm,y=3cm,>=Stealth]
+            \draw[->] (-0.85,0) -- (2.2,0) node[right] {$x$};
+            \draw[->] (0,-0.12) -- (0,1.23) node[above] {$F_\xi(x)$};
+            \draw[blue,dashed] (0,1) -- (1,1);
+            \draw[blue,dashed] (1,0) -- (1,0.75);
+            \draw[blue,very thick] (-0.85,0) -- (0,0);
+            \draw[blue,very thick] (0,0.75) -- (1,0.75);
+            \draw[blue,very thick] (1,1) -- (2.05,1);
+            \filldraw[blue,fill=white] (0,0) circle (1.6pt);
+            \filldraw[blue,fill=white] (1,0.75) circle (1.6pt);
+            \fill[blue] (0,0.75) circle (1.6pt);
+            \fill[blue] (1,1) circle (1.6pt);
+            \node[below left] at (0,0) {$0$};
+            \node[below] at (1,0) {$1$};
+            \node[left] at (0,0.75) {$\frac34$};
+            \node[left] at (0,1) {$1$};
+        \end{tikzpicture}
+    \end{center}
+\end{example}
+\endgroup
+
+\subsubsection{Свойства функции распределения}
+
+\begin{theorem}
+    \begin{enumerate}[label=\arabic*)]
+        \item $\lim_{x\to+\infty}F_\xi(x)=1$,
+        $\lim_{x\to-\infty}F_\xi(x)=0$.
+        \item $F_\xi$ не убывает.
+        \item $F_\xi$ непрерывна справа.
+    \end{enumerate}
+\end{theorem}
+
+\begin{Proof}[Непрерывность справа]
+    По Гейне рассмотрим $x_n\downarrow x_0$. Положим
+    \[
+        A_n=\xi^{-1}\bigl((-\infty;x_n]\bigr),
+        \qquad A=\xi^{-1}\bigl((-\infty;x_0]\bigr).
+    \]
+    Тогда
+    \[
+        F_\xi(x_n)=\Pr\{\xi(\omega)\leq x_n\}=\Pr(A_n),
+        \qquad F_\xi(x_0)=\Pr(A).
+    \]
+    Поскольку $A_n\downarrow A$, по непрерывности сверху
+    \[
+        \Pr(A_n)\longrightarrow\Pr(A),
+        \qquad F_\xi(x_n)\longrightarrow F_\xi(x_0).
+    \]
+    Следовательно, $\lim_{x\to x_0+}F_\xi(x)=F_\xi(x_0)$.
+\end{Proof}
+
+\begin{remark}
+    Для неубывающей, ограниченной и непрерывной справа функции $F$
+    на полуинтервалах задаётся
+    \[
+        m\bigl((a;b]\bigr)=F(b)-F(a).
+    \]
+\end{remark}
+
+\begin{theorem}[Следствие из теоремы Каратеодори]
+    Существует взаимно однозначное соответствие:
+    \[
+        \text{вероятностные меры на }\mathcal{B}(\R)
+        \quad\longleftrightarrow\quad
+        \text{функции распределения}.
+    \]
+\end{theorem}
+
+\subsection{Абсолютно непрерывное распределение}
+
+\begin{definition}
+    Распределение называется \textbf{абсолютно непрерывным},
+    если у него есть плотность $p_\xi$, то есть
+    \[
+        p_\xi(x)\geq0,\qquad
+        F_\xi(x)=\int_{-\infty}^{x}p_\xi(t)\,\diff t.
+    \]
+\end{definition}
+
+\subsection{Сравнение случайных величин}
+
+\begin{exercise}
+    Пусть $\xi,\eta$ --- случайные величины. Тогда
+    \[
+        \{\omega\colon\xi(\omega)<\eta(\omega)\}\in\mathcal{F}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    Пусть $\Q=\{x_n\}_{n\in\N}$. Тогда
+    \[
+        \begin{aligned}
+            &\{\omega\colon\xi(\omega)<\eta(\omega)\}\\
+            &\quad=\bigcup_{n=1}^{\infty}
+            \left(\underbrace{\{\omega\colon\xi(\omega)<x_n\}}
+            _{\in\mathcal{F}}\cap
+            \underbrace{\{\omega\colon x_n<\eta(\omega)\}}
+            _{\in\mathcal{F}}\right)\in\mathcal{F}.
+        \end{aligned}
+    \]
+\end{solution}
