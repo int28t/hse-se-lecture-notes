@@ -1,0 +1,262 @@
+% Источник решений: «5 Семинар.pdf», страницы 2--7.
+% Условия: «2026-10-09 14-41.pdf» -> conditions/sem_05.pdf.
+% В задаче 1 используется подтверждённый пользователем вариант рукописи:
+% пять значений -2, -1, 0, 1, 2; в печатном условии пропущено 1.
+% В рукописи нет решений 2(в), 4, 5, 7, 8 и окончания задачи 6.
+\section{Функция распределения}
+
+\noindent Условия:
+\href{run:conditions/sem_05.pdf}{семинар 5 (PDF)}.
+
+\subsection{Задача 1}
+
+\begin{solution}
+    \setlength{\abovedisplayskip}{12pt plus 2pt minus 1pt}
+    \setlength{\belowdisplayskip}{12pt plus 2pt minus 1pt}
+    \setlength{\abovedisplayshortskip}{10pt plus 2pt minus 1pt}
+    \setlength{\belowdisplayshortskip}{10pt plus 2pt minus 1pt}
+    \textbf{Модель: дискретная.}
+    По рукописи $\xi$ принимает значения $-2,-1,0,1,2$
+    с вероятностями $1/5$ (в условии пропущено значение $1$).
+    \[
+        \eta_1(\omega)=-\xi(\omega),\qquad
+        \eta_2(\omega)=|\xi(\omega)|.
+    \]
+    \[
+        \Pr\{\eta_1(\omega)=i\}
+        =\Pr\{\xi(\omega)=-i\}=\frac15,
+        \quad i\in\{-2,-1,0,1,2\}.
+    \]
+    \[
+        \begin{array}{c|ccccc}
+            x_i&-2&-1&0&1&2\\\hline
+            \Pr\{\eta_1(\omega)=x_i\}&1/5&1/5&1/5&1/5&1/5
+        \end{array}
+        \hspace{1.4cm}
+        \begin{array}{c|ccc}
+            y_i&0&1&2\\\hline
+            \Pr\{\eta_2(\omega)=y_i\}&1/5&2/5&2/5
+        \end{array}
+    \]
+    Для $j=1,2$:
+    $\Pr\{\eta_2(\omega)=j\}
+    =\Pr\{\xi(\omega)=-j\}+\Pr\{\xi(\omega)=j\}=2/5$.
+    \[
+        F_\xi(x)=F_{\eta_1}(x)=
+        \begin{cases}
+            0,&x<-2,\\
+            1/5,&-2\leq x<-1,\\
+            2/5,&-1\leq x<0,\\
+            3/5,&0\leq x<1,\\
+            4/5,&1\leq x<2,\\
+            1,&x\geq2;
+        \end{cases}
+        \hspace{1.6cm}
+        F_{\eta_2}(x)=
+        \begin{cases}
+            0,&x<0,\\
+            1/5,&0\leq x<1,\\
+            3/5,&1\leq x<2,\\
+            1,&x\geq2.
+        \end{cases}
+    \]
+    \vspace{3mm}
+    \begin{center}
+        \begin{tikzpicture}[x=0.9cm,y=3.2cm,>=Stealth]
+            \draw[->] (-2.8,0)--(2.9,0) node[right] {$x$};
+            \draw[->] (0,-0.12)--(0,1.22)
+                node[above] {$F_\xi(x)=F_{\eta_1}(x)$};
+            \foreach \x in {-2,-1,1,2}
+                \draw (\x,0.02)--(\x,-0.02) node[below] {$\x$};
+            \node[below left] at (0,0) {$0$};
+            \draw[blue,very thick] (-2.7,0)--(-2,0);
+            \foreach \x/\y/\z in {-2/0.2/-1,-1/0.4/0,0/0.6/1,1/0.8/2}{
+                \draw[blue,very thick] (\x,\y)--(\z,\y);
+                \filldraw[blue,fill=solution_back] (\z,\y) circle (1.5pt);
+                \fill[blue] (\x,\y) circle (1.5pt);
+            }
+            \draw[blue,very thick] (2,1)--(2.7,1);
+            \fill[blue] (2,1) circle (1.5pt);
+            \filldraw[blue,fill=solution_back] (-2,0) circle (1.5pt);
+            \foreach \y/\lab in {0.2/{1/5},0.4/{2/5},0.6/{3/5},0.8/{4/5},1/{1}}
+                \node[left,yshift=4pt,font=\scriptsize] at (0,\y) {$\lab$};
+        \end{tikzpicture}
+        \hspace{1.8cm}
+        \begin{tikzpicture}[x=1.5cm,y=3.2cm,>=Stealth]
+            \draw[->] (-0.6,0)--(2.9,0) node[right] {$x$};
+            \draw[->] (0,-0.12)--(0,1.22) node[above] {$F_{\eta_2}(x)$};
+            \foreach \x in {1,2}
+                \draw (\x,0.02)--(\x,-0.02) node[below] {$\x$};
+            \node[below left] at (0,0) {$0$};
+            \draw[blue,very thick] (-0.5,0)--(0,0);
+            \draw[blue,very thick] (0,0.2)--(1,0.2);
+            \draw[blue,very thick] (1,0.6)--(2,0.6);
+            \draw[blue,very thick] (2,1)--(2.7,1);
+            \foreach \x/\y in {0/0,1/0.2,2/0.6}
+                \filldraw[blue,fill=solution_back] (\x,\y) circle (1.5pt);
+            \foreach \x/\y in {0/0.2,1/0.6,2/1}
+                \fill[blue] (\x,\y) circle (1.5pt);
+            \foreach \y/\lab in {0.2/{1/5},0.6/{3/5},1/{1}}
+                \node[left,font=\scriptsize] at (0,\y) {$\lab$};
+        \end{tikzpicture}
+    \end{center}
+\end{solution}
+
+\clearpage
+\subsection{Задача 2}
+
+\begin{solution}
+    \textbf{Модель: геометрическая.}
+    $\Omega=[0,1]$, $\mathcal{A}$ --- измеримые по Лебегу подмножества,
+    $\Pr$ --- длина.
+
+    \textbf{а)}
+    \[
+        \Pr\{\xi(\omega)=1/4\}
+        =\Pr\bigl([0,1/4]\cup(3/4,1]\bigr)=\frac12,
+        \qquad \Pr\{\xi(\omega)=1\}=\frac12.
+    \]
+    \[
+        F_\xi(x)=\Pr\{\xi(\omega)\leq x\}=
+        \begin{cases}
+            0,&x<1/4,\\
+            1/2,&1/4\leq x<1,\\
+            1,&x\geq1.
+        \end{cases}
+    \]
+    \begin{center}
+        \begin{tikzpicture}[x=4cm,y=2.7cm,>=Stealth]
+            \draw[->] (-0.12,0)--(1.25,0) node[right] {$\omega$};
+            \draw[->] (0,-0.12)--(0,1.22) node[above] {$\xi(\omega)$};
+            \node[below left] at (0,0) {$0$};
+            \foreach \x/\lab in {0.25/{1/4},0.75/{3/4},1/{1}}
+                \draw (\x,0.02)--(\x,-0.02) node[below] {$\lab$};
+            \node[left] at (0,0.25) {$1/4$};
+            \node[left] at (0,1) {$1$};
+            \draw[blue,very thick] (0,0.25)--(0.25,0.25);
+            \draw[blue,very thick] (0.25,1)--(0.75,1);
+            \draw[blue,very thick] (0.75,0.25)--(1,0.25);
+            \foreach \x/\y in {0.25/1,0.75/0.25}
+                \filldraw[blue,fill=solution_back] (\x,\y) circle (1.5pt);
+            \foreach \x/\y in {0/0.25,0.25/0.25,0.75/1,1/0.25}
+                \fill[blue] (\x,\y) circle (1.5pt);
+        \end{tikzpicture}
+        \hspace{0.8cm}
+        \begin{tikzpicture}[x=4cm,y=2.7cm,>=Stealth]
+            \draw[->] (-0.15,0)--(1.25,0) node[right] {$x$};
+            \draw[->] (0,-0.12)--(0,1.22) node[above] {$F_\xi(x)$};
+            \node[below left] at (0,0) {$0$};
+            \foreach \x/\lab in {0.25/{1/4},1/{1}}
+                \draw (\x,0.02)--(\x,-0.02) node[below] {$\lab$};
+            \node[left] at (0,0.5) {$1/2$};
+            \node[left] at (0,1) {$1$};
+            \draw[blue,very thick] (-0.15,0)--(0.25,0);
+            \draw[blue,very thick] (0.25,0.5)--(1,0.5);
+            \draw[blue,very thick] (1,1)--(1.2,1);
+            \foreach \x/\y in {0.25/0,1/0.5}
+                \filldraw[blue,fill=solution_back] (\x,\y) circle (1.5pt);
+            \foreach \x/\y in {0.25/0.5,1/1}
+                \fill[blue] (\x,\y) circle (1.5pt);
+        \end{tikzpicture}
+    \end{center}
+
+    \textbf{б)} $\xi(\omega)=\omega^2$. При $0\leq x\leq1$:
+    \[
+        F_\xi(x)=\Pr\{\omega\in[0,1]:\omega^2\leq x\}
+        =\Pr\bigl([0,\sqrt{x}]\bigr)=\sqrt{x}.
+    \]
+    \[
+        F_\xi(x)=\begin{cases}
+            0,&x<0,\\
+            \sqrt{x},&0\leq x\leq1,\\
+            1,&x>1.
+        \end{cases}
+    \]
+    \begin{center}
+        \begin{tikzpicture}[x=4cm,y=2.5cm,>=Stealth]
+            \draw[->] (-0.12,0)--(1.25,0) node[right] {$\omega$};
+            \draw[->] (0,-0.12)--(0,1.2) node[above] {$\xi(\omega)$};
+            \draw[blue,very thick,domain=0:1,samples=60] plot (\x,{\x*\x});
+            \draw[dashed] (0,0.49) node[left] {$x$}--(0.7,0.49)--(0.7,0)
+                node[below] {$\sqrt{x}$};
+            \draw[dashed] (0,1) node[left] {$1$}--(1,1)--(1,0) node[below] {$1$};
+            \node[below left] at (0,0) {$0$};
+        \end{tikzpicture}
+        \hspace{0.8cm}
+        \begin{tikzpicture}[x=4cm,y=2.5cm,>=Stealth]
+            \draw[->] (-0.15,0)--(1.25,0) node[right] {$x$};
+            \draw[->] (0,-0.12)--(0,1.2) node[above] {$F_\xi(x)$};
+            \draw[blue,very thick] (-0.15,0)--(0,0);
+            \draw[blue,very thick,domain=0:1,samples=70,variable=\t]
+                plot ({\t*\t},\t);
+            \draw[blue,very thick] (1,1)--(1.2,1);
+            \draw[dashed] (0,1) node[left] {$1$}--(1,1)--(1,0) node[below] {$1$};
+            \node[below left] at (0,0) {$0$};
+        \end{tikzpicture}
+    \end{center}
+\end{solution}
+
+\clearpage
+\subsection{Задача 3}
+
+\begin{solution}
+    \textbf{Модель: произвольное распределение.}
+    \[
+        \eta(\omega)=\frac{\xi(\omega)+|\xi(\omega)|}{2}
+        =\max\{\xi(\omega),0\},\qquad F_\xi=F.
+    \]
+    При $x<0$ имеем $F_\eta(x)=0$, при $x=0$:
+    \[
+        F_\eta(0)=\Pr\{\eta(\omega)=0\}
+        =\Pr\{\xi(\omega)\leq0\}=F(0).
+    \]
+    При $x>0$:
+    \[
+        \begin{aligned}
+            F_\eta(x)
+            &=\Pr\{\eta(\omega)=0\}
+              +\Pr\{0<\eta(\omega)\leq x\}\\
+            &=F(0)+\Pr\{0<\xi(\omega)\leq x\}\\
+            &=F(0)+F(x)-F(0)=F(x).
+        \end{aligned}
+    \]
+    \[
+        \boxed{F_\eta(x)=\begin{cases}
+            0,&x<0,\\
+            F(x),&x\geq0.
+        \end{cases}}
+    \]
+\end{solution}
+
+\subsection{Задача 6}
+
+\begin{solution}
+    \textbf{Модель: абсолютно непрерывное распределение.}
+    \[
+        1=\int_1^{+\infty}\frac{C}{x^4}\,\diff x
+        =\left[-\frac{C}{3x^3}\right]_1^{+\infty}
+        =\frac C3
+        \quad\Longrightarrow\quad C=3.
+    \]
+    \[
+        F_\xi(x)=\int_{-\infty}^{x}p_\xi(t)\,\diff t
+        =\begin{cases}
+            0,&x<1,\\
+            1-\dfrac1{x^3},&x\geq1.
+        \end{cases}
+    \]
+    \begin{center}
+        \begin{tikzpicture}[x=1.5cm,y=2.5cm,>=Stealth]
+            \draw[->] (-0.5,0)--(4.4,0) node[right] {$x$};
+            \draw[->] (0,-0.12)--(0,1.22) node[above] {$F_\xi(x)$};
+            \draw[dashed] (0,1) node[left] {$1$}--(4.2,1);
+            \draw[blue,very thick] (-0.45,0)--(1,0);
+            \draw[blue,very thick,domain=1:4.2,samples=80]
+                plot (\x,{1-1/(\x*\x*\x)});
+            \fill[blue] (1,0) circle (1.5pt);
+            \node[below] at (1,0) {$1$};
+            \node[below left] at (0,0) {$0$};
+        \end{tikzpicture}
+    \end{center}
+    \noindent\small В рукописи решение заканчивается нахождением $F_\xi$.
+\end{solution}
