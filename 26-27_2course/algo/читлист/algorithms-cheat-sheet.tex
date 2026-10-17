@@ -1,0 +1,699 @@
+% !TeX program = xelatex
+% Four-page A4 reference sheet. Standalone; supports pdfLaTeX and XeLaTeX.
+\documentclass[a4paper,10pt]{article}
+\usepackage{iftex}
+\ifPDFTeX
+ \usepackage{cmap}\usepackage[T2A]{fontenc}\usepackage[utf8]{inputenc}
+\else
+ \usepackage{fontspec}
+ \setmainfont{cmunrm.otf}[BoldFont=cmunbx.otf,ItalicFont=cmunti.otf,BoldItalicFont=cmunbi.otf]
+\fi
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amssymb,mathtools,microtype}
+\usepackage[left=10mm,right=10mm,top=9mm,bottom=11mm,footskip=6mm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{array,tabularx,booktabs,enumitem,fancyhdr}
+\usepackage[unicode,hidelinks]{hyperref}
+\hypersetup{pdftitle={Алгоритмы: читлист к контрольной, 4 страницы}}
+\definecolor{ink}{HTML}{354B55}
+\definecolor{greenframe}{HTML}{7E9E79}
+\definecolor{greenback}{HTML}{F4FBF6}
+\definecolor{redframe}{HTML}{B46A55}
+\definecolor{redback}{HTML}{FFF6F3}
+\definecolor{purpleframe}{HTML}{9C8BB8}
+\definecolor{purpleback}{HTML}{F8F6FB}
+\definecolor{sandframe}{HTML}{CBBBA4}
+\definecolor{sandback}{HTML}{FBF8F3}
+\definecolor{blueframe}{HTML}{9CA7B3}
+\definecolor{blueback}{HTML}{F4F7FA}
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\fontsize{8.5}{9}\selectfont\color{ink}АСД \enspace / \enspace Справочник к контрольной}
+\fancyfoot[R]{\fontsize{8.5}{9}\selectfont\color{ink}\thepage\,/\,4}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.8pt}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\setlist{leftmargin=1.35em,itemsep=1pt,topsep=2pt,parsep=0pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newtcolorbox{card}[2]{enhanced,arc=1.4mm,boxrule=.45pt,
+ colback=#1back,colframe=#1frame,colbacktitle=#1frame!28!white,
+ coltitle=black,title={#2},fonttitle=\bfseries\fontsize{10.5}{11.5}\selectfont,
+ left=2mm,right=2mm,top=1.3mm,bottom=1.3mm,toptitle=1mm,bottomtitle=1mm,
+ before skip=0pt,after skip=5pt,
+ before upper={\setlength{\abovedisplayskip}{3.5pt}\setlength{\belowdisplayskip}{3.5pt}
+ \setlength{\abovedisplayshortskip}{2pt}\setlength{\belowdisplayshortskip}{2pt}}}
+\newcommand{\key}[1]{\textbf{#1}}
+\newcommand{\Th}{\Theta}
+\newcommand{\Oh}{O}
+\newcommand{\Om}{\Omega}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\pagehead}[2]{%
+ {\color{ink}\fontsize{17}{19}\selectfont\bfseries #1\par}
+ \vspace{1mm}
+ {\fontsize{9}{10}\selectfont\color{ink}#2\par}\vspace{3mm}}
+\newlength{\colmax}
+\setlength{\colmax}{\dimexpr\textheight-43pt\relax}
+\newsavebox{\cheatcol}
+\newcounter{cheatcolnum}
+\newenvironment{sheetcol}[1][.486\textwidth]{%
+ \begin{lrbox}{\cheatcol}\begin{minipage}[t]{#1}\vspace{0pt}
+}{%
+ \end{minipage}\end{lrbox}\stepcounter{cheatcolnum}%
+ \typeout{CHEAT-COLUMN-\thecheatcolnum: \the\dimexpr\ht\cheatcol+\dp\cheatcol\relax; LIMIT \the\colmax}%
+ \ifdim\dimexpr\ht\cheatcol+\dp\cheatcol\relax>\colmax
+ \PackageError{cheat}{Column \thecheatcolnum\space exceeds planned height}{Shorten content; keep body text at least 10pt.}\fi
+ \usebox{\cheatcol}}
+\AtEndDocument{\clearpage\ifnum\value{page}=5\else
+ \PackageError{cheat}{Expected exactly four pages}{Check the page and column layout.}\fi}
+\begin{document}
+\fontsize{10}{11.5}\selectfont
+
+{\color{ink}\fontsize{9}{10}\selectfont\texttt{@hse-se-lecture-notes}\par}
+\vspace{1mm}
+\pagehead{1. Асимптотика: определения и переходы}
+{1 --- O-символика \quad 2 --- сортировки и контейнеры \quad 3 --- циклы и корректность \quad 4 --- рекурсии}
+\noindent\begin{sheetcol}
+\begin{card}{green}{Что именно означает оценка\smash{\textsuperscript{*}}}
+$f,g>0$ при больших $n$. Константы не зависят от $n$;
+все неравенства ниже верны при $n\ge n_0$.
+\[
+\begin{array}{rcl}
+f=O(g)&\iff&\exists C>0:\ f\le Cg,\\
+f=\Omega(g)&\iff&\exists c>0:\ f\ge cg,\\
+f=\Theta(g)&\iff&\exists c,C>0:\ cg\le f\le Cg.
+\end{array}
+\]
+В каждой строке также существует порог $n_0$.
+$O$ --- \key{верхняя}, $\Omega$ --- \key{нижняя},
+$\Theta$ --- \key{точная по порядку} граница.
+
+Для $g>0$:
+\[
+f=o(g)\iff f/g\to0,\qquad
+f=\omega(g)\iff f/g\to\infty.
+\]
+В $o$: для \emph{каждого} $\varepsilon>0$ в итоге $f\le\varepsilon g$.
+В $\omega$: для \emph{каждого} $C>0$ в итоге $f\ge Cg$.
+\end{card}
+
+\begin{card}{purple}{Равносильные переходы\smash{\textsuperscript{*}}}
+\[
+\begin{aligned}
+f=O(g)&\iff g=\Omega(f),\\
+f=\Omega(g)&\iff g=O(f),\\
+f=\Theta(g)&\iff g=\Theta(f),\\
+f=\Theta(g)&\iff
+ \begin{cases}f=O(g),\\f=\Omega(g),\end{cases}\\
+&\iff
+ \begin{cases}f=O(g),\\g=O(f),\end{cases}\\
+f=o(g)&\iff g=\omega(f).
+\end{aligned}
+\]
+Для классов функций:
+\[
+O(f)=O(g)\iff f=\Theta(g)\iff\Omega(f)=\Omega(g).
+\]
+\key{Следствия:} $\Theta(g)\subseteq O(g)$ и
+$\Theta(g)\subseteq\Omega(g)$.
+Все пять отношений транзитивны.
+
+\key{Не равносильно:}
+$f=O(g)\ \not\Rightarrow\ g=O(f)$.
+Верхняя и нижняя границы не обязаны быть точными.
+\end{card}
+
+\begin{card}{sand}{Дроби и степени}
+При $f,g>0$ и постоянном $r>0$:
+\[
+\begin{aligned}
+f=O(g)&\iff f/g=O(1)\\
+&\iff 1/g=O(1/f)\\
+&\iff f^r=O(g^r).
+\end{aligned}
+\]
+При обращении дробей $O$ и $\Omega$ меняются местами:
+$f=O(g)\iff 1/f=\Omega(1/g)$.
+Для $\Theta$ степень и обращение также сохраняют
+эквивалентность.
+\end{card}
+
+\begin{card}{blue}{Как доказать $\Theta$ по определению\smash{\textsuperscript{*}}}
+Найти $c_1,c_2>0,n_0$ и показать
+\[
+c_1g(n)\le T(n)\le c_2g(n)\quad(n\ge n_0).
+\]
+Одного $T(n)\le c_2g(n)$ недостаточно:
+это только $O(g)$.
+\end{card}
+\end{sheetcol}\hfill
+\begin{sheetcol}
+\begin{card}{green}{Алгебра O-символов\smash{\textsuperscript{*}}}
+Для неотрицательных функций и постоянного $c>0$:
+\[
+\begin{aligned}
+O(f)+O(g)&=O(f+g)=O(\max\{f,g\}),\\
+O(f)\,O(g)&=O(fg),\\
+c\,O(f)&=O(f).
+\end{aligned}
+\]
+Те же правила верны для $\Theta$.
+В конечной сумме оставляем максимальный порядок;
+при произведении перемножаем порядки.
+\[
+f=O(g)\iff f+g=\Theta(g).
+\]
+
+$f=O(g)$ и $u=O(v)\Rightarrow fu=O(gv)$.
+Сложение и умножение сохраняют также нижние оценки
+для неотрицательных функций.
+
+\key{Вычитание:} ведущие члены могут сократиться.
+Из $f,g=\Theta(n)$ нельзя заключить
+$f-g=\Theta(n)$.
+\end{card}
+
+\begin{card}{purple}{Сравнение через отношение}
+Если существует $L=\lim f(n)/g(n)$, $g>0$:
+\[
+\begin{array}{c|l}
+L=0 & f=o(g),\ f=O(g),\ f\notin\Omega(g)\\
+0<L<\infty & f=\Theta(g)\\
+L=\infty & f=\omega(g),\ f=\Omega(g),\ f\notin O(g)
+\end{array}
+\]
+Предел может не существовать, хотя $\Theta$ верна.
+Полный критерий для $f,g>0$:
+\[
+f=\Theta(g)\iff
+0<\liminf\frac fg\le\limsup\frac fg<\infty.
+\]
+\end{card}
+
+\begin{card}{sand}{Логарифмы и шкала роста\smash{\textsuperscript{*}}}
+$b>1$, $a,r,k,\varepsilon$ --- постоянные:
+\[
+\log_b n=\frac{\ln n}{\ln b},\qquad
+\log(n^r)=r\log n.
+\]
+\[
+\log^r n=(\log n)^r\ne\log(n^r).
+\]
+\[
+(\log n)^k=o(n^\varepsilon)\quad(k,\varepsilon>0).
+\]
+\[
+\begin{gathered}
+1\prec\log n\prec n\prec n\log n
+\prec n^{3/2}\prec n^2,\\
+n^k\prec n^{\log n}\prec a^n\prec n!
+\quad(k>0,\ a>1).
+\end{gathered}
+\]
+Здесь $\prec$ означает строго меньший порядок.
+Полином с положительным старшим коэффициентом
+имеет порядок старшей степени.
+\end{card}
+
+\begin{card}{red}{Ловушки в тестах\smash{\textsuperscript{*}}}
+\key{$O\ne\Theta$.} Для $T=\Theta(n\log n)$ верны
+$O(n^2)$ и $\Omega(n)$, но неверны $\Theta(n)$ и $\Omega(n^2)$.
+
+\key{$\Omega(1)\ne O(1)$.}
+$\Omega(1)$ может быть и $n$, и $2^n$.
+Поэтому $O(n)+\Omega(1)$ не даёт верхней оценки $O(n)$.
+
+\key{Случай и граница --- разные вещи.}
+$O$ не означает «худший случай», а $\Omega$ --- «лучший».
+Оценку применяют к уже выбранной функции времени.
+
+\key{$f=O(g)$ --- не обычное равенство.}
+Это принадлежность классу; переставлять стороны
+как в числовом равенстве нельзя.
+\end{card}
+\end{sheetcol}
+\newpage
+
+\begingroup
+\fontsize{10}{11}\selectfont
+\setlength{\parskip}{1.2pt}
+\renewcommand{\arraystretch}{1.0}
+\pagehead{2. Сортировки и линейные структуры}
+{Время --- для стандартных реализаций; сравнение ключей за $\Theta(1)$. Дополнительная память не включает входной массив.}
+\begin{card}{green}{Сводная таблица сортировок}
+{\fontsize{10}{11.4}\selectfont
+\begin{tabularx}{\linewidth}{@{}Yllllc@{}}
+\toprule
+Алгоритм & Лучшее & Среднее & Худшее & Доп.\ память & Устойчив.\\\midrule
+\rowcolor{greenback}
+Insertion / вставки\smash{\textsuperscript{*}} & $\Theta(n)$ & $\Theta(n^2)$ & $\Theta(n^2)$ & $O(1)$ & да\\
+Selection / выбором\smash{\textsuperscript{*}} & $\Theta(n^2)$ & $\Theta(n^2)$ & $\Theta(n^2)$ & $O(1)$ & нет\\
+\rowcolor{greenback}
+Bubble без флага\smash{\textsuperscript{*}} & $\Theta(n^2)$ & $\Theta(n^2)$ & $\Theta(n^2)$ & $O(1)$ & да\\
+Bubble с флагом\smash{\textsuperscript{*}} & $\Theta(n)$ & $\Theta(n^2)$ & $\Theta(n^2)$ & $O(1)$ & да\\
+\rowcolor{greenback}
+Merge / слиянием\smash{\textsuperscript{*}} & $\Theta(n\log n)$ & $\Theta(n\log n)$ & $\Theta(n\log n)$ & $O(n)$ & да\\
+Quick / быстрая\smash{\textsuperscript{*}} & $\Theta(n\log n)$ & $\Theta(n\log n)$ & $\Theta(n^2)$ & $O(\log n)$ / $O(n)$ & нет\\
+\rowcolor{greenback}
+Shell: шаги $n/2,n/4,\ldots$ & $\Theta(n\log n)$ & см.\ ниже & $\Theta(n^2)$ & $O(1)$ & нет\\
+\href{https://algs4.cs.princeton.edu/cheatsheet/}{Heap / пирамидальная} & $\Theta(n\log n)^{\dagger}$ & $\Theta(n\log n)$ & $\Theta(n\log n)$ & $O(1)$ & нет\\\midrule
+\href{https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/mit6_006f11_lec07_orig/}{Counting / подсчётом} & $\Theta(n+K)$ & $\Theta(n+K)$ & $\Theta(n+K)$ & $O(n+K)$ & да\\
+\href{https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/mit6_006f11_lec07_orig/}{LSD Radix / поразрядная} & $\Theta(D(n+B))$ & $\Theta(D(n+B))$ & $\Theta(D(n+B))$ & $O(n+B)$ & да\\
+\href{https://belohlavek.inf.upol.cz/vyuka/Cormen-bucket-sort-analysis.pdf}{Bucket / блочная} & $\Theta(n)$ & $\Theta(n)$ & $\Theta(n^2)$ & $O(n)$ & условно\\\bottomrule
+\end{tabularx}
+}
+\key{Устойчивость:} равные ключи сохраняют исходный взаимный порядок.
+Среднее для сравнительных сортировок --- по случайным перестановкам;
+для quick sort также подходит случайный выбор опорного при различных ключах.
+$^{\dagger}$Heap: различные ключи; с равными лучший случай зависит от реализации.
+\end{card}
+\setlength{\colmax}{\dimexpr\textheight-\pagetotal-10pt\relax}
+\typeout{CHEAT-PAGE-2-PRECOL: \the\pagetotal; REMAINING \the\colmax}
+\noindent\begin{sheetcol}[.46\textwidth]
+\begin{card}{purple}{Состояние массива после прохода\smash{\textsuperscript{*}}}
+\key{Insertion.} После $k$ итераций (первая обрабатывает
+второй элемент) первые $k+1$ исходных элементов
+отсортированы; остальной суффикс не обработан.
+Число сдвигов равно числу инверсий $I$;
+$T=\Theta(n+I)$, инверсия: $i<j$, $a_i>a_j$.
+
+\key{Bubble.} При проходе слева направо максимум
+уходит вправо. После $k$ проходов $k$ последних
+элементов на своих местах.
+Без флага раннего выхода лучший случай тоже квадратичный.
+
+\key{Merge.} Две отсортированные части сливаются
+за $\Theta(n)$; при равенстве брать из левой
+части для устойчивости.
+\end{card}
+
+\begin{card}{sand}{Quick sort: опорный и разбиение\smash{\textsuperscript{*}}}
+Если опорный поставлен на окончательное место $p$,
+то
+\[
+\max_{i<p}a_i\le a_p\le\min_{i>p}a_i.
+\]
+Оба условия обязательны; части внутри могут быть
+не отсортированы. В схеме Hoare возвращается граница,
+опорный не обязан стоять на окончательном месте.
+
+Баланс частей $\Rightarrow\Theta(n\log n)$;
+размеры $0,n-1$ $\Rightarrow\Theta(n^2)$.
+Стек: обычно $O(\log n)$, худший $O(n)$.
+Рекурсия только в меньшую часть гарантирует
+$O(\log n)$ стека.
+
+Quick часто быстрее Merge из-за накладных расходов
+и отсутствия отдельного массива, а не гарантированно
+меньшего числа сравнений.
+\end{card}
+
+\begin{card}{blue}{Shell и цена сравнения}
+Shell --- вставки с убывающими шагами.
+Средняя оценка зависит от последовательности.
+Для шагов Хиббарда / Кнута верхняя граница
+$O(n^{3/2})$, для последовательности Седжвика
+из семинара --- $O(n^{4/3})$.
+
+Если сравнение стоит $O(L)$, Merge требует
+$O(nL\log n)$. Для строк $L$ --- максимальная длина.
+Сравнительным сортировкам в худшем случае нужно
+$\Omega(n\log n)$ сравнений.
+\end{card}
+\end{sheetcol}\hfill
+\begin{sheetcol}[.512\textwidth]
+\begin{card}{green}{Массив, список, стек\smash{\textsuperscript{*}}}
+Худший случай; известный узел не нужно искать.
+Для массива: порядок сохраняется, без перевыделения.
+\[
+\begin{array}{l|ccc}
+ & \text{Массив} & \text{1-связ.} & \text{2-связ.}\\ \hline
+\text{Доступ по индексу} & O(1)&O(n)&O(n)\\
+\text{Поиск значения} & O(n)&O(n)&O(n)\\
+\text{Вставка в середину} & O(n)&O(1)^a&O(1)^a\\
+\text{Удалить узел} & O(n)&O(1)^b&O(1)^a\\
+\text{Удалить хвост} & O(1)&O(n)&O(1)^c
+\end{array}
+\]
+$^a$Известно место / узел. $^b$Известен также предшественник.
+$^c$Есть указатель на хвост.
+
+Вставка в массив со сдвигом: $\Theta(n-i+1)$.
+Добавление в конец при удвоении ёмкости:
+$O(1)$ амортизированно, отдельный вызов $O(n)$.
+
+В односвязном списке $k$-й от головы:
+$\Theta(k)$, для фиксированного $k$ --- $\Theta(1)$;
+$k$-й от конца --- $\Theta(n)$.
+
+Стек --- LIFO; очередь --- FIFO. Операции на связной
+реализации $O(1)$ (у очереди есть голова и хвост).
+\end{card}
+
+\begin{card}{sand}{Условия для линейных сортировок}
+\key{Counting:} считаем частоты целых чисел.
+$K$ --- число значений в диапазоне $0,\ldots,K-1$.
+Время $\Theta(n+K)$; линейно при $K=O(n)$.
+В таблице --- версия с выходным массивом.
+
+\key{LSD Radix:} сортируем по цифрам от младшей
+к старшей. $D$ --- число разрядов, $B$ --- основание
+($B=10$ для десятичных чисел).
+Линейно при постоянных $D,B$.
+Проходы --- устойчивый подсчёт.
+
+\key{Bucket:} разложить по $n$ равным интервалам,
+в каждом отсортировать вставками и соединить.
+Независимые равномерные данные дают $\Theta(n)$
+в среднем; худшее $\Theta(n^2)$.
+Для устойчивости не менять порядок равных.
+\end{card}
+
+\begin{card}{blue}{Короткие теоретические факты}
+АТД --- операции и их смысл; структура данных --- реализация.
+
+Двусвязный список: больше памяти, обход в обе стороны.
+Рекурсивный вывод после обхода следующего узла:
+обратный порядок; время $\Theta(n)$, стек $\Theta(n)$.
+
+Линейный порядок: рефлексивность, антисимметричность,
+транзитивность; любая пара сравнима.
+\end{card}
+\end{sheetcol}
+\endgroup
+\setlength{\colmax}{\dimexpr\textheight-43pt\relax}
+\newpage
+
+\pagehead{3. Циклы, корректность и выбор алгоритма}
+{Сначала считаем реальные затраты; затем упрощаем сумму. Число уровней или итераций само по себе не равно времени.}
+\noindent\begin{sheetcol}
+\begin{card}{purple}{От изменения счётчика к числу шагов\smash{\textsuperscript{*}}}
+Постоянные: целое $b>1$ и $d>0$.
+\[
+\begin{array}{l|l}
+\text{Значения счётчика} & \text{Число шагов}\\ \hline
+a,a+d,\ldots<M & \lceil(M-a)/d\rceil\\
+1,b,b^2,\ldots<M & \lceil\log_bM\rceil\\
+n,\lfloor n/b\rfloor,\ldots\ge1 & \lfloor\log_b n\rfloor+1
+\end{array}
+\]
+Первая строка: $M>a$; вторая: $M>1$.
+
+\key{Последовательные части:} $T=T_1+T_2$.
+
+\key{Вложенные проходы:} $N=\sum_i N_i$.
+Умножать число внешних шагов на одну внутреннюю
+стоимость можно, если она одинакова на всех шагах.
+\end{card}
+
+\begin{card}{green}{Суммы, которые дают точный порядок\smash{\textsuperscript{*}}}
+\[
+\begin{gathered}
+\sum_{i=1}^{m}i=\frac{m(m+1)}2,\\
+\sum_{t=0}^{h-1}q^t=\frac{q^h-1}{q-1}\quad(q\ne1),\\
+\sum_{t=0}^{\infty}q^t=\frac1{1-q}\quad(|q|<1).
+\end{gathered}
+\]
+При $q>1$ порядок задаёт последний член;
+при $0<q<1$ --- первый.
+\end{card}
+
+\begin{card}{sand}{Зависимая внутренняя работа\smash{\textsuperscript{*}}}
+\key{$n$ внешних шагов; внутренние длины $1,2,4,\ldots$.}
+При $h=\lceil\log_2n\rceil$:
+\[
+N=n\sum_{t=0}^{h-1}2^t=n(2^h-1).
+\]
+\[
+n\le2^h<2n
+\ \Rightarrow\
+\tfrac12n^2\le N<2n^2\quad(n\ge2).
+\]
+Значит, $\Theta(n^2)$; $c_1=1/2,c_2=2,n_0=2$.
+
+\key{Растущий счётчик; цена шага $b^t-1$.}
+$h=\lceil\log_bM\rceil$, $b>1$ постоянно:
+\[
+N=\sum_{t=0}^{h-1}(b^t-1)
+=\frac{b^h-1}{b-1}-h=\Theta(M).
+\]
+Если $M=cn^\alpha$, $c,\alpha>0$ постоянны,
+то $T=\Theta(n^\alpha)$.
+\end{card}
+
+\begin{card}{sand}{Каскад с делением аргумента на $b$}
+Для $\alpha>0$ и постоянного $b>1$:
+\[
+\sum_{t=0}^{\lfloor\log_b n\rfloor}(n/b^t)^\alpha
+=\Theta(n^\alpha).
+\]
+\[
+\begin{array}{c|c}
+\text{Цена одного шага} & \text{Весь каскад}\\ \hline
+\Theta(1) & \Theta(\log n)\\
+\Theta(x^\alpha),\ \alpha>0 & \Theta(n^\alpha)\\
+\Theta(\log x) & \Theta(\log^2 n)
+\end{array}
+\]
+Цена $x,x^2,\sqrt x$ даёт порядок $n,n^2,\sqrt n$.
+При цене $\log x$ суммируется арифметическая прогрессия.
+\end{card}
+\end{sheetcol}\hfill
+\begin{sheetcol}
+\begin{card}{green}{Время и число выбранных операций\smash{\textsuperscript{*}}}
+\[
+T(n)=\sum_j c_jN_j(n).
+\]
+В RAM машинная операция стоит $\Theta(1)$;
+для строк и длинных чисел проверять цену отдельно.
+
+\key{Лучшее / худшее:} минимум / максимум по входам размера $n$.
+\key{Среднее:} ожидание по распределению.
+\key{Амортизированное:} стоимость последовательности /
+число операций; случайность не нужна.
+
+Если при просмотре $n$ элементов запись выполняется
+лишь для $r$ блоков одинаковых соседних значений,
+число записей равно $r$, но полное время $\Theta(n)$,
+даже при $r=1$.
+\end{card}
+
+\begin{card}{purple}{Инвариант: что проверять\smash{\textsuperscript{*}}}
+\key{Инвариант $P$:} истинен перед первой итерацией
+и перед каждой следующей проверкой условия.
+\begin{enumerate}
+\item \key{Инициализация:} предусловие $\Rightarrow P$.
+\item \key{Сохранение:} $P$ и условие цикла
+$\Rightarrow P$ после тела.
+\item \key{Выход:} $P$ и отрицание условия
+$\Rightarrow$ нужный результат.
+\end{enumerate}
+Завершение доказывается \key{отдельно}:
+неотрицательная целая величина строго убывает.
+
+\key{Примеры:} перед шагом $i$ сумма
+$S=\sum_{j=1}^{i-1}j$; префикс до $i$ отсортирован;
+в просмотренном префиксе цели нет.
+
+Инвариантов может быть несколько.
+$2=2$ --- допустимый, но бесполезный инвариант.
+Внутри тела между присваиваниями $P$ может нарушаться.
+\end{card}
+
+\begin{card}{sand}{Практический выбор алгоритма\smash{\textsuperscript{*}}}
+\[
+T_A=an\log_b n,\quad T_B=dn,\quad a,d>0:
+\]
+\[
+T_A<T_B\iff\log_b n<d/a\iff n<b^{d/a}.
+\]
+Сначала найти порог, затем сравнить с \key{допустимым диапазоном}.
+
+Если принята модель $T=cf(n)$ и известно
+$T(n_0)=t_0$, то
+\[
+c=\frac{t_0}{f(n_0)},\qquad
+T(n)=t_0\,\frac{f(n)}{f(n_0)}.
+\]
+Из одного $O(f(n))$ такую точную модель получить нельзя.
+\end{card}
+
+\begin{card}{red}{Независимые повторные запуски\smash{\textsuperscript{*}}}
+Успех одного запуска --- $p\in(0,1)$:
+\[
+P(\text{хотя бы один успех})=1-(1-p)^k.
+\]
+Для требуемой вероятности $q\in(0,1)$ положим
+$R=\ln(1-q)/\ln(1-p)$:
+\[
+P\ge q:\ k_{\min}=\lceil R\rceil;\qquad
+P>q:\ k_{\min}=\lfloor R\rfloor+1.
+\]
+Строгое «превысила» отличается от «не меньше».
+При делении на $\ln(1-p)<0$ знак меняется.
+Успехи должны быть независимы.
+\end{card}
+\end{sheetcol}
+\newpage
+
+\pagehead{4. Рекурсии: выбрать метод и получить оценку}
+{Сначала записать все реально выполняемые вызовы, нерекурсивную работу и базу. Глубина дерева не равна полному времени.}
+\noindent\begin{sheetcol}
+\begin{card}{green}{Дерево равных подзадач\smash{\textsuperscript{*}}}
+$T(n)=aT(n/b)+f(n)$; целое $a\ge1$ и $b>1$ постоянны,
+база $\Theta(1)$. Для $n=b^h$:
+\[
+\begin{array}{l|l}
+\text{Высота} & h=\log_b n\\
+\text{Узлов на уровне }i & a^i\\
+\text{Размер задачи} & n/b^i\\
+\text{Работа уровня} & a^if(n/b^i)\\
+\text{Число листьев} & a^h=n^{\log_ba}
+\end{array}
+\]
+\[
+T(n)=\sum_{i=0}^{h-1}a^if(n/b^i)+\Theta(a^h).
+\]
+Если размер уменьшается на $d$, а не в $b$ раз,
+высота $\Theta(n/d)$, а не $\Theta(\log n)$.
+\end{card}
+
+\begin{card}{purple}{Мастер-теорема\smash{\textsuperscript{*}}}
+$T(n)=aT(n/b)+f(n)$, $p=\log_ba$, $f\ge0$.
+\key{Сравнивать $f(n)$ с $n^p$.}
+
+\key{1. Доминируют листья.}
+Для некоторого постоянного $\varepsilon>0$:
+\[
+f=O(n^{p-\varepsilon})
+\quad\Rightarrow\quad T=\Theta(n^p).
+\]
+
+\key{2. Равные порядки по уровням.}
+Для постоянного $k\ge0$:
+\[
+f=\Theta(n^p\log^kn)
+\Rightarrow T=\Theta(n^p\log^{k+1}n).
+\]
+
+\key{3. Доминирует верх дерева.}
+Для некоторых $\varepsilon>0$ и $q<1$:
+\[
+\left.
+\begin{gathered}
+f=\Omega(n^{p+\varepsilon}),\\
+af(n/b)\le qf(n)
+\end{gathered}
+\right\}
+\Rightarrow T=\Theta(f(n)).
+\]
+В третьем случае обязательно \key{условие регулярности}.
+В первом и третьем нужен разрыв на степень $n^\varepsilon$,
+а не просто на логарифм.
+
+Не применяется напрямую к $T(n-d)$, разным долям
+подзадач или отрицательной стоимости $f$.
+\end{card}
+
+\begin{card}{sand}{Подстановка = доказательство индукцией\smash{\textsuperscript{*}}}
+\key{Гипотеза:} $T(n)\le Cg(n)$ (или $Cg(n)+A$).
+\begin{enumerate}
+\item Выбрать константы, закрыть все базовые случаи.
+\item Подставить гипотезу для меньших аргументов.
+\item Получить то же неравенство для $n$.
+\end{enumerate}
+Для $\Omega$ доказывается обратное неравенство;
+для $\Theta$ --- оба.
+Если шаг не замыкается, иногда нужна усиленная гипотеза,
+например $Cn-D$. Индукция не гарантирует, что
+выбрана самая точная граница.
+\end{card}
+
+\begin{card}{blue}{«Разделяй и властвуй»\smash{\textsuperscript{*}}}
+Разделить $\to$ решить части $\to$ объединить.
+Части должны вести к базе, но не обязаны быть равными
+или уменьшаться в целое число раз.
+Независимые части можно распараллелить.
+Общей гарантии эффективности для любой задачи нет.
+\end{card}
+\end{sheetcol}\hfill
+\begin{sheetcol}
+\begin{card}{sand}{Постоянный шаг: развёртывание и база\smash{\textsuperscript{*}}}
+$T(n)=aT(n-d)+c$, $n=r+kd$, $r$ --- базовый аргумент:
+\[
+T(r+kd)=a^kT(r)+c\sum_{j=0}^{k-1}a^j.
+\]
+При $a\ne1$, положив $L=c/(1-a)$:
+\[
+\boxed{T(r+kd)=L+a^k(T(r)-L).}
+\]
+При $a=1$: $T(r+kd)=T(r)+kc$.
+
+\key{Сначала подставить базу!}
+Если $T(r)=L$, экспонента сокращается:
+$T(n)\equiv L$. При $d>1$ нужна база для каждого
+остатка по $d$.
+Отрицательная добавка требует проверки
+неотрицательности формального решения.
+\end{card}
+
+\begin{card}{green}{Частые рекурсии}
+База положительна и имеет порядок $\Theta(1)$.
+\[
+\begin{array}{l|l}
+\text{Соотношение} & T(n)\\ \hline
+T(n/2)+\Theta(1) & \Theta(\log n)\\
+T(n/2)+\Theta(\log n) & \Theta(\log^2n)\\
+T(n/2)+\Theta(n) & \Theta(n)\\
+2T(n/2)+\Theta(n) & \Theta(n\log n)\\
+4T(n/2)+\Theta(n^2) & \Theta(n^2\log n)\\
+7T(n/2)+\Theta(n^2) & \Theta(n^{\log_2 7})\\
+T(n-1)+\Theta(n) & \Theta(n^2)\\
+2T(n-1)+\Theta(n) & \Theta(2^n)
+\end{array}
+\]
+При одном вызове с делением на $2$ и работе $\log n$:
+\[
+m+(m-1)+\cdots+1=\Theta(m^2),
+\qquad m=\log_2n.
+\]
+Для Штрассена $\log_2 7\approx2.807<3$.
+Меньшая степень не гарантирует выигрыша
+на маленьких матрицах.
+\end{card}
+
+\begin{card}{purple}{Разные доли: суммировать размеры\smash{\textsuperscript{*}}}
+\[
+T(n)=T(n/2)+T(n/4)+T(n/8)+cn,\quad c>0.
+\]
+Сумма долей $\rho=1/2+1/4+1/8=7/8<1$.
+Работа активных узлов уровня $i$ не больше $cn\rho^i$:
+\[
+\sum_{i\ge0}cn\rho^i=\frac{cn}{1-\rho}=8cn.
+\]
+Листья дают $O(n)$; корень уже даёт $\Omega(n)$.
+\[
+\boxed{T(n)=\Theta(n).}
+\]
+Индукция: $T(n)\le A\rho n+cn\le An$
+при $A\ge c/(1-\rho)$ и выполненной базе.
+
+Короткие ветви делят на $8$, длинные --- на $2$;
+высоты порядка $\log_8n$ и $\log_2n$.
+На глубоких уровнях уже \key{не все $3^i$ узлов активны}.
+\end{card}
+
+\begin{card}{red}{Сравнительная рекурсия --- только граница\smash{\textsuperscript{*}}}
+При неубывании $T$ и согласованных базах:
+\[
+3T(n/8)+cn\le T(n)\le3T(n/2)+cn.
+\]
+Сравнение даёт $\Omega(n)$ и $O(n^{\log_2 3})$.
+Верхняя оценка \key{не точна}: сумма по уровням улучшает её до $O(n)$.
+При разных долях подставлять одно произвольное $b$
+в мастер-теорему нельзя.
+\end{card}
+\end{sheetcol}
+\end{document}
