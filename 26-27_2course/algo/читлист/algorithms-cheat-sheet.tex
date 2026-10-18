@@ -565,32 +565,30 @@ T(n)=\sum_{i=0}^{h-1}a^if(n/b^i)+\Theta(a^h).
 
 \begin{card}{purple}{Мастер: разделяй и властвуй\smash{\textsuperscript{*}}}
 $T(n)=aT(n/b)+f(n)$; постоянные $a\ge1$, $b>1$,
-$f\ge0$, база $\Theta(1)$. Положить $p=\log_ba$.
-\key{Сравнивать добавку $f$ с $n^p$:}
+$f\ge0$, база $\Theta(1)$.
 
-\key{1. Листья:} для постоянного $\varepsilon>0$
+\key{1. Вычислить показатель рекурсии:}
 \[
-f=O(n^{p-\varepsilon})
-\quad\Rightarrow\quad T=\Theta(n^p).
+\boxed{p=\log_b a.}
 \]
-\key{2. Баланс:} для постоянного $k\ge0$
+\key{2. Выделить степень $n$ в добавке:} это $k$.
+Если есть множитель $\log^r n$, записать отдельно $r$.
+Показатели $k,r\ge0$ постоянны.
+
+\key{3. Сравнить $p$ и $k$.} В ячейках --- итог $T(n)$:
 \[
-f=\Theta(n^p\log^kn)
-\Rightarrow T=\Theta(n^p\log^{k+1}n).
+\setlength{\arraycolsep}{3pt}
+\begin{array}{c|c|c}
+ & f=\Theta(n^k) & f=\Theta(n^k\log^r n)\\ \hline
+p>k & \Theta(n^p) & \Theta(n^p)\\
+p=k & \Theta(n^k\log n) & \Theta(n^k\log^{r+1}n)\\
+p<k & \Theta(n^k) & \Theta(n^k\log^r n)
+\end{array}
 \]
-\key{3. Корень:} постоянные $\varepsilon>0$, $0<q<1$:
-\[
-\left.
-\begin{gathered}
-f=\Omega(n^{p+\varepsilon}),\\
-af(n/b)\le qf(n)
-\end{gathered}
-\right\}
-\Rightarrow T=\Theta(f(n)).
-\]
-В п.\ 3 обязательно второе условие (регулярность).
-В п.\ 1 и 3 разрыв должен быть \key{на степень}, не на логарифм.
-К $T(n-d)$ и разным долям напрямую неприменима.
+При $p=k$ появляется \key{ещё один $\log n$}.
+Если добавка задана через $O$, результаты читать как
+верхние границы $O$. Для иных $f$, шага $n-d$ и разных
+долей эта таблица не применяется автоматически.
 \end{card}
 
 \begin{card}{sand}{Мастер: уменьшай и властвуй\smash{\textsuperscript{*}}}
