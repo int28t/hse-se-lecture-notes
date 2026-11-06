@@ -1,0 +1,214 @@
+\clearpage
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\everymath{\textstyle}
+\subsection{Субаддитивность и супераддитивность}
+
+Пусть $\mathcal X$ --- система подмножеств некоторого множества,
+а $m\colon\mathcal X\to[0;+\infty)$ --- неотрицательная функция.
+
+\begin{definition}[Субаддитивность]
+    Функция $m$ называется \textbf{субаддитивной}, если для любых
+    $A,A_1,\ldots,A_n\in\mathcal X$
+    \[
+        A\subseteq\bigcup_{i=1}^{n}A_i
+        \quad\Longrightarrow\quad
+        m(A)\leq\sum_{i=1}^{n}m(A_i).
+    \]
+\end{definition}
+
+\begin{definition}[Супераддитивность]
+    Функция $m$ называется \textbf{супераддитивной}, если для любых
+    $B,B_1,\ldots,B_r\in\mathcal X$, где $B_j$ попарно не пересекаются,
+    \[
+        \bigsqcup_{j=1}^{r}B_j\subseteq B
+        \quad\Longrightarrow\quad
+        \sum_{j=1}^{r}m(B_j)\leq m(B).
+    \]
+\end{definition}
+
+\begin{theorem}
+    Любая мера на полукольце $S$ субаддитивна и супераддитивна.
+\end{theorem}
+
+\begin{Proof}[Субаддитивность]
+    Пусть $A\subseteq\bigcup_{i=1}^{n}A_i$, где $A,A_i\in S$.
+    По лемме о замельчении существует конечное семейство попарно
+    непересекающихся множеств $C_j\in S$, для которого
+    \[
+        A=\bigsqcup_{j\in I}C_j,\qquad
+        A_i=\bigsqcup_{j\in I_i}C_j.
+    \]
+    Каждое $C_j$, входящее в разбиение $A$, входит хотя бы в одно разбиение
+    $A_i$. Поэтому по конечной аддитивности и неотрицательности
+    \[
+        m(A)=\sum_{j\in I}m(C_j)
+        \leq\sum_{i=1}^{n}\sum_{j\in I_i}m(C_j)
+        =\sum_{i=1}^{n}m(A_i).
+    \]
+\end{Proof}
+
+\begin{Proof}[Супераддитивность]
+    По свойствам полукольца найдутся попарно непересекающиеся $D_k\in S$:
+    \[
+        B\setminus\bigsqcup_{j=1}^{r}B_j
+        =\bigsqcup_{k=1}^{\ell}D_k,\qquad D_k\in S.
+    \]
+    По аддитивности $m(B)=\sum_{j=1}^{r}m(B_j)+\sum_{k=1}^{\ell}m(D_k)
+    \geq\sum_{j=1}^{r}m(B_j)$.
+\end{Proof}
+
+\newpage
+\begin{theorem}[Обратное утверждение]
+    Если неотрицательная функция $m$ на полукольце $S$ субаддитивна
+    и супераддитивна, то она конечно аддитивна, то есть является мерой.
+\end{theorem}
+
+\begin{Proof}
+    При $A=\bigsqcup_{i=1}^{n}A_i$, $A,A_i\in S$, два свойства дают
+    \[
+        m(A)\leq\sum_{i=1}^{n}m(A_i)\leq m(A).
+    \]
+    Следовательно, обе оценки обращаются в равенство.
+\end{Proof}
+
+\subsection{Счётные аналоги}
+
+\begin{definition}[$\sigma$-субаддитивность]
+    Функция $m$ называется \textbf{$\sigma$-субаддитивной}, если для любых
+    $A,A_1,A_2,\ldots\in\mathcal X$
+    \[
+        A\subseteq\bigcup_{i=1}^{\infty}A_i
+        \quad\Longrightarrow\quad
+        m(A)\leq\sum_{i=1}^{\infty}m(A_i).
+    \]
+\end{definition}
+
+\begin{definition}[$\sigma$-супераддитивность]
+    Функция $m$ называется \textbf{$\sigma$-супераддитивной}, если для любых
+    $B,B_1,B_2,\ldots\in\mathcal X$, где $B_j$ попарно не пересекаются,
+    \[
+        \bigsqcup_{j=1}^{\infty}B_j\subseteq B
+        \quad\Longrightarrow\quad
+        \sum_{j=1}^{\infty}m(B_j)\leq m(B).
+    \]
+\end{definition}
+
+\begin{theorem}
+    Любая мера на полукольце $S$ является $\sigma$-супераддитивной.
+\end{theorem}
+
+\begin{Proof}
+    Если $\bigsqcup_{j=1}^{\infty}B_j\subseteq B$, то для каждого $n\in\N$
+    \[
+        \bigsqcup_{j=1}^{n}B_j\subseteq B,
+        \qquad\sum_{j=1}^{n}m(B_j)\leq m(B).
+    \]
+    Переходя к пределу при $n\to\infty$, получаем требуемое неравенство.
+\end{Proof}
+
+\newpage
+\subsection{Критерий счётной аддитивности}
+
+\begin{theorem}
+    Мера $m$ на полукольце $S$ является $\sigma$-аддитивной
+    тогда и только тогда, когда она $\sigma$-субаддитивна.
+\end{theorem}
+
+\begin{Proof}[Достаточность]
+    Пусть $m$ является $\sigma$-субаддитивной. Если
+    $A=\bigsqcup_{i=1}^{\infty}A_i$, где $A,A_i\in S$, то
+    по $\sigma$-субаддитивности и $\sigma$-супераддитивности
+    \[
+        m(A)\leq\sum_{i=1}^{\infty}m(A_i)\leq m(A).
+    \]
+    Значит, $m(A)=\sum_{i=1}^{\infty}m(A_i)$.
+\end{Proof}
+
+\begin{Proof}[Необходимость]
+    Пусть $m$ является $\sigma$-аддитивной и
+    $A\subseteq\bigcup_{i=1}^{\infty}A_i$, где $A,A_i\in S$.
+    Положим $A_i'=A\cap A_i\in S$. Тогда
+    \[
+        A=\bigcup_{i=1}^{\infty}A_i',\qquad m(A_i')\leq m(A_i).
+    \]
+    Исключим из каждого множества уже учтённые части. Для $i\geq2$
+    представим
+    \[
+        A_i'\setminus\bigcup_{k=1}^{i-1}A_k'
+        =\bigsqcup_{j=1}^{r_i}B_{ij},\qquad B_{ij}\in S.
+    \]
+    Все полученные множества попарно не пересекаются, и
+    \[
+        A=A_1'\sqcup\bigsqcup_{i=2}^{\infty}
+                       \bigsqcup_{j=1}^{r_i}B_{ij}.
+    \]
+    По конечной супераддитивности
+    $\sum_{j=1}^{r_i}m(B_{ij})\leq m(A_i')$.
+    Поэтому по $\sigma$-аддитивности
+    \[
+        \begin{aligned}
+            m(A)
+            &=m(A_1')+\sum_{i=2}^{\infty}\sum_{j=1}^{r_i}m(B_{ij})\\
+            &\leq\sum_{i=1}^{\infty}m(A_i')
+             \leq\sum_{i=1}^{\infty}m(A_i).
+        \end{aligned}
+    \]
+\end{Proof}
+
+\newpage
+\subsection{Счётная аддитивность меры Лебега--Стилтьеса}
+
+Пусть $S$ --- полукольцо промежутков, введённое ранее, а
+$F\colon\R\to\R$ ограничена, не убывает и непрерывна справа.
+Мера $m$ задаётся равенством $m((a;b])=F(b)-F(a)$
+с соответствующими предельными формулами для неограниченных промежутков.
+
+\begin{theorem}
+    Мера Лебега--Стилтьеса $m$ на полукольце $S$ является
+    $\sigma$-аддитивной.
+\end{theorem}
+
+\begin{Proof}[Счётная субаддитивность на ограниченном промежутке]
+    По доказанному критерию достаточно проверить $\sigma$-субаддитивность.
+    Пусть
+    \[
+        (a;b]\subseteq\bigcup_{i=1}^{\infty}(a_i;b_i].
+    \]
+    Зафиксируем $\eps>0$. По непрерывности $F$ справа выберем
+    $a'\in(a;b)$ и $b_i'>b_i$ так, чтобы
+    \[
+        F(a')-F(a)<\frac\eps2,\qquad
+        F(b_i')-F(b_i)<\frac{\eps}{2^{i+1}}.
+    \]
+    Открытые интервалы $(a_i;b_i')$ покрывают отрезок $[a';b]$.
+    По лемме Гейне--Бореля существует конечное подпокрытие
+    с множеством индексов $I\subset\N$:
+    \[
+        [a';b]\subseteq\bigcup_{i\in I}(a_i;b_i').
+    \]
+    Следовательно, $(a';b]\subseteq\bigcup_{i\in I}(a_i;b_i']$.
+    По конечной субаддитивности
+    \[
+        \begin{aligned}
+            F(b)-F(a')
+            &\leq\sum_{i\in I}\bigl(F(b_i')-F(a_i)\bigr)\\
+            &\leq\sum_{i=1}^{\infty}
+                 \left(F(b_i)-F(a_i)+\frac{\eps}{2^{i+1}}\right)\\
+            &=\sum_{i=1}^{\infty}m((a_i;b_i])+\frac\eps2.
+        \end{aligned}
+    \]
+    Прибавляя $F(a')-F(a)<\eps/2$, получаем
+    \[
+        m((a;b])\leq\sum_{i=1}^{\infty}m((a_i;b_i])+\eps.
+    \]
+    Устремляя $\eps$ к нулю, получаем требуемое неравенство.
+\end{Proof}
+
+\begin{remark}[Неограниченные промежутки]
+    Для покрытия лучами используется то же рассуждение с открытыми лучами.
+    Если покрываемый промежуток неограничен, сначала рассматривают его
+    пересечение с $(-M;M]$, затем переходят к пределу при $M\to\infty$
+    по формулам через $F(-\infty)$ и $F(+\infty)$.
+\end{remark}
+\endgroup
