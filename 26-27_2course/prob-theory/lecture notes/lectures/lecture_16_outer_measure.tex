@@ -1,0 +1,220 @@
+\clearpage
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\everymath{\textstyle}
+\subsection{Счётная аддитивность продолжения меры}
+
+Пусть $S$ --- полуалгебра подмножеств $\Omega$, то есть полукольцо,
+содержащее $\Omega$, а $m$ --- конечная $\sigma$-аддитивная мера на $S$.
+Обозначим через $\gamma$ её продолжение на $R(S)$:
+\[
+    \gamma\left(\bigsqcup_{i=1}^{n}A_i\right)
+    =\sum_{i=1}^{n}m(A_i),\qquad A_i\in S.
+\]
+Поскольку $\Omega\in S$, кольцо $R(S)$ является алгеброй.
+
+\begin{theorem}
+    Продолжение $\gamma$ является $\sigma$-аддитивной мерой на $R(S)$.
+    В частности, оно $\sigma$-субаддитивно.
+\end{theorem}
+
+\subsection{Внешняя мера Лебега}
+
+\begin{definition}
+    Для любого $A\subseteq\Omega$ положим
+    \[
+        \mu^*(A)=\inf\left\{
+            \sum_{i=1}^{\infty}m(A_i):\
+            A\subseteq\bigcup_{i=1}^{\infty}A_i,\quad A_i\in S
+        \right\}.
+    \]
+    Функция $\mu^*\colon2^\Omega\to[0;+\infty)$ называется
+    \textbf{внешней мерой Лебега}, порождённой $m$.
+    Инфимум берётся по всем счётным покрытиям $A$ элементами $S$.
+\end{definition}
+
+\begin{remark}[Конечность внешней меры]
+    Любое $A\subseteq\Omega$ покрывается множеством $\Omega\in S$, поэтому
+    \[
+        0\leq\mu^*(A)\leq m(\Omega)<\infty.
+    \]
+    Конечное покрытие можно дополнить пустыми множествами.
+    В частности, $\mu^*(\varnothing)=0$.
+\end{remark}
+
+\begin{theorem}[Совпадение с мерой на алгебре]
+    Для любого $A\in R(S)$ справедливо равенство $\mu^*(A)=\gamma(A)$.
+\end{theorem}
+
+\begin{Proof}
+    Пусть $A=\bigsqcup_{i=1}^{n}A_i$, $A_i\in S$.
+    Это покрытие $A$, поэтому
+    \[
+        \mu^*(A)\leq\sum_{i=1}^{n}m(A_i)=\gamma(A).
+    \]
+    С другой стороны, для любого покрытия $A\subseteq\bigcup_{j=1}^{\infty}B_j$,
+    $B_j\in S$, по $\sigma$-субаддитивности $\gamma$
+    \[
+        \gamma(A)\leq\sum_{j=1}^{\infty}\gamma(B_j)
+        =\sum_{j=1}^{\infty}m(B_j).
+    \]
+    Переходя к инфимуму по покрытиям, получаем $\gamma(A)\leq\mu^*(A)$.
+\end{Proof}
+
+\newpage
+\subsection{Свойства внешней меры}
+
+\begin{example}[Внешняя мера не обязана быть аддитивной]
+    Пусть
+    \[
+        \Omega=\{1,2,3\},\qquad
+        S=\{\varnothing,\{1,2\},\{3\},\Omega\},
+    \]
+    а мера на $S$ задана значениями
+    \[
+        m(\varnothing)=0,\quad m(\{1,2\})=2,\quad
+        m(\{3\})=0,\quad m(\Omega)=2.
+    \]
+    Тогда $\mu^*(\{1\})=\mu^*(\{2\})=2$ и $\mu^*(\{1,2\})=2$.
+    Следовательно,
+    \[
+        \mu^*(\{1\}\sqcup\{2\})=2
+        \ne\mu^*(\{1\})+\mu^*(\{2\})=4.
+    \]
+\end{example}
+
+\begin{theorem}[Счётная субаддитивность]
+    Для любых $A,A_1,A_2,\ldots\subseteq\Omega$
+    \[
+        A\subseteq\bigcup_{i=1}^{\infty}A_i
+        \quad\Longrightarrow\quad
+        \mu^*(A)\leq\sum_{i=1}^{\infty}\mu^*(A_i).
+    \]
+\end{theorem}
+
+\begin{Proof}
+    Если сумма справа бесконечна, утверждение очевидно.
+    Пусть она конечна. Зафиксируем $\eps>0$. По определению инфимума
+    для каждого $i$ выберем покрытие
+    \[
+        A_i\subseteq\bigcup_{j=1}^{\infty}B_{ij},\qquad B_{ij}\in S,
+        \qquad
+        \sum_{j=1}^{\infty}m(B_{ij})<\mu^*(A_i)+\frac{\eps}{2^i}.
+    \]
+    Счётное семейство всех $B_{ij}$ покрывает $A$. Поэтому
+    \[
+        \begin{aligned}
+            \mu^*(A)
+            &\leq\sum_{i=1}^{\infty}\sum_{j=1}^{\infty}m(B_{ij})\\
+            &\leq\sum_{i=1}^{\infty}\mu^*(A_i)
+                 +\sum_{i=1}^{\infty}\frac{\eps}{2^i}
+             =\sum_{i=1}^{\infty}\mu^*(A_i)+\eps.
+        \end{aligned}
+    \]
+    Устремляя $\eps$ к нулю, получаем требуемое неравенство.
+\end{Proof}
+
+\newpage
+\begin{theorem}[Оценка через симметрическую разность]
+    Для любых $A,B\subseteq\Omega$
+    \[
+        |\mu^*(A)-\mu^*(B)|\leq\mu^*(A\mathbin{\triangle}B).
+    \]
+\end{theorem}
+
+\begin{Proof}
+    Из включений
+    \[
+        A\subseteq B\cup(A\mathbin{\triangle}B),\qquad
+        B\subseteq A\cup(A\mathbin{\triangle}B)
+    \]
+    и субаддитивности следует
+    \[
+        \begin{aligned}
+            \mu^*(A)&\leq\mu^*(B)+\mu^*(A\mathbin{\triangle}B),\\
+            \mu^*(B)&\leq\mu^*(A)+\mu^*(A\mathbin{\triangle}B).
+        \end{aligned}
+    \]
+    Все величины конечны, поэтому эти два неравенства дают требуемую оценку.
+\end{Proof}
+
+\subsection{Измеримые по Лебегу множества}
+
+\begin{definition}
+    Множество $A\subseteq\Omega$ называется \textbf{измеримым по Лебегу}
+    относительно построенной внешней меры, если
+    \[
+        \forall\eps>0\quad\exists A_\eps\in R(S):\quad
+        \mu^*(A\mathbin{\triangle}A_\eps)<\eps.
+    \]
+    Обозначим систему всех таких множеств через $M$.
+\end{definition}
+
+\begin{theorem}
+    $R(S)\subseteq M$.
+\end{theorem}
+
+\begin{Proof}
+    Для $A\in R(S)$ и любого $\eps>0$ выберем $A_\eps=A$.
+    Тогда $\mu^*(A\mathbin{\triangle}A_\eps)=\mu^*(\varnothing)=0<\eps$.
+\end{Proof}
+
+\begin{theorem}
+    Система $M$ измеримых по Лебегу множеств является алгеброй.
+\end{theorem}
+
+\newpage
+\begin{Proof}[Замкнутость относительно пересечения]
+    Пусть $A,B\in M$ и $\eps>0$. Выберем
+    $A_{\eps/2},B_{\eps/2}\in R(S)$ так, чтобы
+    \[
+        \mu^*(A\mathbin{\triangle}A_{\eps/2})<\frac\eps2,
+        \qquad
+        \mu^*(B\mathbin{\triangle}B_{\eps/2})<\frac\eps2.
+    \]
+    Тогда $A_{\eps/2}\cap B_{\eps/2}\in R(S)$ и
+    \[
+        (A\cap B)\mathbin{\triangle}(A_{\eps/2}\cap B_{\eps/2})
+        \subseteq
+        (A\mathbin{\triangle}A_{\eps/2})
+        \cup(B\mathbin{\triangle}B_{\eps/2}).
+    \]
+    По субаддитивности
+    \[
+        \begin{aligned}
+            &\mu^*\bigl((A\cap B)\mathbin{\triangle}
+                           (A_{\eps/2}\cap B_{\eps/2})\bigr)\\
+            &\qquad\leq\mu^*(A\mathbin{\triangle}A_{\eps/2})
+                      +\mu^*(B\mathbin{\triangle}B_{\eps/2})<\eps.
+        \end{aligned}
+    \]
+    Следовательно, $A\cap B\in M$.
+\end{Proof}
+
+\begin{Proof}[Замкнутость относительно симметрической разности]
+    Для тех же приближений
+    $A_{\eps/2}\mathbin{\triangle}B_{\eps/2}\in R(S)$ и
+    \[
+        \begin{aligned}
+            &(A\mathbin{\triangle}B)\mathbin{\triangle}
+                (A_{\eps/2}\mathbin{\triangle}B_{\eps/2})\\
+            &\qquad\subseteq
+                (A\mathbin{\triangle}A_{\eps/2})
+                \cup(B\mathbin{\triangle}B_{\eps/2}).
+        \end{aligned}
+    \]
+    Поэтому
+    \[
+        \begin{aligned}
+            &\mu^*\bigl((A\mathbin{\triangle}B)\mathbin{\triangle}
+                (A_{\eps/2}\mathbin{\triangle}B_{\eps/2})\bigr)\\
+            &\qquad\leq\mu^*(A\mathbin{\triangle}A_{\eps/2})
+                      +\mu^*(B\mathbin{\triangle}B_{\eps/2})<\eps.
+        \end{aligned}
+    \]
+    Следовательно, $A\mathbin{\triangle}B\in M$.
+    Замкнутость относительно пересечения и симметрической разности
+    означает, что $M$ --- кольцо. Так как $\Omega\in R(S)\subseteq M$,
+    это кольцо является алгеброй.
+\end{Proof}
+\endgroup

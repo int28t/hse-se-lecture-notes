@@ -1,0 +1,206 @@
+\clearpage
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\everymath{\textstyle}
+\subsection{Случайный вектор и совместная функция распределения}
+
+\begin{definition}[Случайный вектор]
+    \textbf{Случайным вектором} называется вектор
+    $\vec\xi=(\xi_1,\ldots,\xi_n)$, компоненты которого являются
+    случайными величинами на одном вероятностном пространстве
+    $(\Omega,\mathcal F,\Pr)$.
+\end{definition}
+
+\begin{definition}[Совместная функция распределения]
+    \textbf{Функцией распределения случайного вектора} $\vec\xi$
+    называется функция
+    \[
+        F_{\vec\xi}(x_1,\ldots,x_n)
+        =\Pr\{\xi_1\leq x_1,\ldots,\xi_n\leq x_n\}.
+    \]
+    Иными словами,
+    \[
+        F_{\vec\xi}(\vec x)
+        =\Pr\left(\bigcap_{i=1}^{n}\{\omega:\xi_i(\omega)\leq x_i\}\right).
+    \]
+    Она называется также \textbf{совместной функцией распределения}
+    величин $\xi_1,\ldots,\xi_n$.
+\end{definition}
+
+\begin{theorem}[Свойства совместной функции распределения]
+    \begin{enumerate}
+        \item $0\leq F_{\vec\xi}(\vec x)\leq1$.
+        \item Предельный переход по одной координате даёт функцию
+        распределения остальных координат. Для пары $(\xi,\eta)$:
+        \[
+            \begin{aligned}
+                \lim_{x\to+\infty}F_{\xi,\eta}(x,y)&=F_\eta(y),&
+                \lim_{x\to-\infty}F_{\xi,\eta}(x,y)&=0,\\
+                \lim_{y\to+\infty}F_{\xi,\eta}(x,y)&=F_\xi(x),&
+                \lim_{y\to-\infty}F_{\xi,\eta}(x,y)&=0.
+            \end{aligned}
+        \]
+        \item $F_{\vec\xi}$ не убывает по каждой координате.
+        \item Если $\vec x^{\,(k)}\downarrow\vec x^{\,(0)}$
+        покоординатно, то
+        \[
+            F_{\vec\xi}\bigl(\vec x^{\,(k)}\bigr)
+            \downarrow F_{\vec\xi}\bigl(\vec x^{\,(0)}\bigr).
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\newpage
+\subsection{Независимость случайных величин}
+
+События $A$ и $B$ независимы, если $\Pr(A\cap B)=\Pr(A)\Pr(B)$.
+
+\begin{definition}
+    Случайные величины $\xi$ и $\eta$ называются \textbf{независимыми}, если
+    \[
+        F_{\xi,\eta}(x,y)=F_\xi(x)F_\eta(y)
+        \qquad\forall x,y\in\R.
+    \]
+\end{definition}
+
+\begin{theorem}[Эквивалентное определение через события]
+    Величины $\xi$ и $\eta$ независимы тогда и только тогда, когда
+    для любых $A,B\in\mathcal B(\R)$ события $\{\xi\in A\}$ и $\{\eta\in B\}$
+    независимы, то есть
+    \[
+        \Pr\{\xi\in A,\eta\in B\}
+        =\Pr\{\xi\in A\}\Pr\{\eta\in B\}.
+    \]
+\end{theorem}
+
+\begin{Proof}[От независимости событий к разложению функции распределения]
+    Подставим $A=(-\infty;x]$, $B=(-\infty;y]$. Тогда
+    \[
+        \begin{aligned}
+            F_{\xi,\eta}(x,y)
+            &=\Pr\{\xi\leq x,\eta\leq y\}\\
+            &=\Pr\{\xi\leq x\}\Pr\{\eta\leq y\}
+             =F_\xi(x)F_\eta(y).
+        \end{aligned}
+    \]
+\end{Proof}
+
+\begin{example}[События случайной величины]
+    Пусть $\Omega=[0;1]$, $\mathcal F=\mathcal B([0;1])$, а $\Pr$ ---
+    мера Лебега на $[0;1]$. Для $\xi(\omega)=\lfloor2\omega\rfloor$ имеем
+    \[
+        \xi(\omega)=
+        \begin{cases}
+            0,&0\leq\omega<\frac12,\\
+            1,&\frac12\leq\omega<1,\\
+            2,&\omega=1.
+        \end{cases}
+    \]
+    Поэтому каждое событие $\{\xi\in B\}$ является объединением некоторых
+    из трёх множеств
+    \[
+        [0;\tfrac12),\qquad[\tfrac12;1),\qquad\{1\}.
+    \]
+    Всего возможны восемь таких объединений, включая $\varnothing$ и $\Omega$.
+\end{example}
+
+\newpage
+\subsection{Совместное дискретное распределение}
+
+\begin{definition}
+    Пусть $\xi$ и $\eta$ принимают значения в конечных или счётных
+    множествах $\{x_i\}$ и $\{y_j\}$ с вероятностью $1$.
+    Их \textbf{совместное распределение} задаётся числами
+    \[
+        p_{ij}=\Pr\{\xi=x_i,\eta=y_j\}.
+    \]
+    Вероятности отдельных значений равны
+    \[
+        p_i=\Pr\{\xi=x_i\}=\sum_jp_{ij},\qquad
+        q_j=\Pr\{\eta=y_j\}=\sum_ip_{ij}.
+    \]
+    При этом $p_{ij}\geq0$ и $\sum_{i,j}p_{ij}=1$.
+\end{definition}
+
+\begin{theorem}[Критерий независимости]
+    Дискретные случайные величины $\xi$ и $\eta$ независимы
+    тогда и только тогда, когда
+    \[
+        p_{ij}=p_iq_j\qquad\forall i,j.
+    \]
+\end{theorem}
+
+\begin{theorem}[Матричный критерий]
+    Если множества значений обеих величин конечны, то для матрицы
+    совместных вероятностей $P=(p_{ij})$
+    \[
+        \xi\text{ и }\eta\text{ независимы}
+        \quad\Longleftrightarrow\quad\rk P=1.
+    \]
+    В случае независимости
+    \[
+        P=
+        \begin{pmatrix}
+            p_1q_1&\cdots&p_1q_s\\
+            \vdots&\ddots&\vdots\\
+            p_rq_1&\cdots&p_rq_s
+        \end{pmatrix}
+        =\begin{pmatrix}p_1\\\vdots\\p_r\end{pmatrix}
+         \begin{pmatrix}q_1&\cdots&q_s\end{pmatrix}.
+    \]
+\end{theorem}
+
+\newpage
+\subsection{Совместная плотность распределения}
+
+\begin{definition}
+    Распределение пары $(\xi,\eta)$ называется \textbf{абсолютно непрерывным},
+    если существует неотрицательная измеримая функция $p_{\xi,\eta}$,
+    для которой
+    \[
+        F_{\xi,\eta}(x,y)
+        =\int_{-\infty}^{y}\int_{-\infty}^{x}
+            p_{\xi,\eta}(u,v)\,\diff u\,\diff v.
+    \]
+    Функция $p_{\xi,\eta}$ называется \textbf{совместной плотностью}.
+    Она удовлетворяет условию
+    \[
+        \iint_{\R^2}p_{\xi,\eta}(u,v)\,\diff u\,\diff v=1.
+    \]
+\end{definition}
+
+\begin{theorem}[Критерий независимости через плотности]
+    Если пара $(\xi,\eta)$ имеет совместную плотность, то
+    \[
+        \xi\text{ и }\eta\text{ независимы}
+        \quad\Longleftrightarrow\quad
+        p_{\xi,\eta}(x,y)=p_\xi(x)p_\eta(y)
+        \ \text{почти всюду}.
+    \]
+    Здесь почти всюду понимается относительно меры Лебега на $\R^2$.
+\end{theorem}
+
+\begin{Proof}[Необходимость]
+    При независимости $F_{\xi,\eta}(x,y)=F_\xi(x)F_\eta(y)$.
+    Дифференцируя по обеим переменным, получаем почти всюду
+    \[
+        p_{\xi,\eta}(x,y)
+        =\frac{\partial^2F_{\xi,\eta}}{\partial x\,\partial y}(x,y)
+        =F_\xi'(x)F_\eta'(y)=p_\xi(x)p_\eta(y).
+    \]
+\end{Proof}
+
+\begin{Proof}[Достаточность]
+    Если $p_{\xi,\eta}(u,v)=p_\xi(u)p_\eta(v)$ почти всюду, то
+    \[
+        \begin{aligned}
+            F_{\xi,\eta}(x,y)
+            &=\int_{-\infty}^{y}\int_{-\infty}^{x}
+                p_\xi(u)p_\eta(v)\,\diff u\,\diff v\\
+            &=\left(\int_{-\infty}^{x}p_\xi(u)\,\diff u\right)
+              \left(\int_{-\infty}^{y}p_\eta(v)\,\diff v\right)\\
+            &=F_\xi(x)F_\eta(y).
+        \end{aligned}
+    \]
+\end{Proof}
+\endgroup

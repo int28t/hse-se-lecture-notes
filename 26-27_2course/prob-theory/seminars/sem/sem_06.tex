@@ -1,0 +1,129 @@
+% Источники: «6 Семинар-2.jpg», «6 Семинар-4.jpg», «6 Семинар-5.jpg».
+% Условия: conditions/sem_06.pdf. В записях разобраны задачи 1, 4, 5(a).
+\section{Функция распределения: смеси распределений}
+
+\noindent Условия:
+\href{run:conditions/sem_06.pdf}{семинар 6 (PDF)}.
+
+\begingroup
+\everymath{\textstyle}
+\subsection{Задача 1}
+
+\begin{solution}
+    \textbf{Модель: дискретная.}
+    \[
+        \Pr\{\xi=k\}=\frac{C}{k(k+1)},\qquad k=1,2,\ldots
+    \]
+    \textbf{а)} Сумма вероятностей равна $1$:
+    \[
+        1=C\sum_{k=1}^{\infty}\frac1{k(k+1)}.
+    \]
+    Разложим слагаемое и найдём частичную сумму:
+    \[
+        \frac1{k(k+1)}=\frac1k-\frac1{k+1},\qquad
+        \sum_{k=1}^{n}\left(\frac1k-\frac1{k+1}\right)
+        =1-\frac1{n+1}\longrightarrow1.
+    \]
+    Следовательно, $\boxed{C=1}$.
+
+    \medskip
+    \textbf{б)}
+    \[
+        \Pr\{\xi\leq3\}
+        =\sum_{k=1}^{3}\Pr\{\xi=k\}
+        =\frac12+\frac16+\frac1{12}=\boxed{\frac34}.
+    \]
+\end{solution}
+
+\subsection{Задача 4}
+
+\begin{solution}
+    Пусть $F_k$ --- функция распределения $\xi_k$,
+    $p_k=\Pr\{\nu=k\}$, $k\in\mathbb N$.
+    Случайный индекс $\nu$ не зависит от $\xi_1,\xi_2,\ldots$.
+    Величина $\xi_\nu$ определяется поточечно:
+    \[
+        \nu(\omega)=k\quad\Longrightarrow\quad
+        \xi_\nu(\omega)=\xi_k(\omega).
+    \]
+    По формуле полной вероятности и независимости:
+    \[
+        \begin{aligned}
+            F_{\xi_\nu}(x)
+            &=\Pr\{\xi_\nu\leq x\}\\
+            &=\sum_{k:\,p_k>0}
+                \Pr\{\xi_\nu\leq x\mid\nu=k\}\,p_k\\
+            &=\sum_{k:\,p_k>0}
+                \Pr\{\xi_k\leq x\mid\nu=k\}\,p_k\\
+            &=\sum_{k=1}^{\infty}F_k(x)\,p_k.
+        \end{aligned}
+    \]
+    Таким образом,
+    \[
+        \boxed{F_{\xi_\nu}(x)=\sum_{k=1}^{\infty}p_kF_k(x).}
+    \]
+\end{solution}
+
+\clearpage
+\subsection{Разложение распределения}
+
+\begin{remark}
+    Любую функцию распределения можно представить в виде
+    \[
+        F(x)=\alpha_1F_{\text{д}}(x)
+            +\alpha_2F_{\text{а.н.}}(x)
+            +\alpha_3F_{\text{с}}(x),
+        \qquad
+        \alpha_i\geq0,\quad \alpha_1+\alpha_2+\alpha_3=1,
+    \]
+    где $F_{\text{д}}$ --- дискретная,
+    $F_{\text{а.н.}}$ --- абсолютно непрерывная,
+    $F_{\text{с}}$ --- сингулярная непрерывная функция распределения.
+    Слагаемые с нулевыми коэффициентами опускаются.
+\end{remark}
+
+\subsection{Задача 5(a)}
+
+\begin{solution}
+    Функция распределения, заданная графиком:
+    \[
+        F(x)=\begin{cases}
+            0,&x<0,\\
+            1/4,&0\leq x<1,\\
+            1/2,&1\leq x<2,\\
+            (x-1)/2,&2\leq x<3,\\
+            1,&x\geq3.
+        \end{cases}
+    \]
+    \begin{center}
+        \begin{tikzpicture}[x=1.7cm,y=3cm,>=Stealth]
+            \draw[->] (-0.65,0)--(3.7,0) node[right] {$x$};
+            \draw[->] (0,-0.12)--(0,1.22) node[above] {$F(x)$};
+            \foreach \x in {1,2,3}
+                \draw (\x,0.02)--(\x,-0.02) node[below] {$\x$};
+            \foreach \y/\lab in {0.25/{1/4},0.5/{1/2},1/{1}}
+                \node[left] at (0,\y) {$\lab$};
+            \node[below left] at (0,0) {$0$};
+            \draw[dashed] (0,1)--(3,1)--(3,0);
+            \draw[blue,very thick] (-0.6,0)--(0,0);
+            \draw[blue,very thick] (0,0.25)--(1,0.25);
+            \draw[blue,very thick] (1,0.5)--(2,0.5)--(3,1)--(3.6,1);
+            \foreach \x/\y in {0/0,1/0.25}
+                \filldraw[blue,fill=solution_back] (\x,\y) circle (1.7pt);
+            \foreach \x/\y in {0/0.25,1/0.5,2/0.5,3/1}
+                \fill[blue] (\x,\y) circle (1.7pt);
+        \end{tikzpicture}
+    \end{center}
+    Скачки в точках $0$ и $1$ равны $1/4$ каждый.
+    Суммарная масса дискретной части равна $1/2$;
+    после нормировки получаем $\operatorname{Bern}(1/2)$.
+
+    На отрезке $[2,3]$ функция линейно возрастает от $1/2$ до $1$.
+    Масса абсолютно непрерывной части также равна $1/2$;
+    после нормировки получаем $U[2,3]$.
+    \[
+        \boxed{F(x)=\frac12 F_{\operatorname{Bern}(1/2)}(x)
+                    +\frac12 F_{U[2,3]}(x).}
+    \]
+\end{solution}
+\endgroup

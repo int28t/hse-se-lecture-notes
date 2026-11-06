@@ -1,0 +1,233 @@
+\clearpage
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\section{Математическое ожидание и дисперсия}
+
+\subsection{Математическое ожидание}
+
+Пусть $(\Omega,\mathcal F,\Pr)$ --- вероятностное пространство,
+а $\xi\colon\Omega\to\R$ --- случайная величина.
+Её распределение задаётся вероятностной мерой
+\[
+    \Pr_\xi(B)=\Pr\{\xi\in B\},\qquad B\in\mathcal B(\R).
+\]
+
+\subsubsection{Конечная модель и среднее арифметическое}
+
+Пусть $\Omega=\{\omega_1,\ldots,\omega_n\}$. Проведём $N$ опытов
+с результатами $\omega^1,\ldots,\omega^N$ и обозначим через $N_i$
+число появлений исхода $\omega_i$. Тогда среднее наблюдаемых значений равно
+\[
+    \frac1N\sum_{j=1}^{N}\xi(\omega^j)
+    =\sum_{i=1}^{n}\xi(\omega_i)\frac{N_i}{N}.
+\]
+В вероятностной модели частотам $N_i/N$ соответствуют вероятности
+$\Pr\{\omega_i\}$.
+
+\begin{definition}[Математическое ожидание в конечной модели]
+    \textbf{Математическим ожиданием} случайной величины $\xi$ называется
+    \[
+        \EE\xi=\sum_{i=1}^{n}\xi(\omega_i)\Pr\{\omega_i\}.
+    \]
+    Используется также обозначение $M\xi$.
+\end{definition}
+
+\begin{definition}[Общее определение]
+    Математическое ожидание случайной величины $\xi$ --- интеграл Лебега
+    \[
+        \EE\xi=\int_\Omega\xi(\omega)\,\diff\Pr(\omega).
+    \]
+    Конечное математическое ожидание существует при условии
+    \[
+        \int_\Omega|\xi(\omega)|\,\diff\Pr(\omega)<\infty.
+    \]
+\end{definition}
+
+\begin{theorem}[Вычисление по распределению]
+    Если в конечной модели $\xi$ принимает различные значения
+    $x_1,\ldots,x_k$ с вероятностями $p_i=\Pr\{\xi=x_i\}$, то
+    \[
+        \EE\xi=\sum_{i=1}^{k}x_i p_i.
+    \]
+\end{theorem}
+
+\begin{Proof}
+    Сгруппируем исходы, на которых $\xi$ принимает одинаковое значение:
+    \[
+        \sum_{\omega\in\Omega}\xi(\omega)\Pr\{\omega\}
+        =\sum_{i=1}^{k}x_i
+          \sum_{\omega:\,\xi(\omega)=x_i}\Pr\{\omega\}
+        =\sum_{i=1}^{k}x_i p_i.
+    \]
+\end{Proof}
+
+\newpage
+\subsubsection{Дискретное и абсолютно непрерывное распределения}
+
+\begin{definition}[Дискретное распределение]
+    Для распределения $\{(x_i,p_i)\}_i$ математическое ожидание равно
+    \[
+        \EE\xi=\sum_i x_i p_i,
+        \qquad\text{если}\quad \sum_i |x_i|p_i<\infty.
+    \]
+    Таким образом, требуется абсолютная сходимость ряда.
+\end{definition}
+
+\begin{example}[Распределение Пуассона]
+    Если $\xi\sim\operatorname{Poiss}(\lambda)$, $\lambda>0$, то
+    \[
+        \Pr\{\xi=k\}=e^{-\lambda}\frac{\lambda^k}{k!},
+        \qquad k=0,1,2,\ldots
+    \]
+    Все слагаемые неотрицательны, и
+    \[
+        \begin{aligned}
+            \EE\xi
+            &=\sum_{k=0}^{\infty}k e^{-\lambda}\frac{\lambda^k}{k!}
+             =\lambda e^{-\lambda}
+                \sum_{k=1}^{\infty}\frac{\lambda^{k-1}}{(k-1)!}\\
+            &=\lambda e^{-\lambda}
+                \sum_{m=0}^{\infty}\frac{\lambda^m}{m!}
+             =\lambda e^{-\lambda}e^\lambda=\lambda.
+        \end{aligned}
+    \]
+\end{example}
+
+\begin{definition}[Абсолютно непрерывное распределение]
+    Если $\xi$ имеет плотность $p_\xi$, то
+    \[
+        \EE\xi=\int_{-\infty}^{+\infty}x p_\xi(x)\,\diff x,
+        \qquad\text{если}\quad
+        \int_{-\infty}^{+\infty}|x|p_\xi(x)\,\diff x<\infty.
+    \]
+    Если интеграл записан как несобственный интеграл Римана,
+    требуется его абсолютная сходимость.
+\end{definition}
+
+Для малого промежутка $\Delta_i$ около точки $x_i$, в которой плотность
+непрерывна,
+\[
+    \Pr\{\xi\in\Delta_i\}\approx p_\xi(x_i)|\Delta_i|.
+\]
+Поэтому суммам $\sum_i x_i\Pr\{\xi\in\Delta_i\}$ соответствуют
+интегральные суммы $\sum_i x_i p_\xi(x_i)|\Delta_i|$.
+
+\begin{consequence}
+    Математическое ожидание определяется распределением случайной величины:
+    \[
+        \EE\xi=\int_\R x\,\diff\Pr_\xi(x).
+    \]
+\end{consequence}
+
+\newpage
+\subsection{Свойства математического ожидания}
+
+\begin{theorem}[Ожидание константы и линейность]
+    Для $c\in\R$ имеем $\EE c=c$.
+    Если существуют конечные $\EE\xi_1$ и $\EE\xi_2$, то для любых
+    $a_1,a_2\in\R$ существует математическое ожидание их линейной комбинации и
+    \[
+        \EE(a_1\xi_1+a_2\xi_2)
+        =a_1\EE\xi_1+a_2\EE\xi_2.
+    \]
+\end{theorem}
+
+\begin{Proof}[Линейность в дискретном случае]
+    Пусть $\xi_1$ принимает значения $x_i$, а $\xi_2$ --- значения $y_j$.
+    Обозначим
+    \[
+        p_{ij}=\Pr\{\xi_1=x_i,\ \xi_2=y_j\},\qquad
+        p_i=\Pr\{\xi_1=x_i\},\quad q_j=\Pr\{\xi_2=y_j\}.
+    \]
+    По счётной аддитивности вероятности
+    \[
+        \sum_j p_{ij}=p_i,\qquad \sum_i p_{ij}=q_j.
+    \]
+    Сначала проверим абсолютную сходимость:
+    \[
+        \begin{aligned}
+            \sum_{i,j}|a_1x_i+a_2y_j|p_{ij}
+            &\leq |a_1|\sum_i|x_i|\sum_jp_{ij}
+                  +|a_2|\sum_j|y_j|\sum_ip_{ij}\\
+            &=|a_1|\sum_i|x_i|p_i+|a_2|\sum_j|y_j|q_j<\infty.
+        \end{aligned}
+    \]
+    Следовательно, суммы можно перегруппировать:
+    \[
+        \begin{aligned}
+            \EE(a_1\xi_1+a_2\xi_2)
+            &=\sum_{i,j}(a_1x_i+a_2y_j)p_{ij}\\
+            &=a_1\sum_i x_i p_i+a_2\sum_j y_j q_j\\
+            &=a_1\EE\xi_1+a_2\EE\xi_2.
+        \end{aligned}
+    \]
+\end{Proof}
+
+\begin{theorem}[Монотонность]
+    Если $\xi\geq\eta$ почти наверное и оба математических ожидания конечны,
+    то $\EE\xi\geq\EE\eta$.
+\end{theorem}
+
+\begin{Proof}
+    Для $\zeta=\xi-\eta\geq0$ имеем $\EE\zeta\geq0$.
+    По линейности $\EE\zeta=\EE\xi-\EE\eta$, откуда
+    $\EE\xi\geq\EE\eta$.
+\end{Proof}
+
+\newpage
+\begin{theorem}[Оценка модуля ожидания]
+    Если $\EE\xi$ конечно, то
+    \[
+        |\EE\xi|\leq\EE|\xi|.
+    \]
+\end{theorem}
+
+\begin{Proof}
+    Ожидание $\EE|\xi|$ конечно по условию абсолютной интегрируемости.
+    Из $-|\xi|\leq\xi\leq|\xi|$, монотонности и линейности следует
+    \[
+        -\EE|\xi|\leq\EE\xi\leq\EE|\xi|.
+    \]
+\end{Proof}
+
+\subsection{Дисперсия}
+
+\begin{example}[Одинаковое ожидание и различный разброс]
+    Пусть
+    \[
+        \Pr\{\xi_1=-1\}=\Pr\{\xi_1=1\}=\frac12,\qquad
+        \Pr\{\xi_2=-100\}=\Pr\{\xi_2=100\}=\frac12.
+    \]
+    Тогда $\EE\xi_1=\EE\xi_2=0$, но значения второй величины
+    дальше от математического ожидания.
+\end{example}
+
+\begin{definition}
+    \textbf{Дисперсией} случайной величины $\xi$ с конечным математическим
+    ожиданием называется
+    \[
+        \DD\xi=\operatorname{Var}\xi
+        =\EE(\xi-\EE\xi)^2.
+    \]
+    Конечная дисперсия существует, если $\EE\xi^2<\infty$.
+\end{definition}
+
+\begin{theorem}[Формула для вычисления дисперсии]
+    При $\EE\xi^2<\infty$ справедливо равенство
+    \[
+        \DD\xi=\EE\xi^2-(\EE\xi)^2.
+    \]
+\end{theorem}
+
+\begin{Proof}
+    По линейности математического ожидания
+    \[
+        \begin{aligned}
+            \DD\xi
+            &=\EE\bigl(\xi^2-2\xi\EE\xi+(\EE\xi)^2\bigr)\\
+            &=\EE\xi^2-2(\EE\xi)^2+(\EE\xi)^2\\
+            &=\EE\xi^2-(\EE\xi)^2.
+        \end{aligned}
+    \]
+\end{Proof}
+\endgroup

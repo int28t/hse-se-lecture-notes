@@ -1,0 +1,57 @@
+\clearpage
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\everymath{\textstyle}
+\subsection{Математическое ожидание функции случайных величин}
+
+Пусть $f\colon\R^2\to\R$ --- борелевская функция.
+
+\begin{theorem}[Дискретное совместное распределение]
+    Если $p_{ij}=\Pr\{\xi=x_i,\eta=y_j\}$ и
+    $\sum_{i,j}|f(x_i,y_j)|p_{ij}<\infty$, то
+    \[
+        \EE f(\xi,\eta)=\sum_{i,j}f(x_i,y_j)p_{ij}.
+    \]
+\end{theorem}
+
+\begin{theorem}[Абсолютно непрерывное совместное распределение]
+    Если $(\xi,\eta)$ имеет плотность $p_{\xi,\eta}$ и
+    \[
+        \iint_{\R^2}|f(x,y)|p_{\xi,\eta}(x,y)\,\diff x\,\diff y<\infty,
+    \]
+    то
+    \[
+        \EE f(\xi,\eta)
+        =\iint_{\R^2}f(x,y)p_{\xi,\eta}(x,y)\,\diff x\,\diff y.
+    \]
+\end{theorem}
+
+\subsection{Ковариация}
+
+\begin{definition}
+    Для случайных величин $\xi$ и $\eta$ с конечными вторыми моментами
+    \textbf{ковариацией} называется число
+    \[
+        \operatorname{cov}(\xi,\eta)
+        =\EE\bigl[(\xi-\EE\xi)(\eta-\EE\eta)\bigr].
+    \]
+\end{definition}
+
+\begin{theorem}[Свойства ковариации]
+    При конечности вторых моментов справедливы следующие свойства.
+    \begin{enumerate}
+        \item $\operatorname{cov}(\xi,\xi)=\DD\xi$.
+        \item Ковариация является билинейной формой: для $a,b\in\R$
+        \[
+            \begin{aligned}
+                \operatorname{cov}(a\xi+b\eta,\zeta)
+                &=a\operatorname{cov}(\xi,\zeta)+b\operatorname{cov}(\eta,\zeta),\\
+                \operatorname{cov}(\zeta,a\xi+b\eta)
+                &=a\operatorname{cov}(\zeta,\xi)+b\operatorname{cov}(\zeta,\eta).
+            \end{aligned}
+        \]
+        \item Из независимости $\xi$ и $\eta$ следует
+        $\operatorname{cov}(\xi,\eta)=0$. Обратное утверждение неверно.
+    \end{enumerate}
+\end{theorem}
+\endgroup

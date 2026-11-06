@@ -223,6 +223,95 @@
     \]
 \end{solution}
 
+\clearpage
+\subsection{Задача 5}
+% Дополнение: «6 Семинар-2.jpg», «6 Семинар-3.jpg».
+
+\begingroup
+\everymath{\textstyle}
+\begin{solution}
+    \textbf{Равномерное распределение.}
+    Для $\xi\sim U[a,b]$, $a<b$, плотность имеет вид
+    \[
+        p_\xi(x)=\begin{cases}
+            \dfrac1{b-a},&a<x<b,\\
+            0,&\text{иначе}.
+        \end{cases}
+    \]
+    В частности, при $\xi\sim U[0,1]$:
+    \[
+        F_\xi(x)=\begin{cases}
+            0,&x\leq0,\\
+            x,&0<x<1,\\
+            1,&x\geq1.
+        \end{cases}
+        \qquad
+        F_\xi'(x)=\begin{cases}
+            1,&0<x<1,\\
+            0,&x<0\ \text{или}\ x>1.
+        \end{cases}
+    \]
+    В точках $0$ и $1$ производной нет; вне этих точек
+    $F_\xi'=p_\xi$.
+
+    \medskip
+    \textbf{Распределение Бернулли.}
+    Если $\zeta\sim\operatorname{Bern}(1/2)$, то
+    \[
+        F_\zeta(x)=\begin{cases}
+            0,&x<0,\\
+            1/2,&0\leq x<1,\\
+            1,&x\geq1.
+        \end{cases}
+    \]
+    Здесь производная также существует во всех точках, кроме $0$ и $1$,
+    но $F_\zeta'(x)=0$ при $x\notin\{0,1\}$.
+
+    \begin{center}
+        \begin{tikzpicture}[x=3cm,y=2.4cm,>=Stealth]
+            \draw[->] (-0.3,0)--(1.5,0) node[right] {$x$};
+            \draw[->] (0,-0.12)--(0,1.3) node[above] {$F_\xi(x)$};
+            \draw[blue,very thick] (-0.25,0)--(0,0)--(1,1)--(1.4,1);
+            \draw[dashed] (0,1) node[left] {$1$}--(1,1)--(1,0) node[below] {$1$};
+            \node[below left] at (0,0) {$0$};
+            \node at (0.65,-0.4) {$U[0,1]$};
+        \end{tikzpicture}
+        \hspace{1cm}
+        \begin{tikzpicture}[x=3cm,y=2.4cm,>=Stealth]
+            \draw[->] (-0.3,0)--(1.5,0) node[right] {$x$};
+            \draw[->] (0,-0.12)--(0,1.3) node[above] {$F_\zeta(x)$};
+            \draw[blue,very thick] (-0.25,0)--(0,0);
+            \draw[blue,very thick] (0,0.5)--(1,0.5);
+            \draw[blue,very thick] (1,1)--(1.4,1);
+            \foreach \x/\y in {0/0,1/0.5}
+                \filldraw[blue,fill=solution_back] (\x,\y) circle (1.6pt);
+            \foreach \x/\y in {0/0.5,1/1}
+                \fill[blue] (\x,\y) circle (1.6pt);
+            \node[left] at (0,0.5) {$1/2$};
+            \node[left] at (0,1) {$1$};
+            \node[below] at (1,0) {$1$};
+            \node[below left] at (0,0) {$0$};
+            \node at (0.65,-0.4) {$\operatorname{Bern}(1/2)$};
+        \end{tikzpicture}
+    \end{center}
+    Нулевая почти всюду производная не является плотностью:
+    её интеграл по $\mathbb R$ равен $0$, а не $1$.
+    Само распределение Бернулли плотности не имеет, поскольку
+    $\Pr\{\zeta=0\}=\Pr\{\zeta=1\}=1/2$.
+\end{solution}
+
+\begin{remark}
+    Равенство $p_\xi(x)=F_\xi'(x)$ почти всюду применяется,
+    \textbf{если существование плотности уже установлено}.
+    Существования производной почти всюду для этого недостаточно.
+    Определяющее равенство для плотности:
+    \[
+        F_\xi(x)=\int_{-\infty}^{x}p_\xi(t)\,\diff t.
+    \]
+\end{remark}
+\endgroup
+
+\clearpage
 \subsection{Задача 6}
 
 \begin{solution}

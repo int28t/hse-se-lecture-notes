@@ -1,0 +1,153 @@
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\Needspace{18\baselineskip}
+\subsection{Основные абсолютно непрерывные распределения}
+
+\subsubsection{Равномерное распределение}
+
+\begin{definition}
+    Случайная величина $\xi$ имеет \textbf{равномерное распределение}
+    на отрезке $[a;b]$, где $a<b$, если её плотность имеет вид
+    \[
+        p_\xi(t)=\frac{1}{b-a}\,I_{[a;b]}(t)
+        =\begin{cases}
+            \dfrac{1}{b-a},&a\leq t\leq b,\\
+            0,&t\notin[a;b].
+        \end{cases}
+    \]
+    Обозначение: $\xi\sim\Uniform[a;b]$.
+    Здесь $I_A(t)=1$ при $t\in A$ и $I_A(t)=0$ при $t\notin A$.
+\end{definition}
+
+\begin{center}
+    \begin{tikzpicture}[x=1.4cm,y=1.8cm,>=Stealth]
+        \draw[->] (-0.5,0)--(4.6,0) node[right] {$t$};
+        \draw[->] (0,-0.2)--(0,1.6) node[above] {$p_\xi(t)$};
+        \draw[dashed] (0,1)--(1,1);
+        \draw[dashed] (1,0)--(1,1) (3,0)--(3,1);
+        \draw[blue,very thick] (-0.45,0)--(1,0) (1,1)--(3,1) (3,0)--(4.4,0);
+        \filldraw[blue,fill=white] (1,0) circle (1.5pt) (3,0) circle (1.5pt);
+        \fill[blue] (1,1) circle (1.5pt) (3,1) circle (1.5pt);
+        \node[below left] at (0,0) {$0$};
+        \node[below] at (1,0) {$a$};
+        \node[below] at (3,0) {$b$};
+        \node[left] at (0,1) {$\frac1{b-a}$};
+    \end{tikzpicture}
+\end{center}
+
+\newpage
+\subsubsection{Экспоненциальное распределение}
+
+\begin{definition}
+    Случайная величина $\xi$ имеет \textbf{экспоненциальное распределение}
+    с параметром $\lambda>0$, если её плотность имеет вид
+    \[
+        p_\xi(t)=\lambda e^{-\lambda t}I_{[0;+\infty)}(t)
+        =\begin{cases}
+            \lambda e^{-\lambda t},&t\geq0,\\
+            0,&t<0.
+        \end{cases}
+    \]
+    Обозначение: $\xi\sim\operatorname{Exp}(\lambda)$.
+\end{definition}
+
+\[
+    \int_{-\infty}^{+\infty}p_\xi(t)\,\diff t
+    =\int_0^{+\infty}\lambda e^{-\lambda t}\,\diff t
+    =\left[-e^{-\lambda t}\right]_0^{+\infty}=1.
+\]
+
+\begin{center}
+    \begin{tikzpicture}[x=1.4cm,y=1.8cm,>=Stealth]
+        \draw[->] (-0.5,0)--(4.6,0) node[right] {$t$};
+        \draw[->] (0,-0.2)--(0,1.6) node[above] {$p_\xi(t)$};
+        \draw[blue,very thick] (-0.45,0)--(0,0);
+        \draw[blue,very thick,domain=0:4.3,samples=100]
+            plot (\x,{exp(-\x)});
+        \filldraw[blue,fill=white] (0,0) circle (1.5pt);
+        \fill[blue] (0,1) circle (1.5pt);
+        \node[left] at (0,1) {$\lambda$};
+        \node[below left] at (0,0) {$0$};
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Нормальное распределение}
+
+\begin{definition}
+    Случайная величина $\xi$ имеет \textbf{нормальное распределение}
+    с параметрами $a\in\R$ и $\sigma^2>0$, если её плотность равна
+    \[
+        p_\xi(t)=\frac{1}{\sqrt{2\pi}\,\sigma}
+        \exp\left(-\frac{(t-a)^2}{2\sigma^2}\right),
+        \qquad t\in\R,\quad\sigma>0.
+    \]
+    Обозначение: $\xi\sim N(a;\sigma^2)$.
+    Распределение $N(0;1)$ называется \textbf{стандартным нормальным};
+    его плотность равна
+    \[
+        p_\xi(t)=\frac{1}{\sqrt{2\pi}}e^{-t^2/2}.
+    \]
+\end{definition}
+
+\newpage
+\begin{lemma}[Интеграл Гаусса]
+    \[
+        \int_{-\infty}^{+\infty}e^{-x^2}\,\diff x=\sqrt\pi.
+    \]
+\end{lemma}
+
+\begin{Proof}
+    Обозначим интеграл через $C$. Он положителен и конечен:
+    при $|x|\geq1$ имеем $e^{-x^2}\leq e^{-|x|}$.
+    Тогда
+    \[
+        \begin{aligned}
+            C^2
+            &=\left(\int_{-\infty}^{+\infty}e^{-x^2}\,\diff x\right)
+              \left(\int_{-\infty}^{+\infty}e^{-y^2}\,\diff y\right)\\
+            &=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}
+              e^{-(x^2+y^2)}\,\diff x\,\diff y
+              =\iint_{\R^2}e^{-(x^2+y^2)}\,\diff x\,\diff y.
+        \end{aligned}
+    \]
+    Перейдём к полярным координатам:
+    \[
+        x=r\cos\varphi,\qquad y=r\sin\varphi,
+        \qquad r\geq0,\quad0\leq\varphi<2\pi.
+    \]
+    Якобиан замены равен
+    \[
+        \left|\frac{\partial(x,y)}{\partial(r,\varphi)}\right|
+        =\left|\begin{vmatrix}
+            \cos\varphi&-r\sin\varphi\\
+            \sin\varphi&r\cos\varphi
+        \end{vmatrix}\right|=r.
+    \]
+    Поэтому
+    \[
+        \begin{aligned}
+            C^2&=\int_0^{+\infty}\int_0^{2\pi}
+                  e^{-r^2}r\,\diff\varphi\,\diff r\\
+               &=2\pi\int_0^{+\infty}r e^{-r^2}\,\diff r
+                 =\pi\int_0^{+\infty}e^{-u}\,\diff u=\pi,
+                 \qquad u=r^2.
+        \end{aligned}
+    \]
+    Так как $C>0$, получаем $C=\sqrt\pi$.
+\end{Proof}
+
+\begin{Proof}[Нормировка нормальной плотности]
+    При замене $y=(t-a)/(\sqrt2\,\sigma)$ имеем
+    $\diff t=\sqrt2\,\sigma\,\diff y$. Следовательно,
+    \[
+        \begin{aligned}
+            \int_{-\infty}^{+\infty}p_\xi(t)\,\diff t
+            &=\frac{1}{\sqrt{2\pi}\,\sigma}
+              \int_{-\infty}^{+\infty}
+              e^{-(t-a)^2/(2\sigma^2)}\,\diff t\\
+            &=\frac1{\sqrt\pi}\int_{-\infty}^{+\infty}
+              e^{-y^2}\,\diff y=1.
+        \end{aligned}
+    \]
+\end{Proof}
+\endgroup
