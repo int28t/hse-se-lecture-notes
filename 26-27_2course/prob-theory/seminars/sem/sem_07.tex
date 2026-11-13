@@ -1,0 +1,179 @@
+% Источник решений: «Семинар 7.pdf», страницы 2--6.
+% Условия: «Неделя 7 Математические ожидания.pdf», conditions/sem_07.pdf.
+\section{Математическое ожидание и дисперсия}
+
+\noindent Условия:
+\href{run:conditions/sem_07.pdf}{семинар 7 (PDF)}.
+
+\begingroup
+\everymath{\textstyle}
+\tcbset{myboxstyle/.append style={breakable=false}}
+\subsection{Задача 1}
+
+\begin{solution}
+    \textbf{Геометрическое распределение.}
+    \[
+        \Pr\{\xi=k\}=(1-p)^{k-1}p,\qquad k\in\N,\quad 0<p<1.
+    \]
+    По определению математического ожидания
+    \[
+        \EE\xi=p\sum_{k=1}^{\infty}k(1-p)^{k-1}.
+    \]
+    Для $|x|<1$ почленно дифференцируем геометрический ряд:
+    \[
+        \sum_{k=1}^{\infty}kx^{k-1}
+        =\left(\sum_{k=1}^{\infty}x^k\right)'
+        =\left(\frac{x}{1-x}\right)'
+        =\frac1{(1-x)^2}.
+    \]
+    Подставляя $x=1-p$, получаем
+    \[
+        \boxed{\EE\xi=p\cdot\frac1{p^2}=\frac1p.}
+    \]
+
+    \textbf{Второй момент и дисперсия.}
+    % В рукописи в начальной сумме второго момента пропущен множитель p.
+    \[
+        \begin{aligned}
+            \EE\xi^2
+            &=p\sum_{k=1}^{\infty}k^2(1-p)^{k-1}\\
+            &=p\sum_{k=2}^{\infty}k(k-1)(1-p)^{k-1}
+              +p\sum_{k=1}^{\infty}k(1-p)^{k-1}\\
+            &=p(1-p)\sum_{k=2}^{\infty}k(k-1)(1-p)^{k-2}
+              +\frac1p.
+        \end{aligned}
+    \]
+    Ещё раз дифференцируем ряд:
+    \[
+        \sum_{k=2}^{\infty}k(k-1)x^{k-2}
+        =\left(\frac1{(1-x)^2}\right)'
+        =\frac2{(1-x)^3}.
+    \]
+    Следовательно,
+    \[
+        \EE\xi^2=p(1-p)\frac2{p^3}+\frac1p
+        =\frac{2-p}{p^2},
+    \]
+    \[
+        \boxed{\DD\xi=\EE\xi^2-(\EE\xi)^2
+        =\frac{2-p}{p^2}-\frac1{p^2}=\frac{1-p}{p^2}.}
+    \]
+    При $p=1$ величина $\xi=1$ почти наверное; те же формулы дают
+    $\EE\xi=1$ и $\DD\xi=0$.
+\end{solution}
+
+\clearpage
+\subsection{Задача 2}
+
+\begin{solution}
+    \textbf{Абсолютно непрерывное распределение.}
+    \[
+        p_\xi(x)=\begin{cases}
+            3/x^4,&x\geq1,\\
+            0,&x<1.
+        \end{cases}
+        \qquad \eta=\frac1\xi.
+    \]
+    \begin{center}
+        \begin{tikzpicture}[x=1.3cm,y=0.6cm,>=Stealth]
+            \draw[->] (-0.5,0)--(4.4,0) node[right] {$x$};
+            \draw[->] (0,-0.25)--(0,3.6) node[above] {$p_\xi(x)$};
+            \draw[dashed] (0,3)--(1,3)--(1,0);
+            \draw[blue,very thick] (-0.45,0)--(1,0);
+            \draw[blue,very thick,domain=1:4.1,samples=100]
+                plot (\x,{3/(\x^4)});
+            \filldraw[blue,fill=solution_back] (1,0) circle (1.7pt);
+            \fill[blue] (1,3) circle (1.7pt);
+            \node[below left] at (0,0) {$0$};
+            \node[below] at (1,0) {$1$};
+            \node[left] at (0,3) {$3$};
+        \end{tikzpicture}
+    \end{center}
+
+    \textbf{Математическое ожидание и дисперсия $\xi$.}
+    \[
+        \EE\xi=\int_1^{+\infty}x\frac3{x^4}\,\diff x
+        =\left[-\frac3{2x^2}\right]_1^{+\infty}=\frac32.
+    \]
+    % Исправлены пределы и первообразная во втором моменте.
+    \[
+        \EE\xi^2=\int_1^{+\infty}x^2\frac3{x^4}\,\diff x
+        =\int_1^{+\infty}\frac3{x^2}\,\diff x
+        =\left[-\frac3x\right]_1^{+\infty}=3.
+    \]
+    \[
+        \boxed{\EE\xi=\frac32,\qquad
+        \DD\xi=3-\frac94=\frac34.}
+    \]
+
+    \textbf{Математическое ожидание и дисперсия $\eta=1/\xi$.}
+    По формуле математического ожидания функции случайной величины
+    \[
+        \EE\eta=\EE\frac1\xi
+        =\int_1^{+\infty}\frac1x\frac3{x^4}\,\diff x
+        =\left[-\frac3{4x^4}\right]_1^{+\infty}=\frac34.
+    \]
+    % В рукописи вычислено только E eta; далее завершён расчёт D eta
+    % по требованию условия тем же способом.
+    \[
+        \EE\eta^2=\int_1^{+\infty}\frac1{x^2}\frac3{x^4}\,\diff x
+        =\left[-\frac3{5x^5}\right]_1^{+\infty}=\frac35.
+    \]
+    \[
+        \boxed{\EE\eta=\frac34,\qquad
+        \DD\eta=\frac35-\left(\frac34\right)^2=\frac3{80}.}
+    \]
+\end{solution}
+
+\clearpage
+\subsection{Задача 3}
+
+\begin{solution}
+    \textbf{Нормальное распределение.}
+    Пусть $\xi\sim N(a;\sigma^2)$, где $a\in\R$, $\sigma>0$:
+    \[
+        p_\xi(x)=\frac1{\sqrt{2\pi}\,\sigma}
+        \exp\left(-\frac{(x-a)^2}{2\sigma^2}\right).
+    \]
+    Положим $\eta=(\xi-a)/\sigma$. Тогда $\eta\sim N(0;1)$,
+    \[
+        p_\eta(x)=\frac1{\sqrt{2\pi}}e^{-x^2/2},
+        \qquad \xi=\sigma\eta+a.
+    \]
+    По свойствам линейных преобразований
+    \[
+        \EE\xi=\sigma\EE\eta+a,
+        \qquad \DD\xi=\sigma^2\DD\eta.
+    \]
+
+    Подынтегральная функция в следующем абсолютно сходящемся интеграле
+    нечётна, поэтому
+    \[
+        \EE\eta=\frac1{\sqrt{2\pi}}
+        \int_{-\infty}^{+\infty}xe^{-x^2/2}\,\diff x=0.
+    \]
+    Следовательно, $\DD\eta=\EE\eta^2$.
+    Вычислим второй момент интегрированием по частям:
+    \[
+        u(x)=x,\quad u'(x)=1,
+        \qquad v'(x)=xe^{-x^2/2},\quad v(x)=-e^{-x^2/2}.
+    \]
+    \[
+        \begin{aligned}
+            \EE\eta^2
+            &=\frac1{\sqrt{2\pi}}
+              \int_{-\infty}^{+\infty}x^2e^{-x^2/2}\,\diff x\\
+            &=\frac1{\sqrt{2\pi}}
+              \left(\left[-xe^{-x^2/2}\right]_{-\infty}^{+\infty}
+              +\int_{-\infty}^{+\infty}e^{-x^2/2}\,\diff x\right)
+              =1.
+        \end{aligned}
+    \]
+    Граничный член равен нулю, а оставшийся интеграл с множителем
+    $1/\sqrt{2\pi}$ равен $1$ по нормировке стандартной нормальной плотности.
+    Таким образом,
+    \[
+        \boxed{\EE\xi=a,\qquad \DD\xi=\sigma^2.}
+    \]
+\end{solution}
+\endgroup

@@ -1,0 +1,37 @@
+% Лекция 17. Источник: Тервер(Лекция)_202611112317_42212.pdf, с. 6.
+\clearpage
+\begingroup
+\tcbset{myboxstyle/.append style={breakable=false}}
+\everymath{\textstyle}
+\subsection{Коэффициент корреляции}
+
+\begin{definition}
+    Пусть $0<\DD\xi<\infty$ и $0<\DD\eta<\infty$.
+    \textbf{Коэффициентом корреляции} случайных величин $\xi$ и $\eta$
+    называется число
+    \[
+        \operatorname{corr}(\xi,\eta)
+        =\frac{\operatorname{cov}(\xi,\eta)}
+        {\sqrt{\DD\xi\cdot\DD\eta}}.
+    \]
+\end{definition}
+
+\begin{theorem}[Свойства коэффициента корреляции]
+    При конечных положительных дисперсиях справедливы следующие свойства.
+    \begin{enumerate}
+        \item $|\operatorname{corr}(\xi,\eta)|\leq1$.
+        \item Если $\xi$ и $\eta$ независимы, то
+        $\operatorname{corr}(\xi,\eta)=0$.
+        \item $\operatorname{corr}(\xi,\eta)=1$ тогда и только тогда,
+        когда существуют $a>0$ и $b\in\R$, для которых
+        \[
+            \xi=a\eta+b\quad\text{почти наверное}.
+        \]
+        \item $\operatorname{corr}(\xi,\eta)=-1$ тогда и только тогда,
+        когда существуют $a<0$ и $b\in\R$, для которых
+        \[
+            \xi=a\eta+b\quad\text{почти наверное}.
+        \]
+    \end{enumerate}
+\end{theorem}
+\endgroup

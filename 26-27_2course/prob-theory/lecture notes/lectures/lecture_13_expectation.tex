@@ -190,6 +190,9 @@ $\Pr\{\omega_i\}$.
     \]
 \end{Proof}
 
+\input{./lectures/lecture_17_expectation.tex}
+
+\newpage
 \subsection{Дисперсия}
 
 \begin{example}[Одинаковое ожидание и различный разброс]
@@ -212,6 +215,15 @@ $\Pr\{\omega_i\}$.
     Конечная дисперсия существует, если $\EE\xi^2<\infty$.
 \end{definition}
 
+% Дополнение из лекции 17, с. 5.
+\begin{definition}[Среднеквадратическое отклонение]
+    \textbf{Среднеквадратическим отклонением} случайной величины $\xi$
+    называется число
+    \[
+        \sigma_\xi=\sqrt{\DD\xi}.
+    \]
+\end{definition}
+
 \begin{theorem}[Формула для вычисления дисперсии]
     При $\EE\xi^2<\infty$ справедливо равенство
     \[
@@ -230,4 +242,11 @@ $\Pr\{\omega_i\}$.
         \end{aligned}
     \]
 \end{Proof}
+% Дополнение из лекции 17, с. 5.
+\begin{theorem}[Дисперсия линейного преобразования]
+    Если $\DD\xi<\infty$, то для любых $a,b\in\R$
+    \[
+        \DD(a\xi+b)=a^2\DD\xi.
+    \]
+\end{theorem}
 \endgroup

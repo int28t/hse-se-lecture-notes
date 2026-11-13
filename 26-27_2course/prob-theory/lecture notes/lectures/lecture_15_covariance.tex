@@ -41,6 +41,8 @@
     При конечности вторых моментов справедливы следующие свойства.
     \begin{enumerate}
         \item $\operatorname{cov}(\xi,\xi)=\DD\xi$.
+        % Дополнение из лекции 17, с. 5.
+        \item $\operatorname{cov}(\xi,\eta)=\EE(\xi\eta)-\EE\xi\cdot\EE\eta$.
         \item Ковариация является билинейной формой: для $a,b\in\R$
         \[
             \begin{aligned}
@@ -54,4 +56,30 @@
         $\operatorname{cov}(\xi,\eta)=0$. Обратное утверждение неверно.
     \end{enumerate}
 \end{theorem}
+% Дополнение из лекции 17, с. 5.
+\begin{theorem}[Дисперсия суммы]
+    Если $\xi$ и $\eta$ имеют конечные вторые моменты, то
+    \[
+        \DD(\xi+\eta)=\DD\xi+2\operatorname{cov}(\xi,\eta)+\DD\eta.
+    \]
+    В частности, для независимых $\xi$ и $\eta$
+    \[
+        \DD(\xi+\eta)=\DD\xi+\DD\eta.
+    \]
+\end{theorem}
+
+\begin{Proof}
+    По линейности математического ожидания
+    \[
+        \begin{aligned}
+            \DD(\xi+\eta)
+            &=\EE\bigl[(\xi-\EE\xi)+(\eta-\EE\eta)\bigr]^2\\
+            &=\EE(\xi-\EE\xi)^2
+              +2\EE\bigl[(\xi-\EE\xi)(\eta-\EE\eta)\bigr]
+              +\EE(\eta-\EE\eta)^2\\
+            &=\DD\xi+2\operatorname{cov}(\xi,\eta)+\DD\eta.
+        \end{aligned}
+    \]
+    При независимости ковариация равна нулю.
+\end{Proof}
 \endgroup
