@@ -1,0 +1,114 @@
+% Лекция 17. Источник: Тервер(Лекция)_202611112317_42212.pdf, с. 2--4.
+\clearpage
+\begingroup
+\everymath{\textstyle}
+\subsubsection{Математическое ожидание произведения независимых величин}
+
+\begin{theorem}
+    Если $\xi$ и $\eta$ независимы и имеют конечные математические
+    ожидания, то $\EE(\xi\eta)$ существует и
+    \[
+        \EE(\xi\eta)=\EE\xi\cdot\EE\eta.
+    \]
+\end{theorem}
+
+\begin{Proof}[Дискретный случай]
+    Пусть $\Pr\{\xi=x_i\}=p_i$ и $\Pr\{\eta=y_j\}=q_j$.
+    По независимости
+    \[
+        \Pr\{\xi=x_i,\eta=y_j\}=p_iq_j.
+    \]
+    Абсолютная сходимость следует из равенства
+    \[
+        \sum_{i,j}|x_iy_j|p_iq_j
+        =\left(\sum_i|x_i|p_i\right)
+         \left(\sum_j|y_j|q_j\right)<\infty.
+    \]
+    Поэтому
+    \[
+        \EE\xi\cdot\EE\eta
+        =\left(\sum_i x_ip_i\right)\left(\sum_j y_jq_j\right)
+        =\sum_{i,j}x_iy_jp_iq_j=\EE(\xi\eta).
+    \]
+\end{Proof}
+
+\subsubsection{Неравенство Йенсена}
+
+\begin{theorem}[Неравенство Йенсена]
+    Пусть $g\colon\R\to\R$ --- выпуклая вниз функция,
+    а $\xi$ имеет конечное математическое ожидание. Тогда
+    \[
+        g(\EE\xi)\leq\EE g(\xi).
+    \]
+    Правая часть может быть равна $+\infty$.
+\end{theorem}
+
+\begin{Proof}
+    Для любого $x_0\in\R$ существует число $\ell(x_0)$, такое что
+    \[
+        g(x)\geq g(x_0)+(x-x_0)\ell(x_0),\qquad x\in\R.
+    \]
+    Положим $x_0=\EE\xi$ и $x=\xi$:
+    \[
+        g(\xi)\geq g(\EE\xi)+(\xi-\EE\xi)\ell(\EE\xi).
+    \]
+    По монотонности и линейности математического ожидания
+    \[
+        \EE g(\xi)\geq g(\EE\xi)
+        +\ell(\EE\xi)\underbrace{\EE(\xi-\EE\xi)}_{=\,0}
+        =g(\EE\xi).
+    \]
+\end{Proof}
+
+\newpage
+\subsubsection{Неравенство Ляпунова}
+
+\begin{theorem}[Неравенство Ляпунова]
+    Если $0<s<t$ и $\EE|\xi|^t<\infty$, то
+    \[
+        \bigl(\EE|\xi|^s\bigr)^{1/s}
+        \leq\bigl(\EE|\xi|^t\bigr)^{1/t}.
+    \]
+\end{theorem}
+
+\begin{Proof}
+    Из $|\xi|^s\leq1+|\xi|^t$ следует $\EE|\xi|^s<\infty$.
+    Функция $g(x)=|x|^{t/s}$ выпукла, поскольку $t/s>1$.
+    Применяя неравенство Йенсена к $\xi'=|\xi|^s$, получаем
+    \[
+        \bigl(\EE|\xi|^s\bigr)^{t/s}
+        =g(\EE\xi')\leq\EE g(\xi')
+        =\EE\bigl(|\xi|^s\bigr)^{t/s}=\EE|\xi|^t.
+    \]
+    Возводя обе части в степень $1/t$, получаем требуемое неравенство.
+\end{Proof}
+
+\subsection{Моменты случайной величины}
+
+\begin{definition}
+    \textbf{Моментом порядка $k$} случайной величины $\xi$, где
+    $k\in\N$, называется число
+    \[
+        \EE\xi^k,
+    \]
+    если это математическое ожидание конечно, то есть
+    $\EE|\xi|^k<\infty$.
+\end{definition}
+
+\begin{consequence}[Существование моментов]
+    Из неравенства Ляпунова следуют утверждения:
+    \begin{enumerate}
+        \item Если существует конечный момент порядка $k$, то существуют
+        все моменты меньших натуральных порядков $i<k$.
+        \item Если конечного момента порядка $k$ нет, то нет и конечных
+        моментов натуральных порядков $i>k$.
+    \end{enumerate}
+\end{consequence}
+
+\begin{definition}[Характеристическая функция]
+    \textbf{Характеристической функцией} случайной величины $\xi$ называется
+    \[
+        \varphi_\xi(t)=\EE e^{it\xi},\qquad t\in\R,\quad i^2=-1.
+    \]
+\end{definition}
+\endgroup
