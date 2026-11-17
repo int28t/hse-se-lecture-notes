@@ -1,0 +1,276 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb,microtype}
+\usepackage[a4paper,landscape,top=19mm,bottom=16mm,left=15mm,right=15mm,headheight=14pt,headsep=5mm]{geometry}
+\usepackage{enumitem,fancyhdr,tikz,multicol}
+\usetikzlibrary{arrows.meta}
+\usepackage[unicode,hidelinks]{hyperref}
+\hypersetup{pdftitle={Демоверсия к КР1 по теории вероятностей},pdfauthor={hse-se-lecture-notes}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\itshape ПИ, ФКН НИУ ВШЭ}
+\fancyhead[C]{\small\itshape hse-se-lecture-notes}
+\fancyhead[R]{\small\itshape Теория вероятностей, 2026/27}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{10mm}
+\raggedcolumns
+\setlength{\abovedisplayskip}{7pt}
+\setlength{\belowdisplayskip}{7pt}
+\setlist[enumerate,1]{label=\arabic*.,leftmargin=6mm,labelsep=2mm,itemsep=10pt,parsep=0pt,topsep=0pt}
+\newcommand{\PP}{\mathsf P}
+\newcommand{\EE}{\mathsf E}
+\newcommand{\DD}{\mathsf D}
+\newcommand{\R}{\mathbb R}
+\newcommand{\normalise}{Найти постоянную $C$ и функцию распределения $F_\xi(x)$.}
+\newcommand{\decompose}{Разложить функцию распределения на графике на линейную комбинацию дискретной и абсолютно непрерывной функций распределения.}
+\newcommand{\graphaxes}[2]{%
+  \draw[->] (-.35,0)--(#1,0) node[right] {$x$};
+  \draw[->] (0,-.04)--(0,1.12) node[above] {$F_\xi(x)$};
+  \foreach \x in {#2}{\draw[gray!45,dashed] (\x,0)--(\x,1);\node[below] at (\x,0) {$\x$};}
+}
+\newcommand{\levels}[2]{\foreach \y/\lab in {#2}{\draw[gray!45,dashed] (0,\y)--(#1,\y);\node[left] at (0,\y) {$\lab$};}}
+\newcommand{\opendot}[2]{\filldraw[draw=black,fill=white] (#1,#2) circle (1.6pt);}
+\newcommand{\closeddot}[2]{\fill (#1,#2) circle (1.6pt);}
+\begin{document}
+\begin{multicols}{2}
+\begin{center}
+{\large\mdseries Демоверсия к КР1 по теории вероятностей}
+\end{center}
+\vspace{4pt}
+\begin{enumerate}
+% Блок 1: классическая и геометрическая вероятность.
+\item\begin{minipage}[t]{\linewidth} В лотерее 15 билетов, из которых 5 выигрышные. Наугад выбирают три билета без возвращения. Найти вероятность того, что ровно два из них выигрышные.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} В ящике 6 стандартных и 4 нестандартные детали. Наугад берут три детали без возвращения. Найти вероятность того, что хотя бы одна из выбранных деталей нестандартная.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} В круге радиуса 2 равномерно выбирают случайную точку. Найти вероятность того, что расстояние от этой точки до центра круга больше $1{,}5$.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Два человека договорились встретиться между 12:00 и 14:00. Каждый приходит в случайный момент, равномерно распределённый на этом промежутке, ждёт 30 минут и уходит. Времена прихода независимы. Найти вероятность встречи.
+
+% Блок 2: вариант 5, задача 1; вариант 6, задача 1.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Вероятность того, что случайно выбранный пирожок с вишней, равна $\PP(A)=3/8$, а вероятность того, что он сладкий, равна $\PP(B)=1/7$. События $A$ и $B$ независимы. Найти вероятность того, что пирожок с вишней или сладкий, и вероятность того, что пирожок с вишней, если известно, что он сладкий.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} События $A$ и $B$ независимы, причём $\PP(A)=2/9$, $\PP(B)=3/10$. Найти $\PP(A\cup B)$ и $\PP(A\mid B)$.
+
+% Блок 2: вариант 5, задача 2; вариант 6, задача 2.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Стрелок стреляет по мишени до первого попадания. Вероятность попадания при одном выстреле равна $p=2/7$, результаты выстрелов независимы. Найти вероятность того, что потребуется ровно 3 выстрела.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Монету бросают до первого выпадения орла. Вероятность выпадения орла при каждом броске равна $p=3/8$, броски независимы. Найти вероятность того, что потребуется ровно 2 броска.
+
+% Блок 2: вариант 5, задачи 3--4.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth}\label{libraries} Три библиотеки хранят художественную и научную литературу. Доля научных книг в первой библиотеке равна $q_1=1/5$, во второй --- $q_2=1/10$, в третьей --- $q_3=1/20$. Библиотека выбирается с вероятностями
+\[
+p_1=\frac12,\qquad p_2=\frac14,\qquad p_3=\frac14.
+\]
+Из выбранной библиотеки наугад берут одну книгу. Найти вероятность того, что книга научная.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} В условиях задачи~\ref{libraries} найти вероятность того, что выбранная научная книга взята из первой библиотеки.
+
+% Блок 2: вариант 6, задачи 3--4. Данные подтверждены пользователем.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth}\label{factories} Три завода поставляют детали. Доли заводов в поставке равны
+\[
+p_1=\frac13,\qquad p_2=\frac12,\qquad p_3=\frac16.
+\]
+Вероятности брака для деталей с этих заводов соответственно равны
+\[
+q_1=\frac1{15},\qquad q_2=\frac1{30},\qquad q_3=\frac1{10}.
+\]
+Найти вероятность того, что случайно выбранная из поставки деталь бракованная.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} В условиях задачи~\ref{factories} найти вероятность того, что бракованная деталь произведена первым заводом.
+
+% Блок 6: новая задача на телескопическую сумму.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Распределение дискретной случайной величины $\xi$ задано формулой
+\[
+\PP\{\xi=k\}=\frac{C}{k(k+2)},\qquad k=1,2,\ldots
+\]
+Найти: а) постоянную $C$; б) вероятность $\PP\{\xi\geq4\}$.
+
+% Блок 3: плотности из вариантов 1, 2, 8, 7.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Плотность случайной величины $\xi$ задана формулой
+\[
+p_\xi(x)=\begin{cases}\dfrac{C}{(x+1)^2},&x\geq0,\\[3pt]0,&x<0.\end{cases}
+\]
+\normalise
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Плотность случайной величины $\xi$ задана формулой
+\[
+p_\xi(x)=\begin{cases}C\cos x,&-\pi/2\leq x\leq\pi/2,\\0,&\text{иначе}.\end{cases}
+\]
+\normalise
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Плотность случайной величины $\xi$ задана формулой
+\[
+p_\xi(x)=\begin{cases}Cx^2+\dfrac32x,&0\leq x\leq1,\\[3pt]0,&\text{иначе}.\end{cases}
+\]
+\normalise
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Плотность случайной величины $\xi$ задана формулой
+\[
+p_\xi(x)=\begin{cases}C+3x^2-2x^3,&0\leq x\leq1,\\0,&\text{иначе}.\end{cases}
+\]
+\normalise
+
+% Блок 4: новая задача с двумя пунктами.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} На вероятностном пространстве $\Omega=[0,1]$ с $\sigma$-алгеброй измеримых по Лебегу множеств и мерой Лебега в качестве вероятности найти функцию распределения случайной величины $\xi$, если:
+\[
+\text{а) }\xi(\omega)=3\omega-1;
+\]
+\[
+\text{б) }\xi(\omega)=\begin{cases}2\omega,&0\leq\omega\leq\tfrac12,\\3(1-\omega),&\tfrac12<\omega\leq1.\end{cases}
+\]
+
+% Блок 3: графики вариантов 1, 2, 8, 7; координаты исходных рисунков.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} \decompose
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=3.2cm,>=Stealth,font=\footnotesize]
+\graphaxes{5.7}{1,2,3,5}
+\levels{5}{.166667/{1/6},.333333/{1/3},.5/{1/2},.666667/{2/3},1/1}
+\draw[thick] (-.3,0)--(0,0)--(1,1/6);
+\draw[thick] (1,1/3)--(2,1/3);
+\draw[thick] (2,1/2)--(3,2/3)--(5,2/3);
+\draw[thick] (5,1)--(5.5,1);
+\foreach \x/\y in {1/.166667,2/.333333,5/.666667}{\opendot{\x}{\y}}
+\foreach \x/\y in {1/.333333,2/.5,3/.666667,5/1}{\closeddot{\x}{\y}}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} \decompose
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=3.2cm,>=Stealth,font=\footnotesize]
+\graphaxes{6.7}{2,3,5,6}
+\levels{6}{.25/{1/4},.375/{3/8},.5/{1/2},.75/{3/4},.875/{7/8},1/1}
+\draw[thick] (-.3,0)--(0,0)--(2,1/4);
+\draw[thick] (2,3/8)--(3,3/8);
+\draw[thick] (3,1/2)--(5,3/4);
+\draw[thick] (5,7/8)--(6,7/8);
+\draw[thick] (6,1)--(6.5,1);
+\foreach \x/\y in {2/.25,3/.375,5/.75,6/.875}{\opendot{\x}{\y}}
+\foreach \x/\y in {2/.375,3/.5,5/.875,6/1}{\closeddot{\x}{\y}}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} \decompose
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=3.2cm,>=Stealth,font=\footnotesize]
+\graphaxes{7.7}{1,3,5,7}
+\levels{7}{.2/{1/5},.4/{2/5},.5/{1/2},.7/{7/10},.8/{4/5},1/1}
+\draw[thick] (-.3,0)--(0,0)--(1,1/5);
+\draw[thick] (1,2/5)--(3,1/2);
+\draw[thick] (3,7/10)--(5,7/10);
+\draw[thick] (5,4/5)--(7,1)--(7.5,1);
+\foreach \x/\y in {1/.2,3/.5,5/.7}{\opendot{\x}{\y}}
+\foreach \x/\y in {1/.4,3/.7,5/.8}{\closeddot{\x}{\y}}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} \decompose
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=3.2cm,>=Stealth,font=\footnotesize]
+\graphaxes{6.7}{2,3,5,6}
+\levels{6}{.2/{1/5},.4/{2/5},.6/{3/5},.7/{7/10},.8/{4/5},1/1}
+\draw[thick] (-.3,0)--(0,0)--(2,1/5);
+\draw[thick] (2,2/5)--(3,2/5);
+\draw[thick] (3,3/5)--(5,7/10);
+\draw[thick] (5,4/5)--(6,1)--(6.5,1);
+\foreach \x/\y in {2/.2,3/.4,5/.7}{\opendot{\x}{\y}}
+\foreach \x/\y in {2/.4,3/.6,5/.8}{\closeddot{\x}{\y}}
+\end{tikzpicture}
+\end{center}
+
+% Блок 7, задача 1: немонотонное преобразование.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Случайная величина $\xi$ имеет плотность
+\[
+p_\xi(x)=\frac12e^{-|x|},\qquad x\in\R.
+\]
+Найти функцию распределения и плотность величины $\eta=\xi^2$.
+
+% Блок 5, задача 1; блок 7, задача 2: дискретные моменты.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Случайная величина $\xi$ принимает значения $2k+1$ с вероятностями
+\[
+\PP\{\xi=2k+1\}=\frac34\left(\frac14\right)^k,
+\qquad k=0,1,2,\ldots
+\]
+Найти математическое ожидание и дисперсию $\xi$.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Распределение случайной величины $\xi$ задано формулой
+\[
+\PP\{\xi=k\}=e^{-3}\frac{3^k}{k!},\qquad k=0,1,2,\ldots
+\]
+Найти математическое ожидание и дисперсию величины $\eta=2\xi-1$.
+Моменты $\xi$ вычислить непосредственно через суммы.
+
+% Блок 7, задача 3; блок 5, задачи 2--3; блок 7, задача 4.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Случайная величина $\xi$ имеет функцию распределения
+\[
+F_\xi(x)=\begin{cases}0,&x<1,\\1-e^{-2(x-1)},&x\geq1.\end{cases}
+\]
+Найти плотность, математическое ожидание и дисперсию $\xi$.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Плотность случайной величины $\xi$ задана формулой
+\[
+p_\xi(x)=\begin{cases}\dfrac{64}{x^5},&x\geq2,\\[3pt]0,&x<2.\end{cases}
+\]
+Найти математическое ожидание и дисперсию величин $\xi$ и $\eta=2/\xi$.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Случайная величина $\xi$ имеет плотность
+\[
+p_\xi(x)=\frac1{3\sqrt{2\pi}}\exp\left(-\frac{(x-2)^2}{18}\right),
+\qquad x\in\R.
+\]
+Найти математическое ожидание и дисперсию $\xi$ и $\eta=4-2\xi$, используя переход к стандартному нормальному распределению и свойства линейных преобразований.
+\end{minipage}
+
+\item\begin{minipage}[t]{\linewidth} Плотность случайной величины $\xi$ задана формулой
+\[
+p_\xi(x)=\begin{cases}\dfrac2{(1+x)^3},&x\geq0,\\[3pt]0,&x<0.\end{cases}
+\]
+Вычислить $\EE\xi$ и $\EE\xi^2$, если они конечны. Определить, имеет ли $\xi$ конечную дисперсию.
+\end{minipage}
+
+\end{enumerate}
+\end{multicols}
+\end{document}
