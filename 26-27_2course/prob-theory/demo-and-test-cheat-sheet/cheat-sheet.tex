@@ -1,0 +1,372 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{header}
+\usepackage{multicol,titlesec}
+\geometry{top=11mm,bottom=12mm,left=11mm,right=11mm,headheight=0pt,headsep=0pt,footskip=7mm}
+\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{4pt}{4pt}
+\setlength{\columnsep}{6mm}
+\setlength{\parindent}{0pt}
+\tcbset{myboxstyle/.append style={breakable=false,arc=1mm,boxrule=.4pt,left=4pt,right=4pt,top=3pt,bottom=3pt,boxsep=1pt,toptitle=2pt,bottomtitle=2pt,before skip=5pt,after skip=5pt,fonttitle=\bfseries\normalsize}}
+\pagestyle{plain}
+\newcommand{\blk}[2]{\section{БЛОК #1. #2}}
+\begin{document}
+\fontsize{11}{13}\selectfont
+\everymath{\textstyle}
+\setlength{\parskip}{3pt}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+{\centering\large Читлист к КР по теории вероятностей\par}
+{\centering\footnotesize\itshape hse-se-lecture-notes\par}
+\begin{multicols}{2}
+\raggedcolumns
+\blk{1}{Модель случайного эксперимента}
+\begin{definition}[Комбинаторика и классическая вероятность]
+При равновозможных исходах $P(A)=|A|/|\Omega|$.
+\[
+\begin{array}{c|c}
+\text{Выбор }k\text{ из }n&\text{Число способов}\\\hline
+\text{Порядок важен, с повторами}&n^k\\
+\text{Порядок важен, без повторов}&n!/(n-k)!\\
+\text{Без порядка и повторов}&C_n^k=\dfrac{n!}{k!(n-k)!}
+\end{array}
+\]
+Без возвращения: из $N$ объектов, $M$ нужных,
+\[
+P(\text{ровно }r\text{ нужных из }k)
+=\frac{C_M^rC_{N-M}^{k-r}}{C_N^k}.
+\]
+\end{definition}
+\begin{definition}[Геометрическая вероятность]
+При равномерном выборе точки в области $\Omega$:
+\[
+P(A)=S(A)/S(\Omega)
+\]
+\end{definition}
+\blk{2}{Формулы вероятности}
+\begin{theorem}[События и условная вероятность]
+\[
+P(\bar A)=1-P(A),\quad P(A\mid B)=\frac{P(A\cap B)}{P(B)}.
+\]
+Условная вероятность определена при $P(B)>0$.
+\[
+P(A\cup B)=P(A)+P(B)-P(A\cap B),
+\]
+\[
+P(A\cap B\cap C)=P(A)P(B\mid A)P(C\mid A\cap B).
+\]
+Независимость: $P(A\cap B)=P(A)P(B)$.
+Несовместность: $A\cap B=\varnothing$; это другое свойство.
+\end{theorem}
+\begin{theorem}[Полная вероятность и Байес]
+$H_i$ --- несовместные гипотезы, покрывающие все исходы; условные вероятности берём для $P(H_i)>0$.
+\[
+P(A)=\sum_iP(H_i)P(A\mid H_i),
+\]
+\[
+P(H_k\mid A)=\frac{P(H_k)P(A\mid H_k)}
+{\sum_iP(H_i)P(A\mid H_i)},\quad P(A)>0.
+\]
+\end{theorem}
+\columnbreak
+\blk{3}{Одномерные распределения}
+\begin{definition}[Бернулли (дискретное)]
+$\xi\sim\operatorname{Bern}(p)$: один индикатор успеха.
+\[
+P(\xi=1)=p,\quad P(\xi=0)=1-p.
+\]
+\[
+E\xi=p,\quad D\xi=p(1-p).
+\]
+\end{definition}
+\begin{definition}[Биномиальное (дискретное)]
+$\xi\sim\operatorname{Bin}(n,p)$: число успехов в $n$ независимых испытаниях с одной вероятностью $p$.
+\[
+P(\xi=k)=C_n^kp^k(1-p)^{n-k},\quad k=0,\ldots,n.
+\]
+\[
+E\xi=np,\qquad D\xi=np(1-p).
+\]
+Сумма $n$ независимых $\operatorname{Bern}(p)$ имеет $\operatorname{Bin}(n,p)$.
+\end{definition}
+\begin{definition}[Геометрическое (дискретное)]
+$\xi\sim\operatorname{Geom}(p)$: номер первого успеха, $0<p\le1$.
+\[
+P(\xi=k)=p(1-p)^{k-1},\quad k=1,2,\ldots
+\]
+\[
+E\xi=1/p,\qquad D\xi=(1-p)/p^2.
+\]
+Здесь отсчёт с $1$, а не с $0$.
+\end{definition}
+\begin{definition}[Пуассона (дискретное)]
+$\xi\sim\operatorname{Pois}(\lambda)$, $\lambda>0$:
+\[
+P(\xi=k)=e^{-\lambda}\frac{\lambda^k}{k!},\quad k=0,1,\ldots
+\]
+\[
+E\xi=D\xi=\lambda,\qquad \sum_{k=0}^{\infty}\frac{\lambda^k}{k!}=e^\lambda.
+\]
+\end{definition}
+\begin{definition}[Равномерное (абсолютно непрерывное)]
+$\xi\sim U[a,b]$, $a<b$: $p(x)=1/(b-a)$ на $[a,b]$, вне отрезка $0$.
+\[
+F(x)=\begin{cases}0,&x<a,\\(x-a)/(b-a),&a\le x\le b,\\1,&x>b.\end{cases}
+\]
+\[
+E\xi=(a+b)/2,\qquad D\xi=(b-a)^2/12.
+\]
+\end{definition}
+\begin{definition}[Показательное (абсолютно непрерывное)]
+$\xi\sim\operatorname{Exp}(\alpha)$, $\alpha>0$, при $x\ge0$:
+\[
+p(x)=\alpha e^{-\alpha x},\quad F(x)=1-e^{-\alpha x}.
+\]
+При $x<0$ обе функции равны $0$.
+\[
+E\xi=1/\alpha,\quad D\xi=1/\alpha^2,\quad
+P(\xi>x)=e^{-\alpha x}\ (x\ge0).
+\]
+\end{definition}
+\begin{definition}[Нормальное (абсолютно непрерывное)]
+$\xi\sim N(a;\sigma^2)$, $\sigma>0$:
+\[
+p(x)=\frac1{\sigma\sqrt{2\pi}}e^{-(x-a)^2/(2\sigma^2)},\quad x\in\R.
+\]
+\[
+E\xi=a,\quad D\xi=\sigma^2,\quad (\xi-a)/\sigma\sim N(0;1).
+\]
+$\Phi$ --- ф.р. $N(0;1)$, $\Phi(-z)=1-\Phi(z)$:
+\[
+F_\xi(x)=\Phi\!\left(\frac{x-a}{\sigma}\right).
+\]
+\end{definition}
+\end{multicols}
+\newpage
+\section{БЛОК 3. Одномерные распределения: методы}
+\begin{multicols}{2}
+\raggedcolumns
+\begin{definition}[Нормировка и функция распределения]
+\textbf{Дискретное:} $p_k\ge0$, $\sum_kp_k=1$.
+
+\textbf{Абсолютно непрерывное:}\par $p(x)\ge0$, $\int_\R p(x)\,dx=1$.
+\[
+F(x)=P(\xi\le x),\quad P(a<\xi\le b)=F(b)-F(a).
+\]
+\[
+P(\xi=x)=F(x)-F(x-),
+\]
+\[
+P(a\le\xi\le b)=F(b)-F(a-).
+\]
+$F$ не убывает, непрерывна справа; $F(-\infty)=0$, $F(+\infty)=1$.
+
+\textbf{При наличии плотности:}
+\[
+F(x)=\int_{-\infty}^xp(t)\,dt,\qquad F'(x)=p(x)\ \text{п.в.}
+\]
+Вероятность точки равна $0$; включение концов интервалов не влияет на вероятность.
+\end{definition}
+\begin{hint}[Преобразование через функцию распределения]
+\par\textbf{1.} Найти возможные значения $\eta$.
+\par\textbf{2.} Записать $F_\eta(y)=P(g(\xi)\le y)$.
+\par\textbf{3.} Решить неравенство и пересечь с областью значений $\xi$.
+\par\textbf{4.} Вычислить вероятность; записать все ветви $F_\eta$.
+\par\textbf{5.} Для абсолютно непрерывного закона взять производную.
+\[
+e^\xi\le y\iff\xi\le\ln y\quad(y>0),
+\]
+\[
+1/\xi\le y\iff\xi\ge1/y\quad(\xi>0,\ y>0),
+\]
+\[
+\xi^2\le y\iff-\sqrt y\le\xi\le\sqrt y\quad(y\ge0).
+\]
+Для $a\xi+b\le y$: при $a>0$ имеем $\xi\le(y-b)/a$; при $a<0$ знак меняется.
+
+Если функция немонотонна, подходящих промежутков может быть несколько: складываем их вероятности.
+\end{hint}
+\begin{theorem}[Ожидание функции и дисперсия]
+\textbf{Дискретное:}
+\[
+E[g(\xi)]=\sum_k g(x_k)p_k.
+\]
+\textbf{Абсолютно непрерывное:}
+\[
+E[g(\xi)]=\int_\R g(x)p_\xi(x)\,dx.
+\]
+Плотность $g(\xi)$ искать не обязательно. Для конечного ожидания нужна абсолютная сходимость.
+\[
+E\xi^2=\sum_k x_k^2p_k\quad\text{или}\quad\int_\R x^2p_\xi(x)\,dx.
+\]
+\[
+D\xi=E\xi^2-(E\xi)^2,\qquad E\xi^2=D\xi+(E\xi)^2.
+\]
+
+$E\xi$ может быть отрицательным; $D\xi\ge0$.
+\end{theorem}
+\columnbreak
+
+\begin{hint}[Телескопические суммы]
+\[
+\sum_{k=m}^{N}(a_k-a_{k+1})=a_m-a_{N+1}.
+\]
+Сначала конечная сумма, затем предел $N\to\infty$.
+\[
+\frac1{k(k+1)}=\frac1k-\frac1{k+1},
+\]
+\[
+\frac1{k(k+r)}=\frac1r\left(\frac1k-\frac1{k+r}\right),\quad r\in\N,
+\]
+\[
+\frac1{k(k+1)(k+2)}
+=\frac12\left(\frac1{k(k+1)}-\frac1{(k+1)(k+2)}\right),
+\]
+\[
+\frac1{k^2-1}=\frac12\left(\frac1{k-1}-\frac1{k+1}\right),\quad k\ge2.
+\]
+\end{hint}
+
+\begin{hint}[Как построить таблицу распределения]
+\textbf{Одна величина.} Выписать различные значения $z_k$; под каждым записать $P(\zeta=z_k)$. Если несколько исходов дают одно значение, их вероятности сложить.
+\[
+\begin{array}{c|ccc}
+\zeta&z_1&z_2&\cdots\\\hline
+P&p_1&p_2&\cdots
+\end{array}
+\qquad F_\zeta(x)=\sum_{z_k\le x}p_k.
+\]
+\textbf{Совместная таблица.}
+\par\textbf{1.} Строки --- значения $\xi$, столбцы --- значения $\eta$.
+\par\textbf{2.} В клетке $(i,j)$ записать $P(\xi=x_i,\eta=y_j)$; невозможная пара даёт $0$.
+\par\textbf{3.} Только при независимости умножать вероятности: $p_{ij}=P(\xi=x_i)P(\eta=y_j)$.
+\par\textbf{4.} Суммы строк дают распределение $\xi$, суммы столбцов --- $\eta$; все клетки в сумме дают $1$.
+
+\end{hint}
+\end{multicols}
+\newpage
+\begin{multicols}{2}
+\raggedcolumns
+\blk{4}{Многомерные распределения}
+\begin{definition}[Совместная таблица (дискретное)]
+$p_{ij}=P(\xi=x_i,\eta=y_j)\ge0$, $\sum_{i,j}p_{ij}=1$.
+\[
+P(\xi=x_i)=\sum_jp_{ij},\quad P(\eta=y_j)=\sum_ip_{ij}.
+\]
+\end{definition}
+
+\begin{definition}[Совместная плотность (абс. непрерывное)]
+$p(u,v)\ge0$, область ненулевой плотности $D$.
+\[
+\iint_Dp(u,v)\,du\,dv=1,
+\]
+\[
+P((\xi,\eta)\in A)=\iint_{D\cap A}p(u,v)\,du\,dv.
+\]
+\[
+p_\xi(u)=\int_\R p(u,v)\,dv,\quad p_\eta(v)=\int_\R p(u,v)\,du.
+\]
+\end{definition}
+\begin{hint}[Двойной интеграл: рабочий шаблон]
+\par\textbf{1.} Нарисовать область. \par\textbf{2.} Зафиксировать $u$ и найти нижнюю и верхнюю границы $v$:
+\[
+a\le u\le b,\quad\varphi(u)\le v\le\psi(u).
+\]
+\[
+\iint_D f(u,v)\,du\,dv
+=\int_a^b\left(\int_{\varphi(u)}^{\psi(u)}f(u,v)\,dv\right)du.
+\]
+\par\textbf{3.} Внутри $u$ --- константа; интегрировать по $v$.
+\par\textbf{4.} Подставить верхнюю минус нижнюю границу.
+\par\textbf{5.} Интегрировать результат по $u$.
+
+Пример: $0\le u\le2$, $0\le v\le1-u/2$.
+\[
+\int_0^2\!\int_0^{1-u/2}(u+v)\,dv\,du
+=\int_0^2\left[uv+\frac{v^2}{2}\right]_0^{1-u/2}du.
+\]
+
+\end{hint}
+\begin{hint}[Функция от пары и полярные координаты]
+Для $\zeta=g(\xi,\eta)$:
+\[
+F_\zeta(z)=\iint_{D\cap\{g(u,v)\le z\}}p(u,v)\,du\,dv.
+\]
+Если есть $u^2+v^2$, удобно
+\[
+u=r\cos\varphi,\quad v=r\sin\varphi,\quad |J|=r,
+\]
+\[
+du\,dv=r\,dr\,d\varphi,\quad u^2+v^2=r^2.
+\]
+Полное кольцо: $a\le r\le b$, $0\le\varphi<2\pi$.
+Для радиальной плотности $p(u,v)=h(r)$:
+\[
+p_R(r)=2\pi r h(r),\quad R=\sqrt{\xi^2+\eta^2},
+\]
+на допустимых радиусах (при полной окружности).
+\end{hint}
+\begin{theorem}[Ожидание функции пары]
+\textbf{Дискретное:} $Eg(\xi,\eta)=\sum_{i,j}g(x_i,y_j)p_{ij}$.
+\textbf{Абс. непрерывное:}
+\[
+Eg(\xi,\eta)=\iint_Dg(u,v)p(u,v)\,du\,dv.
+\]
+\end{theorem}
+\columnbreak
+
+\blk{5}{Независимость и корреляция}
+\begin{theorem}[Критерии независимости]
+\textbf{Дискретное:} $p_{ij}=p_{i\cdot}p_{\cdot j}$ для всех клеток.
+\textbf{Абс. непрерывное:} $p(u,v)=p_\xi(u)p_\eta(v)$ почти всюду.
+\textbf{Общий:} $F_{\xi,\eta}(x,y)=F_\xi(x)F_\eta(y)$ для всех $x,y$.
+
+\end{theorem}
+\begin{theorem}[Максимум и минимум независимых]
+Пусть $F,G$ --- ф.р. $\xi,\eta$. Тогда
+\[
+F_{\max}(x)=F(x)G(x),
+\]
+\[
+F_{\min}(x)=1-(1-F(x))(1-G(x)).
+\]
+Максимум $\le x$: обе величины $\le x$.
+Минимум $>x$: обе величины $>x$.
+
+\end{theorem}
+\begin{theorem}[Линейные комбинации]
+Для конечных ожиданий, без независимости:
+\[
+E(a\xi+b\eta+c)=aE\xi+bE\eta+c.
+\]
+При конечных вторых моментах:
+\[
+D(a\xi+b)=a^2D\xi,
+\]
+\[
+\begin{aligned}
+D(a\xi+b\eta+c)&=a^2D\xi+b^2D\eta\\
+&\quad+2ab\operatorname{cov}(\xi,\eta).
+\end{aligned}
+\]
+При $\operatorname{cov}(\xi,\eta)=0$ остаётся $a^2D\xi+b^2D\eta$.
+\end{theorem}
+\begin{definition}[Ковариация и корреляция]
+При конечных вторых моментах:
+\[
+\operatorname{cov}(\xi,\eta)=E(\xi\eta)-E\xi E\eta.
+\]
+При $0<D\xi,D\eta<\infty$:
+\[
+\rho(\xi,\eta)=\frac{\operatorname{cov}(\xi,\eta)}{\sqrt{D\xi D\eta}},
+\qquad -1\le\rho\le1.
+\]
+Некоррелированность: $\operatorname{cov}(\xi,\eta)=0$.
+\[
+\text{независимость}\ \Longrightarrow\ \text{некоррелированность}.
+\]
+Обратное неверно (при конечных вторых моментах).
+\end{definition}
+\end{multicols}
+\end{document}

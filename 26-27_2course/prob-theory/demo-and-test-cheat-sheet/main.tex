@@ -5,8 +5,7 @@
 \usepackage[russian]{babel}
 \usepackage{amsmath,amssymb,microtype}
 \usepackage[a4paper,landscape,top=19mm,bottom=16mm,left=15mm,right=15mm,headheight=14pt,headsep=5mm]{geometry}
-\usepackage{enumitem,fancyhdr,tikz,multicol}
-\usetikzlibrary{arrows.meta}
+\usepackage{enumitem,fancyhdr,multicol}
 \usepackage[unicode,hidelinks]{hyperref}
 \hypersetup{pdftitle={Демоверсия к КР1 по теории вероятностей},pdfauthor={hse-se-lecture-notes}}
 \pagestyle{fancy}
@@ -27,15 +26,6 @@
 \newcommand{\DD}{\mathsf D}
 \newcommand{\R}{\mathbb R}
 \newcommand{\normalise}{Найти постоянную $C$ и функцию распределения $F_\xi(x)$.}
-\newcommand{\decompose}{Разложить функцию распределения на графике на линейную комбинацию дискретной и абсолютно непрерывной функций распределения.}
-\newcommand{\graphaxes}[2]{%
-  \draw[->] (-.35,0)--(#1,0) node[right] {$x$};
-  \draw[->] (0,-.04)--(0,1.12) node[above] {$F_\xi(x)$};
-  \foreach \x in {#2}{\draw[gray!45,dashed] (\x,0)--(\x,1);\node[below] at (\x,0) {$\x$};}
-}
-\newcommand{\levels}[2]{\foreach \y/\lab in {#2}{\draw[gray!45,dashed] (0,\y)--(#1,\y);\node[left] at (0,\y) {$\lab$};}}
-\newcommand{\opendot}[2]{\filldraw[draw=black,fill=white] (#1,#2) circle (1.6pt);}
-\newcommand{\closeddot}[2]{\fill (#1,#2) circle (1.6pt);}
 \begin{document}
 \begin{multicols}{2}
 \begin{center}
@@ -109,6 +99,12 @@ q_1=\frac1{15},\qquad q_2=\frac1{30},\qquad q_3=\frac1{10}.
 Найти: а) постоянную $C$; б) вероятность $\PP\{\xi\geq4\}$.
 
 % Блок 3: плотности из вариантов 1, 2, 8, 7.
+
+Решить аналогичную задачу для распределения
+\[
+\PP\{\xi=k\}=\frac{C}{(k+1)(k+4)},\quad k=0,1,\ldots,
+\]
+найдя $C$ и $\PP\{\xi\geq3\}$.
 \end{minipage}
 
 \item\begin{minipage}[t]{\linewidth} Плотность случайной величины $\xi$ задана формулой
@@ -151,69 +147,13 @@ p_\xi(x)=\begin{cases}C+3x^2-2x^3,&0\leq x\leq1,\\0,&\text{иначе}.\end{case
 
 % Блок 3: графики вариантов 1, 2, 8, 7; координаты исходных рисунков.
 \end{minipage}
-
-\item\begin{minipage}[t]{\linewidth} \decompose
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=3.2cm,>=Stealth,font=\footnotesize]
-\graphaxes{5.7}{1,2,3,5}
-\levels{5}{.166667/{1/6},.333333/{1/3},.5/{1/2},.666667/{2/3},1/1}
-\draw[thick] (-.3,0)--(0,0)--(1,1/6);
-\draw[thick] (1,1/3)--(2,1/3);
-\draw[thick] (2,1/2)--(3,2/3)--(5,2/3);
-\draw[thick] (5,1)--(5.5,1);
-\foreach \x/\y in {1/.166667,2/.333333,5/.666667}{\opendot{\x}{\y}}
-\foreach \x/\y in {1/.333333,2/.5,3/.666667,5/1}{\closeddot{\x}{\y}}
-\end{tikzpicture}
-\end{center}
+\item\begin{minipage}[t]{\linewidth} На пространстве $\Omega=[0,1]$ с мерой Лебега в качестве вероятности задана величина
+\[
+\xi(\omega)=\begin{cases}3\omega,&0\leq\omega\leq\tfrac13,\\2-3\omega,&\tfrac13<\omega\leq\tfrac23,\\6\omega-4,&\tfrac23<\omega\leq1.\end{cases}
+\]
+Найти функцию распределения и плотность $\xi$.
 \end{minipage}
 
-\item\begin{minipage}[t]{\linewidth} \decompose
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=3.2cm,>=Stealth,font=\footnotesize]
-\graphaxes{6.7}{2,3,5,6}
-\levels{6}{.25/{1/4},.375/{3/8},.5/{1/2},.75/{3/4},.875/{7/8},1/1}
-\draw[thick] (-.3,0)--(0,0)--(2,1/4);
-\draw[thick] (2,3/8)--(3,3/8);
-\draw[thick] (3,1/2)--(5,3/4);
-\draw[thick] (5,7/8)--(6,7/8);
-\draw[thick] (6,1)--(6.5,1);
-\foreach \x/\y in {2/.25,3/.375,5/.75,6/.875}{\opendot{\x}{\y}}
-\foreach \x/\y in {2/.375,3/.5,5/.875,6/1}{\closeddot{\x}{\y}}
-\end{tikzpicture}
-\end{center}
-\end{minipage}
-
-\item\begin{minipage}[t]{\linewidth} \decompose
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=3.2cm,>=Stealth,font=\footnotesize]
-\graphaxes{7.7}{1,3,5,7}
-\levels{7}{.2/{1/5},.4/{2/5},.5/{1/2},.7/{7/10},.8/{4/5},1/1}
-\draw[thick] (-.3,0)--(0,0)--(1,1/5);
-\draw[thick] (1,2/5)--(3,1/2);
-\draw[thick] (3,7/10)--(5,7/10);
-\draw[thick] (5,4/5)--(7,1)--(7.5,1);
-\foreach \x/\y in {1/.2,3/.5,5/.7}{\opendot{\x}{\y}}
-\foreach \x/\y in {1/.4,3/.7,5/.8}{\closeddot{\x}{\y}}
-\end{tikzpicture}
-\end{center}
-\end{minipage}
-
-\item\begin{minipage}[t]{\linewidth} \decompose
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=3.2cm,>=Stealth,font=\footnotesize]
-\graphaxes{6.7}{2,3,5,6}
-\levels{6}{.2/{1/5},.4/{2/5},.6/{3/5},.7/{7/10},.8/{4/5},1/1}
-\draw[thick] (-.3,0)--(0,0)--(2,1/5);
-\draw[thick] (2,2/5)--(3,2/5);
-\draw[thick] (3,3/5)--(5,7/10);
-\draw[thick] (5,4/5)--(6,1)--(6.5,1);
-\foreach \x/\y in {2/.2,3/.4,5/.7}{\opendot{\x}{\y}}
-\foreach \x/\y in {2/.4,3/.6,5/.8}{\closeddot{\x}{\y}}
-\end{tikzpicture}
-\end{center}
-
-% Блок 7, задача 1: немонотонное преобразование.
-\end{minipage}
 
 \item\begin{minipage}[t]{\linewidth} Случайная величина $\xi$ имеет плотность
 \[
@@ -271,6 +211,84 @@ p_\xi(x)=\begin{cases}\dfrac2{(1+x)^3},&x\geq0,\\[3pt]0,&x<0.\end{cases}
 Вычислить $\EE\xi$ и $\EE\xi^2$, если они конечны. Определить, имеет ли $\xi$ конечную дисперсию.
 \end{minipage}
 
+
+\item\begin{minipage}[t]{\linewidth} Совместная плотность величин $\xi,\eta$ имеет вид
+\[
+p_{\xi,\eta}(u,v)=\begin{cases}C(u+2v),&0\leq u\leq2,\ 0\leq v\leq1,\\0,&\text{иначе}.\end{cases}
+\]
+Найти $C$, одномерные плотности $p_\xi$, $p_\eta$ и вероятность $\PP\{\xi+\eta\leq1\}$. Проверить независимость $\xi$ и $\eta$.
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Точка $(\xi,\eta)$ равномерно распределена в треугольнике с вершинами $(0,0)$, $(3,0)$ и $(0,2)$. Найти совместную плотность, плотности обеих координат и вероятность $\PP\{\xi\leq1,\eta\leq1\}$.
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Случайные величины $\xi,\eta$ независимы и имеют плотности
+\[
+p_\xi(x)=2e^{-2x},\qquad p_\eta(x)=3e^{-3x},\qquad x\geq0
+\]
+(при $x<0$ плотности равны нулю). Найти $\PP\{|\xi-\eta|\leq\tfrac12\}$.
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Совместная плотность величин $\xi,\eta$ задана формулой
+\[
+p_{\xi,\eta}(u,v)=\begin{cases}\dfrac{192}{\pi(u^2+v^2)^4},&u^2+v^2\geq4,\\[3pt]0,&\text{иначе}.\end{cases}
+\]
+Найти функцию распределения и плотность величины $R=\sqrt{\xi^2+\eta^2}$, а также $\EE R$ и $\DD R$.
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Случайные величины $\xi$ и $\eta$ независимы, их функции распределения равны $F$ и $G$. Выразить через $F$ и $G$ функции распределения $\max\{\xi,2\eta+1\}$ и $\min\{\xi,2\eta+1\}$.
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Независимые величины $\xi,\eta$ имеют показательные распределения с параметрами $1$ и $2$ соответственно. Найти функции распределения и плотности величин $\max\{\xi,\eta^2\}$ и $\min\{\xi,\eta^2\}$.
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Индикаторы $I_1,\ldots,I_n$ независимы, причём $\PP\{I_i=1\}=p$, $\PP\{I_i=0\}=1-p$. За успех начисляют 3 балла, за неудачу снимают 1 балл. Итоговый балл равен
+\[
+S=\sum_{i=1}^n(4I_i-1).
+\]
+Найти $\EE S$, $\DD S$ и $\EE S^2$, используя представление в виде суммы. Здесь $n\geq1$, $0<p<1$.
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Величины $\xi,\eta$ независимы, причём
+\[
+\EE\xi=-1,\quad\EE\eta=3,\quad\DD\xi=2,\quad\DD\eta=5.
+\]
+Найти: а) $\EE(2\xi^2+\eta^2-3\xi\eta+\xi-2\eta)$;
+б) $\EE(2\xi-\eta+1)^2$; в) $\DD(3\xi+2\eta-4)$.
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Величины $\xi\in\{-2,0,2\}$ и $\eta\in\{-1,0,1\}$ удовлетворяют условиям
+\[
+\PP\{\xi\eta=0\}=1,\qquad\PP\{\xi=2\}=\PP\{\xi=-2\}=\frac16,
+\]
+\[
+\PP\{\eta=1\}=\PP\{\eta=-1\}=\frac14.
+\]
+Восстановить таблицу совместного распределения. Найти ожидания, дисперсии, ковариацию и коэффициент корреляции. Проверить независимость и некоррелированность.
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Правильную игральную кость бросают $n\geq1$ раз независимо. Пусть $\xi$ --- число выпадений чётных чисел, а $\eta$ --- число выпадений чисел, больших 3. Найти $\operatorname{cov}(\xi,\eta)$ и коэффициент корреляции. Независимы ли $\xi$ и $\eta$?
+\end{minipage}
+
+
+\item\begin{minipage}[t]{\linewidth} Случайные величины $\xi,\eta$ независимы,
+\[
+\PP\{\xi=2\}=\PP\{\xi=-2\}=\frac12,
+\]
+\[
+\PP\{\eta=1\}=\PP\{\eta=-1\}=\frac13,\qquad\PP\{\eta=0\}=\frac13.
+\]
+Построить совместную таблицу распределения $\xi\eta$ и $\eta$. Будут ли эти величины независимыми? Некоррелированными?
+\end{minipage}
 \end{enumerate}
 \end{multicols}
 \end{document}
