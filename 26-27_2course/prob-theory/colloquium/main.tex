@@ -1,0 +1,67 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{header}
+\usepackage{needspace}
+\usepackage{chngcntr}
+\usepackage{sectsty}
+\counterwithout{subsection}{section}
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\theHsubsection}{q.\arabic{subsection}}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{2}
+\makeatletter
+\renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\enspace}
+\makeatother
+
+% Each topic registers its title and PDF destination for the next LaTeX pass.
+\newcounter{questiontopic}[subsection]
+\newcommand{\registertopic}[3]{%
+  \ifcsdef{topics.#1}{\csgappto{topics.#1}{\enspace\textperiodcentered\enspace}}{}%
+  \csgappto{topics.#1}{\hyperlink{#2}{#3}}}
+\makeatletter
+\newcommand{\topicmark}[1]{%
+  \stepcounter{questiontopic}%
+  \edef\topicdest{topic.\arabic{subsection}.\arabic{questiontopic}}%
+  \hypertarget{\topicdest}{}%
+  \bookmark[level=3,dest=\topicdest]{#1}%
+  \addtocontents{toc}{\protect\contentsline{subsubsection}%
+    {\protect\numberline{\arabic{subsection}.\arabic{questiontopic}}#1}%
+    {\thepage}{\topicdest}\protected@file@percent}%
+  \protected@write\@auxout{}{\string\registertopic{\arabic{subsection}}{\topicdest}{#1}}%
+  \ignorespaces}
+\makeatother
+\newcommand{\question}[1]{%
+  \Needspace{8\baselineskip}\subsection{#1}%
+  \ifcsdef{topics.\arabic{subsection}}{%
+    {\small\raggedright\noindent\csuse{topics.\arabic{subsection}}\par}\smallskip
+  }{}}
+
+\newcommand{\editorialmark}{\hfill\mbox{\normalfont\footnotesize\itshape Редакторское дополнение}}
+\newcommand{\partfile}[2]{\Needspace{13\baselineskip}\section{#1}\input{sections/#2.tex}}
+\hypersetup{pdftitle={Коллоквиум по теории вероятностей ПИ 2 курс},
+  pdfauthor={hse-se-lecture-notes}, linktoc=all, bookmarksdepth=3}
+\fancypagestyle{plain}{%
+  \fancyhf{}\renewcommand{\headrulewidth}{0pt}
+  \fancyfoot[L]{\hyperlink{contents}{\fcolorbox{remark_frame}{remark_back}{\strut\footnotesize Вернуться к содержанию}}}
+  \fancyfoot[C]{\thepage}}
+\tcbset{myboxstyle/.append style={breakable=false}}
+\raggedbottom
+\title{Коллоквиум по теории вероятностей ПИ~2~курс}
+\author{github.com/int28t/hse-se-lecture-notes}
+\date{}
+
+\begin{document}
+\pagestyle{empty}
+\maketitle
+\thispagestyle{empty}
+\hypertarget{contents}{}
+\tableofcontents
+\clearpage
+\sectionfont{\color{blue}}
+\pagestyle{plain}
+\partfile{Вероятностная модель и события}{01}
+\partfile{Случайные величины и одномерные распределения}{02}
+\partfile{Совместные распределения и независимость}{03}
+\partfile{Математическое ожидание, моменты и зависимость}{04}
+\partfile{Предельные теоремы и характеристические функции}{05}
+\end{document}
