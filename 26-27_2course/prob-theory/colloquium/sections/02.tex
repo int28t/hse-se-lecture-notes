@@ -1,0 +1,420 @@
+% Источник: lectures_08_10_sets.tex 118–123; lectures_07_10_random_variables.tex 10–35, 67–74, 93–112, 139–162, 273–281.
+\question{Случайная величина и её распределение}
+
+\begin{definition}[\topicmark{Борелевская сигма-алгебра}Определение]
+    \textbf{Борелевской $\sigma$-алгеброй} на пространстве $A$
+    называется наименьшая $\sigma$-алгебра, содержащая все
+    открытые множества этого пространства.
+    Обозначение: $\mathcal{B}(A)$.
+\end{definition}
+
+Пусть $(\Omega,\mathcal{F},\Pr)$ --- вероятностное пространство.
+Идея: случайная величина --- числовая характеристика
+случайного эксперимента.
+
+\begin{definition}[\topicmark{Случайная величина}Определение]
+    Функция $\xi\colon\Omega\to\R$ называется
+    \textbf{случайной величиной}, если
+    \[
+        \xi^{-1}\bigl((-\infty;x]\bigr)\in\mathcal{F}
+        \qquad\forall x\in\R.
+    \]
+    Эквивалентная запись:
+    \[
+        \{\omega\in\Omega\colon\xi(\omega)\leq x\}
+        \in\mathcal{F}
+        \qquad\forall x\in\R.
+    \]
+    Эквивалентное условие:
+    \[
+        \xi^{-1}(B)\in\mathcal{F}
+        \qquad\forall B\in\mathcal{B}(\R).
+    \]
+    Здесь $\mathcal{B}(\R)$ --- наименьшая $\sigma$-алгебра,
+    содержащая промежутки на $\R$, в частности
+    $(y;x]$, $(y;x)$, $[y;x]$, $[y;x)$.
+\end{definition}
+
+\begin{definition}[\topicmark{Распределение}Определение]
+    \textbf{Распределением случайной величины} $\xi$ называется
+    вероятностная мера на $\mathcal{B}(\R)$, определённая равенством
+    \[
+        \Pr_\xi(B)=\Pr\{\omega\in\Omega\colon\xi(\omega)\in B\},
+        \qquad B\in\mathcal{B}(\R).
+    \]
+\end{definition}
+
+\begin{definition}[\topicmark{Дискретное распределение}Определение]
+    Случайная величина $\xi$ имеет \textbf{дискретное распределение},
+    если существует конечное или счётное множество $\{x_i\}_{i\in I}$,
+    такое что
+    \[
+        \Pr\{\xi(\omega)\in\{x_i\}_{i\in I}\}=1.
+    \]
+    Распределение задаётся набором $\{(x_i;p_i)\}_{i\in I}$,
+    где значения $x_i$ различны и
+    \[
+        p_i=\Pr\{\xi(\omega)=x_i\},\qquad
+        p_i\geq0,\qquad \sum_{i\in I}p_i=1.
+    \]
+\end{definition}
+
+Для дискретного распределения $\{(x_i;p_i)\}_i$:
+\[
+    \Pr_\xi(B)=\sum_{j\colon x_j\in B}p_j,
+    \qquad B\in\mathcal{B}(\R).
+\]
+
+\begin{example}[\topicmark{Примеры}Три дискретных распределения]
+\textbf{Бернулли.} В одном испытании $\xi\sim\operatorname{Bern}(p)$ равна $1$ с вероятностью $p$ и $0$ с вероятностью $1-p$.
+
+\smallskip
+\textbf{Биномиальное.} Число успехов в $n$ испытаниях Бернулли имеет распределение $\operatorname{Bin}(n;p)$:
+\[
+ \Pr\{\xi=k\}=C_n^k p^k(1-p)^{n-k},\qquad k=0,\ldots,n.
+\]
+\textbf{Геометрическое.} Номер первого успеха в бесконечной схеме Бернулли имеет распределение $\operatorname{Geom}(p)$:
+\[
+ \Pr\{\xi=k\}=(1-p)^{k-1}p,\qquad k=1,2,\ldots
+\]
+\end{example}
+
+% Источник: lectures_07_10_random_variables.tex 192–269.
+\question{Пуассоновское распределение. Теорема Пуассона}
+
+\begin{definition}[\topicmark{Распределение Пуассона}Определение]
+    \[
+        \operatorname{Poiss}(\lambda),\qquad\lambda>0.
+    \]
+    \[
+        x_k=k\in\{0,1,2,\ldots\},\qquad
+        p_k=\frac{\lambda^k}{k!}e^{-\lambda}.
+    \]
+\end{definition}
+
+\begin{theorem}[\topicmark{Теорема Пуассона}Теорема Пуассона]
+    Рассмотрим серию схем испытаний Бернулли:
+    \[
+        \xi_n\sim\operatorname{Bin}(n;p_n),\qquad
+        np_n\xrightarrow[n\to\infty]{}\lambda,\qquad
+        \eta\sim\operatorname{Poiss}(\lambda).
+    \]
+    Тогда для каждого фиксированного $k=0,1,2,\ldots$
+    \[
+        \Pr\{\xi_n=k\}\xrightarrow[n\to\infty]{}\Pr\{\eta=k\}.
+    \]
+\end{theorem}
+
+\begin{Proof}
+    \[
+        \begin{aligned}
+            \Pr\{\xi_n=k\}
+            &=C_n^k p_n^k(1-p_n)^{n-k}\\
+            &=\frac{n!}{(n-k)!\,k!}\,p_n^k(1-p_n)^{n-k}\\
+            &=\frac1{k!}\,
+              \underbrace{\frac{n(n-1)\cdots(n-k+1)}{n^k}}
+              _{\longrightarrow\,1}\,
+              \underbrace{(np_n)^k}_{\longrightarrow\,\lambda^k}\,
+              \frac{(1-p_n)^n}
+              {\underbrace{(1-p_n)^k}_{\longrightarrow\,1}}.
+        \end{aligned}
+    \]
+    При этом
+    \[
+        (1-p_n)^n
+        =\left(\underbrace{(1-p_n)^{-1/p_n}}
+        _{\longrightarrow\,e}\right)^{-np_n}
+        \longrightarrow e^{-\lambda}.
+    \]
+    Следовательно,
+    \[
+        \Pr\{\xi_n=k\}\longrightarrow
+        \frac1{k!}\cdot1\cdot\lambda^k e^{-\lambda}
+        =\frac{\lambda^k}{k!}e^{-\lambda}.
+    \]
+\end{Proof}
+
+\begin{theorem}[\topicmark{Обобщение}Обобщение]
+    Пусть $\xi\sim\operatorname{Bin}(n;p)$,
+    $\eta\sim\operatorname{Poiss}(\lambda)$, $np=\lambda$.
+    Тогда
+    \[
+        \bigl|\Pr\{\xi\in B\}-\Pr\{\eta\in B\}\bigr|
+        \leq np^2
+        \qquad\forall B\in\mathcal{B}(\R).
+    \]
+\end{theorem}
+
+% Источник: lectures_07_10_random_variables.tex 302–309, 343–386.
+\question{Функция распределения и её свойства}
+
+\begin{definition}[\topicmark{Определение}Определение]
+    \textbf{Функцией распределения случайной величины} $\xi$
+    называется функция
+    \[
+        F_\xi(x)=\Pr\{\xi(\omega)\leq x\}
+        =\Pr_\xi\bigl((-\infty;x]\bigr),\qquad x\in\R.
+    \]
+\end{definition}
+
+\begin{theorem}[\topicmark{Свойства}Теорема]
+    \begin{enumerate}[label=\arabic*)]
+        \item $\lim_{x\to+\infty}F_\xi(x)=1$,
+        $\lim_{x\to-\infty}F_\xi(x)=0$.
+        \item $F_\xi$ не убывает.
+        \item $F_\xi$ непрерывна справа.
+    \end{enumerate}
+\end{theorem}
+
+\begin{Proof}[Монотонность и пределы\editorialmark]
+При $x\leq y$ вложение $\{\xi\leq x\}\subseteq\{\xi\leq y\}$ даёт $F_\xi(x)\leq F_\xi(y)$.
+
+\smallskip
+Поскольку $\xi$ принимает конечные вещественные значения, при $n\to\infty$
+\[
+  \{\xi\leq n\}\uparrow\Omega,\qquad
+  \{\xi\leq -n\}\downarrow\varnothing.
+\]
+По непрерывности вероятности снизу и сверху $F_\xi(n)\to 1$ и $F_\xi(-n)\to 0$.
+Монотонность даёт те же пределы при $x\to+\infty$ и $x\to-\infty$ соответственно.
+\end{Proof}
+
+\begin{Proof}[\topicmark{Непрерывность справа}Непрерывность справа]
+    По Гейне рассмотрим $x_n\downarrow x_0$. Положим
+    \[
+        A_n=\xi^{-1}\bigl((-\infty;x_n]\bigr),
+        \qquad A=\xi^{-1}\bigl((-\infty;x_0]\bigr).
+    \]
+    Тогда
+    \[
+        F_\xi(x_n)=\Pr\{\xi(\omega)\leq x_n\}=\Pr(A_n),
+        \qquad F_\xi(x_0)=\Pr(A).
+    \]
+    Поскольку $A_n\downarrow A$, по непрерывности сверху
+    \[
+        \Pr(A_n)\longrightarrow\Pr(A),
+        \qquad F_\xi(x_n)\longrightarrow F_\xi(x_0).
+    \]
+    Следовательно, $\lim_{x\to x_0+}F_\xi(x)=F_\xi(x_0)$.
+\end{Proof}
+
+\begin{remark}
+    Для неубывающей, ограниченной и непрерывной справа функции $F$
+    на полуинтервалах задаётся
+    \[
+        m\bigl((a;b]\bigr)=F(b)-F(a).
+    \]
+\end{remark}
+
+\begin{theorem}[\topicmark{Следствие из теоремы Каратеодори}Следствие из теоремы Каратеодори]
+    Существует взаимно однозначное соответствие:
+    \[
+        \text{вероятностные меры на }\mathcal{B}(\R)
+        \quad\longleftrightarrow\quad
+        \text{функции распределения}.
+    \]
+\end{theorem}
+
+% ТВ 3.pdf, с. 5; Тервер(Лекция)68.pdf, с. 12–13.
+На полукольце мера задана равенством $\Pr_\xi((a;b])=F_\xi(b)-F_\xi(a)$.
+По теореме Каратеодори её продолжение на $\mathcal B(\R)$ единственно.
+
+% Источник: lectures_07_10_random_variables.tex 390–434.
+\question{Непрерывное и абсолютно непрерывное распределения}
+
+\begin{definition}[\topicmark{Непрерывное распределение}Непрерывное распределение\editorialmark]
+Распределение $\xi$ называется \textbf{непрерывным}, если его функция
+распределения $F_\xi$ непрерывна в каждой точке $\R$.
+
+\smallskip
+Равносильное условие: $\Pr\{\xi=x\}=0$ для каждого $x\in\R$.
+Действительно, $F_\xi(x-)=\Pr\{\xi<x\}$, поэтому
+\[
+ F_\xi(x)-F_\xi(x-)=\Pr\{\xi=x\}.
+\]
+Справа функция распределения непрерывна всегда.
+\end{definition}
+
+\begin{definition}[\topicmark{Плотность}Определение]
+    Распределение называется \textbf{абсолютно непрерывным},
+    если существует неотрицательная измеримая функция
+    $p_\xi\colon\R\to[0;+\infty)$, называемая
+    \textbf{плотностью распределения}, такая что
+    \[
+        p_\xi(x)\geq0,\qquad
+        F_\xi(x)=\int_{-\infty}^{x}p_\xi(t)\,\diff t.
+    \]
+    При этом
+    \[
+        \int_{-\infty}^{+\infty}p_\xi(t)\,\diff t=1.
+    \]
+    Эквивалентно, \textbf{плотность распределения} $p_\xi$ задаёт
+    вероятности попадания в борелевские множества:
+    \[
+        \Pr\{\omega\in\Omega:\xi(\omega)\in B\}
+        =\int_B p_\xi(x)\,\diff x,
+        \qquad B\in\mathcal{B}(\R).
+    \]
+\end{definition}
+
+\begin{definition}[\topicmark{Абсолютная непрерывность}Абсолютная непрерывность функции распределения]
+    Функция распределения $F$ \textbf{абсолютно непрерывна}, если
+    для каждого $\eps>0$ существует $\delta>0$ такое, что для любого
+    конечного семейства попарно непересекающихся интервалов $(a_i;b_i)$
+    \[
+        \sum_{i=1}^{m}(b_i-a_i)<\delta
+        \quad\Longrightarrow\quad
+        \sum_{i=1}^{m}\bigl(F(b_i)-F(a_i)\bigr)<\eps.
+    \]
+    Для функции распределения это условие равносильно существованию
+    плотности. Непрерывности $F$ самой по себе недостаточно.
+\end{definition}
+
+\begin{remark}[\topicmark{Плотность и производная}Плотность и производная функции распределения]
+    Плотность определяется однозначно с точностью до множества
+    меры Лебега нуль: изменение её значений на таком множестве
+    не меняет распределение.
+
+    \smallskip
+    Для абсолютно непрерывной функции распределения
+    \[
+        F_\xi'(x)=p_\xi(x)
+        \qquad\text{почти всюду относительно меры Лебега}.
+    \]
+\end{remark}
+
+% Источник: lecture_11_distributions.tex 8–90.
+\question{Равномерное, экспоненциальное и нормальное распределения}
+
+\begin{definition}[\topicmark{Равномерное}Равномерное распределение]
+    Случайная величина $\xi$ имеет \textbf{равномерное распределение}
+    на отрезке $[a;b]$, где $a<b$, если её плотность имеет вид
+    \[
+        p_\xi(t)=\frac{1}{b-a}\,I_{[a;b]}(t)
+        =\begin{cases}
+            \dfrac{1}{b-a},&a\leq t\leq b,\\
+            0,&t\notin[a;b].
+        \end{cases}
+    \]
+    Обозначение: $\xi\sim\Uniform[a;b]$.
+    Здесь $I_A(t)=1$ при $t\in A$ и $I_A(t)=0$ при $t\notin A$.
+\end{definition}
+
+\begin{definition}[\topicmark{Экспоненциальное}Экспоненциальное распределение]
+    Случайная величина $\xi$ имеет \textbf{экспоненциальное распределение}
+    с параметром $\lambda>0$, если её плотность имеет вид
+    \[
+        p_\xi(t)=\lambda e^{-\lambda t}I_{[0;+\infty)}(t)
+        =\begin{cases}
+            \lambda e^{-\lambda t},&t\geq0,\\
+            0,&t<0.
+        \end{cases}
+    \]
+    Обозначение: $\xi\sim\operatorname{Exp}(\lambda)$.
+\end{definition}
+
+\begin{definition}[\topicmark{Нормальное}Нормальное распределение]
+    Случайная величина $\xi$ имеет \textbf{нормальное распределение}
+    с параметрами $a\in\R$ и $\sigma^2>0$, если её плотность равна
+    \[
+        p_\xi(t)=\frac{1}{\sqrt{2\pi}\,\sigma}
+        \exp\left(-\frac{(t-a)^2}{2\sigma^2}\right),
+        \qquad t\in\R,\quad\sigma>0.
+    \]
+    Обозначение: $\xi\sim N(a;\sigma^2)$.
+    Распределение $N(0;1)$ называется \textbf{стандартным нормальным};
+    его плотность равна
+    \[
+        p_\xi(t)=\frac{1}{\sqrt{2\pi}}e^{-t^2/2}.
+    \]
+\end{definition}
+
+% Источник: lecture_11_distributions.tex 93–152.
+\question{Интеграл Гаусса. Нормировка нормальной плотности}
+
+\begin{lemma}[\topicmark{Интеграл Гаусса}Интеграл Гаусса]
+    \[
+        \int_{-\infty}^{+\infty}e^{-x^2}\,\diff x=\sqrt\pi.
+    \]
+\end{lemma}
+
+\begin{Proof}[\topicmark{Доказательство}Доказательство]
+    Обозначим интеграл через $C$. Он положителен и конечен:
+    при $|x|\geq1$ имеем $e^{-x^2}\leq e^{-|x|}$.
+    Тогда
+    \[
+        \begin{aligned}
+            C^2
+            &=\left(\int_{-\infty}^{+\infty}e^{-x^2}\,\diff x\right)
+              \left(\int_{-\infty}^{+\infty}e^{-y^2}\,\diff y\right)\\
+            &=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}
+              e^{-(x^2+y^2)}\,\diff x\,\diff y
+              =\iint_{\R^2}e^{-(x^2+y^2)}\,\diff x\,\diff y.
+        \end{aligned}
+    \]
+    Перейдём к полярным координатам:
+    \[
+        x=r\cos\varphi,\qquad y=r\sin\varphi,
+        \qquad r\geq0,\quad0\leq\varphi<2\pi.
+    \]
+    Якобиан замены равен
+    \[
+        \left|\frac{\partial(x,y)}{\partial(r,\varphi)}\right|
+        =\left|\begin{vmatrix}
+            \cos\varphi&-r\sin\varphi\\
+            \sin\varphi&r\cos\varphi
+        \end{vmatrix}\right|=r.
+    \]
+    Поэтому
+    \[
+        \begin{aligned}
+            C^2&=\int_0^{+\infty}\int_0^{2\pi}
+                  e^{-r^2}r\,\diff\varphi\,\diff r\\
+               &=2\pi\int_0^{+\infty}r e^{-r^2}\,\diff r
+                 =\pi\int_0^{+\infty}e^{-u}\,\diff u=\pi,
+                 \qquad u=r^2.
+        \end{aligned}
+    \]
+    Так как $C>0$, получаем $C=\sqrt\pi$.
+\end{Proof}
+
+\begin{Proof}[\topicmark{Нормировка плотности}Нормировка нормальной плотности]
+    При замене $y=(t-a)/(\sqrt2\,\sigma)$ имеем
+    $\diff t=\sqrt2\,\sigma\,\diff y$. Следовательно,
+    \[
+        \begin{aligned}
+            \int_{-\infty}^{+\infty}p_\xi(t)\,\diff t
+            &=\frac{1}{\sqrt{2\pi}\,\sigma}
+              \int_{-\infty}^{+\infty}
+              e^{-(t-a)^2/(2\sigma^2)}\,\diff t\\
+            &=\frac1{\sqrt\pi}\int_{-\infty}^{+\infty}
+              e^{-y^2}\,\diff y=1.
+        \end{aligned}
+    \]
+\end{Proof}
+
+% Источник: lecture_17_distribution_decomposition.tex 8–28.
+\question{Сингулярные распределения. Разложение функции распределения}
+
+\begin{definition}[\topicmark{Сингулярное распределение}Сингулярное непрерывное распределение]
+    Функция распределения $F$ называется \textbf{сингулярной непрерывной},
+    если она непрерывна и
+    \[
+        F'(x)=0
+        \quad\text{почти всюду относительно меры Лебега}.
+    \]
+\end{definition}
+
+\begin{theorem}[\topicmark{Теорема о разложении}Разложение функции распределения]
+    Любую функцию распределения можно представить в виде
+    \[
+        F(x)=\alpha_1F_1(x)+\alpha_2F_2(x)+\alpha_3F_3(x),
+    \]
+    где $F_1$ --- дискретная, $F_2$ --- абсолютно непрерывная,
+    $F_3$ --- сингулярная непрерывная функция распределения, причём
+    \[
+        \alpha_1,\alpha_2,\alpha_3\geq0,
+        \qquad \alpha_1+\alpha_2+\alpha_3=1.
+    \]
+\end{theorem}
+

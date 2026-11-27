@@ -1,0 +1,193 @@
+% 15. Источник: lecture_15_joint_distributions.tex: 7–28, 58–86. Страницы лекционного PDF: 37–38.
+\question{Совместная функция распределения и независимость}
+
+\begin{definition}[\topicmark{Случайный вектор}Случайный вектор]
+    \textbf{Случайным вектором} называется вектор
+    $\vec\xi=(\xi_1,\ldots,\xi_n)$, компоненты которого являются
+    случайными величинами на одном вероятностном пространстве
+    $(\Omega,\mathcal F,\Pr)$.
+\end{definition}
+
+\begin{definition}[\topicmark{Совместная функция распределения}Совместная функция распределения]
+    \textbf{Функцией распределения случайного вектора} $\vec\xi$
+    называется функция
+    \[
+        F_{\vec\xi}(x_1,\ldots,x_n)
+        =\Pr\{\xi_1\leq x_1,\ldots,\xi_n\leq x_n\}.
+    \]
+    Иными словами,
+    \[
+        F_{\vec\xi}(\vec x)
+        =\Pr\left(\bigcap_{i=1}^{n}\{\omega:\xi_i(\omega)\leq x_i\}\right).
+    \]
+    Она называется также \textbf{совместной функцией распределения}
+    величин $\xi_1,\ldots,\xi_n$.
+\end{definition}
+
+\begin{definition}[\topicmark{Независимость через функции распределения}Определение]
+    Случайные величины $\xi$ и $\eta$ называются \textbf{независимыми}, если
+    \[
+        F_{\xi,\eta}(x,y)=F_\xi(x)F_\eta(y)
+        \qquad\forall x,y\in\R.
+    \]
+\end{definition}
+
+\begin{theorem}[\topicmark{Независимость через события}Эквивалентное определение через события]
+    Величины $\xi$ и $\eta$ независимы $\;\Leftrightarrow\;$
+    для любых $A,B\in\mathcal B(\R)$ события $\{\xi\in A\}$ и $\{\eta\in B\}$
+    независимы, то есть
+    \[
+        \Pr\{\xi\in A,\eta\in B\}
+        =\Pr\{\xi\in A\}\Pr\{\eta\in B\}.
+    \]
+\end{theorem}
+
+\begin{Proof}[От независимости событий к разложению функции распределения]
+    Подставим $A=(-\infty;x]$, $B=(-\infty;y]$. Тогда
+    \[
+        \begin{aligned}
+            F_{\xi,\eta}(x,y)
+            &=\Pr\{\xi\leq x,\eta\leq y\}\\
+            &=\Pr\{\xi\leq x\}\Pr\{\eta\leq y\}
+             =F_\xi(x)F_\eta(y).
+        \end{aligned}
+    \]
+\end{Proof}
+
+% Обе требуемые формулировки и приведённый переход: Тервер(Лекция)67.pdf, с. 2–3.
+
+% 16. Источник: lecture_15_joint_distributions.tex: 110–131. Страницы лекционного PDF: 39.
+\question{Совместное дискретное распределение}
+
+\begin{definition}[\topicmark{Совместное распределение}Определение]
+    Пусть $\xi$ и $\eta$ принимают значения в конечных или счётных
+    множествах $\{x_i\}$ и $\{y_j\}$ с вероятностью $1$.
+    Их \textbf{совместное распределение} задаётся числами
+    \[
+        p_{ij}=\Pr\{\xi=x_i,\eta=y_j\}.
+    \]
+    Вероятности отдельных значений равны
+    \[
+        p_i=\Pr\{\xi=x_i\}=\sum_jp_{ij},\qquad
+        q_j=\Pr\{\eta=y_j\}=\sum_ip_{ij}.
+    \]
+    При этом $p_{ij}\geq0$ и $\sum_{i,j}p_{ij}=1$.
+\end{definition}
+
+\begin{theorem}[\topicmark{Критерий независимости}Критерий независимости]
+    Для дискретных случайных величин $\xi$ и $\eta$
+    \[
+        \xi\text{ и }\eta\text{ независимы}
+        \quad\Leftrightarrow\quad
+        p_{ij}=p_iq_j\quad\forall i,j.
+    \]
+\end{theorem}
+
+% Тервер(Лекция)67.pdf, с. 2–4; Тервер(Лекция)69.pdf, с. 4 (факторизация вероятностей отдельных значений).
+\begin{Proof}[$\Rightarrow$]
+При независимости $\xi$ и $\eta$ события $\{\xi=x_i\}$ и $\{\eta=y_j\}$
+независимы для каждой пары $i,j$. Поэтому
+\[
+ p_{ij}=\Pr\{\xi=x_i,\eta=y_j\}
+       =\Pr\{\xi=x_i\}\Pr\{\eta=y_j\}=p_iq_j.
+\]
+\end{Proof}
+\begin{Proof}[$\Leftarrow$\editorialmark]
+Пусть $p_{ij}=p_iq_j$ для всех $i,j$. Для любых борелевских множеств
+$A,B\subseteq\R$ событие $\{\xi\in A,\eta\in B\}$ объединяет попарно
+несовместные исходы таблицы с $x_i\in A$ и $y_j\in B$. Поэтому
+\[
+ \begin{aligned}
+ \Pr\{\xi\in A,\eta\in B\}
+ &=\sum_{i:\,x_i\in A}\sum_{j:\,y_j\in B} p_iq_j\\
+ &=\left(\sum_{i:\,x_i\in A}p_i\right)
+   \left(\sum_{j:\,y_j\in B}q_j\right)
+ =\Pr\{\xi\in A\}\Pr\{\eta\in B\}.
+ \end{aligned}
+\]
+Получили определение независимости через события.
+\end{Proof}
+
+\begin{remark}[Матричная запись для конечных распределений]
+Для конечной таблицы $P=(p_{ij})$ критерий записывается также в виде
+$\xi$ и $\eta$ независимы $\Leftrightarrow \rk P=1$.
+При независимости $i$-я строка таблицы равна $p_i(q_1,\ldots,q_s)$.
+\end{remark}
+
+\begin{theorem}[\topicmark{Свёртка}Дискретная свёртка\editorialmark]
+Пусть $\xi$ и $\eta$ независимы и дискретны. Чтобы найти вероятность
+значения $z$ у суммы, складываем вероятности всех пар, дающих $z$:
+\[
+ \Pr\{\xi+\eta=z\}=\sum_{(i,j):\,x_i+y_j=z}p_iq_j.
+\]
+Для целочисленных величин стоит зафиксировать первое слагаемое $k$.
+Тогда второе должно равняться $m-k$, и при $m\in\Z$
+\[
+ \Pr\{\xi+\eta=m\}
+ =\sum_{k\in\Z}\Pr\{\xi=k\}\Pr\{\eta=m-k\}.
+\]
+\end{theorem}
+
+% 17. Источник: lecture_15_joint_distributions.tex: 156–205. Страницы лекционного PDF: 40.
+\question{Совместное абсолютно непрерывное распределение}
+
+\begin{definition}[\topicmark{Совместная плотность}Определение]
+    Распределение пары $(\xi,\eta)$ называется \textbf{абсолютно непрерывным},
+    если существует неотрицательная измеримая функция $p_{\xi,\eta}$,
+    для которой
+    \[
+        F_{\xi,\eta}(x,y)
+        =\int_{-\infty}^{y}\int_{-\infty}^{x}
+            p_{\xi,\eta}(u,v)\,\diff u\,\diff v.
+    \]
+    Функция $p_{\xi,\eta}$ называется \textbf{совместной плотностью}.
+    Она удовлетворяет условию
+    \[
+        \iint_{\R^2}p_{\xi,\eta}(u,v)\,\diff u\,\diff v=1.
+    \]
+\end{definition}
+
+\begin{theorem}[\topicmark{Критерий независимости}Критерий независимости через плотности]
+    Если пара $(\xi,\eta)$ имеет совместную плотность, то
+    \[
+        \xi\text{ и }\eta\text{ независимы}
+        \quad\Longleftrightarrow\quad
+        p_{\xi,\eta}(x,y)=p_\xi(x)p_\eta(y)
+        \ \text{почти всюду}.
+    \]
+    Здесь почти всюду понимается относительно меры Лебега на $\R^2$.
+\end{theorem}
+
+\begin{Proof}[\topicmark{\texorpdfstring{$\Rightarrow$}{⇒}}$\Rightarrow$]
+    При независимости $F_{\xi,\eta}(x,y)=F_\xi(x)F_\eta(y)$.
+    Дифференцируя по обеим переменным, получаем почти всюду
+    \[
+        p_{\xi,\eta}(x,y)
+        =\frac{\partial^2F_{\xi,\eta}}{\partial x\,\partial y}(x,y)
+        =F_\xi'(x)F_\eta'(y)=p_\xi(x)p_\eta(y).
+    \]
+\end{Proof}
+
+\begin{Proof}[\topicmark{\texorpdfstring{$\Leftarrow$}{⇐}}$\Leftarrow$]
+    Если $p_{\xi,\eta}(u,v)=p_\xi(u)p_\eta(v)$ почти всюду, то
+    \[
+        \begin{aligned}
+            F_{\xi,\eta}(x,y)
+            &=\int_{-\infty}^{y}\int_{-\infty}^{x}
+                p_\xi(u)p_\eta(v)\,\diff u\,\diff v\\
+            &=\left(\int_{-\infty}^{x}p_\xi(u)\,\diff u\right)
+              \left(\int_{-\infty}^{y}p_\eta(v)\,\diff v\right)\\
+            &=F_\xi(x)F_\eta(y).
+        \end{aligned}
+    \]
+\end{Proof}
+
+\begin{theorem}[\topicmark{Свёртка}Свёртка плотностей\editorialmark]
+Пусть $\xi$ и $\eta$ независимы и имеют плотности $p_\xi$ и $p_\eta$.
+Тогда $S=\xi+\eta$ имеет плотность, которая почти всюду равна
+\[
+    p_S(z)=\int_{\R}p_\xi(u)\,p_\eta(z-u)\,\diff u.
+\]
+При фиксированном $z$ вклад дают те $u$, для которых обе плотности
+в подынтегральном произведении отличны от нуля.
+\end{theorem}

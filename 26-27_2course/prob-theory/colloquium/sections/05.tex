@@ -1,0 +1,196 @@
+% 24. ТВ 3.pdf, с. 2–3 (формулировка и доказательство ЗБЧ, обе оценки);
+% с. 6 (обозначение сходимости по вероятности для выборочного среднего).
+\question{Неравенства Маркова и Чебышева. Закон больших чисел}
+
+\begin{theorem}[\topicmark{Неравенство Маркова}Неравенство Маркова]
+Если $\xi\geq0$ почти наверное и $\EE\xi<\infty$, то при любом $\eps>0$
+\[
+ \Pr\{\xi\geq\eps\}\leq\frac{\EE\xi}{\eps}.
+\]
+\end{theorem}
+\begin{Proof}
+Положим $A=\{\xi\geq\eps\}$. Разложим ожидание по событиям $A$ и $\overline A$.
+Оба слагаемых неотрицательны, а на $A$ величина $\xi$ не меньше $\eps$. Поэтому
+\[
+ \EE\xi=\EE(\xi I_A)+\EE(\xi I_{\overline A})
+ \geq\EE(\xi I_A)\geq\eps\,\EE I_A=\eps\,\Pr(A).
+\]
+Делим на $\eps>0$.
+\end{Proof}
+
+\begin{theorem}[\topicmark{Неравенство Чебышева}Неравенство Чебышева]
+Если у $\xi$ конечная дисперсия, то при любом $\eps>0$
+\[
+ \Pr\{|\xi-\EE\xi|\geq\eps\}\leq\frac{\DD\xi}{\eps^2}.
+\]
+\end{theorem}
+\begin{Proof}
+Применим неравенство Маркова к $(\xi-\EE\xi)^2$ с порогом $\eps^2$:
+\[
+ \Pr\{|\xi-\EE\xi|\geq\eps\}
+ =\Pr\{(\xi-\EE\xi)^2\geq\eps^2\}
+ \leq\frac{\EE(\xi-\EE\xi)^2}{\eps^2}=\frac{\DD\xi}{\eps^2}.
+\]
+\end{Proof}
+
+\begin{definition}[\topicmark{Сходимость по вероятности}Сходимость по вероятности\editorialmark]
+Пусть $\xi_1,\xi_2,\ldots$ и $\xi$ заданы на одном вероятностном
+пространстве. Последовательность $\xi_n$ \textbf{сходится по вероятности}
+к $\xi$, если для каждого $\eps>0$
+\[
+    \lim_{n\to\infty}\Pr\{|\xi_n-\xi|>\eps\}=0.
+\]
+Обозначение: $\xi_n\xrightarrow{\Pr}\xi$. При постоянном пределе $\xi=a$
+под знаком вероятности получаем событие $\{|\xi_n-a|>\eps\}$.
+\end{definition}
+
+\Needspace{16\baselineskip}
+\begin{theorem}[\topicmark{Закон больших чисел}Закон больших чисел]
+Пусть $\xi_1,\xi_2,\ldots$ независимы, одинаково распределены,
+$\EE\xi_1=a$ и $\DD\xi_1=\sigma^2<\infty$. Тогда их среднее
+$\overline\xi_n=(\xi_1+\cdots+\xi_n)/n$ сходится по вероятности к $a$:
+\[
+ \overline\xi_n\xrightarrow{\Pr}a,\qquad
+ \Pr\{|\overline\xi_n-a|>\eps\}\longrightarrow 0
+ \quad\text{при каждом }\eps>0.
+\]
+\end{theorem}
+\begin{Proof}
+По линейности $\EE\overline\xi_n=a$. Независимость слагаемых даёт
+\[
+ \DD\overline\xi_n
+ =\frac{\DD(\xi_1+\cdots+\xi_n)}{n^2}
+ =\frac{n\sigma^2}{n^2}=\frac{\sigma^2}{n}.
+\]
+По неравенству Чебышева
+\[
+ \Pr\{|\overline\xi_n-a|>\eps\}\leq
+ \Pr\{|\overline\xi_n-a|\geq\eps\}
+ \leq\frac{\sigma^2}{n\eps^2}\xrightarrow[n\to\infty]{}0.
+\]
+\end{Proof}
+
+% 25. ТВ 3.pdf, с. 2, 6. В программе требуется формулировка ЦПТ.
+\question{Сходимость по распределению и центральная предельная теорема}
+
+\begin{definition}[\topicmark{Сходимость по распределению}Сходимость по распределению]
+Пишут $\eta_n\xrightarrow{d}\eta$, если для каждой точки $x$, в которой
+$F_\eta$ непрерывна, выполнено
+\[
+ F_{\eta_n}(x)\xrightarrow[n\to\infty]{}F_\eta(x).
+\]
+\end{definition}
+
+% ТВ 3.pdf, с. 6: пример, в котором предел имеет скачок в нуле.
+\begin{example}[Что происходит в точке разрыва]
+Пусть $\eta_n$ принимает значения $0$ и $1/n$ с вероятностями $1/2$,
+а $\eta=0$ почти наверное.
+
+\smallskip
+При $x<0$ обе функции распределения равны нулю.
+При каждом $x>0$ начиная с некоторого $n$ обе равны единице.
+
+\smallskip
+В точке $x=0$ имеем $F_{\eta_n}(0)=1/2$ и $F_\eta(0)=1$.
+Это точка разрыва $F_\eta$, поэтому условие сходимости по распределению выполнено.
+\end{example}
+
+\begin{theorem}[\topicmark{Центральная предельная теорема}Центральная предельная теорема]
+Пусть $\xi_1,\xi_2,\ldots$ независимы и одинаково распределены,
+$\EE\xi_1=a$, $0<\DD\xi_1=\sigma^2<\infty$. Если $Z\sim N(0;1)$, то
+\[
+ \frac{\xi_1+\cdots+\xi_n-na}{\sigma\sqrt n}\xrightarrow{d}Z.
+\]
+\end{theorem}
+
+% 26. ТВ 3.pdf, с. 6–8; Тервер(Лекция)69.pdf, с. 4; lecture_17_expectation.tex:108–113.
+\question{Характеристическая функция и её свойства}
+\begin{definition}[\topicmark{Определение}Характеристическая функция]
+Характеристической функцией случайной величины $\xi$ называется функция
+\[
+ \varphi_\xi(t)=\EE e^{it\xi},\qquad t\in\R,\quad i^2=-1.
+\]
+\end{definition}
+
+\begin{theorem}[\topicmark{Существование}Существование характеристической функции]
+У любой случайной величины $\xi$ характеристическая функция существует при всех $t\in\R$.
+\end{theorem}
+\begin{Proof}
+По формуле Эйлера
+\[
+ \varphi_\xi(t)=\EE\cos(t\xi)+i\,\EE\sin(t\xi).
+\]
+Поскольку $|\cos(t\xi)|\leq1$ и $|\sin(t\xi)|\leq1$, оба математических ожидания существуют.
+\end{Proof}
+
+\begin{theorem}[\topicmark{Единственность}Теорема единственности]
+Величины $\xi$ и $\eta$ имеют одинаковое распределение
+$\Leftrightarrow$ $\varphi_\xi(t)=\varphi_\eta(t)$ при всех $t\in\R$.
+\end{theorem}
+
+\begin{theorem}[\topicmark{Сумма независимых величин}Сумма независимых величин]
+Если $\xi$ и $\eta$ независимы, то
+$\varphi_{\xi+\eta}(t)=\varphi_\xi(t)\varphi_\eta(t)$ для всех $t\in\R$.
+\end{theorem}
+\begin{Proof}
+Из независимости $\xi$ и $\eta$ следует независимость $e^{it\xi}$ и $e^{it\eta}$. Поэтому
+\[
+ \varphi_{\xi+\eta}(t)=\EE e^{it(\xi+\eta)}
+ =\EE(e^{it\xi}e^{it\eta})
+ =\EE e^{it\xi}\,\EE e^{it\eta}=\varphi_\xi(t)\varphi_\eta(t).
+\]
+\end{Proof}
+
+% ТВ 3.pdf, с. 6–7.
+\begin{example}[Сумма независимых пуассоновских величин]
+Для $\xi\sim\operatorname{Poiss}(\lambda)$ по определению ожидания
+\[
+ \varphi_\xi(t)=e^{-\lambda}\sum_{k=0}^\infty\frac{(\lambda e^{it})^k}{k!}
+ =\exp\{\lambda(e^{it}-1)\}.
+\]
+У независимых пуассоновских величин с параметрами $\lambda_1,\lambda_2$
+произведение характеристических функций равно $\exp\{(\lambda_1+\lambda_2)(e^{it}-1)\}$.
+По теореме единственности их сумма имеет распределение $\operatorname{Poiss}(\lambda_1+\lambda_2)$.
+\end{example}
+
+\Needspace{10\baselineskip}
+\begin{theorem}[\topicmark{Линейное преобразование}Линейное преобразование]
+Пусть $\eta=a\xi+b$, где $a,b\in\R$. Тогда
+$\varphi_\eta(t)=e^{itb}\varphi_\xi(at)$.
+\end{theorem}
+\begin{Proof}
+Множитель $e^{itb}$ постоянен. По определению
+\[
+ \varphi_\eta(t)=\EE e^{it(a\xi+b)}
+ =e^{itb}\EE e^{i(at)\xi}=e^{itb}\varphi_\xi(at).
+\]
+\end{Proof}
+
+% ТВ 3.pdf, с. 7: вычисление для N(0;1), затем применение линейного преобразования.
+\begin{example}[Характеристическая функция нормального распределения]
+Пусть $Z\sim N(0;1)$. В интеграле для $\varphi_Z(t)$ слагаемое с $\sin(tx)$
+обращается в нуль по нечётности.
+
+\smallskip
+Дифференцируя оставшийся интеграл и
+интегрируя по частям, получаем
+\[
+ \varphi_Z'(t)=-\frac1{\sqrt{2\pi}}\int_{\R} x\sin(tx)e^{-x^2/2}\,\diff x
+ =-\frac{t}{\sqrt{2\pi}}\int_{\R}\cos(tx)e^{-x^2/2}\,\diff x
+ =-t\varphi_Z(t).
+\]
+Из $\varphi_Z(0)=1$ следует $\varphi_Z(t)=e^{-t^2/2}$.
+Поэтому для $\eta=\sigma Z+a$ имеем
+$\varphi_\eta(t)=e^{ita}\varphi_Z(\sigma t)=e^{ita-\sigma^2t^2/2}$.
+\end{example}
+
+% ТВ 3.pdf, с. 8: версия с заданной предельной случайной величиной.
+\begin{theorem}[\topicmark{Теорема Леви}Теорема непрерывности Леви]
+Для случайных величин $\xi_n$ и $\xi$ справедлива эквивалентность
+\[
+ \xi_n\xrightarrow{d}\xi
+ \quad\Longleftrightarrow\quad
+ \varphi_{\xi_n}(t)\xrightarrow[n\to\infty]{}\varphi_\xi(t)
+ \quad\text{для каждого }t\in\R.
+\]
+\end{theorem}
